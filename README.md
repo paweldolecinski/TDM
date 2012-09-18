@@ -1,4 +1,6 @@
 SupDicium
 =========
+Group Decision Support System
 
-Group Decision Support System - master thesis project
+This is master thesis project
+Author: Pawel Dolecinski
