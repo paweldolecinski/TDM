@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<g:LayoutPanel>
+
+		<g:layer left='0px' width='50%'>
+			<g:FlowPanel ui:field='googleBox' />
+		</g:layer>
+
+		<g:layer right='0px' width='50%'>
+			<g:FlowPanel ui:field='fcbBox' />
+		</g:layer>
+	</g:LayoutPanel>
+
+
+</ui:UiBinder> 

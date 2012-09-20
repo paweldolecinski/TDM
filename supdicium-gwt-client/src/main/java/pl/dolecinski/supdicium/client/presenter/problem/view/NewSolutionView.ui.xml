@@ -1,0 +1,49 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:style>
+		.textBoxContainer {
+		background-color: white;
+		}
+
+		.metaComposerNewSolutionBox {
+		background-color: #F2F2F2;
+		}
+		.metaComposerNewSolutionBoxShelf {
+		border-top: 1px solid #CCC;
+		height: 30px;
+		padding: 5px 5px 0px 0px;
+		}
+
+	</ui:style>
+
+	<ui:with type="pl.dolecinski.supdicium.client.theme.base.MainCss"
+		field="res" />
+
+	<g:DisclosurePanel>
+		<g:header>Add a Solution</g:header>
+		<g:HTMLPanel addStyleNames="{style.metaComposerNewSolutionBox}">
+			<div>
+				<b>
+					<g:Label>One solution idea is...</g:Label>
+				</b>
+				<g:TextBox ui:field="solutionText" maxLength="255"
+					visibleLength="65" />
+			</div>
+			<div>
+				<g:Label>Additional Detail</g:Label>
+				<g:HTMLPanel title="textBoxContainer">
+					<g:TextArea ui:field="solutionAdditionalText"
+						characterWidth="50" visibleLines="3" />
+				</g:HTMLPanel>
+			</div>
+			<g:HTMLPanel styleName="{style.metaComposerNewSolutionBoxShelf}">
+				<g:HTMLPanel styleName="{res.rfloat}">
+					<g:Button ui:field="addNewSolution">Add My Idea</g:Button>
+				</g:HTMLPanel>
+			</g:HTMLPanel>
+		</g:HTMLPanel>
+	</g:DisclosurePanel>
+
+</ui:UiBinder> 

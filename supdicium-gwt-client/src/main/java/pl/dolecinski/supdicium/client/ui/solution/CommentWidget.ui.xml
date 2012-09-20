@@ -1,0 +1,23 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:with type="pl.dolecinski.supdicium.client.theme.base.CommentWidgetCss"
+		field="res" />
+
+	<g:HTMLPanel styleName="{res.comment}">
+
+		<g:InlineLabel ui:field="commentText" styleName="{res.commentBody}" />
+
+		<g:HTMLPanel styleName="{res.commentActions}">
+			<g:DateLabel ui:field="commentDate" customFormat='EEE, d MMM yyyy HH:mm' />
+			·
+			<span class="{res.like}">
+				<button class="{res.asLink}" title="Like this comment">
+					<g:InlineLabel>Like</g:InlineLabel>
+				</button>
+			</span>
+		</g:HTMLPanel>
+	</g:HTMLPanel>
+
+</ui:UiBinder> 

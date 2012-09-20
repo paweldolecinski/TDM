@@ -1,0 +1,25 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:with type="pl.dolecinski.supdicium.client.theme.base.MainCss"
+		field="res" />
+
+	<g:FlowPanel>
+		<g:HTMLPanel styleName="{res.top}">
+			<g:HTMLPanel styleName="{res.header}">
+				<g:HTMLPanel styleName="{res.container}">
+					<h1 class="{res.pageLogo}">
+						<g:InlineHyperlink addStyleNames="{res.pageLogoHref}"
+							title="Home">
+							SupDicium</g:InlineHyperlink>
+					</h1>
+				</g:HTMLPanel>
+			</g:HTMLPanel>
+		</g:HTMLPanel>
+		<g:FlowPanel ui:field="mainContentPanel" styleName="{res.globalContainer}" />
+
+	</g:FlowPanel>
+
+
+</ui:UiBinder> 

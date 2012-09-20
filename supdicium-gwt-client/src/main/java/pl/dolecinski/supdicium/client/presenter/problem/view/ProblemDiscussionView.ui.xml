@@ -1,0 +1,95 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:sd="urn:import:pl.dolecinski.supdicium.client.ui">
+
+	<ui:style>
+		.paddingTop {
+			padding: 10px 0 0px 0;
+		}
+		
+		.brainstormPanel {
+			width: 600px;
+			height: 100%;
+			min-width: 600px;
+		}
+	</ui:style>
+
+	<ui:with type="pl.dolecinski.supdicium.client.theme.base.MainCss"
+		field="res" />
+
+	<g:HTMLPanel width="100%" height="100%">
+		<!-- ui:field="problemDescription" -->
+		<g:DeckPanel ui:field="deckPanel">
+			<g:HTMLPanel>
+				<g:HTMLPanel ui:field="problemDescription" addStyleNames="{res.leftContainer}  {res.lfloat}">
+						Lorem ipsum Lorem ipsum Lorem ipsum
+						Lorem ipsum Lorem
+						ipsum Lorem
+						ipsum
+						Lorem ipsum Lorem ipsum Lorem
+						ipsum Lorem ipsum Lorem
+						ipsum Lorem
+						ipsum Lorem ipsum Lorem ipsum
+						Lorem ipsum Lorem ipsum Lorem
+						ipsum
+						Lorem ipsum Lorem ipsum Lorem
+				</g:HTMLPanel>
+				<g:HTMLPanel addStyleNames="{res.lfloat}">
+					<g:ScrollPanel width="100%" height="100%"
+						addStyleNames="{res.verticalBorder}">
+						<sd:WidgetList>
+							<g:FlowPanel ui:field="newSolutionPanel"
+								addStyleNames="{style.paddingTop}" />
+
+							<g:FlowPanel ui:field="brainstormPanel"
+								addStyleNames="{style.brainstormPanel}" />
+
+						</sd:WidgetList>
+					</g:ScrollPanel>
+
+					<sd:FooterWidget />
+				</g:HTMLPanel>
+			</g:HTMLPanel>
+		</g:DeckPanel>
+		<!-- ui:field="infoSidebar" -->
+		<g:HTMLPanel styleName="{res.infoSidebar}">
+			Lorem ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem ipsum
+			Lorem ipsum Lorem ipsum Lorem
+			ipsum Lorem ipsum Lorem ipsum Lorem
+			ipsum
+		</g:HTMLPanel>
+		<!-- ui:field="problemDockPanel" -->
+		<g:HTMLPanel>
+		</g:HTMLPanel>
+	</g:HTMLPanel>
+
+</ui:UiBinder> 

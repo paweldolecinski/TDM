@@ -1,0 +1,36 @@
+@external .gwt-ScrollTable;
+@external .gwt-ScrollTable .dataTable;
+@external .gwt-ScrollTable .dataWrapper;
+.category {
+	font-size: 1.4em;
+}
+
+.description {
+	font-size: 1em;
+}
+
+.cellBody {
+	position: relative;
+	width: 100%;
+}
+
+.cellBody td:last-child {
+	text-align: right;
+	vertical-align: middle !important;
+}
+
+.gwt-ScrollTable .dataTable tr {
+	background-color: white;
+	border-width: 1px;
+	border-color: black;
+}
+
+.cityPanel {
+	margin: 10px 10px 10px 10px;
+}
+
+.centered {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}

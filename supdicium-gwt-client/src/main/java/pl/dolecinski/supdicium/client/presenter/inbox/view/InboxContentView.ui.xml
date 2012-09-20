@@ -1,0 +1,20 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:sd="urn:import:pl.dolecinski.supdicium.client.ui">
+
+	<ui:with type="pl.dolecinski.supdicium.client.theme.base.MainCss"
+		field="res" />
+
+	<g:SplitLayoutPanel addStyleNames="{res.contentAbsolute}">
+		<g:west size='200.0'>
+			<g:FlowPanel ui:field="menuPanel" addStyleNames="{res.section}" />
+		</g:west>
+		<g:center>
+			<!-- <g:HTMLPanel> -->
+			<g:FlowPanel ui:field="problemListPanel" addStyleNames="{res.section}" />
+			<!--</g:HTMLPanel> -->
+		</g:center>
+	</g:SplitLayoutPanel>
+
+
+</ui:UiBinder> 
