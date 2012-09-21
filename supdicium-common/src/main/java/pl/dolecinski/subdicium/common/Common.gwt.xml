@@ -19,6 +19,4 @@
 
 <module>
 	<inherits name='com.google.gwt.user.User' />
-	<inherits name='com.gwtplatform.dispatch.Dispatch' />
-	<source path="vo" />
 </module>

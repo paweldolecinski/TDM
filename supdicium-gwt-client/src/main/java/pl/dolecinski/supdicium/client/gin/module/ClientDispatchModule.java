@@ -13,20 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pl.dolecinski.supdicium.client.vo.problem.dispatch;
+package pl.dolecinski.supdicium.client.gin.module;
 
-import pl.dolecinski.subdicium.common.vo.problem.ProblemInfoList;
+import com.google.gwt.inject.client.AbstractGinModule;
+import com.gwtplatform.dispatch.client.gin.DispatchAsyncModule;
 
-import com.gwtplatform.dispatch.annotation.GenDispatch;
-import com.gwtplatform.dispatch.annotation.Out;
-
-/**
- * @author Paweł Doleciński
- * 
- */
-@GenDispatch(isSecure = false)
-public class GetProblemList {
-	
-	@Out(1)
-	ProblemInfoList locations;
+public class ClientDispatchModule extends AbstractGinModule {
+    @Override
+    protected void configure() {
+        install(new DispatchAsyncModule.Builder().clientActionHandlerRegistry(
+                ClientActionHandlerRegistry.class).build());
+    }
 }

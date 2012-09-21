@@ -13,24 +13,20 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pl.dolecinski.supdicium.server.dispatcher;
+package pl.dolecinski.supdicium.client.gin.module;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import pl.dolecinski.supdicium.client.dispatch.handler.GetProblemListHandler;
 
-import com.gwtplatform.dispatch.server.spring.HandlerModule;
-import com.gwtplatform.dispatch.server.spring.configuration.DefaultModule;
+import com.google.inject.Inject;
+import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
 
-/**
- * @author Paweł Doleciński
- *
- */
-@Configuration
-@Import(DefaultModule.class)
-public class HandlerDispatchModule extends HandlerModule {
+public class ClientActionHandlerRegistry extends
+		DefaultClientActionHandlerRegistry {
 
-	@Override
-	protected void configureHandlers() {
+	@Inject
+	public ClientActionHandlerRegistry(
+			final GetProblemListHandler getProblemListHandler) {
 
+		register(getProblemListHandler);
 	}
 }

@@ -15,6 +15,9 @@
  */
 package pl.dolecinski.supdicium.client.presenter.inbox;
 
+import pl.dolecinski.supdicium.client.model.problem.ProblemInfo;
+
+import com.google.gwt.view.client.ListDataProvider;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
@@ -38,8 +41,11 @@ public abstract class InboxProblemList extends
 
 	public interface ProblemListUiHandlers extends UiHandlers {
 		void showDecisionProblem(String problemId);
+
+		void refreshProblemList(String filter);
 	}
 
 	public interface Display extends View, HasUiHandlers<ProblemListUiHandlers> {
+		ListDataProvider<ProblemInfo> getProblemsDataProvider();
 	}
 }

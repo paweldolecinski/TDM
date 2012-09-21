@@ -23,28 +23,24 @@ import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.core.Authentication;
 
-public class SuspendRealTimeVoter implements AccessDecisionVoter {
+public class SuspendRealTimeVoter implements AccessDecisionVoter<Object> {
 
 	private Set<String> revokedUsers = new HashSet<String>();
-
-	/**
-	 * Will vote based on existence of a particular user in the "revokedUsers"
-	 * set;
-	 */
-	@Override
-	public int vote(Authentication authentication, Object object,
-			Collection<ConfigAttribute> config) {
-		String userName = authentication.getName();
-		return revokedUsers.contains(userName) ? ACCESS_DENIED : ACCESS_GRANTED;
-	}
-
-	@Override
-	public boolean supports(Class<?> arg0) {
-		return true;
-	}
 
 	@Override
 	public boolean supports(ConfigAttribute attribute) {
 		return true;
+	}
+
+	@Override
+	public boolean supports(Class<?> clazz) {
+		return true;
+	}
+
+	@Override
+	public int vote(Authentication authentication, Object object,
+			Collection<ConfigAttribute> attributes) {
+		String userName = authentication.getName();
+		return revokedUsers.contains(userName) ? ACCESS_DENIED : ACCESS_GRANTED;
 	}
 }

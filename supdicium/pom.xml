@@ -44,7 +44,7 @@
 		<guice.version>3.0</guice.version>
 		<aopalliance.version>1.0</aopalliance.version>
 
-		<spring.version>3.0.5.RELEASE</spring.version>
+		<spring.version>3.1.2.RELEASE</spring.version>
 		<cglib.version>2.2</cglib.version>
 
 		<gwt-maven-plugin.version>2.4.0</gwt-maven-plugin.version>

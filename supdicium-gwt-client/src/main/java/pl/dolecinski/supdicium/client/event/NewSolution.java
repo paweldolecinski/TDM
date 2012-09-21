@@ -4,7 +4,7 @@ import com.gwtplatform.dispatch.annotation.GenEvent;
 import com.gwtplatform.dispatch.annotation.Order;
 
 @GenEvent
-public class AddNewSolution {
+public class NewSolution {
 
 	@Order(1)
 	String text;

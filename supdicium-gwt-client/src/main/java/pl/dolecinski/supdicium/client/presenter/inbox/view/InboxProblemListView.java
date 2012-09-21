@@ -17,9 +17,8 @@ package pl.dolecinski.supdicium.client.presenter.inbox.view;
 
 import java.util.Date;
 
-import pl.dolecinski.subdicium.common.vo.problem.ProblemInfo;
+import pl.dolecinski.supdicium.client.model.problem.ProblemInfo;
 import pl.dolecinski.supdicium.client.presenter.inbox.InboxProblemList;
-import pl.dolecinski.supdicium.client.vo.problem.model.ProblemInfoProvider;
 
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.TextCell;
@@ -34,10 +33,10 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
+import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionModel;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 /**
@@ -62,12 +61,12 @@ public class InboxProblemListView extends
 
 	@UiField(provided = true)
 	CellTable<ProblemInfo> problemList;
-
+	
+	private ListDataProvider<ProblemInfo> problemsDataProvider;
 	private final Widget widget;
 
 	@Inject
 	public InboxProblemListView(Binder binder,
-			Provider<ProblemInfoProvider> problemInfoProvider,
 			SdCellTableResources resources) {
 		problemList = new CellTable<ProblemInfo>(25, resources,
 				ProblemInfo.KEY_PROVIDER);
@@ -75,8 +74,10 @@ public class InboxProblemListView extends
 		problemList.setHeight("100%");
 		// Attach a column sort handler to the ListDataProvider to sort the
 		// list.
+		problemsDataProvider = new ListDataProvider<ProblemInfo>();
+		
 		ListHandler<ProblemInfo> sortHandler = new ListHandler<ProblemInfo>(
-				problemInfoProvider.get().getDataProvider().getList());
+				getProblemsDataProvider().getList());
 		problemList.addColumnSortHandler(sortHandler);
 
 		// Create a Pager to control the table.
@@ -94,7 +95,7 @@ public class InboxProblemListView extends
 		initTableColumns(selectionModel, sortHandler);
 
 		// Add the CellList to the adapter in the database.
-		problemInfoProvider.get().addDataDisplay(problemList);
+		getProblemsDataProvider().addDataDisplay(problemList);
 
 		problemList.addCellPreviewHandler(this);
 		widget = binder.createAndBindUi(this);
@@ -194,5 +195,9 @@ public class InboxProblemListView extends
 			getUiHandlers().showDecisionProblem(
 					Integer.toString(clicked.getId()));
 		}
+	}
+
+	public ListDataProvider<ProblemInfo> getProblemsDataProvider() {
+		return problemsDataProvider;
 	}
 }

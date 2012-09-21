@@ -13,30 +13,27 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pl.dolecinski.supdicium.client.dispatch;
+package pl.dolecinski.supdicium.client.model.problem;
+
+import java.util.List;
+
+import com.google.gwt.core.client.GWT;
+import name.pehl.piriti.json.client.JsonReader;
 
 /**
- * Wrap {@link com.google.gwt.http.client.RequestException} in a
- * RuntimeException.
- * 
  * @author Paweł Doleciński
- * 
+ *
  */
-@SuppressWarnings("serial")
-public class RequestRuntimeException extends RuntimeException {
+public class ProblemInfoList {
 
-	public RequestRuntimeException() {
+	public interface ItemsReader extends JsonReader<ProblemInfoList> {
 	}
 
-	public RequestRuntimeException(final String message) {
-		super(message);
-	}
-
-	public RequestRuntimeException(final String message, final Throwable cause) {
-		super(message, cause);
-	}
-
-	public RequestRuntimeException(final Throwable cause) {
-		super(cause);
+	public static final ItemsReader JSON = GWT.create(ItemsReader.class);
+	
+	private List<ProblemInfo> problems;
+	
+	public List<ProblemInfo> getProblems() {
+		return problems;
 	}
 }

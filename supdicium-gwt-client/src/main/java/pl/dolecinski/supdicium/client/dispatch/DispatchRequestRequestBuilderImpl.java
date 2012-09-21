@@ -19,6 +19,8 @@ import com.google.gwt.http.client.Request;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
+ *  Implementation of {@link DispatchRequest} used by
+ * {@link DispatchAsyncRequestBuilderImpl}.
  * @author Paweł Doleciński
  *
  */

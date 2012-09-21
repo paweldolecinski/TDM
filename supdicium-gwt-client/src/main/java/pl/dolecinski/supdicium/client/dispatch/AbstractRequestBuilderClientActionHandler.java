@@ -29,6 +29,17 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.Result;
 
 /**
+ * Implementation of the command pattern using GWT's RequestBuilder instead of
+ * GWT-RPC.
+ * 
+ * Use this DispatchAsync implementation when the backend is not GWT-RPC.
+ * 
+ * How to use: For each MyAction/MyActionResult pair: Implement a
+ * AbstractRequestBuilderClientActionHandler<MyAction, MyActionResult> and
+ * implement getRequestBuilder() and extractResult() abstract methods. Then
+ * register your Handler in GIN, see : {@linkplain http
+ * ://code.google.com/p/gwt-platform/wiki/ClientActionHandlers}
+ * 
  * @author Paweł Doleciński
  * 
  */

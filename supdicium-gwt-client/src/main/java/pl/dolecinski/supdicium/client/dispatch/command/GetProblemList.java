@@ -13,15 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pl.dolecinski.subdicium.common.vo.problem;
+package pl.dolecinski.supdicium.client.dispatch.command;
 
-import java.util.ArrayList;
+import pl.dolecinski.supdicium.client.model.problem.ProblemInfoList;
+
+import com.gwtplatform.dispatch.annotation.GenDispatch;
+import com.gwtplatform.dispatch.annotation.In;
+import com.gwtplatform.dispatch.annotation.Out;
 
 /**
  * @author Paweł Doleciński
- *
+ * 
  */
-public class ProblemInfoList {
-
-	ArrayList<ProblemInfo> problems;
+@GenDispatch(isSecure = true)
+public class GetProblemList {
+	
+	@In(1)
+	String filter;
+	
+	@Out(1)
+	ProblemInfoList problemList;
 }

@@ -26,6 +26,9 @@ import pl.dolecinski.subdicium.server.pojo.api.requests.dto.ProblemDTO;
  */
 public interface ProblemService {
 
+	
+	 public ProblemDTO getProblemInfo(long id);
+	 
     /**
      * Returns list of latest pending{@code RequestSummaryDTO}s
      * Pending requests are requests with {@code RequestStatus == READ} or {@code UNREAD}

@@ -16,9 +16,7 @@
 package pl.dolecinski.supdicium.client.gin.module;
 
 import pl.dolecinski.supdicium.client.bl.ClientPlaceManager;
-import pl.dolecinski.supdicium.client.vo.problem.model.ProblemInfoProvider;
 
-import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.annotations.GaAccount;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.gin.DefaultModule;
@@ -30,8 +28,6 @@ public class ClientModule extends AbstractPresenterModule {
 	protected void configure() {
 		install((new DefaultModule(ClientPlaceManager.class)));
 
-		bind(ProblemInfoProvider.class).in(Singleton.class);
-		
 		if (ParamsModule.USE_GA) {
 			bindConstant().annotatedWith(GaAccount.class).to(
 					ParamsModule.GA_ACCOUNT);

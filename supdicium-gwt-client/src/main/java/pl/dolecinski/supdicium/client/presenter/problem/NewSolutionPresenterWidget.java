@@ -15,7 +15,7 @@
  */
 package pl.dolecinski.supdicium.client.presenter.problem;
 
-import pl.dolecinski.supdicium.client.event.AddNewSolutionEvent;
+import pl.dolecinski.supdicium.client.event.NewSolutionEvent;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -45,6 +45,6 @@ public class NewSolutionPresenterWidget
 	@Override
 	public void addNewSolution(String text, String additionalText) {
 			getView().resetFields();
-			AddNewSolutionEvent.fire(this, text, additionalText);
+			NewSolutionEvent.fire(this, text, additionalText);
 	}
 }

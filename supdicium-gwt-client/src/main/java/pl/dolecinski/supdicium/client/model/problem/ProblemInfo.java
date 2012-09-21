@@ -13,11 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pl.dolecinski.subdicium.common.vo.problem;
+package pl.dolecinski.supdicium.client.model.problem;
 
 import java.io.Serializable;
 import java.util.Date;
 
+import name.pehl.piriti.json.client.JsonReader;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.view.client.ProvidesKey;
 
 /**
@@ -35,8 +38,13 @@ public class ProblemInfo implements Serializable {
 			return item == null ? null : item.getId();
 		}
 	};
-	
-	private static  int nextId = 0;
+
+	public interface ItemReader extends JsonReader<ProblemInfo> {
+	}
+
+	public static final ItemReader JSON = GWT.create(ItemReader.class);
+
+	private static int nextId = 0;
 
 	private final String[] experts;
 	private final String description;

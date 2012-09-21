@@ -17,7 +17,7 @@ package pl.dolecinski.supdicium.client.presenter.problem;
 
 import java.util.Date;
 
-import pl.dolecinski.supdicium.client.event.AddNewSolutionEvent;
+import pl.dolecinski.supdicium.client.event.NewSolutionEvent;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
@@ -54,11 +54,11 @@ public class BrainstormPresenterWidget extends
 	protected void onBind() {
 		super.onBind();
 
-		addRegisteredHandler(AddNewSolutionEvent.getType(),
-				new AddNewSolutionEvent.AddNewSolutionHandler() {
+		addRegisteredHandler(NewSolutionEvent.getType(),
+				new NewSolutionEvent.NewSolutionHandler() {
 
 					@Override
-					public void onAddNewSolution(AddNewSolutionEvent event) {
+					public void onNewSolution(NewSolutionEvent event) {
 						SingleSolutionPresenterWidget solution = solutionProvider
 								.get();
 						solution.setSolutionText(event.getText());

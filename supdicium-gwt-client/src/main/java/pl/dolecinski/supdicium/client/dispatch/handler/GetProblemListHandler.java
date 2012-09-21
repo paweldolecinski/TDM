@@ -13,15 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pl.dolecinski.supdicium.client.vo.problem.dispatch;
+package pl.dolecinski.supdicium.client.dispatch.handler;
 
-import name.pehl.piriti.json.client.JsonReader;
-import name.pehl.piriti.json.client.JsonWriter;
-import pl.dolecinski.subdicium.common.vo.problem.ProblemInfoList;
 import pl.dolecinski.supdicium.client.dispatch.AbstractRequestBuilderClientActionHandler;
+import pl.dolecinski.supdicium.client.dispatch.command.GetProblemListAction;
+import pl.dolecinski.supdicium.client.dispatch.command.GetProblemListResult;
+import pl.dolecinski.supdicium.client.model.problem.ProblemInfoList;
 import pl.dolecinski.supdicium.client.util.UrlBuilder;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.Response;
 
@@ -33,39 +32,26 @@ public class GetProblemListHandler
 		extends
 		AbstractRequestBuilderClientActionHandler<GetProblemListAction, GetProblemListResult> {
 
-
-	public interface LocationReader extends JsonReader<ProblemInfoList> {
-	}
-
-	public interface LocationWriter extends JsonWriter<ProblemInfoList> {
-	}
-
-	public transient static final LocationReader jsonr = GWT
-			.create(LocationReader.class);
-
-	public transient static final LocationWriter jsonw = GWT
-			.create(LocationWriter.class);
-	
-	// @Inject
 	protected GetProblemListHandler() {
 		super(GetProblemListAction.class);
 	}
 
 	@Override
 	protected GetProblemListResult extractResult(final Response response) {
-		// TODO parse error handling
-		ProblemInfoList location = jsonr.read(response.getText());
-
-		return new GetProblemListResult(location);
+		System.out.println(response.getText());
+		final ProblemInfoList items = ProblemInfoList.JSON.read(response
+				.getText());
+		return new GetProblemListResult(items);
 	}
 
 	@Override
 	protected RequestBuilder getRequestBuilder(final GetProblemListAction action) {
 		UrlBuilder urlBuilder = new UrlBuilder().setModule("api").setVersion(
 				"v1");
-		urlBuilder.addResourcePath("locations");
 
-		RequestBuilder rb = new RequestBuilder(RequestBuilder.POST,
+		urlBuilder.addResourcePath("problems/" + action.getFilter());
+
+		RequestBuilder rb = new RequestBuilder(RequestBuilder.GET,
 				urlBuilder.toUrl());
 
 		return rb;

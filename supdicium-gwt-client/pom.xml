@@ -250,7 +250,7 @@
 						<id>process</id>
 						<phase>generate-sources</phase>
 						<goals>
-<!-- 							<goal>process</goal> -->
+							<goal>process</goal>
 						</goals>
 						<configuration>
 							<outputDirectory>${generated-sources}</outputDirectory>
