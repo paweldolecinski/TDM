@@ -15,6 +15,7 @@
  */
 package pl.dolecinski.supdicium.client.gin;
 
+import pl.dolecinski.supdicium.client.gin.module.ClientDispatchModule;
 import pl.dolecinski.supdicium.client.gin.module.ClientModule;
 import pl.dolecinski.supdicium.client.gin.module.ParamsModule;
 
@@ -23,7 +24,7 @@ import com.google.gwt.inject.client.Ginjector;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
-@GinModules({ ClientModule.class, ParamsModule.class})
+@GinModules({ ClientModule.class, ParamsModule.class, ClientDispatchModule.class })
 public interface CommonInjector extends Ginjector {
 
 	// ProxyFailureHandler getProxyFailureHandler();

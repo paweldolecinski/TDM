@@ -113,29 +113,29 @@
 			<groupId>name.pehl</groupId>
 			<artifactId>piriti-user</artifactId>
 			<version>0.8</version>
-<!-- 			<scope>provided</scope> -->
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>name.pehl</groupId>
 			<artifactId>piriti-dev</artifactId>
 			<version>0.8</version>
-<!-- 			<scope>provided</scope> -->
+			<scope>provided</scope>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>name.pehl</groupId> -->
+		<!-- <artifactId>piriti-restlet</artifactId> -->
+		<!-- <version>0.8</version> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>name.pehl</groupId>
-			<artifactId>piriti-restlet</artifactId>
-			<version>0.8</version>
-<!-- 			<scope>provided</scope> -->
-		</dependency>
-		<dependency>
-    		<groupId>name.pehl</groupId>
-    		<artifactId>totoe</artifactId>
-    		<version>0.3</version>
-<!--     <scope>provided</scope> -->
+			<artifactId>totoe</artifactId>
+			<version>0.3</version>
+			<scope>provided</scope>
 		</dependency>
 
-		
-		
+
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>supdicium-common</artifactId>
@@ -161,18 +161,18 @@
 				</includes>
 			</resource>
 			<resource>
-            	<directory>src/main/java</directory>
-            	<includes>
-                	<include>**/*.java</include>
-                	<include>**/*.gwt.xml</include>
-            	</includes>
-        	</resource>
-        	<resource>
-            	<directory>src/main/resources</directory>
-	            <includes>
-    	            <include>**/*.*</include>
-        	    </includes>
-        	</resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.java</include>
+					<!-- <include>**/*.gwt.xml</include> -->
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
 		</resources>
 
 		<!-- <finalName>supdicium</finalName> -->
@@ -205,10 +205,9 @@
 					<execution>
 						<goals>
 							<goal>compile</goal>
-<!-- 						
-	<goal>test</goal> -->
-<!-- 							<goal>i18n</goal> -->
-<!-- 							<goal>generateAsync</goal> -->
+							<!-- <goal>test</goal> -->
+							<!-- <goal>i18n</goal> -->
+							<!-- <goal>generateAsync</goal> -->
 						</goals>
 					</execution>
 				</executions>
@@ -236,10 +235,24 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-compile</id>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<compilerArgument>-proc:none</compilerArgument>
+							<includes>
+								<include>**/*.java</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
 				<configuration>
-					<proc>none</proc>
+					<compilerArgument>-proc:none</compilerArgument>
 				</configuration>
-				<extensions>true</extensions>
+				<!-- <extensions>true</extensions> -->
 			</plugin>
 			<!-- Run annotation processors on src/main/java sources -->
 			<plugin>
@@ -252,7 +265,7 @@
 						<goals>
 							<goal>process</goal>
 						</goals>
-						<configuration>
+						<configuration><failOnError>false</failOnError>
 							<outputDirectory>${generated-sources}</outputDirectory>
 							<processors>
 								<processor>com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor</processor>
@@ -418,10 +431,10 @@
 				<artifactId>maven-gae-plugin</artifactId>
 				<version>0.9.2</version>
 				<configuration>
-				    <jvmFlags>
-				        	<jvmFlag>-Dappengine.user.timezone=UTC</jvmFlag>
-				        	<jvmFlag>-Dappengine.user.timezone.impl=UTC</jvmFlag>
-				        </jvmFlags>
+					<jvmFlags>
+						<jvmFlag>-Dappengine.user.timezone=UTC</jvmFlag>
+						<jvmFlag>-Dappengine.user.timezone.impl=UTC</jvmFlag>
+					</jvmFlags>
 				</configuration>
 				<dependencies>
 					<dependency>

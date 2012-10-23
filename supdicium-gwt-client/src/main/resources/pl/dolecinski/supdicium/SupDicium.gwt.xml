@@ -26,7 +26,8 @@
 	<!-- Other module inherits -->
 	<inherits name='com.gwtplatform.mvp.Mvp' />
 	<inherits name='com.gwtplatform.dispatch.Dispatch' />
-	<inherits name="name.pehl.piriti.xml.XML" />
+	<inherits name="name.pehl.piriti.json.JSON" />
+
 	<inherits name="pl.dolecinski.subdicium.common.Common" />
 
 	<define-property name="mobile.user.agent" values="mobilesafari, none" />

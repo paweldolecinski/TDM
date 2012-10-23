@@ -2,11 +2,10 @@
 
 <b:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:b="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	   		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-			http://www.springframework.org/schema/security 
-			http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 
 	<!-- <http pattern="/favicon.ico" security="none" /> -->
@@ -57,12 +56,14 @@
 		class="pl.dolecinski.supdicium.server.security.SuspendRealTimeVoter" />
 
 	<!-- Define AccessDesisionManager as UnanimousBased -->
-	<b:bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
+	<b:bean id="accessDecisionManager"
+		class="org.springframework.security.access.vote.UnanimousBased">
 		<b:property name="decisionVoters">
 			<b:list>
 				<b:ref bean="suspendVoter" />
 				<b:bean class="org.springframework.security.access.vote.RoleVoter" />
-				<b:bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+				<b:bean
+					class="org.springframework.security.access.vote.AuthenticatedVoter" />
 			</b:list>
 		</b:property>
 	</b:bean>

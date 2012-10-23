@@ -46,11 +46,15 @@ public class ProblemInfo implements Serializable {
 
 	private static int nextId = 0;
 
-	private final String[] experts;
-	private final String description;
-	private final String state;
-	private final Date createDate;
-	private final int id;
+	private String[] experts;
+	private String description;
+	private String state;
+	private Date createDate;
+	private int id;
+
+	protected ProblemInfo() {
+
+	}
 
 	public ProblemInfo(int id, String[] experts, String description,
 			String state) {
