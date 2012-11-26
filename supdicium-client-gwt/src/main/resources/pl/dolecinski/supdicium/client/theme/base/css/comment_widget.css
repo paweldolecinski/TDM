@@ -1,0 +1,38 @@
+.sd-Comment {
+	display: table-cell;
+	background-color: #F2F2F2;
+	margin-top: 0px;
+	padding: 0;
+	vertical-align: top;
+	width: 10000px;
+}
+
+.sd-Comment .commentBody {
+	
+}
+
+.sd-Comment .commentActions {
+	padding-top: 2px;
+	color: gray;
+	font-weight: normal;
+	font-size: 11px;
+}
+
+.sd-Comment .like {
+	
+}
+
+.sd-Comment .asLink {
+	background: none;
+	border: none;
+	color: #3B5998;
+	cursor: pointer;
+	font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+	font-size: 100%;
+	margin: 0;
+	overflow: visible;
+	padding: 0;
+	text-align: left;
+	width: auto;
+	border-image: initial;
+}

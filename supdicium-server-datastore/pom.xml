@@ -13,22 +13,51 @@
 	<packaging>jar</packaging>
 	<name>supdicium-server-datastore</name>
 
+	<build>
+		<plugins>
+
+		</plugins>
+	</build>
 
 	<dependencies>
-		<dependency>
-			<groupId>javax.jdo</groupId>
-			<artifactId>jdo2-api</artifactId>
-			<version>2.3-eb</version>
-		</dependency>
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>supdicium-server-datastore-api</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>javax.jdo</groupId>
+			<artifactId>jdo2-api</artifactId>
+			<version>2.3-eb</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.appengine.orm</groupId>
+			<artifactId>datanucleus-appengine</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-jpa</artifactId>
+			<version>2.1.8</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jpa_3.0_spec</artifactId>
+			<version>1.1.1</version>
+			<scope>runtime</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.8.5</version>
+			<version>${mockito-all.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 </project>

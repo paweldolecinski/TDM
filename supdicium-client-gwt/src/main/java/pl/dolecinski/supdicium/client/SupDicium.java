@@ -33,6 +33,6 @@ public class SupDicium implements EntryPoint {
 		MainAppInjector injector = injectorWrapper.getInjector();
 		DelayedBindRegistry.bind(injector);
 		injector.getGaleriaApp().run(injector);
-		
+
 	}
 }

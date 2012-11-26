@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+
+@def darkPanelColor  #889bb3;
+@def lightPanelColor #c7d3e1;
+@def messageBoxColor #fad163;
+@def titleFontWeight  bold;
+@def titleFontSize    22px;
+@def titleColor #921b12;
+@def minAppWidth 700px;
+@def leftColWidth 200px;
+@def formLineSpacing 8px;
+
+.horizontalBar {
+	width: 100%;
+	height: 5px;
+	background-color: darkPanelColor;
+}
+
+.header {
+/* 	position: absolute !important; */
+	overflow: hidden;
+/* 	left: 3px; */
+/* 	top: 0px; */
+/* 	right: 3px; */
+	position: relative;
+/* 	margin: 0 3px; */
+}
+
+.container {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	position: relative;
+	overflow: hidden;
+	left: 0px;
+	top: -1px;
+	right: 0px;
+	bottom: 0px;
+}
+
+.tabFooter {
+	background-color: darkPanelColor;
+	height: 0px;
+	top: 0px;
+	position: relative;
+	/* 	z-index: 20; */
+	right: 0px;
+	left: 0px;
+}
+
+.floating {
+	float: right;
+	
+}
+
+.pageContainer {
+	background-color: white;
+	bottom: 0px;
+	left: 0px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.imageMargin {
+/* 	margin-top: 2px; */
+}

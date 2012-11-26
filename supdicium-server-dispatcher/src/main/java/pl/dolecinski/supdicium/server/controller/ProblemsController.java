@@ -14,13 +14,12 @@ import pl.dolecinski.subdicium.server.pojo.api.requests.dto.ProblemDTO;
 final class ProblemsController {
 
 	ProblemService service;
-	
-	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET, produces="application/json")
+
+	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public ProblemDTO getProblem(@PathVariable long id) {
 
 		return service.getProblemInfo(id);
-
 	}
 
 }

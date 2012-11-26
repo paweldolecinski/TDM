@@ -1,0 +1,27 @@
+@def darkPanelColor  #889bb3;
+
+.cellListWidget {
+  
+}
+
+.cellListEvenItem {
+  cursor: pointer;
+  zoom: 1;
+}
+
+.cellListOddItem {
+  cursor: pointer;
+  zoom: 1;
+}
+
+.cellListKeyboardSelectedItem {
+  background: #ffc;
+}
+
+.cellListSelectedItem {
+/*   gwt-image: 'cellListSelectedBackground'; */
+  background-color: darkPanelColor;
+  color: white;
+  height: auto;
+  overflow: visible;
+}

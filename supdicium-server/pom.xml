@@ -32,12 +32,12 @@
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>supdicium-server-pojo</artifactId>
+				<artifactId>supdicium-server-pojo-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>supdicium-server-pojo-api</artifactId>
+				<artifactId>supdicium-server-pojo</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

@@ -16,11 +16,11 @@
 
 	<dependencies>
 		<!-- GWTP Dispatch component -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.gwtplatform</groupId> -->
-<!-- 			<artifactId>gwtp-dispatch-server-spring</artifactId> -->
-<!-- 			<version>${gwtp.version}</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.gwtplatform</groupId> -->
+		<!-- <artifactId>gwtp-dispatch-server-spring</artifactId> -->
+		<!-- <version>${gwtp.version}</version> -->
+		<!-- </dependency> -->
 
 		<!-- GWT -->
 		<dependency>
@@ -78,6 +78,10 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>supdicium-server-security</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>supdicium-server-pojo-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
