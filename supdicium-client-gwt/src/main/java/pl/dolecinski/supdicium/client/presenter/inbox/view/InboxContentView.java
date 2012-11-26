@@ -16,24 +16,34 @@
 package pl.dolecinski.supdicium.client.presenter.inbox.view;
 
 import pl.dolecinski.supdicium.client.SDStyle;
+import pl.dolecinski.supdicium.client.model.problem.ProblemInfo;
 import pl.dolecinski.supdicium.client.presenter.inbox.InboxPagePresenter;
+import pl.dolecinski.supdicium.client.presenter.inbox.view.InboxContentView.ProblemListUiHandlers;
 import pl.dolecinski.supdicium.client.theme.base.MainCss;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.ListDataProvider;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.mvp.client.ViewImpl;
+import com.gwtplatform.mvp.client.UiHandlers;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 /**
  * @author Paweł Doleciński
  * 
  */
-public class InboxContentView extends ViewImpl implements
+public class InboxContentView extends ViewWithUiHandlers<ProblemListUiHandlers> implements
 		InboxPagePresenter.Display {
+
+	public interface ProblemListUiHandlers extends UiHandlers {
+		void showDecisionProblem(String problemId);
+
+		void refreshProblemList(String filter);
+	}
 
 	public interface Binder extends UiBinder<Widget, InboxContentView> {
 	}
@@ -41,9 +51,9 @@ public class InboxContentView extends ViewImpl implements
 	private final Widget widget;
 
 	@UiField
-	protected FlowPanel menuPanel;
+	protected HTMLPanel headerPanel;
 	@UiField
-	protected FlowPanel problemListPanel;
+	protected HTMLPanel problemListPanel;
 
 	@Inject
 	public InboxContentView(Binder binder, EventBus eventBus) {
@@ -67,10 +77,10 @@ public class InboxContentView extends ViewImpl implements
 	}
 
 	private void setInboxMenu(Widget content) {
-		menuPanel.clear();
-		menuPanel.setVisible(true);
+		headerPanel.clear();
+		headerPanel.setVisible(true);
 		if (content != null) {
-			menuPanel.add(content);
+			headerPanel.add(content);
 		}
 	}
 
@@ -87,5 +97,11 @@ public class InboxContentView extends ViewImpl implements
 		MainCss mainCss = SDStyle.getTheme().getSDClientBundle().getMainCss();
 		mainCss.ensureInjected();
 		return mainCss;
+	}
+
+	@Override
+	public ListDataProvider<ProblemInfo> getProblemsDataProvider() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

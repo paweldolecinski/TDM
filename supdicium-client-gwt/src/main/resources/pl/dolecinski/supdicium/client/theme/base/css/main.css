@@ -4,6 +4,10 @@
 	border-bottom: 1px solid #CCC;
 }
 
+.row {
+	
+}
+
 .problemDescription {
 	background-color: #F2F4F8;
 	border-left: 1px solid rgba(0, 0, 0, .4);
@@ -25,7 +29,7 @@
 	right: 0;
 	width: 205px;
 	z-index: 300;
-	padding:10px;
+	padding: 10px;
 }
 
 @sprite .stackLayoutPanelHeader {
@@ -74,11 +78,6 @@
 	width: 100%;
 }
 
-.footer { /* 	margin-bottom: 30px; */
-	padding: 8px;
-	border-top: 1px solid #CCC;
-}
-
 .container {
 	background-color: #474747;
 	margin: 0 auto;
@@ -89,9 +88,7 @@
 }
 
 .globalContainer {
-	margin: 0 auto;
-	width: 1141px;
-	zoom: 1;
+	margin: 50px 0;
 }
 
 .leftContainer {
@@ -129,11 +126,36 @@
 	color: white;
 }
 
+.footer {
+	background-color: #F0F0F0;
+	border-top: 2px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+	\-webkit-box-shadow: inset 0 1px 0 #F0F0F0;
+	\-moz-box-shadow: inset 0 1px 0 #f0f0f0;
+	box-shadow: inset 0 1px 0 #F0F0F0;
+	\-webkit-box-shadow: inset 0 1px 0 #F0F0F0;
+	\-moz-box-shadow: inset 0 1px 0 #f0f0f0;
+	box-shadow: inset 0 1px 0 #F0F0F0;
+	font-size: 14px;
+	min-width: 940px;
+	text-shadow: 1px 1px 0 white;
+}
+
 .top {
-	color: #BBB;
-	height: 25px;
-	line-height: 25px;
-	overflow: hidden;
+	background-color: #F0F0F0;
+	border-top: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+	\-webkit-box-shadow: inset 0 -1px 0 #ECECEC;
+	\-moz-box-shadow: inset 0 -1px 0 #ececec;
+	box-shadow: inset 0 -1px 0 #ECECEC;
+	\-webkit-box-shadow: inset 0 -1px 0 #ECECEC;
+	\-moz-box-shadow: inset 0 -1px 0 #ececec;
+	box-shadow: inset 0 -1px 0 #ECECEC;
+	font-family: 'TriplexSansLight';
+	height: 70px;
+	min-width: 940px;
+	position: relative;
+	text-shadow: 1px 1px 0 white;
 }
 
 h1 {

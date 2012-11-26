@@ -16,7 +16,6 @@
 package pl.dolecinski.supdicium.client.presenter.inbox.view;
 
 import pl.dolecinski.supdicium.client.SDStyle;
-import pl.dolecinski.supdicium.client.presenter.inbox.InboxMenuPresenterWidget;
 import pl.dolecinski.supdicium.client.theme.base.MainCss;
 
 import com.google.gwt.uibinder.client.UiBinder;
@@ -29,8 +28,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
  * @author Paweł Doleciński
  * 
  */
-public class InboxMenuView extends ViewImpl implements
-		InboxMenuPresenterWidget.Display {
+public class InboxMenuView extends ViewImpl {
 
 	public interface Binder extends UiBinder<Widget, InboxMenuView> {
 	}

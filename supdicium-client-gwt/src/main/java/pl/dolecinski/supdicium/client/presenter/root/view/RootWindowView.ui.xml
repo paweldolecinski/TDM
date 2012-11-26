@@ -2,24 +2,230 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<ui:with type="pl.dolecinski.supdicium.client.theme.base.MainCss"
-		field="res" />
+	<ui:with field="res"
+		type="pl.dolecinski.supdicium.client.theme.base.MainCss" />
 
 	<g:FlowPanel>
 		<g:HTMLPanel styleName="{res.top}">
-			<g:HTMLPanel styleName="{res.header}">
-				<g:HTMLPanel styleName="{res.container}">
-					<h1 class="{res.pageLogo}">
-						<g:InlineHyperlink addStyleNames="{res.pageLogoHref}"
-							title="Home">
-							SupDicium</g:InlineHyperlink>
-					</h1>
-				</g:HTMLPanel>
-			</g:HTMLPanel>
-		</g:HTMLPanel>
-		<g:FlowPanel ui:field="mainContentPanel" styleName="{res.globalContainer}" />
 
+			<div class="container"> <!-- branding -->
+
+				<a class="branding" href="/index/">
+					Prezi
+				</a> <!-- /branding --> <!-- navigation -->
+
+				<ul id="navigation" class="nav-main container">
+
+					<li class="nav-create">
+
+						<a href="/your/">
+							Your prezis
+
+							<span class="pointer">
+							</span>
+						</a>
+					</li>
+
+					<li class="nav-learn">
+
+						<a href="/learn/">
+							Learn
+
+							<span class="pointer">
+							</span>
+						</a>
+					</li>
+
+					<li class="nav-explore">
+
+						<a href="/explore/">
+							Explore
+
+							<span class="pointer">
+							</span>
+						</a>
+					</li>
+				</ul>
+
+				<div class="dropdown">
+
+					<a class="btn btn-discreet dropdown-toggle username" data-toggle="dropdown"
+						href="#">
+						Paweł Doleciński
+
+						<span class="caret">
+						</span>
+					</a>
+
+					<ul class="dropdown-menu">
+
+						<li>
+
+							<a href="/settings/">
+								Settings &amp; Account
+							</a>
+						</li>
+
+						<li>
+
+							<a href="/user/ckrtomokbhge">
+								Profile Page
+							</a>
+						</li>
+
+						<li>
+
+							<a href="/logout/">
+								Logout
+							</a>
+						</li>
+					</ul>
+				</div> <!-- navigation -->
+			</div>
+		</g:HTMLPanel>
+
+		<g:FlowPanel styleName="{res.globalContainer}" ui:field="mainContentPanel" />
+
+		<g:HTMLPanel styleName="{res.footer}">
+			<div class="container">
+				<ul class="nav-sub row">
+					<li class="span2">
+						<ul>
+							<li>
+								<h4>Company</h4>
+							</li>
+							<li>
+								<a href="/about/">About</a>
+								/
+								<a href="/about-team/">Team</a>
+							</li>
+							<li>
+								<a href="/our-values/">Our Values</a>
+							</li>
+							<li>
+								<a href="http://jobs.prezi.com">Jobs</a>
+							</li>
+							<li>
+								<a href="/contact/">Contact</a>
+							</li>
+							<li>
+								<a href="/privacy-policy/">Privacy</a>
+								&amp;
+								<a href="/terms-of-use/">Terms</a>
+							</li>
+						</ul>
+					</li>
+					<li class="span2">
+						<ul>
+							<li>
+								<h4>Product</h4>
+							</li>
+							<li>
+								<a href="/pricing/">Pricing</a>
+							</li>
+							<li>
+								<a href="/the-basics/">Prezi Online</a>
+							</li>
+							<li>
+								<a href="/desktop/">Prezi Desktop</a>
+							</li>
+							<li>
+								<a href="/meeting/">Prezi Meeting</a>
+							</li>
+							<li>
+								<a href="/ipad/">Prezi for iPad</a>
+							</li>
+						</ul>
+					</li>
+					<li class="span2">
+						<ul>
+							<li>
+								<h4>Customers</h4>
+							</li>
+							<li>
+								<a href="/prezi-for-business/">Prezi for Business</a>
+							</li>
+							<li>
+								<a href="/prezi-for-conferences/">Prezi for Conferences</a>
+							</li>
+							<li>
+								<a href="/prezi-for-education/">Prezi for Education</a>
+							</li>
+							<li>
+								<a href="/prezi-for-nonprofits/">Prezi for Nonprofits</a>
+							</li>
+							<li>
+								<a href="/contact/sales/grouplicense/">Group Licenses</a>
+							</li>
+						</ul>
+					</li>
+					<li class="span2">
+						<ul>
+							<li>
+								<h4>Community</h4>
+							</li>
+							<li>
+								<a href="/community/">All Communities</a>
+							</li>
+							<li>
+								<a href="http://blog.prezi.com">Blog</a>
+								/
+								<a
+									href="http://beautifulbits.prezi.com/?utm_source=prezi&amp;utm_medium=footer&amp;utm_campaign=website">Design Blog</a>
+							</li>
+							<li>
+								<a href="http://www.facebook.com/pages/Prezi/52193296770">Facebook</a>
+								/
+								<a href="http://twitter.com/prezi">Twitter</a>
+							</li>
+							<li>
+								<a href="http://www.youtube.com/PreziVideoChannel">YouTube</a>
+							</li>
+							<li>
+								<a href="/ambassadors/">Campus Ambassadors</a>
+							</li>
+						</ul>
+					</li>
+					<li class="span2">
+						<ul>
+							<li>
+								<h4>Help</h4>
+							</li>
+							<li>
+								<a href="/learn/">Learn</a>
+							</li>
+							<li>
+								<a href="/support/">Support</a>
+							</li>
+							<li>
+								<a href="/learn/manual/">Manual</a>
+							</li>
+							<li>
+								<a href="/experts/">Experts</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<hr class="separator" />
+					<p class="copyright">
+						2012
+						© Prezi Inc.&nbsp;
+
+						English
+
+
+
+
+						&nbsp;·&nbsp;
+						<a href="#" class="changelang_loggedin" data-langcode="es">español</a>
+
+
+
+						&nbsp;·&nbsp;
+						<a href="#" class="changelang_loggedin" data-langcode="ko">한국어</a>
+					</p>
+			</div>
+		</g:HTMLPanel>
 	</g:FlowPanel>
 
-
-</ui:UiBinder> 
+</ui:UiBinder>

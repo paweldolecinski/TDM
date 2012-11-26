@@ -68,11 +68,10 @@ public class RootWindowPresenter extends
 
 	@Override
 	protected void revealInParent() {
-		if (RootPanel.get("content") != null) // TODO non-externalized string
-			DOM.removeChild(RootPanel.get().getElement(),
-					RootPanel.get("content").getElement()); // TODO
-															// non-externalized
-															// string
+
+		if (RootPanel.get("loading") != null) // TODO non-externalized string
+			DOM.setStyleAttribute(RootPanel.get("loading").getElement(),
+					"display", "none");
 		RevealRootContentEvent.fire(this, this);
 	}
 

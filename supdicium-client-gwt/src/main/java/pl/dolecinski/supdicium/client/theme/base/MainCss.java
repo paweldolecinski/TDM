@@ -34,6 +34,8 @@ public interface MainCss extends CssResource {
 
 	String container();
 
+	String row();
+
 	String lfloat();
 
 	String rfloat();

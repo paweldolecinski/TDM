@@ -2,19 +2,108 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:sd="urn:import:pl.dolecinski.supdicium.client.ui">
 
-	<ui:with type="pl.dolecinski.supdicium.client.theme.base.MainCss"
-		field="res" />
+	<ui:with field="res"
+		type="pl.dolecinski.supdicium.client.theme.base.MainCss" />
 
-	<g:SplitLayoutPanel addStyleNames="{res.contentAbsolute}">
-		<g:west size='200.0'>
-			<g:FlowPanel ui:field="menuPanel" addStyleNames="{res.section}" />
-		</g:west>
-		<g:center>
-			<!-- <g:HTMLPanel> -->
-			<g:FlowPanel ui:field="problemListPanel" addStyleNames="{res.section}" />
-			<!--</g:HTMLPanel> -->
-		</g:center>
-	</g:SplitLayoutPanel>
+	<g:HTMLPanel styleName="{res.container}">
+		<g:HTMLPanel styleName="{res.row}" ui:field="headerPanel">
+			<div class="span7">
+				<h1>
+					You have 6 prezis
+				</h1>
+			</div>
+			<div class="span5">
+				<form class="form-inline pull-right form-aside">
+					<label>
+						<span>
+							Sort
+						</span>
+						<select id="sort" name="sort" class="span2">
+							<option value="modified_at">
+								by last opened
+							</option>
+							<option value="title">
+								by title
+							</option>
+						</select>
+					</label>
+					<label>
+						<span>
+							Show
+						</span>
+						<select id="filter" name="show" class="span2">
+							<option value="all">
+								all prezis
+							</option>
+							<option value="own">
+								owned by me
+							</option>
+							<option value="shared">
+								shared with me
+							</option>
+						</select>
+					</label>
+				</form>
+			</div>
+		</g:HTMLPanel>
 
+		<g:HTMLPanel styleName="{res.container}" ui:field="problemListPanel">
+			<ul id="presentations" class="prezi-list thumbnails">
 
-</ui:UiBinder> 
+				<li class="span4 li_create">
+					<div class="prezi-list-item thumbnail create">
+						<a id="create" href="">
+							<button class="btn btn-primary btn-large">
+								<i class="icon-plus icon-large icon-white">
+								</i>
+								New prezi
+							</button>
+						</a>
+					</div>
+				</li>
+
+				<li class="span4">
+					<div class="prezi-list-item thumbnail">
+						<a
+							style="background-image: url(http://0701.static.prezi.com/preview/jskksbrvdzzwu2gdwi7jaxwtzeadw6rhlm5vs2oll757hbaoaxlq_0_0.png); background-position: 50% 50%; background-repeat: repeat repeat; "
+							data-background="http://0701.static.prezi.com/preview/jskksbrvdzzwu2gdwi7jaxwtzeadw6rhlm5vs2oll757hbaoaxlq_0_0.png"
+							href="/gizegexzop12/zxczxc/">
+						</a>
+						<div class="caption" data-copyright="1">
+							<h3 class="title">
+								<a href="/gizegexzop12/zxczxc/">
+									zxczxc
+								</a>
+							</h3>
+							<p class="meta">
+								by
+
+								<a href="/user/ckrtomokbhge/" title="Paweł Doleciński">
+									Paweł Doleciński
+								</a>
+								on 26 November 2012
+							</p>
+
+							<ul class="stats">
+
+								<li class="reusable">
+
+									<i class="icon-reusable">
+									</i>
+									Reusable
+								</li>
+							</ul>
+
+							<p class="description">
+								zcxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+								xxxxxxxxxxxxxxxxxxxxxxxxxxx x...
+							</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</g:HTMLPanel>
+		<g:HTMLPanel />
+	</g:HTMLPanel>
+
+</ui:UiBinder>

@@ -17,13 +17,8 @@ package pl.dolecinski.supdicium.client.gin.module.ui;
 
 import pl.dolecinski.supdicium.client.presenter.error.ErrorPagePresenter;
 import pl.dolecinski.supdicium.client.presenter.error.view.ErrorPageView;
-import pl.dolecinski.supdicium.client.presenter.inbox.InboxMenuPresenterWidget;
 import pl.dolecinski.supdicium.client.presenter.inbox.InboxPagePresenter;
-import pl.dolecinski.supdicium.client.presenter.inbox.InboxProblemList;
-import pl.dolecinski.supdicium.client.presenter.inbox.InboxProblemListPresenterWidget;
 import pl.dolecinski.supdicium.client.presenter.inbox.view.InboxContentView;
-import pl.dolecinski.supdicium.client.presenter.inbox.view.InboxMenuView;
-import pl.dolecinski.supdicium.client.presenter.inbox.view.InboxProblemListView;
 import pl.dolecinski.supdicium.client.presenter.popup.LocalDialogPresenterWidget;
 import pl.dolecinski.supdicium.client.presenter.popup.view.LocalDialogView;
 import pl.dolecinski.supdicium.client.presenter.problem.BrainstormPresenterWidget;
@@ -96,13 +91,6 @@ public abstract class BasePresenterModule extends AbstractPresenterModule {
 		bindPresenter(InboxPagePresenter.class,
 				InboxPagePresenter.Display.class, InboxContentView.class,
 				InboxPagePresenter.IProxy.class);
-
-		bindSingletonPresenterWidget(InboxMenuPresenterWidget.class,
-				InboxMenuPresenterWidget.Display.class, InboxMenuView.class);
-
-		bindSingletonPresenterWidget(InboxProblemList.class,
-				InboxProblemListPresenterWidget.class,
-				InboxProblemList.Display.class, InboxProblemListView.class);
 
 		/*
 		 * Problem section

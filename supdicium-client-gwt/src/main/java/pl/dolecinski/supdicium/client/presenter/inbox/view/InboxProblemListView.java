@@ -18,7 +18,6 @@ package pl.dolecinski.supdicium.client.presenter.inbox.view;
 import java.util.Date;
 
 import pl.dolecinski.supdicium.client.model.problem.ProblemInfo;
-import pl.dolecinski.supdicium.client.presenter.inbox.InboxProblemList;
 
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.TextCell;
@@ -32,20 +31,16 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionModel;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 /**
  * @author Paweł Doleciński
  * 
  */
-public class InboxProblemListView extends
-		ViewWithUiHandlers<InboxProblemList.ProblemListUiHandlers> implements
-		InboxProblemList.Display, CellPreviewEvent.Handler<ProblemInfo> {
+public class InboxProblemListView{
 
 	public interface Binder extends UiBinder<Widget, InboxProblemListView> {
 	}
@@ -61,13 +56,12 @@ public class InboxProblemListView extends
 
 	@UiField(provided = true)
 	CellTable<ProblemInfo> problemList;
-	
+
 	private ListDataProvider<ProblemInfo> problemsDataProvider;
 	private final Widget widget;
 
 	@Inject
-	public InboxProblemListView(Binder binder,
-			SdCellTableResources resources) {
+	public InboxProblemListView(Binder binder, SdCellTableResources resources) {
 		problemList = new CellTable<ProblemInfo>(25, resources,
 				ProblemInfo.KEY_PROVIDER);
 		problemList.setWidth("100%", true);
@@ -75,7 +69,7 @@ public class InboxProblemListView extends
 		// Attach a column sort handler to the ListDataProvider to sort the
 		// list.
 		problemsDataProvider = new ListDataProvider<ProblemInfo>();
-		
+
 		ListHandler<ProblemInfo> sortHandler = new ListHandler<ProblemInfo>(
 				getProblemsDataProvider().getList());
 		problemList.addColumnSortHandler(sortHandler);
@@ -97,13 +91,7 @@ public class InboxProblemListView extends
 		// Add the CellList to the adapter in the database.
 		getProblemsDataProvider().addDataDisplay(problemList);
 
-		problemList.addCellPreviewHandler(this);
 		widget = binder.createAndBindUi(this);
-	}
-
-	@Override
-	public Widget asWidget() {
-		return widget;
 	}
 
 	private void initTableColumns(
@@ -179,23 +167,6 @@ public class InboxProblemListView extends
 		problemList.setColumnWidth(dateColumn, 70, Unit.PX);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.google.gwt.view.client.CellPreviewEvent.Handler#onCellPreview(com
-	 * .google.gwt.view.client.CellPreviewEvent)
-	 */
-	@Override
-	public void onCellPreview(CellPreviewEvent<ProblemInfo> event) {
-		boolean isClick = "click".equals(event.getNativeEvent().getType());
-		if (isClick && event.getColumn() != 0) {
-
-			ProblemInfo clicked = event.getValue();
-			getUiHandlers().showDecisionProblem(
-					Integer.toString(clicked.getId()));
-		}
-	}
 
 	public ListDataProvider<ProblemInfo> getProblemsDataProvider() {
 		return problemsDataProvider;

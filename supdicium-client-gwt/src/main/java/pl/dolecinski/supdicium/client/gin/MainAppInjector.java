@@ -17,9 +17,7 @@ package pl.dolecinski.supdicium.client.gin;
 
 import pl.dolecinski.supdicium.client.SupDiciumApp;
 import pl.dolecinski.supdicium.client.presenter.error.ErrorPagePresenter;
-import pl.dolecinski.supdicium.client.presenter.inbox.InboxMenuPresenterWidget;
 import pl.dolecinski.supdicium.client.presenter.inbox.InboxPagePresenter;
-import pl.dolecinski.supdicium.client.presenter.inbox.InboxProblemListPresenterWidget;
 import pl.dolecinski.supdicium.client.presenter.problem.BrainstormPresenterWidget;
 import pl.dolecinski.supdicium.client.presenter.problem.NewSolutionPresenterWidget;
 import pl.dolecinski.supdicium.client.presenter.problem.ProblemDicussionPresenter;
@@ -32,8 +30,8 @@ import pl.dolecinski.supdicium.client.presenter.welcome.HomePresenter;
 import pl.dolecinski.supdicium.client.presenter.welcome.LoginPresenter;
 import pl.dolecinski.supdicium.client.presenter.welcome.WelcomeContentPresenter;
 import pl.dolecinski.supdicium.client.ui.FooterWidget;
-import pl.dolecinski.supdicium.client.ui.solution.CommentWidget;
 import pl.dolecinski.supdicium.client.ui.solution.AddCommentBox;
+import pl.dolecinski.supdicium.client.ui.solution.CommentWidget;
 
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.inject.Provider;
@@ -69,10 +67,6 @@ public interface MainAppInjector extends CommonInjector {
 	 * Inbox section
 	 */
 	AsyncProvider<InboxPagePresenter> getInboxContentPresenter();
-
-	AsyncProvider<InboxMenuPresenterWidget> getInboxMenuPresenterWidget();
-
-	AsyncProvider<InboxProblemListPresenterWidget> getInboxProblemListPresenterWidget();
 
 	/*
 	 * Problem section
