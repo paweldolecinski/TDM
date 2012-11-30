@@ -1,93 +1,59 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:tdm="urn:import:pl.dolecinski.supdicium.client.ui">
 
 	<ui:with field="res"
 		type="pl.dolecinski.supdicium.client.theme.base.MainCss" />
 
 	<g:FlowPanel>
-		<g:HTMLPanel styleName="{res.top}">
+		<g:HTMLPanel styleName="{res.header}">
 
-			<div class="container"> <!-- branding -->
+			<g:HTMLPanel styleName="{res.container}">
+				<g:Hyperlink styleName="res.logo" targetHistoryToken="/">TDM</g:Hyperlink>
+				<tdm:WidgetList>
 
-				<a class="branding" href="/index/">
-					Prezi
-				</a> <!-- /branding --> <!-- navigation -->
-
+				</tdm:WidgetList>
 				<ul id="navigation" class="nav-main container">
-
-					<li class="nav-create">
-
-						<a href="/your/">
-							Your prezis
-
-							<span class="pointer">
-							</span>
-						</a>
+					<li>
+						<g:InlineHyperlink styleName="menu">Your problems</g:InlineHyperlink>
 					</li>
 
-					<li class="nav-learn">
-
-						<a href="/learn/">
-							Learn
-
-							<span class="pointer">
-							</span>
-						</a>
+					<li>
+						<g:InlineHyperlink styleName="menu">Learn</g:InlineHyperlink>
 					</li>
 
-					<li class="nav-explore">
-
-						<a href="/explore/">
-							Explore
-
-							<span class="pointer">
-							</span>
-						</a>
+					<li>
+						<g:InlineHyperlink styleName="menu">Explore</g:InlineHyperlink>
 					</li>
 				</ul>
 
-				<div class="dropdown">
+				<g:HTMLPanel class="dropdown">
 
-					<a class="btn btn-discreet dropdown-toggle username" data-toggle="dropdown"
+					<g:Anchor styleName="btn btn-discreet dropdown-toggle username"
 						href="#">
 						Paweł Doleciński
-
-						<span class="caret">
-						</span>
-					</a>
+						<g:InlineLabel styleName="caret" />
+					</g:Anchor>
 
 					<ul class="dropdown-menu">
-
 						<li>
-
-							<a href="/settings/">
-								Settings &amp; Account
-							</a>
+							<g:InlineHyperlink>Settings &amp; Account</g:InlineHyperlink>
 						</li>
-
 						<li>
-
-							<a href="/user/ckrtomokbhge">
-								Profile Page
-							</a>
+							<g:InlineHyperlink>Profile Page</g:InlineHyperlink>
 						</li>
-
 						<li>
-
-							<a href="/logout/">
-								Logout
-							</a>
+							<g:InlineHyperlink>Logout</g:InlineHyperlink>
 						</li>
 					</ul>
-				</div> <!-- navigation -->
-			</div>
+				</g:HTMLPanel>
+			</g:HTMLPanel>
 		</g:HTMLPanel>
 
-		<g:FlowPanel styleName="{res.globalContainer}" ui:field="mainContentPanel" />
+		<g:FlowPanel styleName="{res.content}" ui:field="mainContentPanel" />
 
 		<g:HTMLPanel styleName="{res.footer}">
-			<div class="container">
+			<g:HTMLPanel styleName="{res.container}">
 				<ul class="nav-sub row">
 					<li class="span2">
 						<ul>
@@ -95,23 +61,18 @@
 								<h4>Company</h4>
 							</li>
 							<li>
-								<a href="/about/">About</a>
-								/
-								<a href="/about-team/">Team</a>
+								<g:InlineHyperlink href="/about/">About</g:InlineHyperlink>
 							</li>
 							<li>
-								<a href="/our-values/">Our Values</a>
+								<g:InlineHyperlink href="/our-values/">Our Values</g:InlineHyperlink>
 							</li>
 							<li>
-								<a href="http://jobs.prezi.com">Jobs</a>
+								<g:InlineHyperlink href="/contact/">Contact</g:InlineHyperlink>
 							</li>
 							<li>
-								<a href="/contact/">Contact</a>
-							</li>
-							<li>
-								<a href="/privacy-policy/">Privacy</a>
+								<g:InlineHyperlink href="/privacy-policy/">Privacy</g:InlineHyperlink>
 								&amp;
-								<a href="/terms-of-use/">Terms</a>
+								<g:InlineHyperlink href="/terms-of-use/">Terms</g:InlineHyperlink>
 							</li>
 						</ul>
 					</li>
@@ -121,68 +82,13 @@
 								<h4>Product</h4>
 							</li>
 							<li>
-								<a href="/pricing/">Pricing</a>
+								<g:InlineHyperlink href="/the-basics/">TDM Online</g:InlineHyperlink>
 							</li>
 							<li>
-								<a href="/the-basics/">Prezi Online</a>
+								<g:InlineHyperlink href="/desktop/">TDM Android</g:InlineHyperlink>
 							</li>
 							<li>
-								<a href="/desktop/">Prezi Desktop</a>
-							</li>
-							<li>
-								<a href="/meeting/">Prezi Meeting</a>
-							</li>
-							<li>
-								<a href="/ipad/">Prezi for iPad</a>
-							</li>
-						</ul>
-					</li>
-					<li class="span2">
-						<ul>
-							<li>
-								<h4>Customers</h4>
-							</li>
-							<li>
-								<a href="/prezi-for-business/">Prezi for Business</a>
-							</li>
-							<li>
-								<a href="/prezi-for-conferences/">Prezi for Conferences</a>
-							</li>
-							<li>
-								<a href="/prezi-for-education/">Prezi for Education</a>
-							</li>
-							<li>
-								<a href="/prezi-for-nonprofits/">Prezi for Nonprofits</a>
-							</li>
-							<li>
-								<a href="/contact/sales/grouplicense/">Group Licenses</a>
-							</li>
-						</ul>
-					</li>
-					<li class="span2">
-						<ul>
-							<li>
-								<h4>Community</h4>
-							</li>
-							<li>
-								<a href="/community/">All Communities</a>
-							</li>
-							<li>
-								<a href="http://blog.prezi.com">Blog</a>
-								/
-								<a
-									href="http://beautifulbits.prezi.com/?utm_source=prezi&amp;utm_medium=footer&amp;utm_campaign=website">Design Blog</a>
-							</li>
-							<li>
-								<a href="http://www.facebook.com/pages/Prezi/52193296770">Facebook</a>
-								/
-								<a href="http://twitter.com/prezi">Twitter</a>
-							</li>
-							<li>
-								<a href="http://www.youtube.com/PreziVideoChannel">YouTube</a>
-							</li>
-							<li>
-								<a href="/ambassadors/">Campus Ambassadors</a>
+								<g:InlineHyperlink href="/meeting/">TDM Mobile</g:InlineHyperlink>
 							</li>
 						</ul>
 					</li>
@@ -192,39 +98,28 @@
 								<h4>Help</h4>
 							</li>
 							<li>
-								<a href="/learn/">Learn</a>
+								<g:InlineHyperlink href="/learn/">Learn</g:InlineHyperlink>
 							</li>
 							<li>
-								<a href="/support/">Support</a>
+								<g:InlineHyperlink href="/support/">Support</g:InlineHyperlink>
 							</li>
 							<li>
-								<a href="/learn/manual/">Manual</a>
+								<g:InlineHyperlink href="/learn/manual/">Manual</g:InlineHyperlink>
 							</li>
 							<li>
-								<a href="/experts/">Experts</a>
+								<g:InlineHyperlink href="/experts/">Experts</g:InlineHyperlink>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<hr class="separator" />
-					<p class="copyright">
-						2012
-						© Prezi Inc.&nbsp;
-
-						English
-
-
-
-
-						&nbsp;·&nbsp;
-						<a href="#" class="changelang_loggedin" data-langcode="es">español</a>
-
-
-
-						&nbsp;·&nbsp;
-						<a href="#" class="changelang_loggedin" data-langcode="ko">한국어</a>
-					</p>
-			</div>
+				<p class="copyright">
+					2012 © TDMTool.com &nbsp;
+					English
+					&nbsp;·&nbsp;
+					<g:Anchor href="#" class="changelang_loggedin" data-langcode="pl">polski</g:Anchor>
+				</p>
+			</g:HTMLPanel>
 		</g:HTMLPanel>
 	</g:FlowPanel>
 

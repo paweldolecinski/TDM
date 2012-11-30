@@ -26,48 +26,11 @@ import com.google.gwt.resources.client.CssResource;
  * 
  */
 public interface MainCss extends CssResource {
-	String verticalBorder();
-
-	String top();
-
-	String leftContainer();
-
+	
 	String container();
-
-	String row();
-
-	String lfloat();
-
-	String rfloat();
-
-	String fcg();
-
-	String fwn();
-
-	String fsm();
-
-	String tar();
-
+	
 	String header();
-
-	String pageLogoHref();
-
-	String footer();
-
-	String footerHref();
-
-	String pageLogo();
-
-	String section();
-
-	String globalContainer();
-
-	String contentAbsolute();
-
-	String problemDescription();
-
-	String infoSidebar();
-
-	String stackLayoutPanelHeader();
+	
+	
 
 }
