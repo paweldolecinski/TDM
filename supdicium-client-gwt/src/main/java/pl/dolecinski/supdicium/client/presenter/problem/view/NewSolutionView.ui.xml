@@ -39,7 +39,7 @@
 				</g:HTMLPanel>
 			</div>
 			<g:HTMLPanel styleName="{style.metaComposerNewSolutionBoxShelf}">
-				<g:HTMLPanel styleName="{res.rfloat}">
+				<g:HTMLPanel>
 					<g:Button ui:field="addNewSolution">Add My Idea</g:Button>
 				</g:HTMLPanel>
 			</g:HTMLPanel>

@@ -6,27 +6,8 @@
 		field="res" />
 
 
-	<g:HTMLPanel styleName="{res.footer}">
-		<g:HTMLPanel addStyleNames="{res.lfloat}">
-			<g:HTMLPanel addStyleNames="{res.fcg} {res.fwn} {res.fsm}">
-				<span>SupDicium © 2011</span>
-			</g:HTMLPanel>
-		</g:HTMLPanel>
-		<g:HTMLPanel
-			addStyleNames="{res.tar} {res.fcg} {res.fwn} {res.fsm}">
-			<g:InlineHyperlink addStyleNames="{res.footerHref}"
-				title="Home">
-				SupDicium</g:InlineHyperlink>
-			.
-			<g:InlineHyperlink addStyleNames="{res.footerHref}"
-				title="Home">
-				SupDicium</g:InlineHyperlink>
-			.
-			<g:InlineHyperlink addStyleNames="{res.footerHref}"
-				title="Home">
-				SupDicium</g:InlineHyperlink>
+	<g:HTMLPanel>
 
-		</g:HTMLPanel>
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

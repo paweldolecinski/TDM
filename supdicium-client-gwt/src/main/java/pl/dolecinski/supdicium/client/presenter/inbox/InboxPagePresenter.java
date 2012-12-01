@@ -17,26 +17,21 @@ package pl.dolecinski.supdicium.client.presenter.inbox;
 
 import pl.dolecinski.supdicium.client.bl.NameTokens;
 import pl.dolecinski.supdicium.client.event.ShowProblemListEvent;
-import pl.dolecinski.supdicium.client.model.problem.ProblemInfo;
-import pl.dolecinski.supdicium.client.presenter.inbox.view.InboxContentView.ProblemListUiHandlers;
+import pl.dolecinski.supdicium.client.presenter.inbox.view.ProblemListUiHandlers;
 import pl.dolecinski.supdicium.client.presenter.root.RootWindowPresenter;
 
-import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.gwt.view.client.ListDataProvider;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * @author Paweł Doleciński
@@ -46,19 +41,12 @@ public class InboxPagePresenter extends
 		Presenter<InboxPagePresenter.Display, InboxPagePresenter.IProxy> implements ProblemListUiHandlers{
 
 	public interface Display extends View, HasUiHandlers<ProblemListUiHandlers> {
-		ListDataProvider<ProblemInfo> getProblemsDataProvider();
 	}
 
 	@NameToken(NameTokens.inbox)
 	@ProxyCodeSplit
 	public interface IProxy extends ProxyPlace<InboxPagePresenter> {
 	}
-
-	@ContentSlot
-	public static final Type<RevealContentHandler<?>> TYPE_InboxMenu = new Type<RevealContentHandler<?>>();
-
-	@ContentSlot
-	public static final Type<RevealContentHandler<?>> TYPE_ProblemList = new Type<RevealContentHandler<?>>();
 
 	private PlaceManager placeManager;
 

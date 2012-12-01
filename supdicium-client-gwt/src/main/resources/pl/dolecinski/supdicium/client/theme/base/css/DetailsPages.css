@@ -82,9 +82,7 @@
 	height: 100px;
 }
 
-@sprite 
 .button {
-	gwt-image: 'headerBackground';
 	height: 30px;
 	border: 1px solid black;
 	border-radius: 10px;

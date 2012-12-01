@@ -16,34 +16,29 @@
 package pl.dolecinski.supdicium.client.presenter.inbox.view;
 
 import pl.dolecinski.supdicium.client.SDStyle;
-import pl.dolecinski.supdicium.client.model.problem.ProblemInfo;
 import pl.dolecinski.supdicium.client.presenter.inbox.InboxPagePresenter;
-import pl.dolecinski.supdicium.client.presenter.inbox.view.InboxContentView.ProblemListUiHandlers;
 import pl.dolecinski.supdicium.client.theme.base.MainCss;
+import pl.dolecinski.supdicium.client.ui.ProblemListItemWidget;
 
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.LIElement;
+import com.google.gwt.dom.client.UListElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.view.client.ListDataProvider;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.mvp.client.UiHandlers;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 /**
  * @author Paweł Doleciński
  * 
  */
-public class InboxContentView extends ViewWithUiHandlers<ProblemListUiHandlers> implements
-		InboxPagePresenter.Display {
-
-	public interface ProblemListUiHandlers extends UiHandlers {
-		void showDecisionProblem(String problemId);
-
-		void refreshProblemList(String filter);
-	}
+public class InboxContentView extends ViewWithUiHandlers<ProblemListUiHandlers>
+		implements InboxPagePresenter.Display {
 
 	public interface Binder extends UiBinder<Widget, InboxContentView> {
 	}
@@ -53,43 +48,35 @@ public class InboxContentView extends ViewWithUiHandlers<ProblemListUiHandlers> 
 	@UiField
 	protected HTMLPanel headerPanel;
 	@UiField
-	protected HTMLPanel problemListPanel;
+	protected UListElement problemList;
+	@UiField
+	protected Button createButton;
 
 	@Inject
 	public InboxContentView(Binder binder, EventBus eventBus) {
 		widget = binder.createAndBindUi(this);
+		LIElement liElement = null;
+		ProblemListItemWidget item = null;
+		
+		liElement = Document.get().createLIElement();
+		liElement.addClassName(getResources().span4());
+		item = new ProblemListItemWidget();
+		item.setTitle("ASDASD");
+		liElement.appendChild(item.getElement());
+		problemList.appendChild(liElement);
+		
+		liElement = Document.get().createLIElement();
+		liElement.addClassName(getResources().span4());
+		item = new ProblemListItemWidget();
+		item.setTitle("ZXCZXC");
+		liElement.appendChild(item.getElement());
+		
+		problemList.appendChild(liElement);
 	}
 
 	@Override
 	public Widget asWidget() {
 		return widget;
-	}
-
-	@Override
-	public void setInSlot(Object slot, Widget content) {
-		if (slot == InboxPagePresenter.TYPE_InboxMenu) {
-			setInboxMenu(content);
-		} else if (slot == InboxPagePresenter.TYPE_ProblemList) {
-			setProblemList(content);
-		} else {
-			super.setInSlot(slot, content);
-		}
-	}
-
-	private void setInboxMenu(Widget content) {
-		headerPanel.clear();
-		headerPanel.setVisible(true);
-		if (content != null) {
-			headerPanel.add(content);
-		}
-	}
-
-	private void setProblemList(Widget content) {
-		problemListPanel.clear();
-		problemListPanel.setVisible(true);
-		if (content != null) {
-			problemListPanel.add(content);
-		}
 	}
 
 	@UiFactory
@@ -99,9 +86,4 @@ public class InboxContentView extends ViewWithUiHandlers<ProblemListUiHandlers> 
 		return mainCss;
 	}
 
-	@Override
-	public ListDataProvider<ProblemInfo> getProblemsDataProvider() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -24,9 +24,6 @@ import com.google.gwt.resources.client.ImageResource.RepeatStyle;
 
 public interface AppResources extends ClientBundle, SDClientBundle {
 
-	@Source({ "css/util.css" })
-	UtilCss getUtilCss();
-
 	@Source({ "css/list.css" })
 	ListCss getListCss();
 
@@ -42,10 +39,14 @@ public interface AppResources extends ClientBundle, SDClientBundle {
 	@Source("css/main.css")
 	MainCss getMainCss();
 
-	@Source("resources/hbackground.png")
-	@ImageOptions(repeatStyle = RepeatStyle.Horizontal)
-	ImageResource hbackground();
-
 	@Source("resources/idea.png")
 	ImageResource idea();
+	
+	@Source("resources/separator-footer.png")
+	@ImageOptions(repeatStyle=RepeatStyle.None)
+	ImageResource separator();
+	
+	@Source("resources/logo.png")
+	@ImageOptions(repeatStyle=RepeatStyle.None)
+	ImageResource logo();
 }

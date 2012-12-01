@@ -6,7 +6,6 @@
 }
 
 @sprite .background {
-	gwt-image: 'headerBackground';
 	height: 100%;
 }
 

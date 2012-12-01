@@ -17,29 +17,7 @@
 		field="res" />
 
 	<g:HTMLPanel>
-		<g:FlowPanel addStyleNames="{style.compose}" width="100%"
-			height="48px">
-			<g:InlineHyperlink targetHistoryToken="{nameTokens.getProblem}">
-				Create New</g:InlineHyperlink>
-		</g:FlowPanel>
-		<g:StackLayoutPanel unit="EM" height="100%" width="100%">
-			<g:stack>
-				<g:customHeader size="3">
-					<g:HTMLPanel styleName="{res.stackLayoutPanelHeader}">
-						Your Problems
-							</g:HTMLPanel>
-				</g:customHeader>
-				<g:Tree height="100%" width="100%">
-					<g:TreeItem text='Current' selected="true" />
-					<g:TreeItem text='Inbox' />
-					<g:TreeItem text='Starred' />
-					<g:TreeItem text='Solved' />
-					<g:TreeItem text='Drafts' />
-					<g:TreeItem text='All' />
-					<g:TreeItem text='Bin' />
-				</g:Tree>
-			</g:stack>
-		</g:StackLayoutPanel>
+
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

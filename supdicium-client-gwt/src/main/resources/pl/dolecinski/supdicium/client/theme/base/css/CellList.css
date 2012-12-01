@@ -19,7 +19,6 @@
 }
 
 .cellListSelectedItem {
-/*   gwt-image: 'cellListSelectedBackground'; */
   background-color: darkPanelColor;
   color: white;
   height: auto;

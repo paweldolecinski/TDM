@@ -7,12 +7,12 @@
 
 	<g:HTMLPanel styleName="{res.container}">
 		<g:HTMLPanel styleName="{res.row}" ui:field="headerPanel">
-			<div class="span7">
+			<g:HTMLPanel styleName="{res.span7}">
 				<h1>
-					You have 6 prezis
+					You have X problems
 				</h1>
-			</div>
-			<div class="span5">
+			</g:HTMLPanel>
+			<g:HTMLPanel styleName="{res.span5}">
 				<form class="form-inline pull-right form-aside">
 					<label>
 						<span>
@@ -33,7 +33,7 @@
 						</span>
 						<select id="filter" name="show" class="span2">
 							<option value="all">
-								all prezis
+								all problems
 							</option>
 							<option value="own">
 								owned by me
@@ -44,63 +44,23 @@
 						</select>
 					</label>
 				</form>
-			</div>
+			</g:HTMLPanel>
 		</g:HTMLPanel>
 
-		<g:HTMLPanel styleName="{res.container}" ui:field="problemListPanel">
-			<ul id="presentations" class="prezi-list thumbnails">
+		<g:HTMLPanel styleName="{res.container}">
+			<ul ui:field="problemList" class="{res.problemList} {res.thumbnails}">
 
-				<li class="span4 li_create">
-					<div class="prezi-list-item thumbnail create">
-						<a id="create" href="">
-							<button class="btn btn-primary btn-large">
-								<i class="icon-plus icon-large icon-white">
-								</i>
-								New prezi
-							</button>
+				<li class="{res.span4}">
+					<g:HTMLPanel styleName="{res.problemListItem} {res.thumbnail} {res.create}">
+						<a id="{res.create}" href="">
+							<g:Button ui:field="createButton"
+								styleName="{res.btn} {res.btnPrimary} {res.btnLarge}">
+								New problem
+							</g:Button>
 						</a>
-					</div>
+					</g:HTMLPanel>
 				</li>
-
-				<li class="span4">
-					<div class="prezi-list-item thumbnail">
-						<a
-							style="background-image: url(http://0701.static.prezi.com/preview/jskksbrvdzzwu2gdwi7jaxwtzeadw6rhlm5vs2oll757hbaoaxlq_0_0.png); background-position: 50% 50%; background-repeat: repeat repeat; "
-							data-background="http://0701.static.prezi.com/preview/jskksbrvdzzwu2gdwi7jaxwtzeadw6rhlm5vs2oll757hbaoaxlq_0_0.png"
-							href="/gizegexzop12/zxczxc/">
-						</a>
-						<div class="caption" data-copyright="1">
-							<h3 class="title">
-								<a href="/gizegexzop12/zxczxc/">
-									zxczxc
-								</a>
-							</h3>
-							<p class="meta">
-								by
-
-								<a href="/user/ckrtomokbhge/" title="Paweł Doleciński">
-									Paweł Doleciński
-								</a>
-								on 26 November 2012
-							</p>
-
-							<ul class="stats">
-
-								<li class="reusable">
-
-									<i class="icon-reusable">
-									</i>
-									Reusable
-								</li>
-							</ul>
-
-							<p class="description">
-								zcxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-								xxxxxxxxxxxxxxxxxxxxxxxxxxx x...
-							</p>
-						</div>
-					</div>
-				</li>
+				
 			</ul>
 		</g:HTMLPanel>
 		<g:HTMLPanel />

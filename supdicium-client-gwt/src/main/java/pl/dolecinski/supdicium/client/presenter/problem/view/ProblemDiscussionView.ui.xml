@@ -21,7 +21,7 @@
 		<!-- ui:field="problemDescription" -->
 		<g:DeckPanel ui:field="deckPanel">
 			<g:HTMLPanel>
-				<g:HTMLPanel ui:field="problemDescription" addStyleNames="{res.leftContainer}  {res.lfloat}">
+				<g:HTMLPanel ui:field="problemDescription">
 						Lorem ipsum Lorem ipsum Lorem ipsum
 						Lorem ipsum Lorem
 						ipsum Lorem
@@ -34,9 +34,8 @@
 						ipsum
 						Lorem ipsum Lorem ipsum Lorem
 				</g:HTMLPanel>
-				<g:HTMLPanel addStyleNames="{res.lfloat}">
-					<g:ScrollPanel width="100%" height="100%"
-						addStyleNames="{res.verticalBorder}">
+				<g:HTMLPanel>
+					<g:ScrollPanel width="100%" height="100%">
 						<sd:WidgetList>
 							<g:FlowPanel ui:field="newSolutionPanel"
 								addStyleNames="{style.paddingTop}" />
@@ -52,7 +51,7 @@
 			</g:HTMLPanel>
 		</g:DeckPanel>
 		<!-- ui:field="infoSidebar" -->
-		<g:HTMLPanel styleName="{res.infoSidebar}">
+		<g:HTMLPanel >
 			Lorem ipsum Lorem ipsum Lorem ipsum
 			Lorem ipsum Lorem ipsum Lorem ipsum
 			Lorem ipsum Lorem ipsum Lorem

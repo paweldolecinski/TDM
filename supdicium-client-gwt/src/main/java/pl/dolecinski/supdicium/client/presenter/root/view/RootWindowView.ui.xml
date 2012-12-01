@@ -9,33 +9,29 @@
 		<g:HTMLPanel styleName="{res.header}">
 
 			<g:HTMLPanel styleName="{res.container}">
-				<g:Hyperlink styleName="res.logo" targetHistoryToken="/">TDM</g:Hyperlink>
-				<tdm:WidgetList>
-
-				</tdm:WidgetList>
-				<ul id="navigation" class="nav-main container">
+				<g:Hyperlink styleName="{res.logo}" targetHistoryToken="/">TDM</g:Hyperlink>
+				<ul id="navigation" class="{res.navMain} {res.container}">
 					<li>
-						<g:InlineHyperlink styleName="menu">Your problems</g:InlineHyperlink>
+						<g:InlineHyperlink>Your problems</g:InlineHyperlink>
 					</li>
 
 					<li>
-						<g:InlineHyperlink styleName="menu">Learn</g:InlineHyperlink>
+						<g:InlineHyperlink>Learn</g:InlineHyperlink>
 					</li>
 
 					<li>
-						<g:InlineHyperlink styleName="menu">Explore</g:InlineHyperlink>
+						<g:InlineHyperlink>Explore</g:InlineHyperlink>
 					</li>
 				</ul>
 
-				<g:HTMLPanel class="dropdown">
+				<g:HTMLPanel styleName="{res.dropdown}">
 
-					<g:Anchor styleName="btn btn-discreet dropdown-toggle username"
-						href="#">
+					<g:Anchor styleName="{res.btn} {res.btnDiscreet}" href="#">
 						Paweł Doleciński
-						<g:InlineLabel styleName="caret" />
+						<span class="{res.caret}" />
 					</g:Anchor>
 
-					<ul class="dropdown-menu">
+					<ul class="{res.dropdownMenu}">
 						<li>
 							<g:InlineHyperlink>Settings &amp; Account</g:InlineHyperlink>
 						</li>
@@ -54,70 +50,70 @@
 
 		<g:HTMLPanel styleName="{res.footer}">
 			<g:HTMLPanel styleName="{res.container}">
-				<ul class="nav-sub row">
-					<li class="span2">
+				<ul class="{res.navSub} {res.row}">
+					<li class="{res.span2}">
 						<ul>
 							<li>
 								<h4>Company</h4>
 							</li>
 							<li>
-								<g:InlineHyperlink href="/about/">About</g:InlineHyperlink>
+								<g:InlineHyperlink>About</g:InlineHyperlink>
 							</li>
 							<li>
-								<g:InlineHyperlink href="/our-values/">Our Values</g:InlineHyperlink>
+								<g:InlineHyperlink>Our Values</g:InlineHyperlink>
 							</li>
 							<li>
-								<g:InlineHyperlink href="/contact/">Contact</g:InlineHyperlink>
+								<g:InlineHyperlink>Contact</g:InlineHyperlink>
 							</li>
 							<li>
-								<g:InlineHyperlink href="/privacy-policy/">Privacy</g:InlineHyperlink>
+								<g:InlineHyperlink>Privacy</g:InlineHyperlink>
 								&amp;
-								<g:InlineHyperlink href="/terms-of-use/">Terms</g:InlineHyperlink>
+								<g:InlineHyperlink>Terms</g:InlineHyperlink>
 							</li>
 						</ul>
 					</li>
-					<li class="span2">
+					<li class="{res.span2}">
 						<ul>
 							<li>
 								<h4>Product</h4>
 							</li>
 							<li>
-								<g:InlineHyperlink href="/the-basics/">TDM Online</g:InlineHyperlink>
+								<g:InlineHyperlink>TDM Online</g:InlineHyperlink>
 							</li>
 							<li>
-								<g:InlineHyperlink href="/desktop/">TDM Android</g:InlineHyperlink>
+								<g:InlineHyperlink>TDM Android</g:InlineHyperlink>
 							</li>
 							<li>
-								<g:InlineHyperlink href="/meeting/">TDM Mobile</g:InlineHyperlink>
+								<g:InlineHyperlink>TDM Mobile</g:InlineHyperlink>
 							</li>
 						</ul>
 					</li>
-					<li class="span2">
+					<li class="{res.span2}">
 						<ul>
 							<li>
 								<h4>Help</h4>
 							</li>
 							<li>
-								<g:InlineHyperlink href="/learn/">Learn</g:InlineHyperlink>
+								<g:InlineHyperlink>Learn</g:InlineHyperlink>
 							</li>
 							<li>
-								<g:InlineHyperlink href="/support/">Support</g:InlineHyperlink>
+								<g:InlineHyperlink>Support</g:InlineHyperlink>
 							</li>
 							<li>
-								<g:InlineHyperlink href="/learn/manual/">Manual</g:InlineHyperlink>
+								<g:InlineHyperlink>Manual</g:InlineHyperlink>
 							</li>
 							<li>
-								<g:InlineHyperlink href="/experts/">Experts</g:InlineHyperlink>
+								<g:InlineHyperlink>Experts</g:InlineHyperlink>
 							</li>
 						</ul>
 					</li>
 				</ul>
-				<hr class="separator" />
-				<p class="copyright">
+				<hr class="{res.separator}" />
+				<p class="{res.copyright}">
 					2012 © TDMTool.com &nbsp;
 					English
 					&nbsp;·&nbsp;
-					<g:Anchor href="#" class="changelang_loggedin" data-langcode="pl">polski</g:Anchor>
+					<g:Anchor href="#">polski</g:Anchor>
 				</p>
 			</g:HTMLPanel>
 		</g:HTMLPanel>

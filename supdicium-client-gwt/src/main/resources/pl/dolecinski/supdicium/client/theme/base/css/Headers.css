@@ -8,7 +8,6 @@
 @sprite 
 .secondHeaderBackground {
 	border-radius: 10px;
-	gwt-image: 'secondHeaderBackground';
 	padding: 10px;
 }
 

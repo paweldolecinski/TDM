@@ -31,6 +31,62 @@ public interface MainCss extends CssResource {
 	
 	String header();
 	
+	String content();
+	
+	String footer();
+	
+	String logo();
+	
+	String navMain();
+	
+	String navSub();
+	
+	String row();
+	
+	String dropdown();
+	
+	String dropdownMenu();
+	
+	String btn();
+	
+	String btnDiscreet();
+	
+	String btnPrimary();
+	
+	String btnLarge();
+	
+	String caret();
+	
+	String span2();
+	
+	String span4();
+	
+	String span5();
+	
+	String span7();
+	
+	String separator();
+	
+	String copyright();
+	
+	
+	String problemList();
+	
+	String problemListItem();
+	
+	String thumbnails();
+	
+	String thumbnail();
+	
+	String caption();
+	
+	String title();
+	
+	String meta();
+	
+	String description();
+	
+	String create();
 	
 
 }

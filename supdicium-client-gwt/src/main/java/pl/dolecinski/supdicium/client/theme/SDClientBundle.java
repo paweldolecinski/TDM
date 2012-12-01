@@ -20,7 +20,6 @@ import pl.dolecinski.supdicium.client.theme.base.CommentListCss;
 import pl.dolecinski.supdicium.client.theme.base.CommentWidgetCss;
 import pl.dolecinski.supdicium.client.theme.base.ListCss;
 import pl.dolecinski.supdicium.client.theme.base.MainCss;
-import pl.dolecinski.supdicium.client.theme.base.UtilCss;
 
 import com.google.gwt.resources.client.ImageResource;
 
@@ -29,8 +28,6 @@ import com.google.gwt.resources.client.ImageResource;
  *
  */
 public interface SDClientBundle {
-	
-	UtilCss getUtilCss();
 	
 	ListCss getListCss();
 	
@@ -44,5 +41,6 @@ public interface SDClientBundle {
 	
 	ImageResource idea();
 	
-	ImageResource hbackground();
+	ImageResource separator();
+	
 }
