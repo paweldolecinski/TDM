@@ -43,4 +43,6 @@ public interface SDClientBundle {
 	
 	ImageResource separator();
 	
+	ImageResource problemDefaultImage();
+	
 }

@@ -14,10 +14,7 @@
 			<p class="{res.meta}">
 				by Paweł Doleciński on 26 November 2012
 			</p>
-			<p class="{res.description}">
-				zcxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-				xxxxxxxxxxxxxxxxxxxxxxxxxxx...
-			</p>
+			<p ui:field="description" class="{res.description}" />
 		</g:HTMLPanel>
 	</g:HTMLPanel>
 

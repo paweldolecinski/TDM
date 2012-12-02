@@ -49,4 +49,8 @@ public interface AppResources extends ClientBundle, SDClientBundle {
 	@Source("resources/logo.png")
 	@ImageOptions(repeatStyle=RepeatStyle.None)
 	ImageResource logo();
+	
+	@Source("resources/which_way.jpg")
+	@ImageOptions(repeatStyle=RepeatStyle.None)
+	ImageResource problemDefaultImage();
 }

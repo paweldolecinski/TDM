@@ -44,6 +44,7 @@ import pl.dolecinski.supdicium.client.presenter.welcome.view.HomeView;
 import pl.dolecinski.supdicium.client.presenter.welcome.view.LoginView;
 import pl.dolecinski.supdicium.client.presenter.welcome.view.WelcomeContentView;
 import pl.dolecinski.supdicium.client.ui.FooterWidget;
+import pl.dolecinski.supdicium.client.ui.ProblemListItemWidget;
 import pl.dolecinski.supdicium.client.ui.solution.AddCommentBox;
 import pl.dolecinski.supdicium.client.ui.solution.CommentWidget;
 
@@ -96,7 +97,8 @@ public abstract class BasePresenterModule extends AbstractPresenterModule {
 		 * Problem section
 		 */
 		bindPresenter(ProblemDicussionPresenter.class,
-				ProblemDicussionPresenter.Display.class, ProblemDiscussionView.class,
+				ProblemDicussionPresenter.Display.class,
+				ProblemDiscussionView.class,
 				ProblemDicussionPresenter.IProxy.class);
 
 		bindSingletonPresenterWidget(NewSolutionPresenterWidget.class,
@@ -106,8 +108,7 @@ public abstract class BasePresenterModule extends AbstractPresenterModule {
 				BrainstormPresenterWidget.Display.class, BrainstormView.class);
 
 		bindSingletonPresenterWidget(VotingPresenterWidget.class,
-				VotingPresenterWidget.Display.class,
-				ProblemVotingView.class);
+				VotingPresenterWidget.Display.class, ProblemVotingView.class);
 
 		bindPresenterWidget(SingleSolutionPresenterWidget.class,
 				SingleSolutionPresenterWidget.Display.class,
@@ -119,6 +120,8 @@ public abstract class BasePresenterModule extends AbstractPresenterModule {
 		bindPresenterWidget(LocalDialogPresenterWidget.class,
 				LocalDialogPresenterWidget.View.class, LocalDialogView.class);
 
+		bind(ProblemListItemWidget.class).toProvider(
+				ProblemListItemWidget.Provider.class);
 		/*
 		 * Widgets
 		 */

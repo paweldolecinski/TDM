@@ -15,21 +15,29 @@
  */
 package pl.dolecinski.supdicium.client.presenter.inbox.view;
 
+import java.util.HashMap;
+
 import pl.dolecinski.supdicium.client.SDStyle;
+import pl.dolecinski.supdicium.client.model.problem.ProblemInfo;
 import pl.dolecinski.supdicium.client.presenter.inbox.InboxPagePresenter;
 import pl.dolecinski.supdicium.client.theme.base.MainCss;
 import pl.dolecinski.supdicium.client.ui.ProblemListItemWidget;
 
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.LIElement;
 import com.google.gwt.dom.client.UListElement;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
@@ -51,27 +59,18 @@ public class InboxContentView extends ViewWithUiHandlers<ProblemListUiHandlers>
 	protected UListElement problemList;
 	@UiField
 	protected Button createButton;
+	@UiField
+	protected HeadingElement problemCounter;
+
+	private HashMap<ProblemInfo, ProblemListItemWidget> problemWidgetMap = new HashMap<ProblemInfo, ProblemListItemWidget>();
+
+	private Provider<ProblemListItemWidget> problemWidgetProvider;
 
 	@Inject
-	public InboxContentView(Binder binder, EventBus eventBus) {
+	public InboxContentView(Binder binder, EventBus eventBus,
+			Provider<ProblemListItemWidget> problemWidgetProvider) {
 		widget = binder.createAndBindUi(this);
-		LIElement liElement = null;
-		ProblemListItemWidget item = null;
-		
-		liElement = Document.get().createLIElement();
-		liElement.addClassName(getResources().span4());
-		item = new ProblemListItemWidget();
-		item.setTitle("ASDASD");
-		liElement.appendChild(item.getElement());
-		problemList.appendChild(liElement);
-		
-		liElement = Document.get().createLIElement();
-		liElement.addClassName(getResources().span4());
-		item = new ProblemListItemWidget();
-		item.setTitle("ZXCZXC");
-		liElement.appendChild(item.getElement());
-		
-		problemList.appendChild(liElement);
+		this.problemWidgetProvider = problemWidgetProvider;
 	}
 
 	@Override
@@ -86,4 +85,30 @@ public class InboxContentView extends ViewWithUiHandlers<ProblemListUiHandlers>
 		return mainCss;
 	}
 
+	@Override
+	public void addProblemListItem(ProblemInfo problem) {
+		LIElement liElement = Document.get().createLIElement();
+		liElement.addClassName(getResources().span4());
+		ProblemListItemWidget item = problemWidgetProvider.get();
+		item.init(problem);
+		problemWidgetMap.put(problem, item);
+		liElement.appendChild(item.getElement());
+		problemList.appendChild(liElement);
+	}
+
+	@Override
+	public void problemCounter(int amount) {
+		problemCounter.setInnerText("You have " + amount + " problems");
+	}
+
+	@Override
+	public void clearProblemList() {
+		while (problemList.getChildCount() > 2)
+			problemList.removeChild(problemList.getLastChild());
+	}
+
+	@UiHandler("createButton")
+	void handleClick(ClickEvent e) {
+		Window.alert("TODO: New problem");
+	}
 }

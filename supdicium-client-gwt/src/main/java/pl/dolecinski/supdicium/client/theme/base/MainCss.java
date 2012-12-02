@@ -33,6 +33,8 @@ public interface MainCss extends CssResource {
 	
 	String content();
 	
+	String landing();
+	
 	String footer();
 	
 	String logo();
@@ -65,6 +67,8 @@ public interface MainCss extends CssResource {
 	
 	String span7();
 	
+	String span8();
+	
 	String separator();
 	
 	String copyright();
@@ -88,5 +92,19 @@ public interface MainCss extends CssResource {
 	
 	String create();
 	
+	String problemTitle();
 
+	String clearfix();
+	
+	String well();
+	
+	String toolbar();
+	
+	String right();
+	
+	String blockShare();
+	
+	String problemSolutions();
+	
+	String solutionsHeader();
 }
