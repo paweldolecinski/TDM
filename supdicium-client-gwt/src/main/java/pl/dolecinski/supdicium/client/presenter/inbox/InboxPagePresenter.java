@@ -17,6 +17,7 @@ package pl.dolecinski.supdicium.client.presenter.inbox;
 
 import pl.dolecinski.supdicium.client.bl.NameTokens;
 import pl.dolecinski.supdicium.client.event.ShowProblemListEvent;
+import pl.dolecinski.supdicium.client.model.problem.ProblemInfo;
 import pl.dolecinski.supdicium.client.presenter.inbox.view.ProblemListUiHandlers;
 import pl.dolecinski.supdicium.client.presenter.root.RootWindowPresenter;
 
@@ -28,8 +29,6 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
@@ -38,9 +37,15 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
  * 
  */
 public class InboxPagePresenter extends
-		Presenter<InboxPagePresenter.Display, InboxPagePresenter.IProxy> implements ProblemListUiHandlers{
+		Presenter<InboxPagePresenter.Display, InboxPagePresenter.IProxy>
+		implements ProblemListUiHandlers {
 
 	public interface Display extends View, HasUiHandlers<ProblemListUiHandlers> {
+		void addProblemListItem(ProblemInfo problem);
+		
+		void clearProblemList();
+		
+		void problemCounter(int amount);
 	}
 
 	@NameToken(NameTokens.inbox)
@@ -48,15 +53,12 @@ public class InboxPagePresenter extends
 	public interface IProxy extends ProxyPlace<InboxPagePresenter> {
 	}
 
-	private PlaceManager placeManager;
-
 	private DispatchAsync dispatch;
 
 	@Inject
 	public InboxPagePresenter(EventBus eventBus, Display view, IProxy proxy,
-			PlaceManager placeManager, final DispatchAsync dispatch) {
+			final DispatchAsync dispatch) {
 		super(eventBus, view, proxy);
-		this.placeManager = placeManager;
 		this.dispatch = dispatch;
 		getView().setUiHandlers(this);
 	}
@@ -64,11 +66,12 @@ public class InboxPagePresenter extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.gwtplatform.mvp.client.PresenterWidget#onReveal()
+	 * @see com.gwtplatform.mvp.client.PresenterWidget#onReset()
 	 */
 	@Override
-	protected void onReveal() {
-		super.onReveal();
+	protected void onReset() {
+		super.onReset();
+		ShowProblemListEvent.fire(this, (String) null);
 	}
 
 	@Override
@@ -91,33 +94,30 @@ public class InboxPagePresenter extends
 	}
 
 	private void getDecisionProblemList(String filter) {
-//		dispatch.execute(new GetProblemListAction(filter),
-//				new AsyncCallback<GetProblemListResult>() {
-//
-//					@Override
-//					public void onFailure(Throwable caught) {
-//						GWT.log("error executing command ", caught);
-//					}
-//
-//					@Override
-//					public void onSuccess(GetProblemListResult result) {
-//						getView().getProblemsDataProvider().setList(
-//								result.getProblemList().getProblems());
-//						getView().getProblemsDataProvider().refresh();
-//					}
-//				});
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see pl.dolecinski.supdicium.client.presenter.inbox.InboxProblemList.
-	 * ProblemListUiHandlers#showDecisionProblem(java.lang.String)
-	 */
-	@Override
-	public void showDecisionProblem(String problemId) {
-		placeManager.revealPlace(new PlaceRequest(NameTokens.problem).with(
-				NameTokens.Params.id, problemId));
+		getView().problemCounter(10);
+		getView().clearProblemList();
+		for (int i = 0; i < 10; i++) {
+			getView().addProblemListItem(
+					new ProblemInfo("problem" + i, "Title" + i, "Description",
+							null));
+
+		}
+
+		// dispatch.execute(new GetProblemListAction(filter),
+		// new AsyncCallback<GetProblemListResult>() {
+		//
+		// @Override
+		// public void onFailure(Throwable caught) {
+		// GWT.log("error executing command ", caught);
+		// }
+		//
+		// @Override
+		// public void onSuccess(GetProblemListResult result) {
+		// getView().getProblemsDataProvider().setList(
+		// result.getProblemList().getProblems());
+		// getView().getProblemsDataProvider().refresh();
+		// }
+		// });
 	}
 
 	/*

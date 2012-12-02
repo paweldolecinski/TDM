@@ -44,24 +44,21 @@ public class ProblemInfo implements Serializable {
 
 	public static final ItemReader JSON = GWT.create(ItemReader.class);
 
-	private static int nextId = 0;
-
-	private String[] experts;
 	private String description;
 	private String state;
 	private Date createDate;
-	private int id;
+	private String id;
+	private String title;
 
 	protected ProblemInfo() {
 
 	}
 
-	public ProblemInfo(int id, String[] experts, String description,
-			String state) {
-		this.experts = experts;
+	public ProblemInfo(String id, String title, String description, String state) {
+		this.title = title;
 		this.description = description;
 		this.state = state;
-		this.id = nextId++;
+		this.id = id;
 		this.createDate = new Date();
 	}
 
@@ -76,8 +73,8 @@ public class ProblemInfo implements Serializable {
 	/**
 	 * @return the experts
 	 */
-	public String[] getExperts() {
-		return experts;
+	public String geTitle() {
+		return title;
 	}
 
 	/**
@@ -104,53 +101,31 @@ public class ProblemInfo implements Serializable {
 	/**
 	 * @return the unique ID of the contact
 	 */
-	public int getId() {
+	public String getId() {
 		return this.id;
 	}
 
 	@Override
 	public int hashCode() {
-		return id;
+		return id.hashCode();
 	}
 
 	/**
 	 * RequestStatus meaning:
 	 * <ul>
-	 * <li>{@link RequestStatus#UNSENT} - at default when request entity is
+	 * <li>{@link ProblemStatus#UNSENT} - at default when request entity is
 	 * created, visible only to its author, can be edited & deleted by end user
-	 * <li>{@link RequestStatus#UNREAD} - unread by administrator, should be
+	 * <li>{@link ProblemStatus#UNREAD} - unread by administrator, should be
 	 * e.g. bolded in administators user interfase
-	 * <li>{@link RequestStatus#READ} - read by administrator, but decission
+	 * <li>{@link ProblemStatus#READ} - read by administrator, but decission
 	 * hasn't been maded
-	 * <li>{@link RequestStatus#ACCEPTED} - accepted by administrator, resource
+	 * <li>{@link ProblemStatus#ACCEPTED} - accepted by administrator, resource
 	 * created
-	 * <li>{@link RequestStatus#REJECTED} - rejected by administrator, resource
+	 * <li>{@link ProblemStatus#REJECTED} - rejected by administrator, resource
 	 * not created
 	 */
-	public enum RequestStatus {
+	public enum ProblemStatus {
 
-		/**
-		 * At default when request entity is created, visible only to its
-		 * author, can be edited & deleted by end user
-		 */
-		UNSENT,
-		/**
-		 * Posted by end user, byt unread by any administrator, should be e.g.
-		 * bolded in administators user interfase
-		 */
-		UNREAD,
-		/**
-		 * Read by administrator, but decission hasn't been maded yet
-		 */
-		READ,
-		/**
-		 * Accepted by administrator, resource created
-		 */
-		ACCEPTED,
-		/**
-		 * Rejected by administrator, resource not created
-		 */
-		REJECTED
 	}
 
 }

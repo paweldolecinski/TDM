@@ -8,7 +8,7 @@
 	<g:HTMLPanel styleName="{res.container}">
 		<g:HTMLPanel styleName="{res.row}" ui:field="headerPanel">
 			<g:HTMLPanel styleName="{res.span7}">
-				<h1>
+				<h1 ui:field="problemCounter">
 					You have X problems
 				</h1>
 			</g:HTMLPanel>
@@ -52,7 +52,7 @@
 
 				<li class="{res.span4}">
 					<g:HTMLPanel styleName="{res.problemListItem} {res.thumbnail} {res.create}">
-						<a id="{res.create}" href="">
+						<a id="{res.create}">
 							<g:Button ui:field="createButton"
 								styleName="{res.btn} {res.btnPrimary} {res.btnLarge}">
 								New problem

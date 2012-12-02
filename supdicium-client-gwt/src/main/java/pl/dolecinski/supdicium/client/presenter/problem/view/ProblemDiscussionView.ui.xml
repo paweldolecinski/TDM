@@ -2,92 +2,67 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:sd="urn:import:pl.dolecinski.supdicium.client.ui">
 
-	<ui:style>
-		.paddingTop {
-			padding: 10px 0 0px 0;
-		}
-		
-		.brainstormPanel {
-			width: 600px;
-			height: 100%;
-			min-width: 600px;
-		}
-	</ui:style>
-
 	<ui:with type="pl.dolecinski.supdicium.client.theme.base.MainCss"
 		field="res" />
 
-	<g:HTMLPanel width="100%" height="100%">
-		<!-- ui:field="problemDescription" -->
-		<g:DeckPanel ui:field="deckPanel">
-			<g:HTMLPanel>
-				<g:HTMLPanel ui:field="problemDescription">
-						Lorem ipsum Lorem ipsum Lorem ipsum
-						Lorem ipsum Lorem
-						ipsum Lorem
-						ipsum
-						Lorem ipsum Lorem ipsum Lorem
-						ipsum Lorem ipsum Lorem
-						ipsum Lorem
-						ipsum Lorem ipsum Lorem ipsum
-						Lorem ipsum Lorem ipsum Lorem
-						ipsum
-						Lorem ipsum Lorem ipsum Lorem
+	<g:HTMLPanel styleName="{res.container}">
+		<h1 class="{res.problemTitle} {res.clearfix}">
+			Problem
+		</h1>
+		<g:HTMLPanel styleName="{res.toolbar}">
+			<a class="{res.btn} {res.btnPrimary}">Edit</a>
+			<a class="{res.btn}">
+				<i class="icon-copy"></i>
+				Save a copy
+			</a>
+			<a id="ln_delete" class="{res.btn} {res.right}">
+				<i class="icon-delete"></i>
+			</a>
+			<a id="ln_privacy" class="{res.btn} {res.right}">
+				<i class="icon-recycle"></i>
+				<span>
+					Allow copy
+				</span>
+			</a>
+			<g:HTMLPanel styleName="{res.blockShare}">
+				<a class="{res.btn}">
+					<i class="icon-share"></i>
+					Share
+				</a>
+			</g:HTMLPanel>
+		</g:HTMLPanel>
+		<g:HTMLPanel styleName="{res.row}">
+			<g:HTMLPanel styleName="{res.span8}">
+				<span class="problemDescription">
+					No description
+				</span>
+				<g:HTMLPanel styleName="problemInfoBar">
+					<span>
+						by
+						<a>Paweł Doleciński</a>
+						on 16 November 2012
+					</span>
 				</g:HTMLPanel>
-				<g:HTMLPanel>
-					<g:ScrollPanel width="100%" height="100%">
-						<sd:WidgetList>
-							<g:FlowPanel ui:field="newSolutionPanel"
-								addStyleNames="{style.paddingTop}" />
+				<g:HTMLPanel styleName="{res.problemSolutions}">
+					<g:FlowPanel ui:field="newSolutionPanel" />
+					<h4 class="{res.solutionsHeader}">
+						Solutions
+						<span>
+							(
+							<span>0</span>
+							)
+						</span>
+					</h4>
 
-							<g:FlowPanel ui:field="brainstormPanel"
-								addStyleNames="{style.brainstormPanel}" />
-
-						</sd:WidgetList>
-					</g:ScrollPanel>
-
-					<sd:FooterWidget />
+					<ul ui:field="solutionList" class="solutionList"></ul>
 				</g:HTMLPanel>
 			</g:HTMLPanel>
-		</g:DeckPanel>
-		<!-- ui:field="infoSidebar" -->
-		<g:HTMLPanel >
-			Lorem ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem ipsum
-			Lorem ipsum Lorem ipsum Lorem
-			ipsum Lorem ipsum Lorem ipsum Lorem
-			ipsum
-		</g:HTMLPanel>
-		<!-- ui:field="problemDockPanel" -->
-		<g:HTMLPanel>
+
+			<g:HTMLPanel styleName="{res.span4}">
+				<g:HTMLPanel styleName="problemSidebar bumped promoted {res.well}">
+					<h4>Voting results</h4>
+				</g:HTMLPanel>
+			</g:HTMLPanel>
 		</g:HTMLPanel>
 	</g:HTMLPanel>
 

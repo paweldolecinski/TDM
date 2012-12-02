@@ -19,12 +19,12 @@ import pl.dolecinski.supdicium.client.SDStyle;
 import pl.dolecinski.supdicium.client.presenter.problem.ProblemDicussionPresenter;
 import pl.dolecinski.supdicium.client.theme.base.MainCss;
 
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.UListElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -42,21 +42,22 @@ public class ProblemDiscussionView extends ViewImpl implements
 
 	private final Widget widget;
 
-	@UiField
-	FlowPanel brainstormPanel;
-
-	@UiField
-	FlowPanel newSolutionPanel;
-	@UiField
-	HTMLPanel problemDescription;
-	@UiField
-	DeckPanel deckPanel;
+	 @UiField
+	 UListElement solutionList;
 	
+	 @UiField
+	 FlowPanel newSolutionPanel;
+	// @UiField
+	// HTMLPanel problemDescription;
+	// @UiField
+	// DeckPanel deckPanel;
+
 	@Inject
 	public ProblemDiscussionView(Binder binder, EventBus eventBus) {
+		getBody().setClassName(getResources().landing());
 		widget = binder.createAndBindUi(this);
-		deckPanel.setAnimationEnabled(true);
-		deckPanel.showWidget(0);
+//		deckPanel.setAnimationEnabled(true);
+//		deckPanel.showWidget(0);
 	}
 
 	@Override
@@ -66,22 +67,10 @@ public class ProblemDiscussionView extends ViewImpl implements
 
 	@Override
 	public void setInSlot(Object slot, Widget content) {
-		if (slot == ProblemDicussionPresenter.TYPE_NewSolution) {
-			setInNewSolutionSlot(content);
-		} else if (slot == ProblemDicussionPresenter.TYPE_Brainstorm) {
-			setInBrainstormSlot(content);
+		 if (slot == ProblemDicussionPresenter.TYPE_NewSolution) {
+		 setInNewSolutionSlot(content);
 		} else {
 			super.setInSlot(slot, content);
-		}
-	}
-
-	/**
-	 * @param content
-	 */
-	private void setInBrainstormSlot(Widget content) {
-		brainstormPanel.clear();
-		if (content != null) {
-			brainstormPanel.add(content);
 		}
 	}
 
@@ -101,4 +90,8 @@ public class ProblemDiscussionView extends ViewImpl implements
 		mainCss.ensureInjected();
 		return mainCss;
 	}
+
+	public static native Element getBody() /*-{
+		return $doc.body;
+	}-*/;
 }
