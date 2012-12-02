@@ -10,11 +10,7 @@
 			Problem
 		</h1>
 		<g:HTMLPanel styleName="{res.toolbar}">
-			<a class="{res.btn} {res.btnPrimary}">Vote</a>
-			<a class="{res.btn}">
-				<i class="icon-edit"></i>
-				Edit
-			</a>
+			<a class="{res.btn} {res.btnPrimary}">Edit</a>
 			<a class="{res.btn}">
 				<i class="icon-copy"></i>
 				Save a copy
