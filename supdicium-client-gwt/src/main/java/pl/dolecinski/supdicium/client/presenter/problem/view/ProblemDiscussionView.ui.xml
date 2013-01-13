@@ -7,7 +7,7 @@
 
 	<g:HTMLPanel styleName="{res.container}">
 		<h1 class="{res.problemTitle} {res.clearfix}">
-			Problem
+			How can we maximize our market share in a tough economy?
 		</h1>
 		<g:HTMLPanel styleName="{res.toolbar}">
 			<a class="{res.btn} {res.btnPrimary}">Edit</a>
@@ -34,7 +34,14 @@
 		<g:HTMLPanel styleName="{res.row}">
 			<g:HTMLPanel styleName="{res.span8}">
 				<span class="problemDescription">
-					No description
+					Lorem ipsum dolor sit amet, consectetur adipiscing
+					elit. Nam eleifend lorem purus. Mauris sed libero sodales felis
+					faucibus rutrum a in risus. Sed quis neque sit amet dolor
+					consectetur pretium. In hac habitasse platea dictumst. Quisque a
+					enim eu risus ultricies ultrices. Vivamus purus ipsum, volutpat
+					quis venenatis ac, dictum id nisi. Vestibulum aliquam, diam sit
+					amet semper iaculis, magna nibh sagittis elit, ac euismod lectus
+					nisi id diam.
 				</span>
 				<g:HTMLPanel styleName="problemInfoBar">
 					<span>
@@ -44,17 +51,75 @@
 					</span>
 				</g:HTMLPanel>
 				<g:HTMLPanel styleName="{res.problemSolutions}">
-					<g:FlowPanel ui:field="newSolutionPanel" />
 					<h4 class="{res.solutionsHeader}">
-						Solutions
+						Flip Chart
 						<span>
 							(
 							<span>0</span>
 							)
 						</span>
 					</h4>
+					<g:FlowPanel ui:field="newSolutionPanel" />
+					<ul ui:field="solutionList" class="{res.solutionList}">
+						<li class="{res.row}">
+							<hr class="{res.span8}" />
+						</li>
+						<li class="{res.row}">
+							<div class="{res.solutionAvatar} {res.span1}"></div>
+							<div class="{res.solution} {res.span7}">
+								<span class="{res.solutionTitle}">Use a tool that makes it really easy for people
+									to send in ideas as they think of them</span>
+								<p class="{res.solutionSubTitle}">Just being able to bung ideas into the idea pit would
+									be
+									helpful.</p>
+								<span class="reply-and-delete">
+									<a class="reply">Reply</a>
+									<span class="delete-comment-link">
+										·
+										<a class="comment-delete">Delete</a>
+									</span>
+								</span>
+							</div>
+							<hr class="{res.span8}" />
+						</li>
 
-					<ul ui:field="solutionList" class="solutionList"></ul>
+						<li class="{res.row}">
+							<div class="{res.solutionAvatar} {res.span1}"></div>
+							<div class="{res.solution} {res.span7}">
+								<span class="{res.solutionTitle}">Use personal approaches to target a smaller,
+									under-served market with highly-tailored products and services.</span>
+								<p class="{res.solutionSubTitle}">Example: A chain of auto parts stores catering
+									specifically
+									to women's preferences and needs.
+								</p>
+								<span class="reply-and-delete">
+									<a class="reply">Reply</a>
+									<span class="delete-comment-link">
+										·
+										<a class="comment-delete">Delete</a>
+									</span>
+								</span>
+							</div>
+							<hr class="{res.span8}" />
+						</li>
+						<li class="{res.row}">
+							<div class="{res.solutionAvatar} {res.span1}"></div>
+							<div class="{res.solution} {res.span7}">
+								<span class="{res.solutionTitle}">Tell a better story how our product helps in a
+									tough economy</span>
+								<p class="{res.solutionSubTitle}"></p>
+								<span class="reply-and-delete">
+									<a class="reply">Reply</a>
+									<span class="delete-comment-link">
+										·
+										<a class="comment-delete">Delete</a>
+									</span>
+								</span>
+							</div>
+							<hr class="{res.span8}" />
+						</li>
+
+					</ul>
 				</g:HTMLPanel>
 			</g:HTMLPanel>
 

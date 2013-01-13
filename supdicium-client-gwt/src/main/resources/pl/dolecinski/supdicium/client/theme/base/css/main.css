@@ -7,12 +7,15 @@ html {
 
 body {
 	margin: 0;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif,
-		'PTSansRegular';
-	font-size: 16px;
 	line-height: 22px;
 	color: #333;
 	background-color: #fff;
+}
+
+body,table td,select {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif,
+		'PTSansRegular';
+	font-size: 16px;
 }
 
 a,a:visited,a:hover {
@@ -113,6 +116,12 @@ h1 {
 
 .container {
 	width: 940px;
+}
+
+.span1 {
+	width: 60px;
+	float: left;
+	margin-left: 20px;
 }
 
 .span2 {
@@ -291,11 +300,11 @@ hr {
 	right: 0;
 }
 
-.landing .content {
+.landing .content-main {
 	margin: 0 0 30px;
 }
 
-.content {
+.content-main {
 	margin: 50px 0;
 }
 
@@ -501,7 +510,7 @@ hr {
 	height: 290px
 }
 
-.problemList li:nth-child           (4n          ):before {
+.problemList li:nth-child (4n):before {
 	clear: both;
 	content: '';
 	display: block
@@ -632,7 +641,7 @@ a.thumbnail:hover {
 	background-color: #6DACE7;
 }
 
-.landing .content .problemTitle {
+.landing .content-main .problemTitle {
 	margin-bottom: 5px;
 }
 
@@ -664,24 +673,24 @@ a.thumbnail:hover {
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-.landing .content .toolbar {
+.landing .content-main .toolbar {
 	padding: 0;
 	margin: 0;
 	background: transparent;
 }
 
-.landing .content .toolbar .btn.right {
+.landing .content-main .toolbar .btn.right {
 	float: right;
 	margin-right: 0;
 	margin-left: 10px;
 }
 
-.landing .content .toolbar .blockShare {
+.landing .content-main .toolbar .blockShare {
 	display: inline-block;
 	position: relative;
 }
 
-.landing .content .toolbar .blockShare a {
+.landing .content-main .toolbar .blockShare a {
 	display: inline-block;
 	margin-right: 10px;
 }
@@ -692,5 +701,61 @@ a.thumbnail:hover {
 
 .landing .problemSolutions .solutionsHeader {
 	font-size: 24px;
-	margin-bottom: 23px;
+	margin-bottom: 15px;
+}
+
+.gwt-DisclosurePanel .header,.gwt-DisclosurePanel .header a,.gwt-DisclosurePanel .header td
+	{
+	text-decoration: none; /* Remove underline from header */
+	color: black;
+	cursor: pointer;
+}
+
+@external .gwt-DisclosurePanel .content;
+.gwt-DisclosurePanel .content {
+	border-left: 3px solid #E8EEF7;
+	padding: 4px 0px 4px 8px;
+	margin-left: 0px;
+}
+
+.solutionList {
+	list-style: none inside none;
+	margin-left: 0;
+}
+
+.solutionList li {
+	font-size: 15px;
+	line-height: 22px;
+}
+
+@sprite .solutionList .solutionAvatar {
+	gwt-image: "solutionAvatar";
+}
+
+.solutionList .solution {
+	position: relative;
+	\-webkit-box-sizing: border-box;
+	\-moz-box-sizing: border-box;
+	\-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0 10px 10px 0;
+	color: #4D4E4D;
+}
+
+.solutionList .solutionTitle {
+	font-weight: bold;	
+}
+
+.solutionList .solutionSubTitle {
+	font-style: italic;	
+}
+
+.solutionList .solutionComment {
+	position: relative;
+	\-webkit-box-sizing: border-box;
+	\-moz-box-sizing: border-box;
+	\-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0 10px 10px 0;
+	color: #4D4E4D;
 }

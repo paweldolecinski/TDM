@@ -31,6 +31,7 @@ public interface MainCss extends CssResource {
 	
 	String header();
 	
+	@ClassName("content-main")
 	String content();
 	
 	String landing();
@@ -58,6 +59,8 @@ public interface MainCss extends CssResource {
 	String btnLarge();
 	
 	String caret();
+	
+	String span1();
 	
 	String span2();
 	
@@ -107,4 +110,16 @@ public interface MainCss extends CssResource {
 	String problemSolutions();
 	
 	String solutionsHeader();
+	
+	String solutionList();
+
+	String solution();
+	
+	String solutionTitle();
+	
+	String solutionSubTitle();
+	
+	String solutionAvatar();
+	
+	String solutionComment();
 }

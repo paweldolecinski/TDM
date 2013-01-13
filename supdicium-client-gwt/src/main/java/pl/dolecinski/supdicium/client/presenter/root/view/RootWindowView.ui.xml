@@ -9,18 +9,18 @@
 		<g:HTMLPanel styleName="{res.header}">
 
 			<g:HTMLPanel styleName="{res.container}">
-				<g:Hyperlink styleName="{res.logo}" targetHistoryToken="/">TDM</g:Hyperlink>
+				<g:Hyperlink styleName="{res.logo}" targetHistoryToken="">TDM</g:Hyperlink>
 				<ul id="navigation" class="{res.navMain} {res.container}">
 					<li>
 						<g:InlineHyperlink>Your problems</g:InlineHyperlink>
 					</li>
 
 					<li>
-						<g:InlineHyperlink>Learn</g:InlineHyperlink>
+						<g:InlineHyperlink ui:field="learnLink">Learn</g:InlineHyperlink>
 					</li>
 
 					<li>
-						<g:InlineHyperlink>Explore</g:InlineHyperlink>
+						<g:InlineHyperlink ui:field="exploreLink">Explore</g:InlineHyperlink>
 					</li>
 				</ul>
 

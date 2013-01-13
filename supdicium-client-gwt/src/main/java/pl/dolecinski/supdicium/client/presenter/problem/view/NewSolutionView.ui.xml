@@ -4,15 +4,17 @@
 
 	<ui:style>
 		.textBoxContainer {
-		background-color: white;
+		margin: 0 20px 0 0;
 		}
 
 		.metaComposerNewSolutionBox {
-		background-color: #F2F2F2;
+		background-color: #E7F1FF;
+		width: 620px;
 		}
 		.metaComposerNewSolutionBoxShelf {
 		border-top: 1px solid #CCC;
-		height: 30px;
+		height:
+		30px;
 		padding: 5px 5px 0px 0px;
 		}
 
@@ -22,20 +24,20 @@
 		field="res" />
 
 	<g:DisclosurePanel>
-		<g:header>Add a Solution</g:header>
-		<g:HTMLPanel addStyleNames="{style.metaComposerNewSolutionBox}">
+		<g:header>Add an Idea</g:header>
+		<g:HTMLPanel styleName="{style.metaComposerNewSolutionBox}">
 			<div>
 				<b>
 					<g:Label>One solution idea is...</g:Label>
 				</b>
 				<g:TextBox ui:field="solutionText" maxLength="255"
-					visibleLength="65" />
+					visibleLength="75" />
 			</div>
 			<div>
-				<g:Label>Additional Detail</g:Label>
-				<g:HTMLPanel title="textBoxContainer">
+				<g:Label>Additional details</g:Label>
+				<g:HTMLPanel addStyleNames="{style.textBoxContainer}">
 					<g:TextArea ui:field="solutionAdditionalText"
-						characterWidth="50" visibleLines="3" />
+						characterWidth="55" visibleLines="3" />
 				</g:HTMLPanel>
 			</div>
 			<g:HTMLPanel styleName="{style.metaComposerNewSolutionBoxShelf}">

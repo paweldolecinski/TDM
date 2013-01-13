@@ -17,9 +17,9 @@ package pl.dolecinski.supdicium.client.presenter.problem.view;
 
 import pl.dolecinski.supdicium.client.SDStyle;
 import pl.dolecinski.supdicium.client.presenter.problem.ProblemDicussionPresenter;
+import pl.dolecinski.supdicium.client.presenter.root.view.RootWindowView;
 import pl.dolecinski.supdicium.client.theme.base.MainCss;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.UListElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
@@ -42,11 +42,12 @@ public class ProblemDiscussionView extends ViewImpl implements
 
 	private final Widget widget;
 
-	 @UiField
-	 UListElement solutionList;
-	
-	 @UiField
-	 FlowPanel newSolutionPanel;
+	@UiField
+	UListElement solutionList;
+
+	@UiField
+	FlowPanel newSolutionPanel;
+
 	// @UiField
 	// HTMLPanel problemDescription;
 	// @UiField
@@ -54,10 +55,9 @@ public class ProblemDiscussionView extends ViewImpl implements
 
 	@Inject
 	public ProblemDiscussionView(Binder binder, EventBus eventBus) {
-		getBody().setClassName(getResources().landing());
 		widget = binder.createAndBindUi(this);
-//		deckPanel.setAnimationEnabled(true);
-//		deckPanel.showWidget(0);
+		// deckPanel.setAnimationEnabled(true);
+		// deckPanel.showWidget(0);
 	}
 
 	@Override
@@ -67,8 +67,8 @@ public class ProblemDiscussionView extends ViewImpl implements
 
 	@Override
 	public void setInSlot(Object slot, Widget content) {
-		 if (slot == ProblemDicussionPresenter.TYPE_NewSolution) {
-		 setInNewSolutionSlot(content);
+		if (slot == ProblemDicussionPresenter.TYPE_NewSolution) {
+			setInNewSolutionSlot(content);
 		} else {
 			super.setInSlot(slot, content);
 		}
@@ -91,7 +91,14 @@ public class ProblemDiscussionView extends ViewImpl implements
 		return mainCss;
 	}
 
-	public static native Element getBody() /*-{
-		return $doc.body;
-	}-*/;
+	@Override
+	public void onReveal() {
+		RootWindowView.getBody().setClassName(getResources().landing());
+	}
+
+	@Override
+	public void onHide() {
+		RootWindowView.getBody().removeClassName(getResources().landing());
+	}
+
 }

@@ -19,10 +19,15 @@ import pl.dolecinski.supdicium.client.SDStyle;
 import pl.dolecinski.supdicium.client.presenter.root.RootWindowPresenter;
 import pl.dolecinski.supdicium.client.theme.base.MainCss;
 
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.InlineHyperlink;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -38,6 +43,10 @@ public class RootWindowView extends ViewImpl implements
 
 	@UiField
 	protected FlowPanel mainContentPanel;
+	@UiField
+	protected InlineHyperlink learnLink;
+	@UiField
+	protected InlineHyperlink exploreLink;
 
 	@Inject
 	public RootWindowView(Binder binder, EventBus eventBus) {
@@ -72,4 +81,13 @@ public class RootWindowView extends ViewImpl implements
 		mainCss.ensureInjected();
 		return mainCss;
 	}
+
+	@UiHandler({"learnLink", "exploreLink"})
+	void handleMenuClick(ClickEvent e) {
+		Window.alert("Under construction. Sorry :(");
+	}
+
+	public static native Element getBody() /*-{
+		return $doc.body;
+	}-*/;
 }
