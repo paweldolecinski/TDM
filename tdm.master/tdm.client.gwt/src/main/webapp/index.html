@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style"
+	content="black-translucent" />
+<!-- iPhone web-app icon -->
+<link rel="apple-touch-icon" href="/custom_icon.png" />
+
+<!-- iPhone web-app startup image -->
+<link rel="apple-touch-startup-image" href="/startup.png">
+
+<link href="/favicon.ico" rel="icon" type="image/x-icon" />
+
+<script type="text/javascript" language="javascript">
+	function blockWindowMove(event) {
+		// Tell Safari not to move the window.
+		event.preventDefault();
+	}
+</script>
+
+<title>TDM - Team Decision Maker</title>
+</head>
+
+<body ontouchmove="blockWindowMove(event);">
+	<div id="loading" style="display: none">
+		<div id="progressbar"
+			style="margin: 15px; width: 300px; height: 10px; border: 2px solid black; overflow: hidden;">
+			<div id="progress"
+				style="background: silver; height: 100%; width: 0;"></div>
+			<script type="text/javascript">
+				var loading = document.getElementById('loading');
+				var progress = document.getElementById('progress');
+				var progressbar = document.getElementById('progressbar');
+				function updateProgress() {
+					if (loading.style.display !== 'none') {
+						var width = parseInt(progress.offsetWidth
+								+ ((progressbar.offsetWidth - progress.offsetWidth) * .15));
+						if (width > (progressbar.offsetWidth * .95)) {
+							width = parseInt(progressbar.offsetWidth) * .5;
+						}
+						progress.style.width = width + 'px';
+						window.setTimeout("updateProgress()", 1000);
+					}
+				}
+				document.body.style.margin = 0;
+				document.body.style.padding = 0;
+				loading.style.display = 'block';
+				updateProgress();
+			</script>
+		</div>
+	</div>
+
+	<iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1'
+		style="position: absolute; width: 0; height: 0; border: 0"></iframe>
+
+	<noscript>
+		<div
+			style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+			Your web browser must have JavaScript enabled in order for this
+			application to display correctly.</div>
+	</noscript>
+	<!--                                           -->
+	<!-- This script loads your compiled module.   -->
+	<!-- If you add any GWT meta tags, they must   -->
+	<!-- be added before this line.                -->
+	<!--                                           -->
+	<script type="text/javascript" language="javascript"
+		src="TDM/TDM.nocache.js"></script>
+</body>
+</html>

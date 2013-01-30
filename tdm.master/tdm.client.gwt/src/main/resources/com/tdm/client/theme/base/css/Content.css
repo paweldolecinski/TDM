@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+
+.container {
+	position: absolute !important;
+	zoom: 1;
+	top: 50px;
+	/* 	bottom: 44px; */
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+}
+
+.footer {
+	position: absolute !important;
+	zoom: 1;
+	bottom: 0px;
+	/* 	height: 44px; */
+	right: 0px;
+	left: 0px;
+}
+
+.containerRelative {
+	position: relative !important;
+	zoom: 1;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	height: 52px;
+}
+
+.loadImageWrapper {
+	height: 100%;
+	width: 100%;
+	display: table;
+	vertical-align: middle;
+	background-color: rgba(255, 255, 255, 0.8);
+	z-index: 10000;
+	position: absolute;
+	top: 74px;
+}
+
+.header {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 44px;
+}

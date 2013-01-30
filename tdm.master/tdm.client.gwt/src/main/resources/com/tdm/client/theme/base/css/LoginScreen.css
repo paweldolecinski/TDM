@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+.errorLabel {
+	color: red;
+	font-size: 1.05em;
+	margin-bottom: 7px;
+}
+
+.container {
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.titleLabel {
+	font-size: 1.45em;
+	margin-bottom: 7px;
+}
+
+.label {
+	font-size: 1.05em;
+}
+
+.input {
+	width: 300px;
+}
+
+.invisible {
+	display: none;
+}
