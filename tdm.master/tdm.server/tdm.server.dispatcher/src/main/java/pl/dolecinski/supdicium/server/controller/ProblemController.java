@@ -6,21 +6,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tdm.server.logic.model.Problem;
-import com.tdm.server.logic.requests.ProblemService;
-
+import com.tdm.server.logic.model.GdmProblem;
+import com.tdm.server.logic.model.GdmProblemId;
+import com.tdm.server.logic.requests.GdmProblemService;
 
 @Controller
 @RequestMapping("/problems")
-final class ProblemsController {
+final class ProblemController {
 
-	ProblemService service;
+	GdmProblemService service;
 
 	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public Problem getProblem(@PathVariable long id) {
+	public GdmProblem getProblem(@PathVariable long id) {
 
-		return service.getProblemInfo(id);
+		return service.retrieveProblem(GdmProblemId.create(id));
 	}
 
 }
