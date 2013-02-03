@@ -15,94 +15,44 @@
  */
 package pl.dolecinski.subdicium.server.datastore.dto;
 
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- *
+ * 
  * @author Paweł Doleciński
  */
 public class ProblemDTO {
 
-    private long id;
-    private Date sentDate;
-    private Date creationDate;
-    private String resourceName;
-    private String requesterUsername;
-    private String requesterMessage;
-    private RequestStatus status;
+	private long id;
+	private String name;
+	private String description;
+	private Map<Long, String> assignedExperts = new HashMap<Long, String>();
 
-    public ProblemDTO(long id, Date sentDate, Date creationDate, String resourceName, String requesterUsername, String requesterMessage, RequestStatus status) {
-        this.id = id;
-        this.sentDate = sentDate;
-        this.creationDate = creationDate;
-        this.resourceName = resourceName;
-        this.requesterUsername = requesterUsername;
-        this.requesterMessage = requesterMessage;
-        this.status = (RequestStatus)status;
-    }
+	public ProblemDTO(long id, String name, String description) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+	}
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getRequesterMessage() {
-        return requesterMessage;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getRequesterUsername() {
-        return requesterUsername;
-    }
+	public void addExpert(long expertId, String expertRole) {
+		assignedExperts.put(expertId, expertRole);
+	}
 
-    public String getResourceName() {
-        return resourceName;
-    }
+	public Map<Long, String> getAssignedExpertsWithRoles() {
+		return assignedExperts;
+	}
 
-    public Date getSentDate() {
-        return sentDate;
-    }
-
-    public RequestStatus getStatus() {
-        return status;
-    }
-
-    /**
-     * RequestStatus meaning:
-     * <ul>
-     * <li>{@link RequestStatus#UNSENT} - at default when request entity is created, visible
-     * only to its author, can be edited & deleted by end user
-     * <li>{@link RequestStatus#UNREAD} - unread by administrator, should be e.g. bolded in
-     * administators user interfase
-     * <li>{@link RequestStatus#READ} - read by administrator, but decission hasn't been maded
-     * <li>{@link RequestStatus#ACCEPTED} - accepted by administrator, resource created
-     * <li>{@link RequestStatus#REJECTED} - rejected by administrator, resource not created
-     */
-    public enum RequestStatus {
-
-        /**
-         * At default when request entity is created, visible
-         * only to its author, can be edited & deleted by end user
-         */
-        UNSENT,
-        /**
-         * Posted by end user, byt unread by any administrator, should be e.g. bolded in
-         * administators user interfase
-         */
-        UNREAD,
-        /**
-         * Read by administrator, but decission hasn't been maded yet
-         */
-        READ,
-        /**
-         * Accepted by administrator, resource created
-         */
-        ACCEPTED,
-        /**
-         * Rejected by administrator, resource not created
-         */
-        REJECTED
-    }
 }

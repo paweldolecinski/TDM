@@ -15,70 +15,71 @@
  */
 package pl.dolecinski.subdicium.server.datastore.dao;
 
+import java.util.Collection;
+
 import pl.dolecinski.subdicium.server.datastore.dto.ProblemDTO;
 import pl.dolecinski.subdicium.server.datastore.exception.ConstraintsViolationException;
 import pl.dolecinski.subdicium.server.datastore.exception.ObjectNotFoundException;
 
 /**
- * Data Access Object for Requests.
- * Allows all CRUD operations.
+ * Data Access Object for Requests. Allows all CRUD operations.
  * <p>
- * To create new request dto use {@link #create(java.lang.String, java.lang.String) create()} method, change what you want
- * and {@link #update(pl.dolecinski.subdicium.server.datastore.dto.ProblemDTO) update(...)} with changed requestDTO
+ * To create new request dto use
+ * {@link #create(java.lang.String, java.lang.String) create()} method, change
+ * what you want and
+ * {@link #update(pl.dolecinski.subdicium.server.datastore.dto.ProblemDTO)
+ * update(...)} with changed requestDTO
  * <p>
- * To get recent Requests, call {@link #findOlderThan(java.util.Date, int) findOlderThan(...)}
- * with current Date, e.g.
+ * To get recent Requests, call {@link #findOlderThan(java.util.Date, int)
+ * findOlderThan(...)} with current Date, e.g.
+ * 
  * <pre>
- * List<RequestDTO> recentRequests = requestDao.findOlderThan(new Date(), 20);
+ * List&lt;RequestDTO&gt; recentRequests = requestDao.findOlderThan(new Date(), 20);
  * </pre>
+ * 
  * @author Paweł Doleciński
  */
 public interface ProblemDao {
 
-    /**
-         * Creates new Request for given user and resourceName, those values cannot be changes later.
-     * Other properties are filled with default values. Returns {@code RequestDTO} representing created Request.
-     * It can be later edited and updated with {@link #update(ProblemDTO)} method
-     *
-     * @return representation of created Request
-     */
-    ProblemDTO create(String userName, String title);
+	ProblemDTO create(String name, String description);
 
-    /**
-     * Creates new Request for given user, message and resourceName. Only message could be change later.
-     * Other properties are filled with default values. Returns {@code RequestDTO} representing created Request.
-     * It can be later edited and updated with {@link #update(ProblemDTO)} method
-     *
-     * @return representation of created Request
-     */
-    ProblemDTO create(String userName, String title, String description);
+	ProblemDTO create(String userName, String title, String description);
 
-    /**
-     * Gets {@code RequestDTO} with given Request id.
-     * @see ProblemDTO
-     * @param id of request
-     * @throws ObjectNotFoundException when Request with given id doesn't exist in database
-     * @return RequestDTO with given id
-     */
-    ProblemDTO read(long id) throws ObjectNotFoundException;
+	ProblemDTO read(long id) throws ObjectNotFoundException;
 
-    /**
-     * Updates request with values taken from given {@link ProblemDTO}. If request
-     * with id taken from {@code RequestDTO}.
-     * <p><b>WARNING:</b>
-     * for now only modifable property is status of request. All other changes are omitted.
-     * @param request contains values to set and <strong>id</strong> of updated request
-     * @throws ObjectNotFoundException when Request with given id doesn't exist in database, so it cannot be updated
-     * @throws ConstraintsViolationException when trying to change unmodifable properties or
-     * make changes that makes inconsistency
-     */
-    void update(ProblemDTO request) throws ObjectNotFoundException, ConstraintsViolationException;
+	/**
+	 * Updates request with values taken from given {@link ProblemDTO}. If
+	 * request with id taken from {@code RequestDTO}.
+	 * <p>
+	 * <b>WARNING:</b> for now only modifable property is status of request. All
+	 * other changes are omitted.
+	 * 
+	 * @param request
+	 *            contains values to set and <strong>id</strong> of updated
+	 *            request
+	 * @throws ObjectNotFoundException
+	 *             when Request with given id doesn't exist in database, so it
+	 *             cannot be updated
+	 * @throws ConstraintsViolationException
+	 *             when trying to change unmodifable properties or make changes
+	 *             that makes inconsistency
+	 */
+	void update(ProblemDTO request) throws ObjectNotFoundException,
+			ConstraintsViolationException;
 
-    /**
-     * Deletes request with given id from database
-     * @param id of request to delete
-     * @throws ObjectNotFoundException when Request with given id doesn't exist in database, so it cannot be deleted
-     */
-    void delete(long id) throws ObjectNotFoundException;
+	/**
+	 * Deletes request with given id from database
+	 * 
+	 * @param id
+	 *            of request to delete
+	 * @throws ObjectNotFoundException
+	 *             when Request with given id doesn't exist in database, so it
+	 *             cannot be deleted
+	 */
+	void delete(long id) throws ObjectNotFoundException;
+
+	Collection<ProblemDTO> findAllAssignedTo(long expertId);
+
+	Collection<ProblemDTO> findAllAssignedTo(long expertId, String expertRole);
 
 }

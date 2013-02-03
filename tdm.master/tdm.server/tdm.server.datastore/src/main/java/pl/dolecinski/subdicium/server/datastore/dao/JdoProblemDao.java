@@ -15,6 +15,8 @@
  */
 package pl.dolecinski.subdicium.server.datastore.dao;
 
+import java.util.Collection;
+
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
@@ -134,13 +136,27 @@ public class JdoProblemDao implements ProblemDao {
 	 */
 	private ProblemDTO entityToDto(Problem request) {
 		return null;
-//		return new ProblemDTO(request.getId(), request.getCreationDate(),
-//				request.getSentDate(), request.getStatus(),
-//				request.getResourceName(), request.getAuthorUsername(),
-//				request.getAuthorMessage());
+		// return new ProblemDTO(request.getId(), request.getCreationDate(),
+		// request.getSentDate(), request.getStatus(),
+		// request.getResourceName(), request.getAuthorUsername(),
+		// request.getAuthorMessage());
 	}
 
 	private PersistenceManager getPersistenceManager() {
 		return PMF.getPersistenceManager();
 	}
+
+	@Override
+	public Collection<ProblemDTO> findAllAssignedTo(long expertId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<ProblemDTO> findAllAssignedTo(long expertId,
+			String expertRole) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

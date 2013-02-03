@@ -1,28 +1,33 @@
 package com.tdm.server.logic.model;
 
-
 public class GdmProblem {
 
-	public void setName(String name) {
-		// TODO Auto-generated method stub
+	private final GdmProblemId id;
+	private String name = "";
+	private String description = "";
 
+	public GdmProblem(GdmProblemId id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setDescription(String description) {
-		// TODO Auto-generated method stub
-
+		this.description = description;
 	}
 
 	public String getName() {
-		return "Car Choosing";
+		return name;
 	}
 
 	public String getDescription() {
-		return "";
+		return description;
 	}
 
 	public GdmProblemId getId() {
-		return GdmProblemId.create(1);
+		return id;
 	}
 
 }

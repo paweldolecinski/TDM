@@ -2,6 +2,8 @@ package com.tdm.server.logic.model;
 
 public class GdmProblemId {
 
+	public static final GdmProblemId EMPTY_ID = new GdmProblemId(-1);
+	
 	private long id;
 
 	public static GdmProblemId create(long id) {

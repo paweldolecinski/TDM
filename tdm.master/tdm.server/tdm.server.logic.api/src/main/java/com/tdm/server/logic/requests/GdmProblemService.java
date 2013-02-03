@@ -15,15 +15,15 @@ public interface GdmProblemService {
 
 	GdmProblem retrieveProblem(GdmProblemId id);
 
-	void assignExpertToProblem(GdmProblemId problemId, ExpertId expertId,
-			ExpertRole expertRole);
-
-	Collection<GdmProblemId> retrieveProblemsIdsForExpert(ExpertId id);
-
-	Collection<GdmProblemId> retrieveProblemsOwnedByExpert(ExpertId id);
-
-	Collection<GdmProblemId> retrieveProblemsModeratedByExpert(ExpertId id);
+	ExpertId getOwnerOfProblem(GdmProblemId problemId);
 
 	void setOwnerOfProblem(GdmProblemId problemId, ExpertId id);
+
+	Collection<ExpertId> retrieveExpertsAssignedToProblem(GdmProblemId problemId);
+
+	Collection<ExpertId> retrieveModeratorsOfProblem(GdmProblemId problemId);
+
+	void assignExpertToProblem(GdmProblemId problemId, ExpertId expertId,
+			ExpertRole expertRole);
 
 }
