@@ -1,22 +1,24 @@
-package com.tdm.server.logic.search;
+package com.tdm.server.logic.service.search;
 
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import pl.dolecinski.subdicium.server.datastore.dao.ProblemDao;
 import pl.dolecinski.subdicium.server.datastore.dto.ProblemDTO;
 
 import com.tdm.server.logic.model.ExpertId;
-import com.tdm.server.logic.model.GdmProblemId;
+import com.tdm.server.logic.model.GdmProblem;
+import com.tdm.server.logic.problem.service.SearchService;
 
 public class SearchServiceTest {
 
@@ -44,22 +46,21 @@ public class SearchServiceTest {
 		// Given
 		ExpertId expertId = ExpertId.create(1);
 
-		HashSet<ProblemDTO> hashSet = new HashSet<ProblemDTO>();
-		hashSet.add(problem0);
-		hashSet.add(problem1);
+		List<ProblemDTO> list = new ArrayList<ProblemDTO>();
+		list.add(problem0);
+		list.add(problem1);
 		when(problemDaoMock.findAllAssignedTo(expertId.getId())).thenReturn(
-				hashSet);
+				list);
 		// When
 
 		// Then
-		Collection<GdmProblemId> problemsIds = searchService
-				.retrieveProblemsIdsForExpert(expertId);
+		Collection<GdmProblem> problemsIds = searchService
+				.retrieveProblemsForExpert(expertId);
 
 		Assert.assertEquals(2, problemsIds.size());
-		Assert.assertTrue(problemsIds.contains(GdmProblemId.create(problem0
-				.getId())));
-		Assert.assertTrue(problemsIds.contains(GdmProblemId.create(problem1
-				.getId())));
+		Iterator<GdmProblem> iterator = problemsIds.iterator();
+		Assert.assertEquals(problem0.getId(), iterator.next().getId().getId());
+		Assert.assertEquals(problem1.getId(), iterator.next().getId().getId());
 
 	}
 }

@@ -1,4 +1,4 @@
-package com.tdm.server.logic.requests;
+package com.tdm.server.logic.service;
 
 import java.util.Collection;
 
@@ -11,7 +11,7 @@ public interface GdmProblemService {
 
 	GdmProblem createEmptyProblem();
 
-	GdmProblemId addProblem(GdmProblem problem);
+	GdmProblem addProblem(GdmProblem problem);
 
 	GdmProblem retrieveProblem(GdmProblemId id);
 

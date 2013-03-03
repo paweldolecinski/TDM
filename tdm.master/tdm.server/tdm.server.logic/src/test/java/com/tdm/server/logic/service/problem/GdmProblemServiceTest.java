@@ -1,4 +1,4 @@
-package com.tdm.server.logic.problem;
+package com.tdm.server.logic.service.problem;
 
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -18,8 +18,10 @@ import com.tdm.server.logic.model.Expert;
 import com.tdm.server.logic.model.ExpertId;
 import com.tdm.server.logic.model.ExpertRole;
 import com.tdm.server.logic.model.GdmProblem;
+import com.tdm.server.logic.model.GdmProblemImpl;
 import com.tdm.server.logic.model.GdmProblemId;
-import com.tdm.server.logic.requests.GdmProblemService;
+import com.tdm.server.logic.problem.service.DefaultGdmProblemService;
+import com.tdm.server.logic.service.GdmProblemService;
 
 public class GdmProblemServiceTest {
 
@@ -46,7 +48,7 @@ public class GdmProblemServiceTest {
 	@Test(expected = UnsupportedOperationException.class)
 	public void shouldThrowExceptionWhenAddingExistingProblem() {
 		// Given
-		GdmProblem problem = new GdmProblem(GdmProblemId.create(1));
+		GdmProblem problem = new GdmProblemImpl(GdmProblemId.create(1));
 
 		// When
 		manager.addProblem(problem);
@@ -66,10 +68,10 @@ public class GdmProblemServiceTest {
 		problem.setName(name);
 		problem.setDescription(description);
 
-		GdmProblemId id = manager.addProblem(problem);
+		GdmProblem id = manager.addProblem(problem);
 
 		// Then
-		GdmProblem result = manager.retrieveProblem(id);
+		GdmProblem result = manager.retrieveProblem(id.getId());
 
 		Assert.assertEquals(name, result.getName());
 		Assert.assertEquals(description, result.getDescription());
@@ -83,19 +85,19 @@ public class GdmProblemServiceTest {
 		Expert expert = new Expert(expertId, "Pawel");
 
 		GdmProblem emptyProblem = manager.createEmptyProblem();
-		GdmProblemId problemId = manager.addProblem(emptyProblem);
+		GdmProblem problemId = manager.addProblem(emptyProblem);
 
 		HashSet<ProblemDTO> hashSet = new HashSet<ProblemDTO>();
 		hashSet.add(problem0);
 		when(problemDaoMock.findAllAssignedTo(expertId.getId())).thenReturn(
 				hashSet);
 		// When
-		manager.assignExpertToProblem(problemId, expert.getId(),
+		manager.assignExpertToProblem(problemId.getId(), expert.getId(),
 				ExpertRole.MEMBER);
 
 		// Then
 		Collection<ExpertId> expertsIds = manager
-				.retrieveExpertsAssignedToProblem(problemId);
+				.retrieveExpertsAssignedToProblem(problemId.getId());
 
 		Assert.assertEquals(1, expertsIds.size());
 		Assert.assertTrue(expertsIds.contains(expertId));
@@ -106,10 +108,10 @@ public class GdmProblemServiceTest {
 	public void shouldThrowExceptionWhenNoOwnerForProblem() {
 		// Given
 		GdmProblem emptyProblem = manager.createEmptyProblem();
-		GdmProblemId problemId = manager.addProblem(emptyProblem);
+		GdmProblem problemId = manager.addProblem(emptyProblem);
 
 		// When
-		manager.getOwnerOfProblem(problemId);
+		manager.getOwnerOfProblem(problemId.getId());
 
 		// Then
 		// exception
@@ -123,7 +125,7 @@ public class GdmProblemServiceTest {
 		Expert expert = new Expert(expertId, "Pawel");
 
 		GdmProblem emptyProblem = manager.createEmptyProblem();
-		GdmProblemId problemId = manager.addProblem(emptyProblem);
+		GdmProblem problemId = manager.addProblem(emptyProblem);
 
 		HashSet<ProblemDTO> hashSet = new HashSet<ProblemDTO>();
 		hashSet.add(problem0);
@@ -133,18 +135,18 @@ public class GdmProblemServiceTest {
 				problemDaoMock.findAllAssignedTo(expertId.getId(),
 						ExpertRole.OWNER.name())).thenReturn(hashSet);
 		// When
-		manager.setOwnerOfProblem(problemId, expert.getId());
+		manager.setOwnerOfProblem(problemId.getId(), expert.getId());
 
 		// Then
 		Collection<ExpertId> assignedExperts = manager
-				.retrieveExpertsAssignedToProblem(problemId);
+				.retrieveExpertsAssignedToProblem(problemId.getId());
 
 		Assert.assertEquals(1, assignedExperts.size());
 		Assert.assertTrue(assignedExperts.contains(expertId));
 		Assert.assertEquals(expertId.getId(), assignedExperts.iterator().next()
 				.getId());
 
-		ExpertId problemOwner = manager.getOwnerOfProblem(problemId);
+		ExpertId problemOwner = manager.getOwnerOfProblem(problemId.getId());
 		Assert.assertEquals(expertId, problemOwner);
 
 	}
@@ -156,7 +158,7 @@ public class GdmProblemServiceTest {
 		Expert expert = new Expert(expertId, "Pawel");
 
 		GdmProblem emptyProblem = manager.createEmptyProblem();
-		GdmProblemId problemId = manager.addProblem(emptyProblem);
+		GdmProblem problemId = manager.addProblem(emptyProblem);
 
 		HashSet<ProblemDTO> hashSet = new HashSet<ProblemDTO>();
 		hashSet.add(problem0);
@@ -166,12 +168,12 @@ public class GdmProblemServiceTest {
 				problemDaoMock.findAllAssignedTo(expertId.getId(),
 						ExpertRole.MODERATOR.name())).thenReturn(hashSet);
 		// When
-		manager.assignExpertToProblem(problemId, expert.getId(),
+		manager.assignExpertToProblem(problemId.getId(), expert.getId(),
 				ExpertRole.MODERATOR);
 
 		// Then
 		Collection<ExpertId> assignedExperts = manager
-				.retrieveExpertsAssignedToProblem(problemId);
+				.retrieveExpertsAssignedToProblem(problemId.getId());
 
 		Assert.assertEquals(1, assignedExperts.size());
 		Assert.assertTrue(assignedExperts.contains(expertId));
@@ -179,7 +181,7 @@ public class GdmProblemServiceTest {
 				.getId());
 
 		Collection<ExpertId> moderatorsOfProblem = manager
-				.retrieveModeratorsOfProblem(problemId);
+				.retrieveModeratorsOfProblem(problemId.getId());
 		Assert.assertEquals(1, moderatorsOfProblem.size());
 		Assert.assertTrue(moderatorsOfProblem.contains(expertId));
 		Assert.assertEquals(expertId.getId(), moderatorsOfProblem.iterator()

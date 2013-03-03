@@ -1,33 +1,15 @@
 package com.tdm.server.logic.model;
 
-public class GdmProblem {
+public interface GdmProblem {
 
-	private final GdmProblemId id;
-	private String name = "";
-	private String description = "";
+	void setName(String name);
 
-	public GdmProblem(GdmProblemId id) {
-		this.id = id;
-	}
+	void setDescription(String description);
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	String getName();
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	String getDescription();
 
-	public String getName() {
-		return name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public GdmProblemId getId() {
-		return id;
-	}
+	GdmProblemId getId();
 
 }

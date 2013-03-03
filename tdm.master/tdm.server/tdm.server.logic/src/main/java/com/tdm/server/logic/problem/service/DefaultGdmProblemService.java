@@ -1,4 +1,4 @@
-package com.tdm.server.logic.problem;
+package com.tdm.server.logic.problem.service;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -13,7 +13,8 @@ import com.tdm.server.logic.model.ExpertId;
 import com.tdm.server.logic.model.ExpertRole;
 import com.tdm.server.logic.model.GdmProblem;
 import com.tdm.server.logic.model.GdmProblemId;
-import com.tdm.server.logic.requests.GdmProblemService;
+import com.tdm.server.logic.model.GdmProblemImpl;
+import com.tdm.server.logic.service.GdmProblemService;
 
 public class DefaultGdmProblemService implements GdmProblemService {
 
@@ -25,11 +26,11 @@ public class DefaultGdmProblemService implements GdmProblemService {
 
 	@Override
 	public GdmProblem createEmptyProblem() {
-		return new GdmProblem(GdmProblemId.EMPTY_ID);
+		return new GdmProblemImpl(GdmProblemId.EMPTY_ID);
 	}
 
 	@Override
-	public GdmProblemId addProblem(GdmProblem problem) {
+	public GdmProblem addProblem(GdmProblem problem) {
 		if (problem.getId() != GdmProblemId.EMPTY_ID) {
 			throw new UnsupportedOperationException(
 					"Adding problem requires empty id");
@@ -37,14 +38,13 @@ public class DefaultGdmProblemService implements GdmProblemService {
 
 		ProblemDTO created = problemDao.create(problem.getName(),
 				problem.getDescription());
-		long id = created.getId();
-		return GdmProblemId.create(id);
+		return GdmProblemImpl.dtoToModel(created);
 	}
 
 	@Override
 	public GdmProblem retrieveProblem(GdmProblemId id) {
 		ProblemDTO read = problemDao.read(id.getId());
-		GdmProblem dtoToModel = dtoToModel(read);
+		GdmProblem dtoToModel = GdmProblemImpl.dtoToModel(read);
 		return dtoToModel;
 	}
 
@@ -101,11 +101,4 @@ public class DefaultGdmProblemService implements GdmProblemService {
 		problemDao.update(read);
 	}
 
-	private GdmProblem dtoToModel(ProblemDTO problem) {
-		long id = problem.getId();
-		GdmProblem gdmProblem = new GdmProblem(GdmProblemId.create(id));
-		gdmProblem.setName(problem.getName());
-		gdmProblem.setDescription(problem.getDescription());
-		return gdmProblem;
-	}
 }
