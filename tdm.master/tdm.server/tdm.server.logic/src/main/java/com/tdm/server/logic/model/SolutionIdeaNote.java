@@ -6,6 +6,11 @@ public class SolutionIdeaNote {
 
 	private int utility;
 
+	public SolutionIdeaNote(SolutionIdeaId solutionId, int utility) {
+		this.solutionId = solutionId;
+		this.utility = utility;
+	}
+
 	public SolutionIdeaId getSolutionId() {
 		return solutionId;
 	}
@@ -14,11 +19,9 @@ public class SolutionIdeaNote {
 		return utility;
 	}
 
-	public void setSolutionId(SolutionIdeaId solutionId) {
-		this.solutionId = solutionId;
+	@Override
+	public String toString() {
+		return solutionId + " -> " + utility;
 	}
 
-	public void setUtility(int utility) {
-		this.utility = utility;
-	}
 }

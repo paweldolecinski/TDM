@@ -38,4 +38,8 @@ public class SolutionIdeaId {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "" + id;
+	}
 }
