@@ -45,7 +45,7 @@
 		<validation-api.version>1.0.0.GA</validation-api.version>
 		<piriti.version>0.8</piriti.version>
 		<piriti.totoe.version>0.3</piriti.totoe.version>
-		
+
 		<spring.version>3.1.2.RELEASE</spring.version>
 		<cglib.version>2.2</cglib.version>
 
@@ -66,6 +66,11 @@
 	</properties>
 
 	<repositories>
+		<repository>
+			<id>scala-tools.org</id>
+			<name>Scala-tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</repository>
 		<repository>
 			<id>JBoss Repo</id>
 			<url>https://repository.jboss.org/nexus/content/repositories/public/</url>
@@ -88,8 +93,16 @@
 				<updatePolicy>daily</updatePolicy>
 			</snapshots>
 		</repository>
-
 	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>scala-tools.org</id>
+			<name>Scala-tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<dependencyManagement>
 		<dependencies>
 			<!-- Sub-modules -->

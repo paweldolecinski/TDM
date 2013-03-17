@@ -3,12 +3,11 @@ package com.tdm.server.logic.decision.preferences;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.tdm.server.logic.model.FuzzyPreferenceRelation;
 import com.tdm.server.logic.model.MultiplicativePreferenceRelation;
-import com.tdm.server.logic.model.PreferenceRelation;
 import com.tdm.server.logic.model.SolutionIdeaId;
 import com.tdm.server.logic.model.SolutionIdeaNote;
 import com.tdm.server.logic.model.SolutionIdeaOrderList;
-import com.tdm.server.logic.model.SolutionIdeaTuple;
 import com.tdm.server.logic.model.SolutionIdeaTupleWithMultiplicativeValue;
 import com.tdm.server.logic.model.SolutionIdeaTupleWithValue;
 import com.tdm.server.logic.model.SolutionIdeaUtilityList;
@@ -19,7 +18,6 @@ public class PreferencesUnifierTest {
 	private SolutionIdeaId i2 = SolutionIdeaId.create(2);
 	private SolutionIdeaId i3 = SolutionIdeaId.create(3);
 	private SolutionIdeaId i4 = SolutionIdeaId.create(4);
-	private PreferencesUnifier preferencesUnifier = new PreferencesUnifier();
 
 	@Test
 	public void shouldTransformOrderToFuzzyRel() {
@@ -32,7 +30,7 @@ public class PreferencesUnifierTest {
 		solutionIdeaOrderList.add(new SolutionIdeaNote(i4, 1));
 
 		// When
-		PreferenceRelation transform = preferencesUnifier
+		FuzzyPreferenceRelation transform = UnifyingPreferences
 				.transform(solutionIdeaOrderList);
 
 		// Then
@@ -100,7 +98,7 @@ public class PreferencesUnifierTest {
 		preferences.add(new SolutionIdeaNote(i4, 2));
 
 		// When
-		PreferenceRelation transform = preferencesUnifier
+		FuzzyPreferenceRelation transform = UnifyingPreferences
 				.transform(preferences);
 
 		// Then
@@ -177,7 +175,7 @@ public class PreferencesUnifierTest {
 				.add(new SolutionIdeaTupleWithMultiplicativeValue(i4, i3, 4));
 
 		// When
-		PreferenceRelation transform = preferencesUnifier
+		FuzzyPreferenceRelation transform = UnifyingPreferences
 				.transform(preferences);
 
 		// Then
