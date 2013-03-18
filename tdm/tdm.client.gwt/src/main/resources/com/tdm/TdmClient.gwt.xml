@@ -10,7 +10,6 @@
 	<inherits name="com.google.gwt.logging.Logging" />
 	<inherits name='com.google.gwt.junit.JUnit' />
 
-	<inherits name='com.gwtplatform.mvp.Mvp' />
 	<inherits name='com.gwtplatform.dispatch.Dispatch' />
 	<inherits name="name.pehl.piriti.json.JSON" />
 
@@ -18,14 +17,18 @@
 
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
 
-	<entry-point class='com.tdm.client.TDMEntryPoint' />
+	<inherits name="com.gwtplatform.mvp.MvpWithEntryPoint" />
 
 	<source path='client' />
 
 	<define-configuration-property name='gin.ginjector'
 		is-multi-valued='false' />
-	<set-configuration-property name='gin.ginjector'
-		value='com.tdm.client.gin.MainAppInjector' />
+		
+	<set-configuration-property name="gin.ginjector.modules"
+		value="com.tdm.client.gin.ClientModule" />
+
+	<set-configuration-property name="gin.ginjector.extensions"
+		value="com.tdm.client.gin.GinjectorExtension" />
 
 	<!-- To change the default logLevel -->
 	<set-property name="gwt.logging.logLevel" value="FINE" />

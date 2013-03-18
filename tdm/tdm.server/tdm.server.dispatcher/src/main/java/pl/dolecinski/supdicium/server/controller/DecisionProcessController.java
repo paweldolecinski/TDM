@@ -1,8 +1,5 @@
 package pl.dolecinski.supdicium.server.controller;
 
-import java.util.Collections;
-import java.util.Set;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tdm.server.logic.model.GdmProblem;
 import com.tdm.server.logic.service.GdmProblemService;
 
 @Controller

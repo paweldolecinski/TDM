@@ -2,9 +2,7 @@ package com.tdm.server.logic.problem.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import pl.dolecinski.subdicium.server.datastore.dao.ProblemDao;
 import pl.dolecinski.subdicium.server.datastore.dto.ProblemDTO;

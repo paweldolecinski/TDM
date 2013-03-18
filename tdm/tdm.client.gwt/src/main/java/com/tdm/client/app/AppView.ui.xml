@@ -1,0 +1,122 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:tdm="urn:import:com.tdm.client.app.ui">
+
+	<ui:with field="res"
+		type="com.tdm.client.resources.AppResources" />
+
+	<g:FlowPanel>
+		<g:HTMLPanel styleName="{res.getMainCss.header}">
+
+			<g:HTMLPanel styleName="{res.getMainCss.container}">
+				<g:Hyperlink styleName="{res.getMainCss.logo}" targetHistoryToken="">TDM</g:Hyperlink>
+				<ul id="navigation" class="{res.getMainCss.navMain} {res.getMainCss.container}">
+					<li>
+						<g:InlineHyperlink>Your problems</g:InlineHyperlink>
+					</li>
+
+					<li>
+						<g:InlineHyperlink ui:field="learnLink">Learn</g:InlineHyperlink>
+					</li>
+
+					<li>
+						<g:InlineHyperlink ui:field="exploreLink">Explore</g:InlineHyperlink>
+					</li>
+				</ul>
+
+				<g:HTMLPanel styleName="{res.getMainCss.dropdown}">
+
+					<g:Anchor styleName="{res.getMainCss.btn} {res.getMainCss.btnDiscreet}" href="#">
+						Paweł Doleciński
+						<span class="{res.getMainCss.caret}" />
+					</g:Anchor>
+
+					<ul class="{res.getMainCss.dropdownMenu}">
+						<li>
+							<g:InlineHyperlink>Settings &amp; Account</g:InlineHyperlink>
+						</li>
+						<li>
+							<g:InlineHyperlink>Profile Page</g:InlineHyperlink>
+						</li>
+						<li>
+							<g:InlineHyperlink>Logout</g:InlineHyperlink>
+						</li>
+					</ul>
+				</g:HTMLPanel>
+			</g:HTMLPanel>
+		</g:HTMLPanel>
+
+		<g:FlowPanel styleName="{res.getMainCss.content}" ui:field="mainContentPanel" />
+
+		<g:HTMLPanel styleName="{res.getMainCss.footer}">
+			<g:HTMLPanel styleName="{res.getMainCss.container}">
+				<ul class="{res.getMainCss.navSub} {res.getMainCss.row}">
+					<li class="{res.getMainCss.span2}">
+						<ul>
+							<li>
+								<h4>Company</h4>
+							</li>
+							<li>
+								<g:InlineHyperlink>About</g:InlineHyperlink>
+							</li>
+							<li>
+								<g:InlineHyperlink>Our Values</g:InlineHyperlink>
+							</li>
+							<li>
+								<g:InlineHyperlink>Contact</g:InlineHyperlink>
+							</li>
+							<li>
+								<g:InlineHyperlink>Privacy</g:InlineHyperlink>
+								&amp;
+								<g:InlineHyperlink>Terms</g:InlineHyperlink>
+							</li>
+						</ul>
+					</li>
+					<li class="{res.getMainCss.span2}">
+						<ul>
+							<li>
+								<h4>Product</h4>
+							</li>
+							<li>
+								<g:InlineHyperlink>TDM Online</g:InlineHyperlink>
+							</li>
+							<li>
+								<g:InlineHyperlink>TDM Android</g:InlineHyperlink>
+							</li>
+							<li>
+								<g:InlineHyperlink>TDM Mobile</g:InlineHyperlink>
+							</li>
+						</ul>
+					</li>
+					<li class="{res.getMainCss.span2}">
+						<ul>
+							<li>
+								<h4>Help</h4>
+							</li>
+							<li>
+								<g:InlineHyperlink>Learn</g:InlineHyperlink>
+							</li>
+							<li>
+								<g:InlineHyperlink>Support</g:InlineHyperlink>
+							</li>
+							<li>
+								<g:InlineHyperlink>Manual</g:InlineHyperlink>
+							</li>
+							<li>
+								<g:InlineHyperlink>Experts</g:InlineHyperlink>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<hr class="{res.getMainCss.separator}" />
+				<p class="{res.getMainCss.copyright}">
+					2012 © TDMTool.com &nbsp;
+					English
+					&nbsp;·&nbsp;
+					<g:Anchor href="#">polski</g:Anchor>
+				</p>
+			</g:HTMLPanel>
+		</g:HTMLPanel>
+	</g:FlowPanel>
+
+</ui:UiBinder>

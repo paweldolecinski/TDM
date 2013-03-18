@@ -24,7 +24,6 @@ import javax.jdo.Query;
 
 import org.springframework.stereotype.Repository;
 
-import pl.dolecinski.subdicium.server.datastore.dao.ProblemDao;
 import pl.dolecinski.subdicium.server.datastore.dto.ProblemDTO;
 import pl.dolecinski.subdicium.server.datastore.exception.ConstraintsViolationException;
 import pl.dolecinski.subdicium.server.datastore.exception.ObjectNotFoundException;

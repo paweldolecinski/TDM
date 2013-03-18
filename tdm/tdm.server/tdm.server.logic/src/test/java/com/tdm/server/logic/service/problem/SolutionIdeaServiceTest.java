@@ -1,10 +1,10 @@
 package com.tdm.server.logic.service.problem;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.eq;
 
 import java.util.Collection;
 
@@ -12,7 +12,6 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.internal.matchers.Any;
 
 import pl.dolecinski.subdicium.server.datastore.dao.ProblemDao;
 import pl.dolecinski.subdicium.server.datastore.dao.SolutionIdeaDao;

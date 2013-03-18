@@ -1,6 +1,6 @@
 package com.tdm.server.logic.module;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Ignore;
 import org.junit.Test;

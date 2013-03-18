@@ -73,7 +73,7 @@ public class ProblemInfo implements Serializable {
 	/**
 	 * @return the experts
 	 */
-	public String geTitle() {
+	public String getTitle() {
 		return title;
 	}
 

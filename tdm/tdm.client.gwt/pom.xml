@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<artifactId>tdm.master</artifactId>
+		<artifactId>tdm</artifactId>
 		<groupId>com.tdm</groupId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
@@ -63,21 +63,19 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<version>${validation-api.version}</version>
-			<scope>test</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<version>${validation-api.version}</version>
 			<classifier>sources</classifier>
-			<scope>test</scope>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Google App Engine -->
@@ -96,8 +94,6 @@
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-testing</artifactId>
-			<version>${gae.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<!-- Piriti JSON Parser -->
@@ -172,24 +168,9 @@
 
 			<!-- GAE Maven Plugin -->
 			<plugin>
-				<groupId>net.kindleit</groupId>
-				<artifactId>maven-gae-plugin</artifactId>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
 				<version>${maven.gae.plugin.version}</version>
-				<dependencies>
-					<dependency>
-						<groupId>net.kindleit</groupId>
-						<artifactId>gae-runtime</artifactId>
-						<version>${gae.version}</version>
-						<type>pom</type>
-						<exclusions>
-							<exclusion>
-								<groupId>com.google.appengine.orm</groupId>
-								<artifactId>datanucleus-core</artifactId>
-							</exclusion>
-
-						</exclusions>
-					</dependency>
-				</dependencies>
 			</plugin>
 
 			<!-- WAR Maven Plugin -->
