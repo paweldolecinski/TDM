@@ -52,3 +52,5 @@ gwt-unitCache/
 .gwt/
 .metadata
 classes
+.idea/
+*.iml
