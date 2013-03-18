@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tdm</groupId>
-	<artifactId>tdm.master</artifactId>
+	<artifactId>tdm</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<name>TDM</name>
 	<packaging>pom</packaging>
-	<url>http://tdm.com</url>
+	<url>http://tdmtool.com</url>
 
 	<licenses>
 		<license>
@@ -23,6 +23,7 @@
 			<name>Paweł Doleciński</name>
 			<email>pawel@dolecinski.pl</email>
 			<roles>
+				<role>founder</role>
 				<role>architect</role>
 				<role>developer</role>
 			</roles>

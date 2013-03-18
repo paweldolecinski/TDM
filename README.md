@@ -1,6 +1,9 @@
-SupDicium
+TDM
 =========
-Group Decision Support System
+Team Decision Making Tool
 
-This is master thesis project
+This is a master thesis project.
+
 Author: Pawel Dolecinski
+
+Web: tdmtool.com
