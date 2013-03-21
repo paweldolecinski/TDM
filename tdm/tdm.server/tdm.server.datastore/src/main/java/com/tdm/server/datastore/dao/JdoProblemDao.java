@@ -22,11 +22,9 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.tdm.common.dto.Problem;
-import com.tdm.server.datastore.dao.ProblemDao;
 import com.tdm.server.datastore.entities.ProblemEntity;
 import com.tdm.server.datastore.exception.ConstraintsViolationException;
 import com.tdm.server.datastore.exception.ObjectNotFoundException;
@@ -43,7 +41,6 @@ import com.tdm.server.datastore.exception.ObjectNotFoundException;
 public class JdoProblemDao implements ProblemDao {
 
 	@Autowired(required = true)
-	@Qualifier("main")
 	private PersistenceManagerFactory persistenceManagerFactory;
 
 	/**

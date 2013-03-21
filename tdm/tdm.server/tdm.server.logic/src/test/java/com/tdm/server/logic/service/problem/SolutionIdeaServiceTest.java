@@ -13,11 +13,11 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
 import com.tdm.common.dto.GdmProblemId;
 import com.tdm.common.dto.SolutionIdea;
 import com.tdm.server.datastore.dao.ProblemDao;
 import com.tdm.server.datastore.dao.SolutionIdeaDao;
+import com.tdm.server.logic.model.SolutionIdeaImpl;
 import com.tdm.server.logic.problem.service.DefaultSolutionIdeaService;
 import com.tdm.server.logic.service.SolutionIdeaService;
 
@@ -31,7 +31,7 @@ public class SolutionIdeaServiceTest {
 	public void setUp() {
 		ideasService = new DefaultSolutionIdeaService(problemDaoMock, solutionIdeaDao);
 		when(solutionIdeaDao.create(anyLong(), anyString())).thenReturn(
-				new SolutionIdea(1, 1, "New idea"));
+				new SolutionIdeaImpl(1, 1, "New idea"));
 	}
 
 	@Test

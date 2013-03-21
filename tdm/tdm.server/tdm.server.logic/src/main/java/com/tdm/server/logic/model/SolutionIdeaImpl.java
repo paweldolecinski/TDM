@@ -14,6 +14,10 @@ public class SolutionIdeaImpl implements SolutionIdea {
 	private String details;
 	private Date creation;
 
+	public SolutionIdeaImpl(int i, int j, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public SolutionIdeaId getId() {
 		return id;

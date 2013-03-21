@@ -10,23 +10,24 @@
 
 	<import resource="common-context.xml" />
 
-	<bean id="persistenceManagerFactory"
-		class="org.springframework.orm.jdo.LocalPersistenceManagerFactoryBean">
-		<property name="persistenceManagerFactoryName" value="transactions-optional" />
-	</bean>
+
 
 	<bean id="persistenceManagerFactoryProxy"
 		class="org.springframework.orm.jdo.TransactionAwarePersistenceManagerFactoryProxy">
-		<qualifier value="main" />
-		<property name="targetPersistenceManagerFactory" ref="persistenceManagerFactory" />
+		<property name="targetPersistenceManagerFactory">
+			<bean
+				class="org.springframework.orm.jdo.LocalPersistenceManagerFactoryBean">
+				<property name="persistenceManagerFactoryName" value="transactions-optional" />
+			</bean>
+		</property>
 		<property name="allowCreate" value="false" />
 	</bean>
 
-	<bean id="transactionManager">
+	<bean id="transactionManager" class="org.springframework.orm.jdo.JdoTransactionManager">
 		<property name="persistenceManagerFactory" ref="persistenceManagerFactoryProxy" />
 	</bean>
 
-	<tx:advice id="txAdvice">
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="increasePrice*" propagation="REQUIRED" />
 			<tx:method name="someOtherBusinessMethod" propagation="REQUIRES_NEW" />
