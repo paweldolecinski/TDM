@@ -1,6 +1,8 @@
 package com.tdm.server.logic.model;
 
-import pl.dolecinski.subdicium.server.datastore.dto.ProblemDTO;
+import com.tdm.common.dto.GdmProblem;
+import com.tdm.common.dto.GdmProblemId;
+import com.tdm.common.dto.Problem;
 
 
 public class GdmProblemImpl implements GdmProblem {
@@ -38,7 +40,7 @@ public class GdmProblemImpl implements GdmProblem {
 		return id;
 	}
 
-	public static final GdmProblem dtoToModel(ProblemDTO problem) {
+	public static final GdmProblem dtoToModel(Problem problem) {
 		long id = problem.getId();
 		GdmProblem gdmProblem = new GdmProblemImpl(GdmProblemId.create(id));
 		gdmProblem.setName(problem.getName());

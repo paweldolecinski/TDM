@@ -13,12 +13,11 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.dolecinski.subdicium.server.datastore.dao.ProblemDao;
-import pl.dolecinski.subdicium.server.datastore.dao.SolutionIdeaDao;
-import pl.dolecinski.subdicium.server.datastore.dto.SolutionIdeaDTO;
 
-import com.tdm.server.logic.model.GdmProblemId;
-import com.tdm.server.logic.model.SolutionIdea;
+import com.tdm.common.dto.GdmProblemId;
+import com.tdm.common.dto.SolutionIdea;
+import com.tdm.server.datastore.dao.ProblemDao;
+import com.tdm.server.datastore.dao.SolutionIdeaDao;
 import com.tdm.server.logic.problem.service.DefaultSolutionIdeaService;
 import com.tdm.server.logic.service.SolutionIdeaService;
 
@@ -32,7 +31,7 @@ public class SolutionIdeaServiceTest {
 	public void setUp() {
 		ideasService = new DefaultSolutionIdeaService(problemDaoMock, solutionIdeaDao);
 		when(solutionIdeaDao.create(anyLong(), anyString())).thenReturn(
-				new SolutionIdeaDTO(1, 1, "New idea"));
+				new SolutionIdea(1, 1, "New idea"));
 	}
 
 	@Test

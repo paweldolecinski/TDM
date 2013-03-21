@@ -3,9 +3,9 @@ package com.tdm.server.logic.decision.preferences;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.tdm.common.dto.SolutionIdeaId;
 import com.tdm.server.logic.model.FuzzyPreferenceRelation;
 import com.tdm.server.logic.model.MultiplicativePreferenceRelation;
-import com.tdm.server.logic.model.SolutionIdeaId;
 import com.tdm.server.logic.model.SolutionIdeaNote;
 import com.tdm.server.logic.model.SolutionIdeaOrderList;
 import com.tdm.server.logic.model.SolutionIdeaTupleWithMultiplicativeValue;

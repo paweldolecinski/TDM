@@ -2,10 +2,10 @@ package com.tdm.server.logic.service;
 
 import java.util.Collection;
 
-import com.tdm.server.logic.model.ExpertId;
-import com.tdm.server.logic.model.ExpertRole;
-import com.tdm.server.logic.model.GdmProblem;
-import com.tdm.server.logic.model.GdmProblemId;
+import com.tdm.common.dto.ExpertId;
+import com.tdm.common.dto.ExpertRole;
+import com.tdm.common.dto.GdmProblem;
+import com.tdm.common.dto.GdmProblemId;
 
 public interface GdmProblemService {
 

@@ -4,14 +4,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import pl.dolecinski.subdicium.server.datastore.dao.ProblemDao;
-import pl.dolecinski.subdicium.server.datastore.dao.SolutionIdeaDao;
-import pl.dolecinski.subdicium.server.datastore.dto.SolutionIdeaDTO;
-
-import com.tdm.server.logic.model.GdmProblemId;
-import com.tdm.server.logic.model.SolutionIdea;
-import com.tdm.server.logic.model.SolutionIdeaId;
-import com.tdm.server.logic.model.SolutionIdeaImpl;
+import com.tdm.common.dto.GdmProblemId;
+import com.tdm.common.dto.SolutionIdea;
+import com.tdm.common.dto.SolutionIdeaId;
+import com.tdm.server.datastore.dao.ProblemDao;
+import com.tdm.server.datastore.dao.SolutionIdeaDao;
 import com.tdm.server.logic.service.SolutionIdeaService;
 
 public class DefaultSolutionIdeaService implements SolutionIdeaService {
@@ -29,10 +26,10 @@ public class DefaultSolutionIdeaService implements SolutionIdeaService {
 	public Collection<SolutionIdea> retrieveSolutionIdeasForProblem(
 			GdmProblemId problemId) {
 		Set<SolutionIdea> solutions = new HashSet<SolutionIdea>();
-		Collection<SolutionIdeaDTO> findAllAssignedTo = solutionIdeaDao
+		Collection<SolutionIdea> findAllAssignedTo = solutionIdeaDao
 				.findAllAssignedTo(problemId.getId());
-		for (SolutionIdeaDTO solutionIdeaDTO : findAllAssignedTo) {
-			solutions.add(SolutionIdeaImpl.dtoToModel(solutionIdeaDTO));
+		for (SolutionIdea solutionIdeaDTO : findAllAssignedTo) {
+			solutions.add(solutionIdeaDTO);
 		}
 		return solutions;
 	}
@@ -40,17 +37,17 @@ public class DefaultSolutionIdeaService implements SolutionIdeaService {
 	@Override
 	public SolutionIdea createAndAddSolutionIdea(GdmProblemId problemId,
 			String ideaName) {
-		SolutionIdeaDTO create = solutionIdeaDao.create(problemId.getId(),
+		SolutionIdea create = solutionIdeaDao.create(problemId.getId(),
 				ideaName);
-		SolutionIdea solutionIdea = SolutionIdeaImpl.dtoToModel(create);
-		return solutionIdea;
+		return create;
 	}
 
 	@Override
-	public SolutionIdea getSolutionIdea(GdmProblemId problemId, SolutionIdeaId ideaId) {
-		SolutionIdeaDTO ideaDto = solutionIdeaDao.read(problemId.getId(), ideaId.getId());
-		SolutionIdea idea = SolutionIdeaImpl.dtoToModel(ideaDto);
-		return idea;
+	public SolutionIdea getSolutionIdea(GdmProblemId problemId,
+			SolutionIdeaId ideaId) {
+		SolutionIdea ideaDto = solutionIdeaDao.read(problemId.getId(),
+				ideaId.getId());
+		return ideaDto;
 	}
 
 }

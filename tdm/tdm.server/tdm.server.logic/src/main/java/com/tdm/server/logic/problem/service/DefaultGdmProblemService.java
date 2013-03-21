@@ -6,13 +6,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import pl.dolecinski.subdicium.server.datastore.dao.ProblemDao;
-import pl.dolecinski.subdicium.server.datastore.dto.ProblemDTO;
 
-import com.tdm.server.logic.model.ExpertId;
-import com.tdm.server.logic.model.ExpertRole;
-import com.tdm.server.logic.model.GdmProblem;
-import com.tdm.server.logic.model.GdmProblemId;
+import com.tdm.common.dto.ExpertId;
+import com.tdm.common.dto.ExpertRole;
+import com.tdm.common.dto.GdmProblem;
+import com.tdm.common.dto.GdmProblemId;
+import com.tdm.common.dto.Problem;
+import com.tdm.server.datastore.dao.ProblemDao;
 import com.tdm.server.logic.model.GdmProblemImpl;
 import com.tdm.server.logic.service.GdmProblemService;
 
@@ -36,21 +36,21 @@ public class DefaultGdmProblemService implements GdmProblemService {
 					"Adding problem requires empty id");
 		}
 
-		ProblemDTO created = problemDao.create(problem.getName(),
+		Problem created = problemDao.create(problem.getName(),
 				problem.getDescription());
 		return GdmProblemImpl.dtoToModel(created);
 	}
 
 	@Override
 	public GdmProblem retrieveProblem(GdmProblemId id) {
-		ProblemDTO read = problemDao.read(id.getId());
+		Problem read = problemDao.read(id.getId());
 		GdmProblem dtoToModel = GdmProblemImpl.dtoToModel(read);
 		return dtoToModel;
 	}
 
 	@Override
 	public ExpertId getOwnerOfProblem(GdmProblemId problemId) {
-		ProblemDTO read = problemDao.read(problemId.getId());
+		Problem read = problemDao.read(problemId.getId());
 		Map<Long, String> experts = read.getAssignedExpertsWithRoles();
 		for (Entry<Long, String> id : experts.entrySet()) {
 			if (ExpertRole.OWNER.name().equals(id.getValue()))
@@ -62,7 +62,7 @@ public class DefaultGdmProblemService implements GdmProblemService {
 
 	@Override
 	public void setOwnerOfProblem(GdmProblemId problemId, ExpertId expertId) {
-		ProblemDTO read = problemDao.read(problemId.getId());
+		Problem read = problemDao.read(problemId.getId());
 		read.addExpert(expertId.getId(), ExpertRole.OWNER.name());
 		problemDao.update(read);
 	}
@@ -70,7 +70,7 @@ public class DefaultGdmProblemService implements GdmProblemService {
 	@Override
 	public Collection<ExpertId> retrieveExpertsAssignedToProblem(
 			GdmProblemId problemId) {
-		ProblemDTO read = problemDao.read(problemId.getId());
+		Problem read = problemDao.read(problemId.getId());
 		Map<Long, String> experts = read.getAssignedExpertsWithRoles();
 		Set<ExpertId> res = new HashSet<ExpertId>();
 		for (long id : experts.keySet()) {
@@ -82,7 +82,7 @@ public class DefaultGdmProblemService implements GdmProblemService {
 	@Override
 	public Collection<ExpertId> retrieveModeratorsOfProblem(
 			GdmProblemId problemId) {
-		ProblemDTO read = problemDao.read(problemId.getId());
+		Problem read = problemDao.read(problemId.getId());
 		Map<Long, String> experts = read.getAssignedExpertsWithRoles();
 		Set<ExpertId> res = new HashSet<ExpertId>();
 		for (Entry<Long, String> id : experts.entrySet()) {
@@ -96,7 +96,7 @@ public class DefaultGdmProblemService implements GdmProblemService {
 	@Override
 	public void assignExpertToProblem(GdmProblemId problemId,
 			ExpertId expertId, ExpertRole expertRole) {
-		ProblemDTO read = problemDao.read(problemId.getId());
+		Problem read = problemDao.read(problemId.getId());
 		read.addExpert(expertId.getId(), expertRole.name());
 		problemDao.update(read);
 	}

@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.tdm.server.logic.model.ExpertId;
+import com.tdm.common.dto.ExpertId;
+import com.tdm.common.dto.GdmProblemId;
+import com.tdm.common.dto.SolutionIdeaId;
 import com.tdm.server.logic.model.FuzzyPreferenceRelation;
-import com.tdm.server.logic.model.GdmProblemId;
-import com.tdm.server.logic.model.SolutionIdeaId;
 import com.tdm.server.logic.model.SolutionIdeaTupleWithValue;
 
 public class SelectionModule {

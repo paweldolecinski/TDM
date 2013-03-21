@@ -54,7 +54,6 @@
 		<junit.version>4.8.2</junit.version>
 		<mockito-all.version>1.8.5</mockito-all.version>
 
-		<maven.gwt.plugin.version>2.5.0</maven.gwt.plugin.version>
 		<maven.gae.plugin.version>1.7.5</maven.gae.plugin.version>
 		<maven.war.plugin.version>2.3</maven.war.plugin.version>
 		<maven.eclipse.plugin.version>2.8</maven.eclipse.plugin.version>
@@ -64,6 +63,10 @@
 
 		<maven.surefire.plugin.version>2.12.3</maven.surefire.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<gae.home>
+			${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}
+		</gae.home>
+		<gwt.style>OBF</gwt.style>
 		<skipTests>true</skipTests>
 	</properties>
 
@@ -192,6 +195,11 @@
 				<version>${spring.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-core</artifactId>
 				<version>${spring.security.version}</version>
@@ -300,6 +308,12 @@
 				<version>${maven.surefire.plugin.version}</version>
 				<configuration>
 					<skipTests>${skipTests}</skipTests>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/*GwtTest.java</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -311,7 +325,21 @@
 					<artifactId>maven-datanucleus-plugin</artifactId>
 					<version>3.1.2</version>
 				</plugin>
-
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>gwt-maven-plugin</artifactId>
+					<version>${gwt.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>com.google.appengine</groupId>
+					<artifactId>appengine-maven-plugin</artifactId>
+					<version>${maven.gae.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${maven.war.plugin.version}</version>
+				</plugin>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
@@ -328,11 +356,12 @@
 											gwt-maven-plugin
 										</artifactId>
 										<versionRange>
-											[2.4.0,)
+											[2.5.0,)
 										</versionRange>
 										<goals>
 											<goal>generateAsync</goal>
 											<goal>i18n</goal>
+											<goal>resources</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
@@ -369,6 +398,25 @@
 										</versionRange>
 										<goals>
 											<goal>testCompile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											build-helper-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.5,)
+										</versionRange>
+										<goals>
+											<goal>add-source</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>

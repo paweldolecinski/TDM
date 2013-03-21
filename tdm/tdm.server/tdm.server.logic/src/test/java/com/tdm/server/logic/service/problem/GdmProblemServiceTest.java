@@ -11,14 +11,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.dolecinski.subdicium.server.datastore.dao.ProblemDao;
-import pl.dolecinski.subdicium.server.datastore.dto.ProblemDTO;
 
-import com.tdm.server.logic.model.Expert;
-import com.tdm.server.logic.model.ExpertId;
-import com.tdm.server.logic.model.ExpertRole;
-import com.tdm.server.logic.model.GdmProblem;
-import com.tdm.server.logic.model.GdmProblemId;
+import com.tdm.common.dto.Expert;
+import com.tdm.common.dto.ExpertId;
+import com.tdm.common.dto.ExpertRole;
+import com.tdm.common.dto.GdmProblem;
+import com.tdm.common.dto.GdmProblemId;
+import com.tdm.common.dto.Problem;
+import com.tdm.server.datastore.dao.ProblemDao;
 import com.tdm.server.logic.model.GdmProblemImpl;
 import com.tdm.server.logic.problem.service.DefaultGdmProblemService;
 import com.tdm.server.logic.service.GdmProblemService;
@@ -27,20 +27,20 @@ public class GdmProblemServiceTest {
 
 	private GdmProblemService manager;
 	private ProblemDao problemDaoMock = mock(ProblemDao.class);
-	private ProblemDTO problem0;
-	private ProblemDTO problem1;
+	private Problem problem0;
+	private Problem problem1;
 
 	@Before
 	public void setUp() {
 
 		manager = new DefaultGdmProblemService(problemDaoMock);
 
-		problem1 = new ProblemDTO(1, "Car Choosing", "");
+		problem1 = new Problem(1, "Car Choosing", "");
 		when(problemDaoMock.create(eq("Car Choosing"), eq(""))).thenReturn(
 				problem1);
 		when(problemDaoMock.read(1)).thenReturn(problem1);
 
-		problem0 = new ProblemDTO(0, "", "");
+		problem0 = new Problem(0, "", "");
 		when(problemDaoMock.create(eq(""), eq(""))).thenReturn(problem0);
 		when(problemDaoMock.read(0)).thenReturn(problem0);
 	}
@@ -87,7 +87,7 @@ public class GdmProblemServiceTest {
 		GdmProblem emptyProblem = manager.createEmptyProblem();
 		GdmProblem problemId = manager.addProblem(emptyProblem);
 
-		HashSet<ProblemDTO> hashSet = new HashSet<ProblemDTO>();
+		HashSet<Problem> hashSet = new HashSet<Problem>();
 		hashSet.add(problem0);
 		when(problemDaoMock.findAllAssignedTo(expertId.getId())).thenReturn(
 				hashSet);
@@ -127,7 +127,7 @@ public class GdmProblemServiceTest {
 		GdmProblem emptyProblem = manager.createEmptyProblem();
 		GdmProblem problemId = manager.addProblem(emptyProblem);
 
-		HashSet<ProblemDTO> hashSet = new HashSet<ProblemDTO>();
+		HashSet<Problem> hashSet = new HashSet<Problem>();
 		hashSet.add(problem0);
 		when(problemDaoMock.findAllAssignedTo(expertId.getId())).thenReturn(
 				hashSet);
@@ -160,7 +160,7 @@ public class GdmProblemServiceTest {
 		GdmProblem emptyProblem = manager.createEmptyProblem();
 		GdmProblem problemId = manager.addProblem(emptyProblem);
 
-		HashSet<ProblemDTO> hashSet = new HashSet<ProblemDTO>();
+		HashSet<Problem> hashSet = new HashSet<Problem>();
 		hashSet.add(problem0);
 		when(problemDaoMock.findAllAssignedTo(expertId.getId())).thenReturn(
 				hashSet);

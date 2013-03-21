@@ -2,9 +2,9 @@ package com.tdm.server.logic.service;
 
 import java.util.Collection;
 
-import com.tdm.server.logic.model.GdmProblemId;
-import com.tdm.server.logic.model.SolutionIdea;
-import com.tdm.server.logic.model.SolutionIdeaId;
+import com.tdm.common.dto.GdmProblemId;
+import com.tdm.common.dto.SolutionIdea;
+import com.tdm.common.dto.SolutionIdeaId;
 
 public interface SolutionIdeaService {
 

@@ -17,7 +17,7 @@
 
 <link href="/favicon.ico" rel="icon" type="image/x-icon" />
 
-<script type="text/javascript" language="javascript">
+<script>
 	function blockWindowMove(event) {
 		// Tell Safari not to move the window.
 		event.preventDefault();
@@ -27,7 +27,7 @@
 <title>TDM - Team Decision Maker</title>
 </head>
 
-<body ontouchmove="blockWindowMove(event);">
+<body>
 	<div id="loading" style="display: none">
 		<div id="progressbar"
 			style="margin: 15px; width: 300px; height: 10px; border: 2px solid black; overflow: hidden;">
@@ -70,7 +70,6 @@
 	<!-- If you add any GWT meta tags, they must   -->
 	<!-- be added before this line.                -->
 	<!--                                           -->
-	<script type="text/javascript" language="javascript"
-		src="TDM/TDM.nocache.js"></script>
+	<script src="TDM/TDM.nocache.js"></script>
 </body>
 </html>

@@ -2,7 +2,9 @@ package com.tdm.server.logic.model;
 
 import java.util.Date;
 
-import pl.dolecinski.subdicium.server.datastore.dto.SolutionIdeaDTO;
+import com.tdm.common.dto.GdmProblemId;
+import com.tdm.common.dto.SolutionIdea;
+import com.tdm.common.dto.SolutionIdeaId;
 
 public class SolutionIdeaImpl implements SolutionIdea {
 
@@ -49,13 +51,4 @@ public class SolutionIdeaImpl implements SolutionIdea {
 		this.name = name;
 	}
 
-	public static final SolutionIdea dtoToModel(SolutionIdeaDTO solutionIdeaDTO) {
-		SolutionIdeaImpl solutionIdea = new SolutionIdeaImpl();
-		long id = solutionIdeaDTO.getId();
-		solutionIdea.setId(SolutionIdeaId.create(id));
-		long problemId = solutionIdeaDTO.getProblemId();
-		solutionIdea.setProblemId(GdmProblemId.create(problemId));
-		solutionIdea.setName(solutionIdeaDTO.getName());
-		return solutionIdea;
-	}
 }

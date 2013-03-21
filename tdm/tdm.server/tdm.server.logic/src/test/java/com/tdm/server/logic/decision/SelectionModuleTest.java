@@ -6,8 +6,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.tdm.common.dto.SolutionIdeaId;
 import com.tdm.server.logic.model.FuzzyPreferenceRelation;
-import com.tdm.server.logic.model.SolutionIdeaId;
 import com.tdm.server.logic.model.SolutionIdeaTupleWithValue;
 
 public class SelectionModuleTest {

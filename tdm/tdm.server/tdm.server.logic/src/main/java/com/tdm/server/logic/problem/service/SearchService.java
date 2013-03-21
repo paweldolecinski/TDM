@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import pl.dolecinski.subdicium.server.datastore.dao.ProblemDao;
-import pl.dolecinski.subdicium.server.datastore.dto.ProblemDTO;
 
-import com.tdm.server.logic.model.ExpertId;
-import com.tdm.server.logic.model.ExpertRole;
-import com.tdm.server.logic.model.GdmProblem;
+import com.tdm.common.dto.ExpertId;
+import com.tdm.common.dto.ExpertRole;
+import com.tdm.common.dto.GdmProblem;
+import com.tdm.common.dto.Problem;
+import com.tdm.server.datastore.dao.ProblemDao;
 import com.tdm.server.logic.model.GdmProblemImpl;
 
 public class SearchService {
@@ -23,9 +23,9 @@ public class SearchService {
 	public Collection<GdmProblem> retrieveProblemsForExpert(ExpertId id) {
 		List<GdmProblem> problemsIds = new ArrayList<GdmProblem>();
 
-		Collection<ProblemDTO> problems = problemDao.findAllAssignedTo(id
+		Collection<Problem> problems = problemDao.findAllAssignedTo(id
 				.getId());
-		for (ProblemDTO problemDTO : problems) {
+		for (Problem problemDTO : problems) {
 			problemsIds.add(GdmProblemImpl.dtoToModel(problemDTO));
 		}
 
@@ -35,9 +35,9 @@ public class SearchService {
 	public Collection<GdmProblem> retrieveProblemsOwnedByExpert(ExpertId id) {
 		List<GdmProblem> problemsIds = new ArrayList<GdmProblem>();
 
-		Collection<ProblemDTO> problems = problemDao.findAllAssignedTo(
+		Collection<Problem> problems = problemDao.findAllAssignedTo(
 				id.getId(), ExpertRole.OWNER.name());
-		for (ProblemDTO problemDTO : problems) {
+		for (Problem problemDTO : problems) {
 			problemsIds.add(GdmProblemImpl.dtoToModel(problemDTO));
 		}
 
@@ -47,9 +47,9 @@ public class SearchService {
 	public Collection<GdmProblem> retrieveProblemsModeratedByExpert(ExpertId id) {
 		List<GdmProblem> problemsIds = new ArrayList<GdmProblem>();
 
-		Collection<ProblemDTO> problems = problemDao.findAllAssignedTo(
+		Collection<Problem> problems = problemDao.findAllAssignedTo(
 				id.getId(), ExpertRole.MODERATOR.name());
-		for (ProblemDTO problemDTO : problems) {
+		for (Problem problemDTO : problems) {
 			problemsIds.add(GdmProblemImpl.dtoToModel(problemDTO));
 		}
 

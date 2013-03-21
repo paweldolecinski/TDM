@@ -6,7 +6,41 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd   http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 	<context:annotation-config />
+	<context:component-scan base-package="pl.dolecinski" />
 
 	<import resource="common-context.xml" />
-	
+
+	<bean id="persistenceManagerFactory"
+		class="org.springframework.orm.jdo.LocalPersistenceManagerFactoryBean">
+		<property name="persistenceManagerFactoryName" value="transactions-optional" />
+	</bean>
+
+	<bean id="persistenceManagerFactoryProxy"
+		class="org.springframework.orm.jdo.TransactionAwarePersistenceManagerFactoryProxy">
+		<qualifier value="main" />
+		<property name="targetPersistenceManagerFactory" ref="persistenceManagerFactory" />
+		<property name="allowCreate" value="false" />
+	</bean>
+
+	<bean id="transactionManager">
+		<property name="persistenceManagerFactory" ref="persistenceManagerFactoryProxy" />
+	</bean>
+
+	<tx:advice id="txAdvice">
+		<tx:attributes>
+			<tx:method name="increasePrice*" propagation="REQUIRED" />
+			<tx:method name="someOtherBusinessMethod" propagation="REQUIRES_NEW" />
+			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="jdoMethods"
+			expression="execution(* pl.dolecinski.subdicium.server.datastore.dao.*.*(..))" />
+		<aop:pointcut id="serviceMethods"
+			expression="execution(* pl.dolecinski.subdicium.server.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="jdoMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods" />
+	</aop:config>
+
 </beans>

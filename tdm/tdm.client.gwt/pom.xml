@@ -15,9 +15,6 @@
 
 	<properties>
 		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
-		<gwt.style>OBFUSCATED</gwt.style> <!-- Can make this DETAILED for debugging. -->
-		<gae.port>8080</gae.port>
-		<gae.application.version>test</gae.application.version>
 	</properties>
 
 	<dependencies>
@@ -130,39 +127,68 @@
 
 	<build>
 		<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${project.build.directory}/generated-sources/apt</directory>
+			</resource>
+			<resource>
+				<directory>${project.build.directory}/generated-sources/gwt</directory>
+			</resource>
+		</resources>
 
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.feature</include>
+				</includes>
+			</testResource>
+		</testResources>
 		<plugins>
 
 			<!-- GWT Maven Plugin -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
-				<version>${maven.gwt.plugin.version}</version>
 				<executions>
 					<execution>
 						<goals>
+							<goal>resources</goal>
+							<goal>test</goal>
 							<goal>compile</goal>
-							<!-- <goal>test</goal> -->
-							<!-- <goal>i18n</goal> -->
-							<!-- <goal>generateAsync</goal> -->
 						</goals>
 					</execution>
 				</executions>
 				<configuration>
-					<runTarget>index.html</runTarget>
+					<strict>true</strict>
+					<testTimeOut>180</testTimeOut>
+					<!-- With multiple tests use GwtTestSuite.java for speed -->
+					<includes>**/*GwtTest.java</includes>
+					<!-- <includes>**/*GwtTestSuite.java</includes> -->
+					<mode>htmlunit</mode>
+					<extraJvmArgs>-Xss1024k -Xmx1024m -XX:MaxPermSize=256m</extraJvmArgs>
+					<logLevel>INFO</logLevel>
+					<style>${gwt.style}</style>
+
+					<copyWebapp>true</copyWebapp>
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
 					<!-- <i18nMessagesBundle>com.tdm.client.Messages</i18nMessagesBundle> -->
 
 					<server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
 					<appEngineHome>${gae.home}</appEngineHome>
 					<appEngineVersion>${gae.version}</appEngineVersion>
+					<extraJvmArgs>-Dappengine.sdk.root=${gae.home}</extraJvmArgs>
+
+					<runTarget>index.html</runTarget>
 
 					<compileSourcesArtifacts>
 						<artifact>${project.groupId}:tdm.common</artifact>
 					</compileSourcesArtifacts>
-					<modules>
-						<module>${project.groupId}.TdmClient</module>
-					</modules>
+					<module>${project.groupId}.TdmClient</module>
 				</configuration>
 			</plugin>
 
@@ -170,14 +196,12 @@
 			<plugin>
 				<groupId>com.google.appengine</groupId>
 				<artifactId>appengine-maven-plugin</artifactId>
-				<version>${maven.gae.plugin.version}</version>
 			</plugin>
 
 			<!-- WAR Maven Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>${maven.war.plugin.version}</version>
 				<executions>
 					<execution>
 						<phase>compile</phase>
@@ -217,7 +241,7 @@
 			<plugin>
 				<groupId>org.bsc.maven</groupId>
 				<artifactId>maven-processor-plugin</artifactId>
-				<version>2.0.6</version>
+				<version>2.1.0</version>
 				<executions>
 					<execution>
 						<id>process</id>
@@ -230,6 +254,27 @@
 								<processor>com.gwtplatform.dispatch.annotation.processor.GenDispatchProcessor</processor>
 								<processor>com.gwtplatform.dispatch.annotation.processor.GenEventProcessor</processor>
 							</processors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Copy the generated classses -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources/apt</source>
+								<source>${project.build.directory}/generated-sources/gwt</source>
+							</sources>
 						</configuration>
 					</execution>
 				</executions>

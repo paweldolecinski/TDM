@@ -3,6 +3,8 @@ package com.tdm.server.logic.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.tdm.common.dto.SolutionIdeaId;
+
 public abstract class PreferenceRelation<T extends SolutionIdeaTupleWithValue>
 		extends ArrayList<T> {
 

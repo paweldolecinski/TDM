@@ -1,5 +1,7 @@
 package com.tdm.server.logic.model;
 
+import com.tdm.common.dto.SolutionIdeaId;
+
 public class SolutionIdeaTupleWithValue extends SolutionIdeaTuple {
 
 	private double value;

@@ -32,7 +32,6 @@ import com.tdm.client.app.problem.ProblemDicussionPresenter;
 import com.tdm.client.app.problem.ProblemDiscussionView;
 import com.tdm.client.app.problem.SingleSolutionPresenterWidget;
 import com.tdm.client.app.problem.SingleSolutionView;
-import com.tdm.client.app.ui.ProblemListItemWidget;
 import com.tdm.client.app.voting.ProblemVotingView;
 import com.tdm.client.app.voting.VotingPresenterWidget;
 import com.tdm.client.app.welcome.FacebookLoginPresenterWidget;
