@@ -15,6 +15,9 @@
 
 	<properties>
 		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+		<gae.home>
+			/opt/google/appengine-java-sdk-1.7.6
+		</gae.home>
 	</properties>
 
 	<dependencies>
@@ -92,7 +95,6 @@
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-testing</artifactId>
 		</dependency>
-
 		<!-- Piriti JSON Parser -->
 		<dependency>
 			<groupId>name.pehl</groupId>
@@ -116,11 +118,11 @@
 		<!-- Sub-projects dependencies -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>tdm.common</artifactId>
+			<artifactId>tdm.domain</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>tdm.server.dispatcher</artifactId>
+			<artifactId>tdm.server.web</artifactId>
 			<type>war</type>
 		</dependency>
 	</dependencies>
@@ -186,7 +188,7 @@
 					<runTarget>index.html</runTarget>
 
 					<compileSourcesArtifacts>
-						<artifact>${project.groupId}:tdm.common</artifact>
+						<artifact>${project.groupId}:tdm.domain</artifact>
 					</compileSourcesArtifacts>
 					<module>${project.groupId}.TdmClient</module>
 				</configuration>
@@ -196,7 +198,13 @@
 			<plugin>
 				<groupId>com.google.appengine</groupId>
 				<artifactId>appengine-maven-plugin</artifactId>
+				<configuration>
+					<useJava7>true</useJava7>
+				</configuration>
+
 			</plugin>
+
+		
 
 			<!-- WAR Maven Plugin -->
 			<plugin>
@@ -216,7 +224,7 @@
 						<overlay>
 							<id>config</id>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>tdm.server.dispatcher</artifactId>
+							<artifactId>tdm.server.web</artifactId>
 							<includes>
 								<include>WEB-INF/web.xml</include>
 								<include>WEB-INF/appengine-web.xml</include>
@@ -232,7 +240,7 @@
 						<overlay>
 							<id>web.xml</id>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>tdm.server.dispatcher</artifactId>
+							<artifactId>tdm.server.web</artifactId>
 						</overlay>
 					</overlays>
 				</configuration>
@@ -241,7 +249,7 @@
 			<plugin>
 				<groupId>org.bsc.maven</groupId>
 				<artifactId>maven-processor-plugin</artifactId>
-				<version>2.1.0</version>
+				<version>2.0.6</version>
 				<executions>
 					<execution>
 						<id>process</id>

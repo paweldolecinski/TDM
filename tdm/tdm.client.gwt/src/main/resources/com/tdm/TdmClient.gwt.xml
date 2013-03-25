@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to='TDM'>
+<module rename-to='TDMClient'>
 	<inherits name='com.google.gwt.user.User' />
 
 	<inherits name="com.google.gwt.uibinder.GinUiBinder" />
@@ -13,7 +13,7 @@
 	<inherits name='com.gwtplatform.dispatch.Dispatch' />
 	<inherits name="name.pehl.piriti.json.JSON" />
 
-	<inherits name="com.tdm.common.Common" />
+	<inherits name="com.tdm.domain.Domain" />
 
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
 

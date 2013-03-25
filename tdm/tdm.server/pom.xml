@@ -12,18 +12,16 @@
 	<name>TDM Server</name>
 	<packaging>pom</packaging>
 	<modules>
-		<module>tdm.server.datastore.api</module>
-		<module>tdm.server.datastore</module>
-		<module>tdm.server.logic.api</module>
-		<module>tdm.server.logic</module>
+		<module>tdm.server.persistance</module>
+		<module>tdm.server.application</module>
 		<module>tdm.server.security</module>
-		<module>tdm.server.dispatcher</module>
+		<module>tdm.server.web</module>
 	</modules>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>tdm.common</artifactId>
+			<artifactId>tdm.domain</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -44,6 +42,10 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -68,6 +70,30 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.jdo</groupId>
+			<artifactId>jdo-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.castor</groupId>
+			<artifactId>spring-xml</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.castor</groupId>
+			<artifactId>castor-xml</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jabsorb</groupId>
+			<artifactId>jabsorb</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>asm</groupId>
