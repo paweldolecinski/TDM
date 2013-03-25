@@ -54,3 +54,5 @@ gwt-unitCache/
 classes
 .idea/
 *.iml
+
+*.cache
