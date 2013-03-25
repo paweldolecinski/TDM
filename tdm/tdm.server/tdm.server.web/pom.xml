@@ -10,7 +10,6 @@
 	</parent>
 
 	<artifactId>tdm.server.web</artifactId>
-	<packaging>war</packaging>
 	<name>TDM Server Web</name>
 
 	<dependencies>
@@ -32,21 +31,5 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<archiveClasses>true</archiveClasses>
-					<!-- <webResources> -->
-					<!-- <resource> -->
-					<!-- <directory>src/main/resources/conf</directory> -->
-					<!-- <targetPath>WEB-INF</targetPath> -->
-					<!-- <filtering>true</filtering> -->
-					<!-- </resource> -->
-					<!-- </webResources> -->
-				</configuration>
-			</plugin>
-		</plugins>
-		<finalName>tdm.server</finalName>
 	</build>
 </project>
