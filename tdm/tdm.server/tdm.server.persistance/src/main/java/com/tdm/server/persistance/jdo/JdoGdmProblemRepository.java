@@ -21,6 +21,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.google.appengine.api.datastore.Key;
@@ -43,7 +44,8 @@ import com.tdm.server.persistance.jdo.entities.GdmProblemEntity;
 @Repository
 public class JdoGdmProblemRepository implements ProblemRepository {
 
-	@Autowired(required = true)
+	@Autowired
+	@Qualifier("proxy")
 	private PersistenceManagerFactory persistenceManagerFactory;
 
 	public JdoGdmProblemRepository() {
