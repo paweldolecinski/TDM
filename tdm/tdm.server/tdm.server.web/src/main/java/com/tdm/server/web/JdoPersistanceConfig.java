@@ -34,19 +34,6 @@ public class JdoPersistanceConfig implements TransactionManagementConfigurer {
 		return factory;
 	}
 
-	//
-	// @Bean
-	// PersistenceManagerFactory persistenceManagerFactory2() {
-	// TransactionAwarePersistenceManagerFactoryProxy factory = new
-	// TransactionAwarePersistenceManagerFactoryProxy();
-	//
-	// factory.setTargetPersistenceManagerFactory(localPersistenceManagerFactoryBean()
-	// .getObject());
-	// factory.setAllowCreate(false);
-	//
-	// return factory.getObject();
-	// }
-
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		JdoTransactionManager jdoTransactionManager = new JdoTransactionManager();

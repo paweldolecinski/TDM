@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
 
 import com.tdm.domain.model.expert.Expert;
 import com.tdm.domain.model.expert.ExpertId;
@@ -15,7 +15,7 @@ import com.tdm.domain.model.problem.GdmProblemId;
 import com.tdm.domain.model.problem.ProblemRepository;
 import com.tdm.domain.model.problem.dto.GdmProblemDto;
 
-@Configuration
+@Service
 public class DefaultGdmProblemService implements GdmProblemService {
 
 	@Autowired

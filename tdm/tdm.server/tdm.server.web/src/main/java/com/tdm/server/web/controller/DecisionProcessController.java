@@ -1,6 +1,5 @@
 package com.tdm.server.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/problem/{problemId}")
 public final class DecisionProcessController {
 
-	@Autowired
 	public DecisionProcessController() {
 	}
 

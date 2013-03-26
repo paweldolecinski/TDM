@@ -11,14 +11,6 @@
 
 	<name>TDM Client GWT</name>
 	<artifactId>tdm.client.gwt</artifactId>
-	<packaging>war</packaging>
-
-	<properties>
-		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
-		<gae.home>
-			/opt/google/appengine-java-sdk-1.7.6
-		</gae.home>
-	</properties>
 
 	<dependencies>
 		<!-- GWTPlatform -->
@@ -78,23 +70,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Google App Engine -->
-		<dependency>
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-labs</artifactId>
-			<version>${gae.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-stubs</artifactId>
-			<version>${gae.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-testing</artifactId>
-		</dependency>
 		<!-- Piriti JSON Parser -->
 		<dependency>
 			<groupId>name.pehl</groupId>
@@ -120,15 +95,10 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>tdm.domain</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>tdm.server.web</artifactId>
-			<type>war</type>
-		</dependency>
 	</dependencies>
 
 	<build>
-		<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -152,99 +122,59 @@
 		</testResources>
 		<plugins>
 
-			<!-- GWT Maven Plugin -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>resources</goal>
-							<goal>test</goal>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<strict>true</strict>
-					<testTimeOut>180</testTimeOut>
-					<!-- With multiple tests use GwtTestSuite.java for speed -->
-					<includes>**/*GwtTest.java</includes>
-					<!-- <includes>**/*GwtTestSuite.java</includes> -->
-					<mode>htmlunit</mode>
-					<extraJvmArgs>-Xss1024k -Xmx1024m -XX:MaxPermSize=256m</extraJvmArgs>
-					<logLevel>INFO</logLevel>
-					<style>${gwt.style}</style>
-
-					<copyWebapp>true</copyWebapp>
-					<hostedWebapp>${webappDirectory}</hostedWebapp>
-					<!-- <i18nMessagesBundle>com.tdm.client.Messages</i18nMessagesBundle> -->
-
-					<server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
-					<appEngineHome>${gae.home}</appEngineHome>
-					<appEngineVersion>${gae.version}</appEngineVersion>
-					<extraJvmArgs>-Dappengine.sdk.root=${gae.home}</extraJvmArgs>
-
-					<runTarget>index.html</runTarget>
-
-					<compileSourcesArtifacts>
-						<artifact>${project.groupId}:tdm.domain</artifact>
-					</compileSourcesArtifacts>
-					<module>${project.groupId}.TdmClient</module>
-				</configuration>
-			</plugin>
-
-			<!-- GAE Maven Plugin -->
-			<plugin>
-				<groupId>com.google.appengine</groupId>
-				<artifactId>appengine-maven-plugin</artifactId>
-				<configuration>
-					<useJava7>true</useJava7>
-				</configuration>
-
-			</plugin>
-
-		
-
-			<!-- WAR Maven Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
 				<executions>
 					<execution>
-						<phase>compile</phase>
+						<id>attach-sources</id>
+						<phase>verify</phase>
 						<goals>
-							<goal>exploded</goal>
+							<goal>jar-no-fork</goal>
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<webappDirectory>${webappDirectory}</webappDirectory>
-					<overlays>
-						<overlay>
-							<id>config</id>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>tdm.server.web</artifactId>
-							<includes>
-								<include>WEB-INF/web.xml</include>
-								<include>WEB-INF/appengine-web.xml</include>
-								<include>WEB-INF/spring/**</include>
-								<include>WEB-INF/oxm/**</include>
-								<include>WEB-INF/lib/**</include>
-							</includes>
-						</overlay>
-						<overlay>
-
-							<!-- empty groupId/artifactId represents the current build -->
-						</overlay>
-						<overlay>
-							<id>web.xml</id>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>tdm.server.web</artifactId>
-						</overlay>
-					</overlays>
-				</configuration>
 			</plugin>
+			<!-- WAR Maven Plugin -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-war-plugin</artifactId> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <phase>compile</phase> -->
+			<!-- <goals> -->
+			<!-- <goal>exploded</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- <configuration> -->
+			<!-- <webappDirectory>${webappDirectory}</webappDirectory> -->
+			<!-- <overlays> -->
+			<!-- <overlay> -->
+			<!-- <id>config</id> -->
+			<!-- <groupId>${project.groupId}</groupId> -->
+			<!-- <artifactId>tdm.server.web</artifactId> -->
+			<!-- <includes> -->
+			<!-- <include>WEB-INF/web.xml</include> -->
+			<!-- <include>WEB-INF/appengine-web.xml</include> -->
+			<!-- <include>WEB-INF/spring/**</include> -->
+			<!-- <include>WEB-INF/oxm/**</include> -->
+			<!-- <include>WEB-INF/lib/**</include> -->
+			<!-- </includes> -->
+			<!-- </overlay> -->
+			<!-- <overlay> -->
+
+			<!-- empty groupId/artifactId represents the current build -->
+			<!-- </overlay> -->
+			<!-- <overlay> -->
+			<!-- <id>web.xml</id> -->
+			<!-- <groupId>${project.groupId}</groupId> -->
+			<!-- <artifactId>tdm.server.web</artifactId> -->
+			<!-- </overlay> -->
+			<!-- </overlays> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
 			<!-- Run annotation processors on src/main/java sources -->
 			<plugin>
 				<groupId>org.bsc.maven</groupId>

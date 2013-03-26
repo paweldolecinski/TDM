@@ -34,6 +34,7 @@
 		<module>tdm.domain</module>
 		<module>tdm.server</module>
 		<module>tdm.client.gwt</module>
+		<module>tdm.webapp</module>
 	</modules>
 
 	<properties>
@@ -123,7 +124,6 @@
 				<groupId>${project.groupId}</groupId>
 				<artifactId>tdm.server.web</artifactId>
 				<version>${project.version}</version>
-				<type>war</type>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
