@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-						http://www.springframework.org/schema/context
-						http://www.springframework.org/schema/context/spring-context-3.1.xsd
-						http://www.springframework.org/schema/tx
-						http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
-						http://www.springframework.org/schema/util 
-						http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
@@ -23,14 +19,30 @@
 	</bean>
 
 	<bean id="persistenceManagerFactoryProxy"
-		class="org.springframework.orm.jdo.TransactionAwarePersistenceManagerFactoryProxy">
+		class="org.springframework.orm.jdo.GAETransactionAwarePersistenceManagerFactoryProxy">
 		<qualifier value="proxy" />
 		<property name="targetPersistenceManagerFactory" ref="localPersistenceManagerFactoryBean" />
-		<property name="allowCreate" value="true" />
+		<property name="allowCreate" value="false" />
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.orm.jdo.JdoTransactionManager">
 		<property name="persistenceManagerFactory" ref="localPersistenceManagerFactoryBean" />
 	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="store" propagation="REQUIRED"
+				rollback-for="Throwable" />
+			<tx:method name="delete" propagation="REQUIRED"
+				rollback-for="Throwable" />
+			<tx:method name="*" propagation="NOT_SUPPORTED" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+
+	<aop:config>
+		<aop:advisor pointcut="execution(* com.tdm.server.persistance.jdo.*.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config>
 
 </beans>
