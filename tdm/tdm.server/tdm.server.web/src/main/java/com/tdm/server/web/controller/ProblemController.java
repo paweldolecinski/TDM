@@ -5,7 +5,10 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tdm.domain.model.idea.SolutionIdea;
 import com.tdm.domain.model.problem.GdmProblem;
+import com.tdm.domain.model.problem.dto.GdmProblemDto;
 import com.tdm.domain.model.problem.dto.GdmProblemIdDto;
 import com.tdm.server.application.problem.service.DefaultGdmProblemService;
 import com.tdm.server.application.problem.service.SolutionIdeaService;
@@ -34,14 +38,14 @@ public final class ProblemController {
 		this.ideaService = ideaService;
 	}
 
-	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/show/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public GdmProblem getProblem(@PathVariable String id) {
 
 		return problemService.retrieveProblem(new GdmProblemIdDto(id));
 	}
 
-	@RequestMapping(value = "/ideas/{problemId}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/ideas/{problemId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<SolutionIdea> getSolutionIdeasForProblem(
 			@PathVariable String problemId) {
@@ -51,15 +55,17 @@ public final class ProblemController {
 		return new ArrayList<SolutionIdea>(ideas);
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
-	@ResponseBody
-	public void createProblem(@RequestBody MultiValueMap<String, String> body) {
+	@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody
+	GdmProblemDto createProblem(@RequestBody GdmProblemDto body,
+			HttpServletResponse response) {
 
-		problemService.addProblem(body.getFirst("name"),
-				body.getFirst("description"), new Date());
+		problemService.addProblem(body.getName(), body.getDescription(),
+				new Date());
+		return new GdmProblemDto();
 	}
 
-	@RequestMapping(value = "/{problemId}/idea", method = RequestMethod.PUT, produces = "application/json")
+	@RequestMapping(value = "/{problemId}/idea", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public void createIdeaForProblem(@PathVariable String problemId,
 			@RequestBody MultiValueMap<String, String> body) {

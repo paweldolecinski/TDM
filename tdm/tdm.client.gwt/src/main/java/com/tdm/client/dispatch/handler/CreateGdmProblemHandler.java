@@ -34,7 +34,7 @@ public class CreateGdmProblemHandler
 		"v1");
 
 	urlBuilder.addResourcePath("problems");
-	urlBuilder.addQueryParameter("format", "json");
+//	urlBuilder.addQueryParameter("format", "json");
 	RequestBuilder rb = new RequestBuilder(RequestBuilder.POST,
 		urlBuilder.toUrl());
 
