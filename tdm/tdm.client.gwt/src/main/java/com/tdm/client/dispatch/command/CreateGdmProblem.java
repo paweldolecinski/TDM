@@ -13,28 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.tdm.client.model.problem;
+package com.tdm.client.dispatch.command;
 
-import java.util.List;
 
-import name.pehl.piriti.json.client.JsonReader;
-
-import com.google.gwt.core.client.GWT;
+import com.gwtplatform.dispatch.annotation.GenDispatch;
+import com.gwtplatform.dispatch.annotation.In;
+import com.gwtplatform.dispatch.annotation.Out;
+import com.tdm.domain.model.problem.jso.GdmProblemJso;
 
 /**
  * @author Paweł Doleciński
- *
+ * 
  */
-public class ProblemInfoList {
-
-	public interface ItemsReader extends JsonReader<ProblemInfoList> {
-	}
-
-	public static final ItemsReader JSON = GWT.create(ItemsReader.class);
+@GenDispatch(isSecure = true)
+public class CreateGdmProblem {
 	
-	private List<ProblemInfo> problems;
+	@In(1)
+	GdmProblemJso newProblem;
 	
-	public List<ProblemInfo> getProblems() {
-		return problems;
-	}
+	@Out(1)
+	GdmProblemJso confirmed;
 }

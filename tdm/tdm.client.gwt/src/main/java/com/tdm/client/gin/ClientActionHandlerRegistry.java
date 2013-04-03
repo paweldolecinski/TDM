@@ -15,18 +15,21 @@
  */
 package com.tdm.client.gin;
 
-
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
+import com.tdm.client.dispatch.handler.CreateGdmProblemHandler;
 import com.tdm.client.dispatch.handler.GetProblemListHandler;
 
 public class ClientActionHandlerRegistry extends
-		DefaultClientActionHandlerRegistry {
+	DefaultClientActionHandlerRegistry {
 
-	@Inject
-	public ClientActionHandlerRegistry(
-			final GetProblemListHandler getProblemListHandler) {
+    @Inject
+    public ClientActionHandlerRegistry(
+	    final GetProblemListHandler getProblemListHandler,
+	    final CreateGdmProblemHandler createGdmProblemHandler) {
 
-		register(getProblemListHandler);
-	}
+	register(getProblemListHandler);
+	register(createGdmProblemHandler);
+
+    }
 }

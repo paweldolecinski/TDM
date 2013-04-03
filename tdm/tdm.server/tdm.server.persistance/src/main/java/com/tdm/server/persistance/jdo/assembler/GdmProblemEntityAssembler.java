@@ -1,8 +1,8 @@
 package com.tdm.server.persistance.jdo.assembler;
 
 import com.tdm.domain.model.problem.GdmProblem;
-import com.tdm.domain.model.problem.GdmProblemId;
 import com.tdm.domain.model.problem.dto.GdmProblemDto;
+import com.tdm.domain.model.problem.dto.GdmProblemIdDto;
 import com.tdm.server.persistance.jdo.entities.GdmProblemEntity;
 
 public class GdmProblemEntityAssembler {
@@ -12,7 +12,7 @@ public class GdmProblemEntityAssembler {
 	 */
 	public GdmProblem fromEntity(GdmProblemEntity entity) {
 		GdmProblemDto gdmProblemDto = new GdmProblemDto();
-		gdmProblemDto.setId(new GdmProblemId(entity.getKey().toString()));
+		gdmProblemDto.setId(new GdmProblemIdDto(entity.getKey().toString()));
 		gdmProblemDto.setName(entity.getName());
 		gdmProblemDto.setDescription(entity.getDescription());
 		gdmProblemDto.setCreationDate(entity.getCreationDate());

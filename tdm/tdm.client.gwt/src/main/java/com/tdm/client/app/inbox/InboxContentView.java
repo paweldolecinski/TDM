@@ -25,7 +25,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -34,73 +33,74 @@ import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.tdm.client.app.ui.ProblemListItemWidget;
-import com.tdm.client.model.problem.ProblemInfo;
 import com.tdm.client.resources.AppResources;
+import com.tdm.domain.model.problem.jso.GdmProblemJso;
 
 /**
  * @author Paweł Doleciński
  * 
  */
 public class InboxContentView extends ViewWithUiHandlers<ProblemListUiHandlers>
-		implements InboxPagePresenter.Display {
+	implements InboxPagePresenter.Display {
 
-	public interface Binder extends UiBinder<Widget, InboxContentView> {
-	}
+    public interface Binder extends UiBinder<Widget, InboxContentView> {
+    }
 
-	private final Widget widget;
+    private final Widget widget;
 
-	@UiField
-	protected HTMLPanel headerPanel;
-	@UiField
-	protected UListElement problemList;
-	@UiField
-	protected Button createButton;
-	@UiField
-	protected HeadingElement problemCounter;
+    @UiField
+    protected HTMLPanel headerPanel;
+    @UiField
+    protected UListElement problemList;
+    @UiField
+    protected Button createButton;
+    @UiField
+    protected HeadingElement problemCounter;
 
-	private HashMap<ProblemInfo, ProblemListItemWidget> problemWidgetMap = new HashMap<ProblemInfo, ProblemListItemWidget>();
+    private HashMap<GdmProblemJso, ProblemListItemWidget> problemWidgetMap = new HashMap<GdmProblemJso, ProblemListItemWidget>();
 
-	private Provider<ProblemListItemWidget> problemWidgetProvider;
+    private Provider<ProblemListItemWidget> problemWidgetProvider;
 
-	private AppResources resources;
+    private AppResources resources;
 
-	@Inject
-	public InboxContentView(Binder binder, EventBus eventBus,
-			Provider<ProblemListItemWidget> problemWidgetProvider, AppResources resources) {
-		this.resources = resources;
-		widget = binder.createAndBindUi(this);
-		this.problemWidgetProvider = problemWidgetProvider;
-	}
+    @Inject
+    public InboxContentView(Binder binder, EventBus eventBus,
+	    Provider<ProblemListItemWidget> problemWidgetProvider,
+	    AppResources resources) {
+	this.resources = resources;
+	widget = binder.createAndBindUi(this);
+	this.problemWidgetProvider = problemWidgetProvider;
+    }
 
-	@Override
-	public Widget asWidget() {
-		return widget;
-	}
+    @Override
+    public Widget asWidget() {
+	return widget;
+    }
 
-	@Override
-	public void addProblemListItem(ProblemInfo problem) {
-		LIElement liElement = Document.get().createLIElement();
-		liElement.addClassName(resources.getMainCss().span4());
-		ProblemListItemWidget item = problemWidgetProvider.get();
-		item.init(problem);
-		problemWidgetMap.put(problem, item);
-		liElement.appendChild(item.getElement());
-		problemList.appendChild(liElement);
-	}
+    @Override
+    public void addProblemListItem(GdmProblemJso problem) {
+	LIElement liElement = Document.get().createLIElement();
+	liElement.addClassName(resources.getMainCss().span4());
+	ProblemListItemWidget item = problemWidgetProvider.get();
+	item.init(problem);
+	problemWidgetMap.put(problem, item);
+	liElement.appendChild(item.getElement());
+	problemList.appendChild(liElement);
+    }
 
-	@Override
-	public void problemCounter(int amount) {
-		problemCounter.setInnerText("You have " + amount + " problems");
-	}
+    @Override
+    public void problemCounter(int amount) {
+	problemCounter.setInnerText("You have " + amount + " problems");
+    }
 
-	@Override
-	public void clearProblemList() {
-		while (problemList.getChildCount() > 2)
-			problemList.removeChild(problemList.getLastChild());
-	}
+    @Override
+    public void clearProblemList() {
+	while (problemList.getChildCount() > 2)
+	    problemList.removeChild(problemList.getLastChild());
+    }
 
-	@UiHandler("createButton")
-	void handleClick(ClickEvent e) {
-		Window.alert("TODO: New problem");
-	}
+    @UiHandler("createButton")
+    void handleClick(ClickEvent e) {
+	getUiHandlers().createNewProblem();
+    }
 }

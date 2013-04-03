@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tdm.domain.model.idea.SolutionIdea;
 import com.tdm.domain.model.problem.GdmProblem;
-import com.tdm.domain.model.problem.GdmProblemId;
+import com.tdm.domain.model.problem.dto.GdmProblemIdDto;
 import com.tdm.server.application.problem.service.DefaultGdmProblemService;
 import com.tdm.server.application.problem.service.SolutionIdeaService;
 
@@ -38,7 +38,7 @@ public final class ProblemController {
 	@ResponseBody
 	public GdmProblem getProblem(@PathVariable String id) {
 
-		return problemService.retrieveProblem(new GdmProblemId(id));
+		return problemService.retrieveProblem(new GdmProblemIdDto(id));
 	}
 
 	@RequestMapping(value = "/ideas/{problemId}", method = RequestMethod.GET, produces = "application/json")
@@ -47,11 +47,11 @@ public final class ProblemController {
 			@PathVariable String problemId) {
 
 		Collection<SolutionIdea> ideas = ideaService
-				.retrieveSolutionIdeasForProblem(new GdmProblemId(problemId));
+				.retrieveSolutionIdeasForProblem(new GdmProblemIdDto(problemId));
 		return new ArrayList<SolutionIdea>(ideas);
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.PUT, produces = "application/json")
+	@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public void createProblem(@RequestBody MultiValueMap<String, String> body) {
 
@@ -64,7 +64,7 @@ public final class ProblemController {
 	public void createIdeaForProblem(@PathVariable String problemId,
 			@RequestBody MultiValueMap<String, String> body) {
 
-		ideaService.createAndAddSolutionIdea(new GdmProblemId(problemId),
+		ideaService.createAndAddSolutionIdea(new GdmProblemIdDto(problemId),
 				body.getFirst("ideaName"));
 	}
 

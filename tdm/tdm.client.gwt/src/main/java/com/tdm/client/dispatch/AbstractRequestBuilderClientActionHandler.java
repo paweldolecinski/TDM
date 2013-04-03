@@ -57,7 +57,7 @@ public abstract class AbstractRequestBuilderClientActionHandler<A extends Action
 			final ExecuteCommand<A, R> executeCommand) {
 
 		final RequestBuilder requestBuilder = getRequestBuilder(action);
-
+		requestBuilder.setHeader("Content-Type", "application/json");
 		requestBuilder.setCallback(new RequestCallback() {
 
 			@Override

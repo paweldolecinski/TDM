@@ -1,26 +1,26 @@
 package com.tdm.domain.model.expert;
 
-import com.tdm.domain.model.preferences.FuzzyPreferenceRelation;
+import com.tdm.domain.model.preferences.FuzzyPreferences;
 
 public class ExpertCurrentPreferences {
 
-	private Expert expertId;
-	private FuzzyPreferenceRelation preferences;
+    private Expert expertId;
+    private FuzzyPreferences preferences;
 
-	public ExpertCurrentPreferences(Expert expertId) {
-		this.expertId = expertId;
-	}
+    public ExpertCurrentPreferences(Expert expertId) {
+	this.expertId = expertId;
+    }
 
-	public Expert getExpertId() {
-		return expertId;
-	}
+    public Expert getExpertId() {
+	return expertId;
+    }
 
-	public FuzzyPreferenceRelation getPreferences() {
-		return preferences;
-	}
+    public FuzzyPreferences getPreferences() {
+	return preferences;
+    }
 
-	public void setPreferences(FuzzyPreferenceRelation preferences) {
-		this.preferences = preferences;
-	}
+    public void setPreferences(FuzzyPreferences preferences) {
+	this.preferences = preferences;
+    }
 
 }

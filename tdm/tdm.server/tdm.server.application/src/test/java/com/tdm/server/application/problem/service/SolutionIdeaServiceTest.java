@@ -17,8 +17,7 @@ import com.tdm.domain.model.idea.SolutionIdeaRepository;
 import com.tdm.domain.model.idea.dto.SolutionIdeaDto;
 import com.tdm.domain.model.problem.GdmProblemId;
 import com.tdm.domain.model.problem.ProblemRepository;
-import com.tdm.server.application.problem.service.DefaultSolutionIdeaService;
-import com.tdm.server.application.problem.service.SolutionIdeaService;
+import com.tdm.domain.model.problem.dto.GdmProblemIdDto;
 
 public class SolutionIdeaServiceTest {
 
@@ -32,7 +31,7 @@ public class SolutionIdeaServiceTest {
 				solutionIdeaDao);
 		SolutionIdeaDto solutionIdea = new SolutionIdeaDto();
 		solutionIdea.setId(new SolutionIdeaId("1"));
-		solutionIdea.setProblemId(new GdmProblemId("1"));
+		solutionIdea.setProblemId(new GdmProblemIdDto("1"));
 		solutionIdea.setName("New idea");
 		when(
 				solutionIdeaDao.read(
@@ -44,7 +43,7 @@ public class SolutionIdeaServiceTest {
 	@Test
 	public void shouldAddNewIdeaToProblem() {
 		// Given
-		GdmProblemId problemId = new GdmProblemId("1");
+		GdmProblemId problemId = new GdmProblemIdDto("1");
 		SolutionIdeaId solutionIdeaId = new SolutionIdeaId("1");
 		String ideaName = "New idea";
 
@@ -60,7 +59,7 @@ public class SolutionIdeaServiceTest {
 
 	@Test
 	public void shouldRetrieveAllIdeasForProblem() {
-		GdmProblemId problemId = new GdmProblemId("0");
+		GdmProblemId problemId = new GdmProblemIdDto("0");
 		Collection<SolutionIdea> ideas = ideasService
 				.retrieveSolutionIdeasForProblem(problemId);
 

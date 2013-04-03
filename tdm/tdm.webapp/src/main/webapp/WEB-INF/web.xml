@@ -59,7 +59,7 @@
 
 	<servlet-mapping>
 		<servlet-name>tdmApp</servlet-name>
-		<url-pattern>/app/*</url-pattern>
+		<url-pattern>/api/v1/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>

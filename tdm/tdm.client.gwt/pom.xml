@@ -70,26 +70,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Piriti JSON Parser -->
-		<dependency>
-			<groupId>name.pehl</groupId>
-			<artifactId>piriti-user</artifactId>
-			<version>${piriti.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>name.pehl</groupId>
-			<artifactId>piriti-dev</artifactId>
-			<version>${piriti.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>name.pehl</groupId>
-			<artifactId>totoe</artifactId>
-			<version>${piriti.totoe.version}</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Sub-projects dependencies -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>

@@ -19,7 +19,7 @@ package com.tdm.client.dispatch.command;
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;
 import com.gwtplatform.dispatch.annotation.Out;
-import com.tdm.client.model.problem.ProblemInfoList;
+import com.tdm.domain.model.problem.jso.GdmProblemListJso;
 
 /**
  * @author Paweł Doleciński
@@ -32,5 +32,5 @@ public class GetProblemList {
 	String filter;
 	
 	@Out(1)
-	ProblemInfoList problemList;
+	GdmProblemListJso problemList;
 }

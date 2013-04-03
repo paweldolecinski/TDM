@@ -6,11 +6,11 @@ package com.tdm.server.application.decision.preferences
 import scala.collection.convert.Wrappers.JCollectionWrapper
 import scala.collection.convert.Wrappers.SeqWrapper
 import scala.collection.mutable.ArrayBuffer
-import com.tdm.domain.model.preferences.SolutionIdeaOrderList
-import com.tdm.domain.model.preferences.SolutionIdeaTupleWithValue
-import com.tdm.domain.model.preferences.FuzzyPreferenceRelation
-import com.tdm.domain.model.preferences.SolutionIdeaUtilityList
-import com.tdm.domain.model.preferences.MultiplicativePreferenceRelation
+import com.tdm.domain.model.preferences.internal.SolutionIdeaOrderList
+import com.tdm.domain.model.preferences.internal.SolutionIdeaTupleWithValue
+import com.tdm.domain.model.preferences.internal.FuzzyPreferenceRelation
+import com.tdm.domain.model.preferences.internal.SolutionIdeaUtilityList
+import com.tdm.domain.model.preferences.internal.MultiplicativePreferenceRelation
 
 /**
  * @author dolek

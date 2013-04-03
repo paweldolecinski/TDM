@@ -1,12 +1,12 @@
 package com.tdm.domain.model.problem;
 
-import com.tdm.domain.model.preferences.FuzzyPreferenceRelation;
+import com.tdm.domain.model.preferences.FuzzyPreferences;
 
 public class GdmProblemCurrentConsensus {
 
 	private double consensusLevel;
 	private GdmProblemId problemId;
-	private FuzzyPreferenceRelation globalPreferences;
+	private FuzzyPreferences globalPreferences;
 
 	public double getConsensusLevel() {
 		return consensusLevel;
@@ -16,7 +16,7 @@ public class GdmProblemCurrentConsensus {
 		return problemId;
 	}
 
-	public FuzzyPreferenceRelation getGlobalPreferences() {
+	public FuzzyPreferences getGlobalPreferences() {
 		return globalPreferences;
 	}
 }

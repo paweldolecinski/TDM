@@ -24,9 +24,9 @@ public final class SearchController {
 		this.service = service;
 	}
 
-	@RequestMapping(value = "/problems.json/{result_type}/{q}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/problems/{result_type}/{q}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public Set<GdmProblem> getProblem(@PathVariable String result_type,
+	public Set<GdmProblem> getProblems(@PathVariable String result_type,
 			@PathVariable String q) {
 
 		return Collections.<GdmProblem> emptySet();

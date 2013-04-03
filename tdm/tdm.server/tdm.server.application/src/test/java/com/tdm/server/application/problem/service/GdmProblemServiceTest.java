@@ -19,6 +19,7 @@ import com.tdm.domain.model.problem.GdmProblem;
 import com.tdm.domain.model.problem.GdmProblemId;
 import com.tdm.domain.model.problem.ProblemRepository;
 import com.tdm.domain.model.problem.dto.GdmProblemDto;
+import com.tdm.domain.model.problem.dto.GdmProblemIdDto;
 
 public class GdmProblemServiceTest {
 
@@ -34,10 +35,10 @@ public class GdmProblemServiceTest {
 
 		problem1 = new GdmProblemDto();
 		problem1.setName("Car Choosing");
-		when(problemDaoMock.read(new GdmProblemId("1"))).thenReturn(problem1);
+		when(problemDaoMock.read(new GdmProblemIdDto("1"))).thenReturn(problem1);
 
 		problem0 = new GdmProblemDto();
-		when(problemDaoMock.read(new GdmProblemId("0"))).thenReturn(problem0);
+		when(problemDaoMock.read(new GdmProblemIdDto("0"))).thenReturn(problem0);
 	}
 
 	@Test
@@ -50,7 +51,7 @@ public class GdmProblemServiceTest {
 		manager.addProblem(name, description, new Date());
 
 		// Then
-		GdmProblemId id = new GdmProblemId("1");
+		GdmProblemId id = new GdmProblemIdDto("1");
 		GdmProblem result = manager.retrieveProblem(id);
 
 		Assert.assertEquals(name, result.getName());
@@ -63,7 +64,7 @@ public class GdmProblemServiceTest {
 		// Given
 		ExpertId expertId = new ExpertIdAsEmail("1");
 
-		GdmProblemId id = new GdmProblemId("0");
+		GdmProblemId id = new GdmProblemIdDto("0");
 		HashSet<GdmProblem> hashSet = new HashSet<GdmProblem>();
 		hashSet.add(problem0);
 		when(problemDaoMock.findAllAssignedTo(expertId)).thenReturn(hashSet);
@@ -81,7 +82,7 @@ public class GdmProblemServiceTest {
 	@Test(expected = IllegalStateException.class)
 	public void shouldThrowExceptionWhenNoOwnerForProblem() {
 		// Given
-		GdmProblemId id = new GdmProblemId("0");
+		GdmProblemId id = new GdmProblemIdDto("0");
 		// When
 		manager.getOwnerOfProblem(id);
 
@@ -95,7 +96,7 @@ public class GdmProblemServiceTest {
 		// Given
 		ExpertId expertId = new ExpertIdAsEmail("1");
 
-		GdmProblemId id = new GdmProblemId("0");
+		GdmProblemId id = new GdmProblemIdDto("0");
 
 		HashSet<GdmProblem> hashSet = new HashSet<GdmProblem>();
 		hashSet.add(problem0);
@@ -123,7 +124,7 @@ public class GdmProblemServiceTest {
 		// Given
 		ExpertId expertId = new ExpertIdAsEmail("1");
 
-		GdmProblemId id = new GdmProblemId("0");
+		GdmProblemId id = new GdmProblemIdDto("0");
 
 		HashSet<GdmProblem> hashSet = new HashSet<GdmProblem>();
 		hashSet.add(problem0);

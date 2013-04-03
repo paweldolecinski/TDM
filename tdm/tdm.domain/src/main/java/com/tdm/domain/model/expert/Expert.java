@@ -1,34 +1,12 @@
 package com.tdm.domain.model.expert;
 
-public class Expert {
 
-	private final ExpertId id;
-	private ExpertRole role;
-	private ExpertCurrentPreferences currentPreferences;
+public interface Expert {
 
-	public Expert(ExpertId id, ExpertRole role) {
-		this.id = id;
-		this.role = role;
-	}
+	ExpertId getId();
 
-	public ExpertId getId() {
-		return id;
-	}
+	ExpertRole getRole();
 
-	public ExpertRole getRole() {
-		return role;
-	}
+	void setRole(ExpertRole role);
 
-	public void setRole(ExpertRole role) {
-		this.role = role;
-	}
-
-	public ExpertCurrentPreferences getCurrentPreferences() {
-		return currentPreferences;
-	}
-
-	public void setCurrentPreferences(
-			ExpertCurrentPreferences currentPreferences) {
-		this.currentPreferences = currentPreferences;
-	}
 }

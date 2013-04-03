@@ -228,19 +228,20 @@ public class UrlBuilder
         // http://www.foo.com:8080/bar/baz
         if (module != null)
         {
-            url.append(module).append("/");
+            url.append(module);
         }
 
         // http://www.foo.com:8080/bar/baz/v1
         if (version != null)
         {
-            url.append(version).append("/");
+            url.append("/").append(version);
         }
 
         // http://www.foo.com:8080/bar/baz/v1/a/b/c
         for (String path : resourcePaths)
         {
-            url.append(path).append("/");
+            url.append("/");
+            url.append(path);
         }
 
         // http://www.foo.com:8080/bar/baz/v1/a/b/c?k0=v0&k1=v1

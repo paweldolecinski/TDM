@@ -7,13 +7,8 @@ import org.springframework.context.annotation.ImportResource;
 
 @Configuration
 @ComponentScan(basePackages = { "com.tdm.server.application",
-		"com.tdm.server.persistance" }, excludeFilters = @Filter(value = Configuration.class))
+	"com.tdm.server.persistance" }, excludeFilters = @Filter(value = Configuration.class))
 @ImportResource("classpath:META-INF/persistance-config.xml")
 public class AppConfig {
-
-	public AppConfig() {
-		System.out
-				.println("AppConfigAppConfigAppConfigAppConfigAppConfigAppConfig");
-	}
 
 }

@@ -8,8 +8,8 @@ import java.util.Map;
 
 import com.tdm.domain.model.expert.ExpertId;
 import com.tdm.domain.model.idea.SolutionIdeaId;
-import com.tdm.domain.model.preferences.FuzzyPreferenceRelation;
-import com.tdm.domain.model.preferences.SolutionIdeaTupleWithValue;
+import com.tdm.domain.model.preferences.internal.FuzzyPreferenceRelation;
+import com.tdm.domain.model.preferences.internal.SolutionIdeaTupleWithValue;
 import com.tdm.domain.model.problem.GdmProblemId;
 
 public class SelectionModule {

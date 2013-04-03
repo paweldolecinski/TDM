@@ -1,4 +1,4 @@
-package com.tdm.domain.model.preferences;
+package com.tdm.domain.model.preferences.internal;
 
 import java.util.ArrayList;
 import java.util.Collection;
