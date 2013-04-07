@@ -19,9 +19,11 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.tdm.client.app.AppPresenter;
 import com.tdm.client.app.AppView;
 import com.tdm.client.app.error.ErrorPagePresenter;
-import com.tdm.client.app.error.view.ErrorPageView;
+import com.tdm.client.app.error.ErrorPageView;
 import com.tdm.client.app.inbox.InboxContentView;
 import com.tdm.client.app.inbox.InboxPagePresenter;
+import com.tdm.client.app.navibar.NaviBarPresenterWidget;
+import com.tdm.client.app.navibar.NaviBarView;
 import com.tdm.client.app.popup.LocalDialogPresenterWidget;
 import com.tdm.client.app.popup.LocalDialogView;
 import com.tdm.client.app.problem.BrainstormPresenterWidget;
@@ -51,15 +53,16 @@ public class ApplicationModule extends AbstractPresenterModule {
 	protected void configure() {
 
 		install(new UiModule());
-		
-		bindPresenter(AppPresenter.class,
-				AppPresenter.Display.class, AppView.class,
-				AppPresenter.IProxy.class);
+
+		bindPresenter(AppPresenter.class, AppPresenter.Display.class,
+				AppView.class, AppPresenter.IProxy.class);
 
 		bindPresenter(ErrorPagePresenter.class,
 				ErrorPagePresenter.Display.class, ErrorPageView.class,
 				ErrorPagePresenter.IProxy.class);
 
+		bindSingletonPresenterWidget(NaviBarPresenterWidget.class,
+				NaviBarPresenterWidget.Display.class, NaviBarView.class);
 		/*
 		 * Welcome section
 		 */

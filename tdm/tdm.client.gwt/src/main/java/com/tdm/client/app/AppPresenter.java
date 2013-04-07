@@ -17,8 +17,6 @@ package com.tdm.client.app;
 
 
 import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
@@ -44,7 +42,6 @@ public class AppPresenter extends
 
 	@ContentSlot
 	public static final Type<RevealContentHandler<?>> TYPE_MainContent = new Type<RevealContentHandler<?>>();
-	private final LocalDialogPresenterWidget infoBox;
 
 	public interface Display extends View {
 	}
@@ -57,7 +54,6 @@ public class AppPresenter extends
 	public AppPresenter(EventBus eventBus, Display view, IProxy proxy,
 			final LocalDialogPresenterWidget infoBox) {
 		super(eventBus, view, proxy);
-		this.infoBox = infoBox;
 	}
 
 	@Override
@@ -68,10 +64,6 @@ public class AppPresenter extends
 
 	@Override
 	protected void revealInParent() {
-
-		if (RootPanel.get("loading") != null) // TODO non-externalized string
-			DOM.setStyleAttribute(RootPanel.get("loading").getElement(),
-					"display", "none");
 		RevealRootContentEvent.fire(this, this);
 	}
 

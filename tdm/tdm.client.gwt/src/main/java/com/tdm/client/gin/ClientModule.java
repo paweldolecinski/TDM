@@ -15,31 +15,50 @@
  */
 package com.tdm.client.gin;
 
+import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.gwtplatform.mvp.client.annotations.GaAccount;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
-import com.gwtplatform.mvp.client.gin.DefaultModule;
+import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics;
+import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl;
 import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker;
 import com.gwtplatform.mvp.client.proxy.DefaultPlaceManager;
+import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.TokenFormatter;
+import com.tdm.client.app.BodyPresenter;
 import com.tdm.client.gin.ui.ApplicationModule;
 
 public class ClientModule extends AbstractPresenterModule {
 
 	@Override
 	protected void configure() {
-		install((new DefaultModule(DefaultPlaceManager.class)));
+
+		bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
+		bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(
+				Singleton.class);
+
+		bind(BodyPresenter.class).asEagerSingleton();
+
+		bind(PlaceManager.class).to(DefaultPlaceManager.class).in(
+				Singleton.class);
+
 		install(new ClientDispatchModule());
 
 		install(new ApplicationModule());
 
 		install(new ParamsModule());
-		
+
 		bind(ResourceLoader.class).asEagerSingleton();
-		
+
 		if (ParamsModule.USE_GA) {
 			bindConstant().annotatedWith(GaAccount.class).to(
 					ParamsModule.GA_ACCOUNT);
-
+			bind(GoogleAnalytics.class).to(GoogleAnalyticsImpl.class).in(
+					Singleton.class);
 			bind(GoogleAnalyticsNavigationTracker.class).asEagerSingleton();
+
 		}
 
 	}

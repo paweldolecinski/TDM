@@ -86,12 +86,12 @@ public class ProblemDiscussionView extends ViewImpl implements
 
 	@Override
 	public void onReveal() {
-		AppView.getBody().setClassName(resources.getMainCss().landing());
+		AppView.getBody().setClassName(resources.mainCss().landing());
 	}
 
 	@Override
 	public void onHide() {
-		AppView.getBody().removeClassName(resources.getMainCss().landing());
+		AppView.getBody().removeClassName(resources.mainCss().landing());
 	}
 
 }

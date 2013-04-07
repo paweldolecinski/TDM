@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.tdm.domain.model.expert.ExpertId;
+import com.tdm.domain.model.expert.vo.ExpertId;
 import com.tdm.domain.model.idea.SolutionIdeaId;
-import com.tdm.domain.model.preferences.internal.FuzzyPreferenceRelation;
-import com.tdm.domain.model.preferences.internal.SolutionIdeaTupleWithValue;
-import com.tdm.domain.model.problem.GdmProblemId;
+import com.tdm.domain.model.preferences.FuzzyPreferenceRelation;
+import com.tdm.domain.model.preferences.SolutionIdeaTupleWithValue;
+import com.tdm.domain.model.problem.vo.GdmProblemKey;
 
 public class SelectionModule {
 
@@ -18,7 +18,7 @@ public class SelectionModule {
 	 * aggregation phase TODO: move to preferences module
 	 */
 	public FuzzyPreferenceRelation getCollectivePreference(
-			GdmProblemId problemId, List<FuzzyPreferenceRelation> preferences) {
+			GdmProblemKey problemId, List<FuzzyPreferenceRelation> preferences) {
 
 		FuzzyPreferenceRelation collectivePref = new FuzzyPreferenceRelation();
 		if (preferences.isEmpty()) {
@@ -41,7 +41,7 @@ public class SelectionModule {
 		return collectivePref;
 	}
 
-	public void calculateConsensus(GdmProblemId problemId,
+	public void calculateConsensus(GdmProblemKey problemId,
 			List<ExpertId> experts, List<SolutionIdeaId> ideas,
 			List<SolutionIdeaId> globalRanking) {
 		

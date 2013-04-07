@@ -9,13 +9,13 @@ import com.tdm.domain.model.handling.ObjectNotFoundException;
 import com.tdm.domain.model.idea.SolutionIdea;
 import com.tdm.domain.model.idea.SolutionIdeaId;
 import com.tdm.domain.model.idea.SolutionIdeaRepository;
-import com.tdm.domain.model.problem.GdmProblemId;
+import com.tdm.domain.model.problem.vo.GdmProblemKey;
 
 @Repository
 public class JdoSolutionIdeaRepository implements SolutionIdeaRepository {
 
 	@Override
-	public SolutionIdea read(GdmProblemId problemId,
+	public SolutionIdea read(GdmProblemKey problemId,
 			SolutionIdeaId solutionIdeaId) {
 		// TODO Auto-generated method stub
 		return null;
@@ -35,7 +35,7 @@ public class JdoSolutionIdeaRepository implements SolutionIdeaRepository {
 	}
 
 	@Override
-	public Collection<SolutionIdea> findAllAssignedTo(GdmProblemId problemId) {
+	public Collection<SolutionIdea> findAllAssignedTo(GdmProblemKey problemId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -15,50 +15,42 @@
  */
 package com.tdm.client.dispatch.handler;
 
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.Response;
-import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.json.client.JSONParser;
-import com.google.gwt.json.client.JSONValue;
 import com.tdm.client.dispatch.AbstractRequestBuilderClientActionHandler;
 import com.tdm.client.dispatch.command.GetProblemListAction;
 import com.tdm.client.dispatch.command.GetProblemListResult;
 import com.tdm.client.util.UrlBuilder;
-import com.tdm.domain.model.problem.jso.GdmProblemListJso;
+import com.tdm.domain.model.problem.vo.jso.GdmProblemJso;
 
 /**
  * @author Paweł Doleciński
  * 
  */
 public class GetProblemListHandler
-	extends
-	AbstractRequestBuilderClientActionHandler<GetProblemListAction, GetProblemListResult> {
+		extends
+		AbstractRequestBuilderClientActionHandler<GetProblemListAction, GetProblemListResult> {
 
-    protected GetProblemListHandler() {
-	super(GetProblemListAction.class);
-    }
+	protected GetProblemListHandler() {
+		super(GetProblemListAction.class);
+	}
 
-    @Override
-    protected GetProblemListResult extractResult(final Response response) {
-	System.out.println(response.getText());
-	JSONValue jsonValue = JSONParser.parseStrict(response.getText());
-	JSONObject jsonObject = jsonValue.isObject(); // assert that this is an
-						      // object
-	GdmProblemListJso items = jsonObject.getJavaScriptObject().cast();
-	return new GetProblemListResult(items);
-    }
+	@Override
+	protected GetProblemListResult extractResult(final Response response) {
+		JsArray<GdmProblemJso> problems = JsonUtils
+				.safeEval(response.getText());
+		return new GetProblemListResult(problems);
+	}
 
-    @Override
-    protected RequestBuilder getRequestBuilder(final GetProblemListAction action) {
-	UrlBuilder urlBuilder = new UrlBuilder().setModule("api").setVersion(
-		"v1");
+	@Override
+	protected RequestBuilder getRequestBuilder(
+			final GetProblemListAction action, UrlBuilder urlBuilder) {
 
-	urlBuilder.addResourcePath("problems/" + action.getFilter());
+		urlBuilder.addResourcePath("search/problems");
+		return prepareRequestBuilder(RequestBuilder.GET, urlBuilder);
 
-	RequestBuilder rb = new RequestBuilder(RequestBuilder.GET,
-		urlBuilder.toUrl());
-
-	return rb;
-    }
+	}
 
 }

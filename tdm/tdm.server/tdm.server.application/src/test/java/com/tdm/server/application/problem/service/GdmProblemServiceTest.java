@@ -3,30 +3,29 @@ package com.tdm.server.application.problem.service;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.Date;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.tdm.domain.model.expert.Expert;
-import com.tdm.domain.model.expert.ExpertId;
-import com.tdm.domain.model.expert.ExpertRole;
-import com.tdm.domain.model.expert.dto.ExpertIdAsEmail;
-import com.tdm.domain.model.problem.GdmProblem;
-import com.tdm.domain.model.problem.GdmProblemId;
+import com.tdm.domain.model.expert.vo.Expert;
+import com.tdm.domain.model.expert.vo.ExpertId;
+import com.tdm.domain.model.expert.vo.ExpertRole;
+import com.tdm.domain.model.expert.vo.dto.ExpertIdAsEmail;
 import com.tdm.domain.model.problem.ProblemRepository;
-import com.tdm.domain.model.problem.dto.GdmProblemDto;
-import com.tdm.domain.model.problem.dto.GdmProblemIdDto;
+import com.tdm.domain.model.problem.vo.GdmProblem;
+import com.tdm.domain.model.problem.vo.GdmProblemKey;
+import com.tdm.domain.model.problem.vo.dto.GdmProblemDto;
+import com.tdm.domain.model.problem.vo.dto.GdmProblemKeyDto;
 
 public class GdmProblemServiceTest {
 
 	private GdmProblemService manager;
 	private ProblemRepository problemDaoMock = mock(ProblemRepository.class);
-	private GdmProblem problem0;
-	private GdmProblem problem1;
+	private GdmProblemDto problem0;
+	private GdmProblemDto problem1;
 
 	@Before
 	public void setUp() {
@@ -35,10 +34,10 @@ public class GdmProblemServiceTest {
 
 		problem1 = new GdmProblemDto();
 		problem1.setName("Car Choosing");
-		when(problemDaoMock.read(new GdmProblemIdDto("1"))).thenReturn(problem1);
+		when(problemDaoMock.read(new GdmProblemKeyDto("1"))).thenReturn(problem1);
 
 		problem0 = new GdmProblemDto();
-		when(problemDaoMock.read(new GdmProblemIdDto("0"))).thenReturn(problem0);
+		when(problemDaoMock.read(new GdmProblemKeyDto("0"))).thenReturn(problem0);
 	}
 
 	@Test
@@ -48,15 +47,15 @@ public class GdmProblemServiceTest {
 		String description = "";
 
 		// When
-		manager.addProblem(name, description, new Date());
+		manager.createProblem(problem1);
 
 		// Then
-		GdmProblemId id = new GdmProblemIdDto("1");
+		GdmProblemKey id = new GdmProblemKeyDto("1");
 		GdmProblem result = manager.retrieveProblem(id);
 
 		Assert.assertEquals(name, result.getName());
 		Assert.assertEquals(description, result.getDescription());
-		Assert.assertEquals(id, result.getId());
+		Assert.assertEquals(id, result.getKey());
 	}
 
 	@Test
@@ -64,8 +63,8 @@ public class GdmProblemServiceTest {
 		// Given
 		ExpertId expertId = new ExpertIdAsEmail("1");
 
-		GdmProblemId id = new GdmProblemIdDto("0");
-		HashSet<GdmProblem> hashSet = new HashSet<GdmProblem>();
+		GdmProblemKey id = new GdmProblemKeyDto("0");
+		ArrayList<GdmProblem> hashSet = new ArrayList<GdmProblem>();
 		hashSet.add(problem0);
 		when(problemDaoMock.findAllAssignedTo(expertId)).thenReturn(hashSet);
 		// When
@@ -82,7 +81,7 @@ public class GdmProblemServiceTest {
 	@Test(expected = IllegalStateException.class)
 	public void shouldThrowExceptionWhenNoOwnerForProblem() {
 		// Given
-		GdmProblemId id = new GdmProblemIdDto("0");
+		GdmProblemKey id = new GdmProblemKeyDto("0");
 		// When
 		manager.getOwnerOfProblem(id);
 
@@ -96,9 +95,9 @@ public class GdmProblemServiceTest {
 		// Given
 		ExpertId expertId = new ExpertIdAsEmail("1");
 
-		GdmProblemId id = new GdmProblemIdDto("0");
+		GdmProblemKey id = new GdmProblemKeyDto("0");
 
-		HashSet<GdmProblem> hashSet = new HashSet<GdmProblem>();
+		ArrayList<GdmProblem> hashSet = new ArrayList<GdmProblem>();
 		hashSet.add(problem0);
 		when(problemDaoMock.findAllAssignedTo(expertId)).thenReturn(hashSet);
 		when(problemDaoMock.findAllAssignedTo(expertId, ExpertRole.OWNER))
@@ -124,9 +123,9 @@ public class GdmProblemServiceTest {
 		// Given
 		ExpertId expertId = new ExpertIdAsEmail("1");
 
-		GdmProblemId id = new GdmProblemIdDto("0");
+		GdmProblemKey id = new GdmProblemKeyDto("0");
 
-		HashSet<GdmProblem> hashSet = new HashSet<GdmProblem>();
+		ArrayList<GdmProblem> hashSet = new ArrayList<GdmProblem>();
 		hashSet.add(problem0);
 		when(problemDaoMock.findAllAssignedTo(expertId)).thenReturn(hashSet);
 		when(problemDaoMock.findAllAssignedTo(expertId, ExpertRole.MODERATOR))

@@ -79,24 +79,6 @@
 			<version>${gwt-gin.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>name.pehl</groupId>
-			<artifactId>piriti-user</artifactId>
-			<version>${piriti.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>name.pehl</groupId>
-			<artifactId>piriti-dev</artifactId>
-			<version>${piriti.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>name.pehl</groupId>
-			<artifactId>totoe</artifactId>
-			<version>${piriti.totoe.version}</version>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -127,7 +109,7 @@
 					<logLevel>INFO</logLevel>
 					<style>${gwt.style}</style>
 
-<!-- 					<copyWebapp>true</copyWebapp> -->
+					<!-- <copyWebapp>true</copyWebapp> -->
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
 					<server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
 					<appEngineHome>${gae.home}</appEngineHome>

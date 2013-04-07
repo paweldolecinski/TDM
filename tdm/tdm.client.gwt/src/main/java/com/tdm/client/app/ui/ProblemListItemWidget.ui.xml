@@ -2,19 +2,23 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<ui:with type="com.tdm.client.resources.AppResources"
-		field="res" />
+	<ui:with type="com.tdm.client.resources.AppResources" field="res" />
 
-	<g:HTMLPanel styleName="{res.getMainCss.problemListItem} {res.getMainCss.thumbnail}">
+	<g:HTMLPanel
+		styleName="{res.mainCss.problemListItem} {res.mainCss.thumbnail}">
 		<g:InlineHyperlink ui:field="titleImage" />
-		<g:HTMLPanel styleName="{res.getMainCss.caption}">
-			<h3 class="{res.getMainCss.title}">
+		<g:HTMLPanel styleName="{res.mainCss.caption}">
+			<h3 class="{res.mainCss.title}">
 				<g:InlineHyperlink ui:field="title" />
 			</h3>
-			<p class="{res.getMainCss.meta}">
-				by Paweł Doleciński on 26 November 2012
+			<p class="{res.mainCss.meta}">
+				by
+				<g:InlineLabel>
+					Paweł Doleciński</g:InlineLabel>
+				on
+				<g:InlineLabel ui:field="creationDate" />
 			</p>
-			<p ui:field="description" class="{res.getMainCss.description}" />
+			<p ui:field="description" class="{res.mainCss.description}" />
 		</g:HTMLPanel>
 	</g:HTMLPanel>
 

@@ -1,35 +1,35 @@
 package com.tdm.server.web.controller;
 
-import java.util.Collections;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tdm.domain.model.problem.GdmProblem;
-import com.tdm.server.application.problem.service.DefaultGdmProblemService;
+import com.tdm.domain.model.problem.vo.GdmProblem;
+import com.tdm.server.application.problem.service.SearchService;
 
 @Controller
 @RequestMapping("/search")
 public final class SearchController {
 
-	private final DefaultGdmProblemService service;
+	private final SearchService service;
 
 	@Autowired
-	public SearchController(DefaultGdmProblemService service) {
+	public SearchController(SearchService service) {
 		this.service = service;
 	}
 
-	@RequestMapping(value = "/problems/{result_type}/{q}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/problems", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Set<GdmProblem> getProblems(@PathVariable String result_type,
-			@PathVariable String q) {
+	public List<GdmProblem> getProblems(@RequestParam(value = "q", required=false) String filtr) {
+		List<GdmProblem> problems = service.retrieveProblemsForExpert(null);
 
-		return Collections.<GdmProblem> emptySet();
+		return problems;
 	}
 
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:with field="res" type="com.tdm.client.resources.AppResources" />
+
+	<g:HTMLPanel styleName="{res.naviBar.navbarInner}">
+
+		<g:HTMLPanel styleName="{res.naviBar.navbarRight}">
+
+			<g:Anchor styleName="{res.mainCss.btn} {res.mainCss.btnDiscreet}"
+				href="#">
+				Paweł
+				<span class="{res.mainCss.caret}" />
+			</g:Anchor>
+
+		</g:HTMLPanel>
+
+		<g:HTMLPanel styleName="{res.naviBar.navbarLeft}">
+			<g:HTMLPanel styleName="{res.naviBar.brand}" />
+
+			<ul id="navigation" class="{res.naviBar.navMain}">
+				<li>
+					<g:InlineHyperlink>Your problems</g:InlineHyperlink>
+				</li>
+
+				<li>
+					<g:InlineHyperlink ui:field="learnLink">Learn</g:InlineHyperlink>
+				</li>
+
+				<li>
+					<g:InlineHyperlink ui:field="exploreLink">Explore</g:InlineHyperlink>
+				</li>
+			</ul>
+
+		</g:HTMLPanel>
+	</g:HTMLPanel>
+
+</ui:UiBinder> 

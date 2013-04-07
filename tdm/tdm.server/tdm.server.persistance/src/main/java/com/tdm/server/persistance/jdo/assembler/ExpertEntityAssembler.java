@@ -1,6 +1,6 @@
 package com.tdm.server.persistance.jdo.assembler;
 
-import com.tdm.domain.model.expert.Expert;
+import com.tdm.domain.model.expert.vo.Expert;
 import com.tdm.server.persistance.jdo.entities.ExpertEntity;
 
 public class ExpertEntityAssembler {

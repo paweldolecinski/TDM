@@ -15,24 +15,29 @@
  */
 package com.tdm.domain.model.problem;
 
-import java.util.Collection;
+import java.util.List;
 
-import com.tdm.domain.model.expert.ExpertId;
-import com.tdm.domain.model.expert.ExpertRole;
+import com.tdm.domain.model.expert.vo.ExpertId;
+import com.tdm.domain.model.expert.vo.ExpertRole;
+import com.tdm.domain.model.problem.vo.GdmProblem;
+import com.tdm.domain.model.problem.vo.GdmProblemKey;
+import com.tdm.domain.model.problem.vo.dto.GdmProblemDto;
 
 /**
  * @author Paweł Doleciński
  */
 public interface ProblemRepository {
 
-	GdmProblem read(GdmProblemId id);
+	GdmProblem read(GdmProblemKey id);
 
-	void store(GdmProblem request);
+	GdmProblemDto create(GdmProblem request);
+	
+	GdmProblemDto update(GdmProblem request);
 
-	void delete(GdmProblemId id);
+	void delete(GdmProblemKey id);
 
-	Collection<GdmProblem> findAllAssignedTo(ExpertId expert);
+	List<GdmProblem> findAllAssignedTo(ExpertId expert);
 
-	Collection<GdmProblem> findAllAssignedTo(ExpertId expert, ExpertRole owner);
+	List<GdmProblem> findAllAssignedTo(ExpertId expert, ExpertRole owner);
 
 }

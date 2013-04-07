@@ -5,34 +5,34 @@
 	<ui:with type="com.tdm.client.resources.AppResources"
 		field="res" />
 
-	<g:HTMLPanel styleName="{res.getMainCss.container}">
-		<h1 class="{res.getMainCss.problemTitle} {res.getMainCss.clearfix}">
+	<g:HTMLPanel styleName="{res.mainCss.container}">
+		<h1 class="{res.mainCss.problemTitle} {res.mainCss.clearfix}">
 			How can we maximize our market share in a tough economy?
 		</h1>
-		<g:HTMLPanel styleName="{res.getMainCss.toolbar}">
-			<a class="{res.getMainCss.btn} {res.getMainCss.btnPrimary}">Edit</a>
-			<a class="{res.getMainCss.btn}">
+		<g:HTMLPanel styleName="{res.mainCss.toolbar}">
+			<a class="{res.mainCss.btn} {res.mainCss.btnPrimary}">Edit</a>
+			<a class="{res.mainCss.btn}">
 				<i class="icon-copy"></i>
 				Save a copy
 			</a>
-			<a id="ln_delete" class="{res.getMainCss.btn} {res.getMainCss.right}">
+			<a id="ln_delete" class="{res.mainCss.btn} {res.mainCss.right}">
 				<i class="icon-delete"></i>
 			</a>
-			<a id="ln_privacy" class="{res.getMainCss.btn} {res.getMainCss.right}">
+			<a id="ln_privacy" class="{res.mainCss.btn} {res.mainCss.right}">
 				<i class="icon-recycle"></i>
 				<span>
 					Allow copy
 				</span>
 			</a>
-			<g:HTMLPanel styleName="{res.getMainCss.blockShare}">
-				<a class="{res.getMainCss.btn}">
+			<g:HTMLPanel styleName="{res.mainCss.blockShare}">
+				<a class="{res.mainCss.btn}">
 					<i class="icon-share"></i>
 					Share
 				</a>
 			</g:HTMLPanel>
 		</g:HTMLPanel>
-		<g:HTMLPanel styleName="{res.getMainCss.row}">
-			<g:HTMLPanel styleName="{res.getMainCss.span8}">
+		<g:HTMLPanel styleName="{res.mainCss.row}">
+			<g:HTMLPanel styleName="{res.mainCss.span8}">
 				<span class="problemDescription">
 					Lorem ipsum dolor sit amet, consectetur adipiscing
 					elit. Nam eleifend lorem purus. Mauris sed libero sodales felis
@@ -50,8 +50,8 @@
 						on 16 November 2012
 					</span>
 				</g:HTMLPanel>
-				<g:HTMLPanel styleName="{res.getMainCss.problemSolutions}">
-					<h4 class="{res.getMainCss.solutionsHeader}">
+				<g:HTMLPanel styleName="{res.mainCss.problemSolutions}">
+					<h4 class="{res.mainCss.solutionsHeader}">
 						Flip Chart
 						<span>
 							(
@@ -60,16 +60,16 @@
 						</span>
 					</h4>
 					<g:FlowPanel ui:field="newSolutionPanel" />
-					<ul ui:field="solutionList" class="{res.getMainCss.solutionList}">
-						<li class="{res.getMainCss.row}">
-							<hr class="{res.getMainCss.span8}" />
+					<ul ui:field="solutionList" class="{res.mainCss.solutionList}">
+						<li class="{res.mainCss.row}">
+							<hr class="{res.mainCss.span8}" />
 						</li>
-						<li class="{res.getMainCss.row}">
-							<div class="{res.getMainCss.solutionAvatar} {res.getMainCss.span1}"></div>
-							<div class="{res.getMainCss.solution} {res.getMainCss.span7}">
-								<span class="{res.getMainCss.solutionTitle}">Use a tool that makes it really easy for people
+						<li class="{res.mainCss.row}">
+							<div class="{res.mainCss.solutionAvatar} {res.mainCss.span1}"></div>
+							<div class="{res.mainCss.solution} {res.mainCss.span7}">
+								<span class="{res.mainCss.solutionTitle}">Use a tool that makes it really easy for people
 									to send in ideas as they think of them</span>
-								<p class="{res.getMainCss.solutionSubTitle}">Just being able to bung ideas into the idea pit would
+								<p class="{res.mainCss.solutionSubTitle}">Just being able to bung ideas into the idea pit would
 									be
 									helpful.</p>
 								<span class="reply-and-delete">
@@ -80,15 +80,15 @@
 									</span>
 								</span>
 							</div>
-							<hr class="{res.getMainCss.span8}" />
+							<hr class="{res.mainCss.span8}" />
 						</li>
 
-						<li class="{res.getMainCss.row}">
-							<div class="{res.getMainCss.solutionAvatar} {res.getMainCss.span1}"></div>
-							<div class="{res.getMainCss.solution} {res.getMainCss.span7}">
-								<span class="{res.getMainCss.solutionTitle}">Use personal approaches to target a smaller,
+						<li class="{res.mainCss.row}">
+							<div class="{res.mainCss.solutionAvatar} {res.mainCss.span1}"></div>
+							<div class="{res.mainCss.solution} {res.mainCss.span7}">
+								<span class="{res.mainCss.solutionTitle}">Use personal approaches to target a smaller,
 									under-served market with highly-tailored products and services.</span>
-								<p class="{res.getMainCss.solutionSubTitle}">Example: A chain of auto parts stores catering
+								<p class="{res.mainCss.solutionSubTitle}">Example: A chain of auto parts stores catering
 									specifically
 									to women's preferences and needs.
 								</p>
@@ -100,14 +100,14 @@
 									</span>
 								</span>
 							</div>
-							<hr class="{res.getMainCss.span8}" />
+							<hr class="{res.mainCss.span8}" />
 						</li>
-						<li class="{res.getMainCss.row}">
-							<div class="{res.getMainCss.solutionAvatar} {res.getMainCss.span1}"></div>
-							<div class="{res.getMainCss.solution} {res.getMainCss.span7}">
-								<span class="{res.getMainCss.solutionTitle}">Tell a better story how our product helps in a
+						<li class="{res.mainCss.row}">
+							<div class="{res.mainCss.solutionAvatar} {res.mainCss.span1}"></div>
+							<div class="{res.mainCss.solution} {res.mainCss.span7}">
+								<span class="{res.mainCss.solutionTitle}">Tell a better story how our product helps in a
 									tough economy</span>
-								<p class="{res.getMainCss.solutionSubTitle}"></p>
+								<p class="{res.mainCss.solutionSubTitle}"></p>
 								<span class="reply-and-delete">
 									<a class="reply">Reply</a>
 									<span class="delete-comment-link">
@@ -116,15 +116,15 @@
 									</span>
 								</span>
 							</div>
-							<hr class="{res.getMainCss.span8}" />
+							<hr class="{res.mainCss.span8}" />
 						</li>
 
 					</ul>
 				</g:HTMLPanel>
 			</g:HTMLPanel>
 
-			<g:HTMLPanel styleName="{res.getMainCss.span4}">
-				<g:HTMLPanel styleName="problemSidebar bumped promoted {res.getMainCss.well}">
+			<g:HTMLPanel styleName="{res.mainCss.span4}">
+				<g:HTMLPanel styleName="problemSidebar bumped promoted {res.mainCss.well}">
 					<h4>Voting results</h4>
 				</g:HTMLPanel>
 			</g:HTMLPanel>

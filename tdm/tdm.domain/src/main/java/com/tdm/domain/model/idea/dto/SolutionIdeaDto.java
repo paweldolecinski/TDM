@@ -4,12 +4,12 @@ import java.util.Date;
 
 import com.tdm.domain.model.idea.SolutionIdea;
 import com.tdm.domain.model.idea.SolutionIdeaId;
-import com.tdm.domain.model.problem.GdmProblemId;
+import com.tdm.domain.model.problem.vo.GdmProblemKey;
 
 public class SolutionIdeaDto implements SolutionIdea {
 
 	private SolutionIdeaId id;
-	private GdmProblemId problemId;
+	private GdmProblemKey problemId;
 	private String name;
 	private String details;
 	private Date creation;
@@ -20,7 +20,7 @@ public class SolutionIdeaDto implements SolutionIdea {
 	}
 
 	@Override
-	public GdmProblemId getProblemId() {
+	public GdmProblemKey getProblemId() {
 		return problemId;
 	}
 
@@ -43,7 +43,7 @@ public class SolutionIdeaDto implements SolutionIdea {
 		this.id = id;
 	}
 
-	public void setProblemId(GdmProblemId problemId) {
+	public void setProblemId(GdmProblemKey problemId) {
 		this.problemId = problemId;
 	}
 

@@ -13,34 +13,35 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.tdm.domain.model.expert.ExpertId;
-import com.tdm.domain.model.expert.dto.ExpertIdAsEmail;
-import com.tdm.domain.model.problem.GdmProblem;
-import com.tdm.domain.model.problem.GdmProblemId;
+import com.tdm.domain.model.expert.vo.ExpertId;
+import com.tdm.domain.model.expert.vo.dto.ExpertIdAsEmail;
 import com.tdm.domain.model.problem.ProblemRepository;
-import com.tdm.domain.model.problem.dto.GdmProblemDto;
-import com.tdm.domain.model.problem.dto.GdmProblemIdDto;
+import com.tdm.domain.model.problem.vo.GdmProblem;
+import com.tdm.domain.model.problem.vo.GdmProblemKey;
+import com.tdm.domain.model.problem.vo.dto.GdmProblemDto;
+import com.tdm.domain.model.problem.vo.dto.GdmProblemKeyDto;
+import com.tdm.server.application.problem.service.DefaultSearchService;
 import com.tdm.server.application.problem.service.SearchService;
 
 public class SearchServiceTest {
 
     private SearchService searchService;
     private ProblemRepository problemDaoMock = mock(ProblemRepository.class);
-    private GdmProblem problem0;
-    private GdmProblem problem1;
+    private GdmProblemDto problem0;
+    private GdmProblemDto problem1;
 
     @Before
     public void setUp() {
-	searchService = new SearchService(problemDaoMock);
+	searchService = new DefaultSearchService(problemDaoMock);
 
 	problem1 = new GdmProblemDto();
 	problem1.setName("Car Choosing");
-	problem1.setId(new GdmProblemIdDto("1"));
-	when(problemDaoMock.read(new GdmProblemIdDto("1")))
+	problem1.setGdmProblemKey(new GdmProblemKeyDto("1"));
+	when(problemDaoMock.read(new GdmProblemKeyDto("1")))
 		.thenReturn(problem1);
 
 	problem0 = new GdmProblemDto();
-	when(problemDaoMock.read(any(GdmProblemId.class))).thenReturn(problem0);
+	when(problemDaoMock.read(any(GdmProblemKey.class))).thenReturn(problem0);
     }
 
     @Test
@@ -60,8 +61,8 @@ public class SearchServiceTest {
 
 	Assert.assertEquals(2, problemsIds.size());
 	Iterator<GdmProblem> iterator = problemsIds.iterator();
-	Assert.assertEquals(problem0.getId(), iterator.next().getId());
-	Assert.assertEquals(problem1.getId(), iterator.next().getId());
+	Assert.assertEquals(problem0.getKey(), iterator.next().getKey());
+	Assert.assertEquals(problem1.getKey(), iterator.next().getKey());
 
     }
 }

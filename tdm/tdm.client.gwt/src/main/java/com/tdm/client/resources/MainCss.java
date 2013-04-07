@@ -29,8 +29,6 @@ public interface MainCss extends CssResource {
 	
 	String container();
 	
-	String header();
-	
 	@ClassName("content-main")
 	String content();
 	
@@ -38,15 +36,9 @@ public interface MainCss extends CssResource {
 	
 	String footer();
 	
-	String logo();
-	
-	String navMain();
-	
 	String navSub();
 	
 	String row();
-	
-	String dropdown();
 	
 	String dropdownMenu();
 	

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module SYSTEM "http://google-web-toolkit.googlecode.com/svn/releases/2.5/distro-source/core/src/gwt-module.dtd" >
+
 <module rename-to='TDMClient'>
 	<inherits name='com.google.gwt.user.User' />
 
 	<inherits name="com.google.gwt.uibinder.GinUiBinder" />
 	<inherits name='com.google.gwt.inject.Inject' />
 	<inherits name='com.google.gwt.resources.Resources' />
+	<inherits name='com.google.gwt.json.JSON' />
 	<inherits name="com.google.gwt.i18n.I18N" />
 	<inherits name='com.google.gwt.storage.Storage' />
 	<inherits name="com.google.gwt.logging.Logging" />
 	<inherits name='com.google.gwt.junit.JUnit' />
 
 	<inherits name='com.gwtplatform.dispatch.Dispatch' />
-	<inherits name="name.pehl.piriti.json.JSON" />
 
 	<inherits name="com.tdm.domain.Domain" />
 

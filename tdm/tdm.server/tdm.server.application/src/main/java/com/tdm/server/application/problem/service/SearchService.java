@@ -1,41 +1,16 @@
 package com.tdm.server.application.problem.service;
 
-import java.util.Collection;
+import java.util.List;
 
-import com.tdm.domain.model.expert.ExpertId;
-import com.tdm.domain.model.expert.ExpertRole;
-import com.tdm.domain.model.problem.GdmProblem;
-import com.tdm.domain.model.problem.ProblemRepository;
+import com.tdm.domain.model.expert.vo.ExpertId;
+import com.tdm.domain.model.problem.vo.GdmProblem;
 
-public class SearchService {
+public interface SearchService {
 
-	ProblemRepository problemDao;
+	List<GdmProblem> retrieveProblemsForExpert(ExpertId id);
 
-	public SearchService(ProblemRepository problemDao) {
-		this.problemDao = problemDao;
-	}
+	List<GdmProblem> retrieveProblemsOwnedByExpert(ExpertId id);
 
-	public Collection<GdmProblem> retrieveProblemsForExpert(ExpertId id) {
-
-		Collection<GdmProblem> problems = problemDao.findAllAssignedTo(id);
-
-		return problems;
-	}
-
-	public Collection<GdmProblem> retrieveProblemsOwnedByExpert(ExpertId id) {
-
-		Collection<GdmProblem> problems = problemDao.findAllAssignedTo(id,
-				ExpertRole.OWNER);
-
-		return problems;
-	}
-
-	public Collection<GdmProblem> retrieveProblemsModeratedByExpert(ExpertId id) {
-
-		Collection<GdmProblem> problems = problemDao.findAllAssignedTo(id,
-				ExpertRole.MODERATOR);
-
-		return problems;
-	}
+	List<GdmProblem> retrieveProblemsModeratedByExpert(ExpertId id);
 
 }

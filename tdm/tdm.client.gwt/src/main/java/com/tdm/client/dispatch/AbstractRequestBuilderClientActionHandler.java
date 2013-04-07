@@ -20,6 +20,8 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.http.client.RequestBuilder.Method;
+import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.actionhandler.AbstractClientActionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ExecuteCommand;
@@ -27,6 +29,7 @@ import com.gwtplatform.dispatch.client.actionhandler.UndoCommand;
 import com.gwtplatform.dispatch.shared.Action;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.Result;
+import com.tdm.client.util.UrlBuilder;
 
 /**
  * Implementation of the command pattern using GWT's RequestBuilder instead of
@@ -56,8 +59,13 @@ public abstract class AbstractRequestBuilderClientActionHandler<A extends Action
 			final AsyncCallback<R> resultCallback,
 			final ExecuteCommand<A, R> executeCommand) {
 
-		final RequestBuilder requestBuilder = getRequestBuilder(action);
-		requestBuilder.setHeader("Content-Type", "application/json; charset=utf-8");
+		UrlBuilder urlBuilder = new UrlBuilder().setModule("api").setVersion(
+				"v1");
+
+		final RequestBuilder requestBuilder = getRequestBuilder(action,
+				urlBuilder);
+		requestBuilder.setHeader("Content-Type",
+				"application/json; charset=utf-8");
 		requestBuilder.setHeader("Accept", "application/json");
 		requestBuilder.setCallback(new RequestCallback() {
 
@@ -71,7 +79,12 @@ public abstract class AbstractRequestBuilderClientActionHandler<A extends Action
 					final Response response) {
 				// TODO handle more errors, such as response.getStatusCode /
 				// getStatusText
-				resultCallback.onSuccess(extractResult(response));
+				if (response.getStatusCode() >= 200
+						&& response.getStatusCode() < 300) {
+					resultCallback.onSuccess(extractResult(response));
+				} else {
+					resultCallback.onFailure(new IllegalArgumentException());
+				}
 			}
 		});
 
@@ -84,12 +97,27 @@ public abstract class AbstractRequestBuilderClientActionHandler<A extends Action
 
 	protected abstract R extractResult(Response response);
 
-	protected abstract RequestBuilder getRequestBuilder(A action);
+	protected abstract RequestBuilder getRequestBuilder(A action,
+			UrlBuilder urlBuilder);
 
 	@Override
 	public DispatchRequest undo(final A action, final R result,
 			final AsyncCallback<Void> callback,
 			final UndoCommand<A, R> undoCommand) {
 		throw new UnsupportedOperationException();
+	}
+
+	protected RequestBuilder prepareRequestBuilder(Method method,
+			UrlBuilder url, JSONObject jsonObject) {
+		RequestBuilder rb = new RequestBuilder(method, url.toUrl());
+		if (jsonObject != null) {
+			String string = jsonObject.toString();
+			rb.setRequestData(string);
+		}
+		return rb;
+	}
+
+	protected RequestBuilder prepareRequestBuilder(Method method, UrlBuilder url) {
+		return prepareRequestBuilder(method, url, null);
 	}
 }

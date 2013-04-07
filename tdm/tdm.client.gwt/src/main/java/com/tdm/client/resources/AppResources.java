@@ -35,8 +35,11 @@ public interface AppResources extends ClientBundle {
 	CommentListCss getCommentListCss();
 
 	@Source("css/main.css")
-	MainCss getMainCss();
+	MainCss mainCss();
 
+	@Source("css/naviBar.css")
+	NaviBarCss naviBar();
+	
 	@Source("resources/idea.png")
 	ImageResource idea();
 

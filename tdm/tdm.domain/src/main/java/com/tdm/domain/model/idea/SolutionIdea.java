@@ -2,7 +2,7 @@ package com.tdm.domain.model.idea;
 
 import java.util.Date;
 
-import com.tdm.domain.model.problem.GdmProblemId;
+import com.tdm.domain.model.problem.vo.GdmProblemKey;
 
 public interface SolutionIdea {
 
@@ -12,7 +12,7 @@ public interface SolutionIdea {
 
 	Date getCreation();
 
-	GdmProblemId getProblemId();
+	GdmProblemKey getProblemId();
 
 	SolutionIdeaId getId();
 

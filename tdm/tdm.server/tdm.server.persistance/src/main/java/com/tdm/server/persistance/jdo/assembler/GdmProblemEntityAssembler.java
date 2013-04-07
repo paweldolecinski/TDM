@@ -1,8 +1,8 @@
 package com.tdm.server.persistance.jdo.assembler;
 
-import com.tdm.domain.model.problem.GdmProblem;
-import com.tdm.domain.model.problem.dto.GdmProblemDto;
-import com.tdm.domain.model.problem.dto.GdmProblemIdDto;
+import com.tdm.domain.model.problem.vo.GdmProblem;
+import com.tdm.domain.model.problem.vo.dto.GdmProblemDto;
+import com.tdm.domain.model.problem.vo.dto.GdmProblemKeyDto;
 import com.tdm.server.persistance.jdo.entities.GdmProblemEntity;
 
 public class GdmProblemEntityAssembler {
@@ -10,9 +10,9 @@ public class GdmProblemEntityAssembler {
 	/**
 	 * Simply creates {@code RequestDTO} based on JPA Request entity.
 	 */
-	public GdmProblem fromEntity(GdmProblemEntity entity) {
+	public GdmProblemDto fromEntity(GdmProblemEntity entity) {
 		GdmProblemDto gdmProblemDto = new GdmProblemDto();
-		gdmProblemDto.setId(new GdmProblemIdDto(entity.getKey().toString()));
+		gdmProblemDto.setGdmProblemKey(new GdmProblemKeyDto(entity.getKey()));
 		gdmProblemDto.setName(entity.getName());
 		gdmProblemDto.setDescription(entity.getDescription());
 		gdmProblemDto.setCreationDate(entity.getCreationDate());

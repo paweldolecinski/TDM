@@ -4,13 +4,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.tdm.domain.model.idea.SolutionIdeaId;
-import com.tdm.domain.model.preferences.internal.FuzzyPreferenceRelation;
-import com.tdm.domain.model.preferences.internal.MultiplicativePreferenceRelation;
-import com.tdm.domain.model.preferences.internal.SolutionIdeaNote;
-import com.tdm.domain.model.preferences.internal.SolutionIdeaOrderList;
-import com.tdm.domain.model.preferences.internal.SolutionIdeaTupleWithMultiplicativeValue;
-import com.tdm.domain.model.preferences.internal.SolutionIdeaTupleWithValue;
-import com.tdm.domain.model.preferences.internal.SolutionIdeaUtilityList;
+import com.tdm.domain.model.preferences.FuzzyPreferenceRelation;
+import com.tdm.domain.model.preferences.MultiplicativePreferenceRelation;
+import com.tdm.domain.model.preferences.SolutionIdeaNote;
+import com.tdm.domain.model.preferences.SolutionIdeaOrderList;
+import com.tdm.domain.model.preferences.SolutionIdeaTupleWithMultiplicativeValue;
+import com.tdm.domain.model.preferences.SolutionIdeaTupleWithValue;
+import com.tdm.domain.model.preferences.SolutionIdeaUtilityList;
 import com.tdm.server.application.decision.preferences.UnifyingPreferences;
 
 public class PreferencesUnifierTest {

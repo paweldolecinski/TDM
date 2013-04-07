@@ -1,48 +1,42 @@
 package com.tdm.client.dispatch.handler;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.json.client.JSONParser;
-import com.google.gwt.json.client.JSONValue;
 import com.tdm.client.dispatch.AbstractRequestBuilderClientActionHandler;
 import com.tdm.client.dispatch.command.CreateGdmProblemAction;
 import com.tdm.client.dispatch.command.CreateGdmProblemResult;
 import com.tdm.client.util.UrlBuilder;
-import com.tdm.domain.model.problem.jso.GdmProblemJso;
+import com.tdm.domain.model.problem.vo.jso.GdmProblemJso;
 
 public class CreateGdmProblemHandler
-	extends
-	AbstractRequestBuilderClientActionHandler<CreateGdmProblemAction, CreateGdmProblemResult> {
+		extends
+		AbstractRequestBuilderClientActionHandler<CreateGdmProblemAction, CreateGdmProblemResult> {
 
-    protected CreateGdmProblemHandler() {
-	super(CreateGdmProblemAction.class);
-    }
+	protected CreateGdmProblemHandler() {
+		super(CreateGdmProblemAction.class);
+	}
 
-    @Override
-    protected CreateGdmProblemResult extractResult(Response response) {
-	JSONValue jsonValue = JSONParser.parseStrict(response.getText());
-	JSONObject jsonObject = jsonValue.isObject(); // assert that this is an
-						      // object
-	GdmProblemJso items = jsonObject.getJavaScriptObject().cast();
-	return new CreateGdmProblemResult(items);
-    }
+	@Override
+	protected CreateGdmProblemResult extractResult(Response response) {
+		GdmProblemJso createdProblem = JsonUtils.safeEval(response.getText());
+		JSONObject jsonObject = new JSONObject(createdProblem);
+		System.out.println(jsonObject.toString());
+		return new CreateGdmProblemResult(createdProblem);
+	}
 
-    @Override
-    protected RequestBuilder getRequestBuilder(CreateGdmProblemAction action) {
-	UrlBuilder urlBuilder = new UrlBuilder().setModule("api").setVersion(
-		"v1");
+	@Override
+	protected RequestBuilder getRequestBuilder(CreateGdmProblemAction action,
+			UrlBuilder urlBuilder) {
 
-	urlBuilder.addResourcePath("problems");
-//	urlBuilder.addQueryParameter("format", "json");
-	RequestBuilder rb = new RequestBuilder(RequestBuilder.POST,
-		urlBuilder.toUrl());
+		urlBuilder.addResourcePath("problems");
+		JSONObject jsonObject = new JSONObject(
+				(JavaScriptObject) action.getProblem());
 
-	JSONObject jsonObject = new JSONObject(action.getNewProblem());
-
-	String string = jsonObject.toString();
-	rb.setRequestData(string);
-	return rb;
-    }
+		return prepareRequestBuilder(RequestBuilder.POST, urlBuilder,
+				jsonObject);
+	}
 
 }

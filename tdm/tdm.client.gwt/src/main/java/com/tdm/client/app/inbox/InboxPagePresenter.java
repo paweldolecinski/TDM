@@ -16,6 +16,7 @@
 package com.tdm.client.app.inbox;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -30,136 +31,133 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.tdm.client.app.AppPresenter;
 import com.tdm.client.dispatch.command.CreateGdmProblemAction;
 import com.tdm.client.dispatch.command.CreateGdmProblemResult;
+import com.tdm.client.dispatch.command.GetProblemListAction;
+import com.tdm.client.dispatch.command.GetProblemListResult;
 import com.tdm.client.event.NewGdmProblemEvent;
 import com.tdm.client.event.ShowProblemListEvent;
 import com.tdm.client.place.NameTokens;
-import com.tdm.domain.model.problem.jso.GdmProblemIdJso;
-import com.tdm.domain.model.problem.jso.GdmProblemJso;
+import com.tdm.domain.model.problem.vo.GdmProblem;
+import com.tdm.domain.model.problem.vo.jso.GdmProblemJso;
 
 /**
  * @author Paweł Doleciński
  * 
  */
 public class InboxPagePresenter extends
-	Presenter<InboxPagePresenter.Display, InboxPagePresenter.IProxy>
-	implements ProblemListUiHandlers {
+		Presenter<InboxPagePresenter.Display, InboxPagePresenter.IProxy>
+		implements ProblemListUiHandlers {
 
-    public interface Display extends View, HasUiHandlers<ProblemListUiHandlers> {
-	void addProblemListItem(GdmProblemJso problem);
+	public interface Display extends View, HasUiHandlers<ProblemListUiHandlers> {
 
-	void clearProblemList();
+		void addProblemListItem(GdmProblem problem);
 
-	void problemCounter(int amount);
-    }
+		void clearProblemList();
 
-    @NameToken(NameTokens.inbox)
-    @ProxyCodeSplit
-    public interface IProxy extends ProxyPlace<InboxPagePresenter> {
-    }
-
-    private DispatchAsync dispatch;
-
-    @Inject
-    public InboxPagePresenter(EventBus eventBus, Display view, IProxy proxy,
-	    final DispatchAsync dispatch) {
-	super(eventBus, view, proxy);
-	this.dispatch = dispatch;
-	getView().setUiHandlers(this);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.gwtplatform.mvp.client.PresenterWidget#onReset()
-     */
-    @Override
-    protected void onReset() {
-	super.onReset();
-	ShowProblemListEvent.fire(this, (String) null);
-    }
-
-    @Override
-    protected void onBind() {
-	super.onBind();
-	addRegisteredHandler(ShowProblemListEvent.getType(),
-		new ShowProblemListEvent.ShowProblemListHandler() {
-
-		    @Override
-		    public void onShowProblemList(ShowProblemListEvent event) {
-			getDecisionProblemList(event.getFilter());
-		    }
-		});
-	addRegisteredHandler(NewGdmProblemEvent.getType(),
-		new NewGdmProblemEvent.NewGdmProblemHandler() {
-
-		    @Override
-		    public void onNewGdmProblem(NewGdmProblemEvent event) {
-			sendNewProblem();
-		    }
-		});
-    }
-
-    @Override
-    protected void revealInParent() {
-	RevealContentEvent.fire(this, AppPresenter.TYPE_MainContent, this);
-    }
-
-    private void sendNewProblem() {
-	GdmProblemJso problem = GdmProblemJso.createObject().cast();
-	problem.setName("Problemo!");
-	problem.setDescription("Molto grande problemo :)");
-	dispatch.execute(new CreateGdmProblemAction(problem),
-		new AsyncCallback<CreateGdmProblemResult>() {
-
-		    @Override
-		    public void onFailure(Throwable caught) {
-			GWT.log("error executing command ", caught);
-		    }
-
-		    @Override
-		    public void onSuccess(CreateGdmProblemResult result) {
-		    }
-		});
-    }
-
-    private void getDecisionProblemList(String filter) {
-	getView().problemCounter(10);
-	getView().clearProblemList();
-	for (int i = 0; i < 10; i++) {
-	    GdmProblemJso pr = GdmProblemJso.createObject().cast();
-	    GdmProblemIdJso id = GdmProblemIdJso.createObject().cast();
-	    id.setId("problem" + i);
-	    pr.setId(id);
-	    pr.setName("Title" + i);
-	    pr.setDescription("Description");
-	    getView().addProblemListItem(pr);
-
+		void problemCounter(int amount);
 	}
 
-	// dispatch.execute(new GetProblemListAction(filter),
-	// new AsyncCallback<GetProblemListResult>() {
-	//
-	// @Override
-	// public void onFailure(Throwable caught) {
-	// GWT.log("error executing command ", caught);
-	// }
-	//
-	// @Override
-	// public void onSuccess(GetProblemListResult result) {
-	// getView().getProblemsDataProvider().setList(
-	// result.getProblemList().getProblems());
-	// getView().getProblemsDataProvider().refresh();
-	// }
-	// });
-    }
+	@NameToken(NameTokens.inbox)
+	@ProxyCodeSplit
+	public interface IProxy extends ProxyPlace<InboxPagePresenter> {
+	}
 
-    @Override
-    public void refreshProblemList(String filter) {
-	ShowProblemListEvent.fire(this, filter);
-    }
+	private DispatchAsync dispatch;
 
-    @Override
-    public void createNewProblem() {
-	NewGdmProblemEvent.fire(this);
-    }
+	@Inject
+	public InboxPagePresenter(EventBus eventBus, Display view, IProxy proxy,
+			final DispatchAsync dispatch) {
+		super(eventBus, view, proxy);
+		this.dispatch = dispatch;
+		getView().setUiHandlers(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.gwtplatform.mvp.client.PresenterWidget#onReset()
+	 */
+	@Override
+	protected void onReset() {
+		super.onReset();
+		ShowProblemListEvent.fire(this, (String) null);
+	}
+
+	@Override
+	protected void onBind() {
+		super.onBind();
+		addRegisteredHandler(ShowProblemListEvent.getType(),
+				new ShowProblemListEvent.ShowProblemListHandler() {
+
+					@Override
+					public void onShowProblemList(ShowProblemListEvent event) {
+						getDecisionProblemList(event.getFilter());
+					}
+				});
+		addRegisteredHandler(NewGdmProblemEvent.getType(),
+				new NewGdmProblemEvent.NewGdmProblemHandler() {
+
+					@Override
+					public void onNewGdmProblem(NewGdmProblemEvent event) {
+						sendNewProblem();
+					}
+				});
+	}
+
+	@Override
+	protected void revealInParent() {
+		RevealContentEvent.fire(this, AppPresenter.TYPE_MainContent, this);
+	}
+
+	private void sendNewProblem() {
+		GdmProblemJso problem = GdmProblemJso.createObject().cast();
+		problem.setName("Problemo!");
+		problem.setDescription("Molto grande problemo :)");
+		dispatch.execute(new CreateGdmProblemAction(problem),
+				new AsyncCallback<CreateGdmProblemResult>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						GWT.log("error executing command ", caught);
+					}
+
+					@Override
+					public void onSuccess(CreateGdmProblemResult result) {
+						GdmProblem createdProblem = result.getCreatedProblem();
+						getView().addProblemListItem(createdProblem);
+					}
+				});
+	}
+
+	private void getDecisionProblemList(String filter) {
+		getView().problemCounter(10);
+		getView().clearProblemList();
+
+		dispatch.execute(new GetProblemListAction(filter),
+				new AsyncCallback<GetProblemListResult>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						GWT.log("error executing command ", caught);
+					}
+
+					@Override
+					public void onSuccess(GetProblemListResult result) {
+						JsArray<GdmProblemJso> problemList = result
+								.getProblemList();
+						for (int i = 0; i < problemList.length(); i++) {
+							getView().addProblemListItem(problemList.get(i));
+						}
+					}
+				});
+	}
+
+	@Override
+	public void refreshProblemList(String filter) {
+		ShowProblemListEvent.fire(this, filter);
+	}
+
+	@Override
+	public void createNewProblem() {
+		NewGdmProblemEvent.fire(this);
+	}
 }

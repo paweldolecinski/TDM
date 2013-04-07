@@ -16,10 +16,11 @@
 package com.tdm.client.dispatch.command;
 
 
+import com.google.gwt.core.client.JsArray;
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;
 import com.gwtplatform.dispatch.annotation.Out;
-import com.tdm.domain.model.problem.jso.GdmProblemListJso;
+import com.tdm.domain.model.problem.vo.jso.GdmProblemJso;
 
 /**
  * @author Paweł Doleciński
@@ -32,5 +33,5 @@ public class GetProblemList {
 	String filter;
 	
 	@Out(1)
-	GdmProblemListJso problemList;
+	JsArray<GdmProblemJso> problemList;
 }

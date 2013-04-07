@@ -17,13 +17,9 @@ package com.tdm.client.app;
 
 
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.InlineHyperlink;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -39,10 +35,6 @@ public class AppView extends ViewImpl implements
 
 	@UiField
 	protected FlowPanel mainContentPanel;
-	@UiField
-	protected InlineHyperlink learnLink;
-	@UiField
-	protected InlineHyperlink exploreLink;
 
 	@Inject
 	public AppView(Binder binder, EventBus eventBus) {
@@ -69,11 +61,6 @@ public class AppView extends ViewImpl implements
 		if (content != null) {
 			mainContentPanel.add(content);
 		}
-	}
-
-	@UiHandler({"learnLink", "exploreLink"})
-	void handleMenuClick(ClickEvent e) {
-		Window.alert("Under construction. Sorry :(");
 	}
 
 	public static native Element getBody() /*-{

@@ -15,9 +15,9 @@ import com.tdm.domain.model.idea.SolutionIdea;
 import com.tdm.domain.model.idea.SolutionIdeaId;
 import com.tdm.domain.model.idea.SolutionIdeaRepository;
 import com.tdm.domain.model.idea.dto.SolutionIdeaDto;
-import com.tdm.domain.model.problem.GdmProblemId;
 import com.tdm.domain.model.problem.ProblemRepository;
-import com.tdm.domain.model.problem.dto.GdmProblemIdDto;
+import com.tdm.domain.model.problem.vo.GdmProblemKey;
+import com.tdm.domain.model.problem.vo.dto.GdmProblemKeyDto;
 
 public class SolutionIdeaServiceTest {
 
@@ -31,11 +31,11 @@ public class SolutionIdeaServiceTest {
 				solutionIdeaDao);
 		SolutionIdeaDto solutionIdea = new SolutionIdeaDto();
 		solutionIdea.setId(new SolutionIdeaId("1"));
-		solutionIdea.setProblemId(new GdmProblemIdDto("1"));
+		solutionIdea.setProblemId(new GdmProblemKeyDto("1"));
 		solutionIdea.setName("New idea");
 		when(
 				solutionIdeaDao.read(
-						org.mockito.Matchers.any(GdmProblemId.class),
+						org.mockito.Matchers.any(GdmProblemKey.class),
 						org.mockito.Matchers.any(SolutionIdeaId.class)))
 				.thenReturn(solutionIdea);
 	}
@@ -43,7 +43,7 @@ public class SolutionIdeaServiceTest {
 	@Test
 	public void shouldAddNewIdeaToProblem() {
 		// Given
-		GdmProblemId problemId = new GdmProblemIdDto("1");
+		GdmProblemKey problemId = new GdmProblemKeyDto("1");
 		SolutionIdeaId solutionIdeaId = new SolutionIdeaId("1");
 		String ideaName = "New idea";
 
@@ -59,7 +59,7 @@ public class SolutionIdeaServiceTest {
 
 	@Test
 	public void shouldRetrieveAllIdeasForProblem() {
-		GdmProblemId problemId = new GdmProblemIdDto("0");
+		GdmProblemKey problemId = new GdmProblemKeyDto("0");
 		Collection<SolutionIdea> ideas = ideasService
 				.retrieveSolutionIdeasForProblem(problemId);
 

@@ -5,14 +5,14 @@
 	<ui:with field="res"
 		type="com.tdm.client.resources.AppResources" />
 
-	<g:HTMLPanel styleName="{res.getMainCss.container}">
-		<g:HTMLPanel styleName="{res.getMainCss.row}" ui:field="headerPanel">
-			<g:HTMLPanel styleName="{res.getMainCss.span7}">
+	<g:HTMLPanel styleName="{res.mainCss.container}">
+		<g:HTMLPanel styleName="{res.mainCss.row}" ui:field="headerPanel">
+			<g:HTMLPanel styleName="{res.mainCss.span7}">
 				<h1 ui:field="problemCounter">
 					You have X problems
 				</h1>
 			</g:HTMLPanel>
-			<g:HTMLPanel styleName="{res.getMainCss.span5}">
+			<g:HTMLPanel styleName="{res.mainCss.span5}">
 				<form class="form-inline pull-right form-aside">
 					<label>
 						<span>
@@ -47,14 +47,14 @@
 			</g:HTMLPanel>
 		</g:HTMLPanel>
 
-		<g:HTMLPanel styleName="{res.getMainCss.container}">
-			<ul ui:field="problemList" class="{res.getMainCss.problemList} {res.getMainCss.thumbnails}">
+		<g:HTMLPanel styleName="{res.mainCss.container}">
+			<ul ui:field="problemList" class="{res.mainCss.problemList} {res.mainCss.thumbnails}">
 
-				<li class="{res.getMainCss.span4}">
-					<g:HTMLPanel styleName="{res.getMainCss.problemListItem} {res.getMainCss.thumbnail} {res.getMainCss.create}">
-						<a id="{res.getMainCss.create}">
+				<li ui:field="createItem" class="{res.mainCss.span4}">
+					<g:HTMLPanel styleName="{res.mainCss.problemListItem} {res.mainCss.thumbnail} {res.mainCss.create}">
+						<a id="{res.mainCss.create}">
 							<g:Button ui:field="createButton"
-								styleName="{res.getMainCss.btn} {res.getMainCss.btnPrimary} {res.getMainCss.btnLarge}">
+								styleName="{res.mainCss.btn} {res.mainCss.btnPrimary} {res.mainCss.btnLarge}">
 								New problem
 							</g:Button>
 						</a>

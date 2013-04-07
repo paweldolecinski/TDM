@@ -11,8 +11,8 @@ import com.tdm.domain.model.idea.SolutionIdea;
 import com.tdm.domain.model.idea.SolutionIdeaId;
 import com.tdm.domain.model.idea.SolutionIdeaRepository;
 import com.tdm.domain.model.idea.dto.SolutionIdeaDto;
-import com.tdm.domain.model.problem.GdmProblemId;
 import com.tdm.domain.model.problem.ProblemRepository;
+import com.tdm.domain.model.problem.vo.GdmProblemKey;
 
 @Service
 public class DefaultSolutionIdeaService implements SolutionIdeaService {
@@ -34,7 +34,7 @@ public class DefaultSolutionIdeaService implements SolutionIdeaService {
 
 	@Override
 	public Collection<SolutionIdea> retrieveSolutionIdeasForProblem(
-			GdmProblemId problemId) {
+			GdmProblemKey problemId) {
 		Set<SolutionIdea> solutions = new HashSet<SolutionIdea>();
 		Collection<SolutionIdea> findAllAssignedTo = solutionIdeaDao
 				.findAllAssignedTo(problemId);
@@ -45,7 +45,7 @@ public class DefaultSolutionIdeaService implements SolutionIdeaService {
 	}
 
 	@Override
-	public void createAndAddSolutionIdea(GdmProblemId problemId, String ideaName) {
+	public void createAndAddSolutionIdea(GdmProblemKey problemId, String ideaName) {
 		SolutionIdeaDto idea = new SolutionIdeaDto();
 		idea.setProblemId(problemId);
 		idea.setName(ideaName);
@@ -53,7 +53,7 @@ public class DefaultSolutionIdeaService implements SolutionIdeaService {
 	}
 
 	@Override
-	public SolutionIdea getSolutionIdea(GdmProblemId problemId,
+	public SolutionIdea getSolutionIdea(GdmProblemKey problemId,
 			SolutionIdeaId ideaId) {
 		SolutionIdea ideaDto = solutionIdeaDao.read(problemId, ideaId);
 		return ideaDto;
