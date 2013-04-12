@@ -43,6 +43,8 @@
 	<aop:config>
 		<aop:advisor pointcut="execution(* com.tdm.server.persistance.jdo.*.*(..))"
 			advice-ref="txAdvice" />
+		<aop:advisor pointcut="execution(* com.tdm.server.security.user.*.*(..))"
+			advice-ref="txAdvice" />
 	</aop:config>
 
 </beans>

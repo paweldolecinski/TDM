@@ -7,7 +7,11 @@
 	<g:HTMLPanel styleName="{res.naviBar.navbarInner}">
 
 		<g:HTMLPanel styleName="{res.naviBar.navbarRight}">
-
+			<p>
+				<a href="/auth/facebook">
+					facebook
+				</a>
+			</p>
 			<g:Anchor styleName="{res.mainCss.btn} {res.mainCss.btnDiscreet}"
 				href="#">
 				Paweł
