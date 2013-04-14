@@ -67,7 +67,7 @@ public class ProblemListItemWidget extends Composite {
 		title.setText(problem.getName());
 
 		String token = placeManager.buildHistoryToken(new PlaceRequest(
-				NameTokens.problem).with(NameTokens.Params.id, problem.getKey()
+				NameTokens.problem).with(NameTokens.Params.problemId, problem.getKey()
 				.getId()));
 
 		title.setTargetHistoryToken(token);

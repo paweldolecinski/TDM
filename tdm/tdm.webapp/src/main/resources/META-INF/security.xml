@@ -9,27 +9,27 @@
 
 	<http pattern="/resources/**" security="none" />
 
-	<http use-expressions="true">
-		<!-- Authentication policy -->
-		<form-login login-page="/" />
-		<logout logout-url="/signout" delete-cookies="JSESSIONID" />
+	<http use-expressions="true" security-context-repository-ref="socialContextRepo">
+		<form-login login-page="/#/welcome" />
+		<logout logout-url="/signout" delete-cookies="JSESSIONID"
+			invalidate-session="true" logout-success-url="/" />
 		<intercept-url pattern="/favicon.ico" access="permitAll" />
-		<intercept-url pattern="/resources/**" access="permitAll" />
 		<intercept-url pattern="/auth/**" access="permitAll" />
-		<intercept-url pattern="/signin/**" access="permitAll" />
-		<intercept-url pattern="/signup/**" access="permitAll" />
 		<intercept-url pattern="/disconnect/facebook" access="permitAll" />
 		<intercept-url pattern="/api/**" access="isAuthenticated()" />
-		<intercept-url pattern="/**" access="permitAll" />
+		<intercept-url pattern="/**" access="isAuthenticated()" />
 		<remember-me />
 
 		<!-- Spring Social Security authentication filter -->
 		<custom-filter ref="socialAuthenticationFilter" before="PRE_AUTH_FILTER" />
 	</http>
 
-	<beans:bean id="cacheContextRepository"
-		class="com.tdm.server.security.CacheContextRepository" />
-		
+	<!-- <beans:bean id="nullContextRepo" -->
+	<!-- class="org.springframework.security.web.context.NullSecurityContextRepository" 
+		/> -->
+
+	<beans:bean id="socialContextRepo"
+		class="com.tdm.server.security.SocialSecurityContextRepository" />
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider user-service-ref="gaeUserDetailsService">
 			<password-encoder hash="sha-256">
@@ -37,7 +37,6 @@
 			</password-encoder>
 		</authentication-provider>
 
-		<!-- Spring Social Security authentication provider -->
 		<authentication-provider ref="socialAuthenticationProvider" />
 	</authentication-manager>
 
@@ -46,5 +45,5 @@
 		id="saltSource">
 		<beans:property name="userPropertyToUse" value="username" />
 	</beans:bean>
-	
+
 </beans:beans>

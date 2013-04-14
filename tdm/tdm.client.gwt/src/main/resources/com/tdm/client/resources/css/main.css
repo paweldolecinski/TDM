@@ -1,4 +1,7 @@
 @external .gwt-*;
+@external .gwt-DisclosurePanel .header; 
+@external .gwt-DisclosurePanel .content; 
+
 html {
 	font-size: 100%;
 	\-webkit-text-size-adjust: 100%;
@@ -9,13 +12,13 @@ body {
 	margin: 0;
 	line-height: 22px;
 	color: #333;
-	background-color: #fff;
+	background-color: #efefef;
 }
 
 body,table td,select {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif,
 		'PTSansRegular';
-	font-size: 16px;
+	font-size: 13px;
 }
 
 a,a:visited,a:hover {
@@ -101,6 +104,10 @@ h1 {
 	margin-bottom: 30px
 }
 
+small {
+	font-size: 100%;
+}
+
 .row {
 	margin-left: -20px;
 }
@@ -138,6 +145,12 @@ h1 {
 
 .span5 {
 	width: 380px;
+	float: left;
+	margin-left: 20px;
+}
+
+.span6 {
+	width: 460px;
 	float: left;
 	margin-left: 20px;
 }
@@ -276,7 +289,8 @@ hr {
 	color: white;
 }
 
-@sprite .separator,.footer .separator {
+@sprite 
+.separator,.footer .separator {
 	gwt-image: "separator";
 	height: 60px;
 	margin: 0;
@@ -394,7 +408,7 @@ hr {
 	background-image: -moz-linear-gradient(top, #318bff, #1a67cd);
 	background-image: -ms-linear-gradient(top, #318bff, #1a67cd);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#318bff),
-		to(#1a67cd) );
+		to(#1a67cd));
 	background-image: -webkit-linear-gradient(top, #318bff, #1a67cd);
 	background-image: -o-linear-gradient(top, #318bff, #1a67cd);
 	background-image: linear-gradient(top, #318bff, #1a67cd);
@@ -421,7 +435,7 @@ hr {
 	height: 290px
 }
 
-.problemList li:nth-child (4n):before {
+.problemList li:nth-child      (4n     ):before {
 	clear: both;
 	content: '';
 	display: block
@@ -615,7 +629,6 @@ a.thumbnail:hover {
 	margin-bottom: 15px;
 }
 
-@external .gwt-DisclosurePanel .header;
 .gwt-DisclosurePanel .header,.gwt-DisclosurePanel .header a,.gwt-DisclosurePanel .header td
 	{
 	text-decoration: none; /* Remove underline from header */
@@ -623,7 +636,6 @@ a.thumbnail:hover {
 	cursor: pointer;
 }
 
-@external .gwt-DisclosurePanel .content;
 .gwt-DisclosurePanel .content {
 	border-left: 3px solid #E8EEF7;
 	padding: 4px 0px 4px 8px;
@@ -640,7 +652,8 @@ a.thumbnail:hover {
 	line-height: 22px;
 }
 
-@sprite .solutionList .solutionAvatar {
+@sprite 
+.solutionList .solutionAvatar {
 	gwt-image: "solutionAvatar";
 }
 
@@ -655,11 +668,11 @@ a.thumbnail:hover {
 }
 
 .solutionList .solutionTitle {
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 .solutionList .solutionSubTitle {
-	font-style: italic;	
+	font-style: italic;
 }
 
 .solutionList .solutionComment {

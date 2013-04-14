@@ -27,7 +27,6 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.tdm.client.app.AppPresenter;
 import com.tdm.client.dispatch.command.CreateGdmProblemAction;
 import com.tdm.client.dispatch.command.CreateGdmProblemResult;
@@ -66,7 +65,7 @@ public class InboxPagePresenter extends
 	@Inject
 	public InboxPagePresenter(EventBus eventBus, Display view, IProxy proxy,
 			final DispatchAsync dispatch) {
-		super(eventBus, view, proxy);
+		super(eventBus, view, proxy, AppPresenter.TYPE_MainContent);
 		this.dispatch = dispatch;
 		getView().setUiHandlers(this);
 	}
@@ -101,11 +100,6 @@ public class InboxPagePresenter extends
 						sendNewProblem();
 					}
 				});
-	}
-
-	@Override
-	protected void revealInParent() {
-		RevealContentEvent.fire(this, AppPresenter.TYPE_MainContent, this);
 	}
 
 	private void sendNewProblem() {

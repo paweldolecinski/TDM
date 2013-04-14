@@ -9,6 +9,7 @@ public class ResourceLoader {
 
 		resources.mainCss().ensureInjected();
 		resources.naviBar().ensureInjected();
+		resources.welcome().ensureInjected();
 		// ... Inject more css into the document here on boot
 	}
 }

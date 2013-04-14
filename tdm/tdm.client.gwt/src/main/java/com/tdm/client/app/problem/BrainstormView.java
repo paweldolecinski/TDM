@@ -18,6 +18,7 @@ package com.tdm.client.app.problem;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
@@ -59,7 +60,7 @@ public class BrainstormView extends ViewWithUiHandlers<BrainstormUiHandlers>
 	 * com.google.gwt.user.client.ui.Widget)
 	 */
 	@Override
-	public void addToSlot(Object slot, Widget content) {
+	public void addToSlot(Object slot, IsWidget content) {
 		if (slot == BrainstormPresenterWidget.TYPE_Solution) {
 			addSolution(content);
 		} else {
@@ -70,7 +71,7 @@ public class BrainstormView extends ViewWithUiHandlers<BrainstormUiHandlers>
 	/**
 	 * @param content
 	 */
-	private void addSolution(Widget content) {
+	private void addSolution(IsWidget content) {
 		if (content != null)
 			brainstormStream.add(content);
 	}

@@ -15,46 +15,32 @@
  */
 package com.tdm.client.app.welcome;
 
-
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+import com.tdm.client.event.RevealWelcomeContentEvent;
 import com.tdm.client.place.NameTokens;
 
 public class LoginPresenter extends
 		Presenter<LoginPresenter.Display, LoginPresenter.IProxy> {
 
-	@ContentSlot
-	public static final Type<RevealContentHandler<?>> TYPE_GoogleBox = new Type<RevealContentHandler<?>>();
-	@ContentSlot
-	public static final Type<RevealContentHandler<?>> TYPE_FcbBox = new Type<RevealContentHandler<?>>();
-
-	private final GoogleLoginPresenterWidget googleLogin;
-	private final FacebookLoginPresenterWidget fcbLogin;
-
 	public interface Display extends View {
 	}
 
-	@NameToken(NameTokens.login)
+	@NameToken(NameTokens.welcome)
 	@ProxyCodeSplit
+	@NoGatekeeper
 	public interface IProxy extends ProxyPlace<LoginPresenter> {
 	}
 
 	@Inject
-	public LoginPresenter(EventBus eventBus, Display view, IProxy proxy,
-			GoogleLoginPresenterWidget googleLogin,
-			FacebookLoginPresenterWidget fcbLogin) {
+	public LoginPresenter(EventBus eventBus, Display view, IProxy proxy) {
 		super(eventBus, view, proxy);
-		this.googleLogin = googleLogin;
-		this.fcbLogin = fcbLogin;
 	}
 
 	@Override
@@ -62,18 +48,14 @@ public class LoginPresenter extends
 		super.onBind();
 	}
 
-
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		setInSlot(TYPE_GoogleBox, googleLogin);
-		setInSlot(TYPE_FcbBox, fcbLogin);
 	}
 
 	@Override
 	protected void revealInParent() {
-		RevealContentEvent.fire(this, WelcomeContentPresenter.TYPE_MainContent,
-				this);
+		RevealWelcomeContentEvent.fire(this, this);
 	}
 
 }

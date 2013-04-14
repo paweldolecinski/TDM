@@ -20,6 +20,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -47,7 +48,7 @@ public class AppView extends ViewImpl implements
 	}
 
 	@Override
-	public void setInSlot(Object slot, Widget content) {
+	public void setInSlot(Object slot, IsWidget content) {
 		if (slot == AppPresenter.TYPE_MainContent) {
 			setMainContent(content);
 		} else {
@@ -55,7 +56,7 @@ public class AppView extends ViewImpl implements
 		}
 	}
 
-	private void setMainContent(Widget content) {
+	private void setMainContent(IsWidget content) {
 		mainContentPanel.clear();
 		mainContentPanel.setVisible(true);
 		if (content != null) {

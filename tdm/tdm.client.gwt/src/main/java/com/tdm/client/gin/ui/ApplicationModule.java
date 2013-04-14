@@ -36,16 +36,8 @@ import com.tdm.client.app.problem.SingleSolutionPresenterWidget;
 import com.tdm.client.app.problem.SingleSolutionView;
 import com.tdm.client.app.voting.ProblemVotingView;
 import com.tdm.client.app.voting.VotingPresenterWidget;
-import com.tdm.client.app.welcome.FacebookLoginPresenterWidget;
-import com.tdm.client.app.welcome.FacebookLoginView;
-import com.tdm.client.app.welcome.GoogleLoginPresenterWidget;
-import com.tdm.client.app.welcome.GoogleLoginView;
-import com.tdm.client.app.welcome.HomePresenter;
-import com.tdm.client.app.welcome.HomeView;
 import com.tdm.client.app.welcome.LoginPresenter;
 import com.tdm.client.app.welcome.LoginView;
-import com.tdm.client.app.welcome.WelcomeContentPresenter;
-import com.tdm.client.app.welcome.WelcomeContentView;
 
 public class ApplicationModule extends AbstractPresenterModule {
 
@@ -66,22 +58,8 @@ public class ApplicationModule extends AbstractPresenterModule {
 		/*
 		 * Welcome section
 		 */
-		bindPresenter(WelcomeContentPresenter.class,
-				WelcomeContentPresenter.Display.class,
-				WelcomeContentView.class, WelcomeContentPresenter.IProxy.class);
-
 		bindPresenter(LoginPresenter.class, LoginPresenter.Display.class,
 				LoginView.class, LoginPresenter.IProxy.class);
-
-		bindSingletonPresenterWidget(GoogleLoginPresenterWidget.class,
-				GoogleLoginPresenterWidget.Display.class, GoogleLoginView.class);
-
-		bindSingletonPresenterWidget(FacebookLoginPresenterWidget.class,
-				FacebookLoginPresenterWidget.Display.class,
-				FacebookLoginView.class);
-
-		bindPresenter(HomePresenter.class, HomePresenter.Display.class,
-				HomeView.class, HomePresenter.IProxy.class);
 
 		/*
 		 * Inbox section

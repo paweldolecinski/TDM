@@ -13,29 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.tdm.client.app.welcome;
+package com.tdm.client.dispatch.command;
 
+import com.gwtplatform.dispatch.annotation.GenDispatch;
 
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewImpl;
-
-public class GoogleLoginView extends ViewImpl implements GoogleLoginPresenterWidget.Display {
-
-	public interface Binder extends UiBinder<Widget, GoogleLoginView> {
-	}
-
-	private final Widget widget;
-
-	@Inject
-	public GoogleLoginView(Binder binder) {
-		widget = binder.createAndBindUi(this);
-	}
-
-	@Override
-	public Widget asWidget() {
-		return widget;
-	}
+/**
+ * @author Paweł Doleciński
+ * 
+ */
+@GenDispatch(isSecure = true)
+public class CheckAuthentication {
 
 }

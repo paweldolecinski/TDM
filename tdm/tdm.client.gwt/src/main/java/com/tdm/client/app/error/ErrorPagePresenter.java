@@ -15,12 +15,12 @@
  */
 package com.tdm.client.app.error;
 
-
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
@@ -35,7 +35,7 @@ public class ErrorPagePresenter extends
 		Presenter<ErrorPagePresenter.Display, ErrorPagePresenter.IProxy> {
 
 	public interface Display extends View {
-		
+
 		/**
 		 * @param text
 		 */
@@ -44,6 +44,7 @@ public class ErrorPagePresenter extends
 
 	@NameToken(NameTokens.error)
 	@ProxyCodeSplit
+	@NoGatekeeper
 	public interface IProxy extends ProxyPlace<ErrorPagePresenter> {
 	}
 
@@ -67,7 +68,9 @@ public class ErrorPagePresenter extends
 		super.onReveal();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
 	 */
 	@Override
@@ -75,13 +78,14 @@ public class ErrorPagePresenter extends
 		super.onBind();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
 	 */
 	@Override
 	protected void revealInParent() {
-		RevealContentEvent.fire(this, AppPresenter.TYPE_MainContent,
-				this);
+		RevealContentEvent.fire(this, AppPresenter.TYPE_MainContent, this);
 	}
 
 }

@@ -19,6 +19,7 @@ import com.google.gwt.dom.client.UListElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -66,7 +67,7 @@ public class ProblemDiscussionView extends ViewImpl implements
 	}
 
 	@Override
-	public void setInSlot(Object slot, Widget content) {
+	public void setInSlot(Object slot, IsWidget content) {
 		if (slot == ProblemDicussionPresenter.TYPE_NewSolution) {
 			setInNewSolutionSlot(content);
 		} else {
@@ -77,7 +78,7 @@ public class ProblemDiscussionView extends ViewImpl implements
 	/**
 	 * @param content
 	 */
-	private void setInNewSolutionSlot(Widget content) {
+	private void setInNewSolutionSlot(IsWidget content) {
 		newSolutionPanel.clear();
 		if (content != null) {
 			newSolutionPanel.add(content);

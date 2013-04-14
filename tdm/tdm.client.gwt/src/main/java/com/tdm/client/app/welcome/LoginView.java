@@ -15,10 +15,8 @@
  */
 package com.tdm.client.app.welcome;
 
-
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -27,12 +25,6 @@ public class LoginView extends ViewImpl implements LoginPresenter.Display {
 
 	public interface Binder extends UiBinder<Widget, LoginView> {
 	}
-
-	@UiField
-	protected FlowPanel googleBox;
-
-	@UiField
-	protected FlowPanel fcbBox;
 
 	private final Widget widget;
 
@@ -47,28 +39,7 @@ public class LoginView extends ViewImpl implements LoginPresenter.Display {
 	}
 
 	@Override
-	public void setInSlot(Object slot, Widget content) {
-		if (slot == LoginPresenter.TYPE_GoogleBox) {
-			setGoogleBox(content);
-		} else if (slot == LoginPresenter.TYPE_FcbBox) {
-			setFcbBox(content);
-		} else {
-			super.setInSlot(slot, content);
-		}
-	}
-
-	private void setFcbBox(Widget content) {
-		fcbBox.clear();
-		if (content != null) {
-			fcbBox.add(content);
-		}
-	}
-
-	private void setGoogleBox(Widget content) {
-		googleBox.clear();
-		if (content != null) {
-			googleBox.add(content);
-		}
+	public void setInSlot(Object slot, IsWidget content) {
 	}
 
 }

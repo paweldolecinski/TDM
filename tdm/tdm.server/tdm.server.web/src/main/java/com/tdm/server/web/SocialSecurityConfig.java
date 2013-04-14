@@ -36,7 +36,7 @@ public class SocialSecurityConfig {
 		SocialAuthenticationFilter socialAuthenticationFilter = new SocialAuthenticationFilter(
 				authenticationManager, userIdSource(),
 				usersConnectionRepository, authenticationServiceLocator);
-		socialAuthenticationFilter.setSignupUrl("/");
+		socialAuthenticationFilter.setSignupUrl(null);
 		socialAuthenticationFilter.setRememberMeServices(rememberMeServices);
 		return socialAuthenticationFilter;
 	}

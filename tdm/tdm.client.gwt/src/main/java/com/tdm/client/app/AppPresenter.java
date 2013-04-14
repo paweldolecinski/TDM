@@ -15,7 +15,6 @@
  */
 package com.tdm.client.app;
 
-
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -34,10 +33,12 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.tdm.client.app.popup.LocalDialogPresenterWidget;
+import com.tdm.client.security.CurrentUserChangedEvent;
+import com.tdm.client.security.CurrentUserChangedEvent.CurrentUserChangedHandler;
 
 public class AppPresenter extends
-		Presenter<AppPresenter.Display, AppPresenter.IProxy>
-		implements AsyncCallStartHandler, AsyncCallFailHandler,
+		Presenter<AppPresenter.Display, AppPresenter.IProxy> implements
+		CurrentUserChangedHandler, AsyncCallStartHandler, AsyncCallFailHandler,
 		AsyncCallSucceedHandler {
 
 	@ContentSlot
@@ -65,6 +66,11 @@ public class AppPresenter extends
 	@Override
 	protected void revealInParent() {
 		RevealRootContentEvent.fire(this, this);
+	}
+
+	@ProxyEvent
+	@Override
+	public void onCurrentUserChanged(CurrentUserChangedEvent event) {
 	}
 
 	@ProxyEvent

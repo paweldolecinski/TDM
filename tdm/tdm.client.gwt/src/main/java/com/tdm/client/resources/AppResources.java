@@ -39,7 +39,10 @@ public interface AppResources extends ClientBundle {
 
 	@Source("css/naviBar.css")
 	NaviBarCss naviBar();
-	
+
+	@Source("css/welcome.css")
+	WelcomeCss welcome();
+
 	@Source("resources/idea.png")
 	ImageResource idea();
 

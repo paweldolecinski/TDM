@@ -2,16 +2,19 @@ package com.tdm.client.app;
 
 import javax.inject.Inject;
 
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 import com.tdm.client.app.navibar.NaviBarPresenterWidget;
+import com.tdm.client.event.RevealWelcomeContentEvent;
+import com.tdm.client.event.RevealWelcomeContentEvent.RevealWelcomeContentHandler;
 import com.tdm.client.resources.AppResources;
 
-public class BodyPresenter extends RootPresenter {
+public class BodyPresenter extends RootPresenter implements
+		RevealWelcomeContentHandler {
 
 	/**
 	 * {@link BodyPresenter}'s view.
@@ -26,14 +29,17 @@ public class BodyPresenter extends RootPresenter {
 		}
 
 		@Override
-		public void setInSlot(Object slot, Widget content) {
+		public void setInSlot(Object slot, IsWidget content) {
 
 			if (slot.equals(menuSlot)) {
 				RootPanel naviBarPanel = RootPanel.get("navibar");
 				naviBarPanel.clear();
-				naviBarPanel.addStyleName(resources.naviBar().navbar());
-				naviBarPanel.addStyleName(resources.naviBar().navbarFixedTop());
-				naviBarPanel.add(content);
+				if (content != null) {
+					naviBarPanel.addStyleName(resources.naviBar().navbar());
+					naviBarPanel.addStyleName(resources.naviBar()
+							.navbarFixedTop());
+					naviBarPanel.add(content);
+				}
 			}
 			if (slot.equals(rootSlot) && content != null) {
 				RootPanel.get("main_container").clear();
@@ -61,6 +67,12 @@ public class BodyPresenter extends RootPresenter {
 	}
 
 	@Override
+	protected void onBind() {
+		super.onBind();
+		addRegisteredHandler(RevealWelcomeContentEvent.getType(), this);
+	}
+
+	@Override
 	public void onRevealRootContent(
 			final RevealRootContentEvent revealContentEvent) {
 		setInSlot(menuSlot, naviBar, false);
@@ -70,6 +82,12 @@ public class BodyPresenter extends RootPresenter {
 	public void onRevealRootLayoutContent(
 			final RevealRootLayoutContentEvent revealContentEvent) {
 		// NOOP
+	}
+
+	@Override
+	public void onRevealWelcomeContent(RevealWelcomeContentEvent event) {
+		setInSlot(menuSlot, null, false);
+		setInSlot(rootSlot, event.getContent());
 	}
 
 }

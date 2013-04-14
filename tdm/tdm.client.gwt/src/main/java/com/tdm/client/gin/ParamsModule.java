@@ -15,7 +15,6 @@
  */
 package com.tdm.client.gin;
 
-
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.annotations.ErrorPlace;
@@ -35,8 +34,9 @@ public class ParamsModule extends AbstractGinModule {
 		bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.inbox);
 
 		bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.error);
-		
-		bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.inbox);
+
+		bindConstant().annotatedWith(UnauthorizedPlace.class).to(
+				NameTokens.welcome);
 	}
 
 }

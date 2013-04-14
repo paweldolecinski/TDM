@@ -18,25 +18,19 @@ package com.tdm.client.place;
 public class NameTokens {
 
 	public class Params {
-		public static final String id = "id"; // non-i18n
+		public static final String problemId = "problemId"; // non-i18n
 	}
 
-	public static final String login = "!login"; // non-i18n
+	public static final String welcome = "/welcome"; // non-i18n
+	
+	public static final String inbox = "/problems"; // non-i18n
 
-	public static final String homePage = "!home"; // non-i18n
+	public static final String problem = "/problems/{problemId}"; // non-i18n
 
-	public static final String inbox = "!inbox"; // non-i18n
+	public static final String error = "/error"; // non-i18n
 
-	public static final String problem = "!problem"; // non-i18n
-
-	public static final String error = "!error"; // non-i18n
-
-	public static String getHomePage() {
-		return homePage;
-	}
-
-	public static String getLogin() {
-		return login;
+	public static String getWelcome() {
+		return welcome;
 	}
 
 	public static String getInbox() {

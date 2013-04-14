@@ -2,16 +2,48 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<g:LayoutPanel>
+	<ui:with field="res" type="com.tdm.client.resources.AppResources" />
 
-		<g:layer left='0px' width='50%'>
-			<g:FlowPanel ui:field='googleBox' />
-		</g:layer>
+	<g:HTMLPanel styleName="{res.welcome.head}">
+		<g:HTMLPanel styleName="{res.welcome.welcome} {res.mainCss.row}">
 
-		<g:layer right='0px' width='50%'>
-			<g:FlowPanel ui:field='fcbBox' />
-		</g:layer>
-	</g:LayoutPanel>
+			<g:HTMLPanel styleName="{res.welcome.logo} {res.mainCss.span4}">
+				<g:Label styleName="{res.welcome.logoName}">TDM</g:Label>
+				<small>make decision</small>
+			</g:HTMLPanel>
+			<g:HTMLPanel styleName="{res.mainCss.clearfix}" />
+		</g:HTMLPanel>
+
+		<g:HTMLPanel styleName="{res.mainCss.row}">
+			<g:HTMLPanel styleName="{res.welcome.loginSection}">
+				<g:HTMLPanel styleName="{res.welcome.login}">
+					<h2>
+						<div>
+							Sign in to TDM
+						</div>
+					</h2>
+					<g:Anchor styleName="{res.welcome.socialSignin} {res.welcome.fb}"
+						href="/auth/facebook?origin=%2F">
+						Facebook
+					</g:Anchor>
+					<g:Anchor styleName="{res.welcome.socialSignin} {res.welcome.goog}"
+						href="/auth/google?origin=%2F">
+						Google
+					</g:Anchor>
+
+					<g:HTMLPanel styleName="{res.welcome.socialHint}">
+						Sign in with Facebook or
+						Google.
+						We
+						won't post
+						without permission.
+					</g:HTMLPanel>
+					<g:HTMLPanel styleName="{res.mainCss.clearfix}" />
+				</g:HTMLPanel>
+
+			</g:HTMLPanel>
+		</g:HTMLPanel>
+	</g:HTMLPanel>
 
 
 </ui:UiBinder> 
