@@ -60,7 +60,7 @@ public class BrainstormView extends ViewWithUiHandlers<BrainstormUiHandlers>
 	 * com.google.gwt.user.client.ui.Widget)
 	 */
 	@Override
-	public void addToSlot(Object slot, IsWidget content) {
+	public void addToSlot(Object slot, Widget content) {
 		if (slot == BrainstormPresenterWidget.TYPE_Solution) {
 			addSolution(content);
 		} else {

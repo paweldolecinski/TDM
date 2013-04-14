@@ -21,13 +21,13 @@ public class NameTokens {
 		public static final String problemId = "problemId"; // non-i18n
 	}
 
-	public static final String welcome = "/welcome"; // non-i18n
+	public static final String welcome = "!welcome"; // non-i18n
 	
-	public static final String inbox = "/problems"; // non-i18n
+	public static final String inbox = "!problems"; // non-i18n
 
-	public static final String problem = "/problems/{problemId}"; // non-i18n
+	public static final String problem = "!problem/"; // non-i18n
 
-	public static final String error = "/error"; // non-i18n
+	public static final String error = "!error"; // non-i18n
 
 	public static String getWelcome() {
 		return welcome;

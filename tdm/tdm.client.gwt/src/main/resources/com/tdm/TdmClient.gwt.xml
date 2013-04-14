@@ -16,6 +16,7 @@
 	<inherits name='com.gwtplatform.dispatch.Dispatch' />
 
 	<inherits name="com.tdm.domain.Domain" />
+	<inherits name="com.tdm.security.Security" />
 
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
 
@@ -25,7 +26,7 @@
 
 	<define-configuration-property name='gin.ginjector'
 		is-multi-valued='false' />
-		
+
 	<set-configuration-property name="gin.ginjector.modules"
 		value="com.tdm.client.gin.ClientModule" />
 

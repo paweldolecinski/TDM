@@ -23,11 +23,11 @@
 						</div>
 					</h2>
 					<g:Anchor styleName="{res.welcome.socialSignin} {res.welcome.fb}"
-						href="/auth/facebook?origin=%2F">
+						href="/auth/facebook">
 						Facebook
 					</g:Anchor>
 					<g:Anchor styleName="{res.welcome.socialSignin} {res.welcome.goog}"
-						href="/auth/google?origin=%2F">
+						href="/auth/google">
 						Google
 					</g:Anchor>
 

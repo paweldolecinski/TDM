@@ -67,7 +67,7 @@ public class ProblemDiscussionView extends ViewImpl implements
 	}
 
 	@Override
-	public void setInSlot(Object slot, IsWidget content) {
+	public void setInSlot(Object slot, Widget content) {
 		if (slot == ProblemDicussionPresenter.TYPE_NewSolution) {
 			setInNewSolutionSlot(content);
 		} else {

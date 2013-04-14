@@ -6,7 +6,7 @@ import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 
 @Singleton
-//@DefaultGatekeeper
+@DefaultGatekeeper
 public class IsAdminGatekeeper implements Gatekeeper {
 	private final CurrentUser currentUser;
 

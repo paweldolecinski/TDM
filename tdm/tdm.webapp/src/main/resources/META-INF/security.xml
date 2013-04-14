@@ -10,12 +10,13 @@
 	<http pattern="/resources/**" security="none" />
 
 	<http use-expressions="true" security-context-repository-ref="socialContextRepo">
-		<form-login login-page="/#/welcome" />
+		<form-login login-page="/" />
 		<logout logout-url="/signout" delete-cookies="JSESSIONID"
 			invalidate-session="true" logout-success-url="/" />
 		<intercept-url pattern="/favicon.ico" access="permitAll" />
 		<intercept-url pattern="/auth/**" access="permitAll" />
 		<intercept-url pattern="/disconnect/facebook" access="permitAll" />
+		<intercept-url pattern="/_ah/**" access="permitAll" />
 		<intercept-url pattern="/api/**" access="isAuthenticated()" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 		<remember-me />

@@ -2,8 +2,8 @@ package com.tdm.client.app;
 
 import javax.inject.Inject;
 
-import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
@@ -29,7 +29,7 @@ public class BodyPresenter extends RootPresenter implements
 		}
 
 		@Override
-		public void setInSlot(Object slot, IsWidget content) {
+		public void setInSlot(Object slot, Widget content) {
 
 			if (slot.equals(menuSlot)) {
 				RootPanel naviBarPanel = RootPanel.get("navibar");
