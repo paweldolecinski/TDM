@@ -18,7 +18,6 @@ package com.tdm.client.gin;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
-import com.gwtplatform.mvp.client.Bootstrapper;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.annotations.GaAccount;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
@@ -27,9 +26,8 @@ import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics;
 import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl;
 import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker;
 import com.gwtplatform.mvp.client.proxy.DefaultPlaceManager;
-import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
+import com.gwtplatform.mvp.client.proxy.RouteTokenFormatter;
 import com.tdm.client.app.BodyPresenter;
-import com.tdm.client.app.SecurityBootstrapper;
 import com.tdm.client.gin.ui.ApplicationModule;
 
 public class ClientModule extends AbstractPresenterModule {
@@ -40,15 +38,13 @@ public class ClientModule extends AbstractPresenterModule {
 	bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
 
 	install(new PresenterSetupModule(DefaultPlaceManager.class,
-		ParameterTokenFormatter.class));
+			RouteTokenFormatter.class));
 
 	install(new ClientDispatchModule());
 
 	install(new ApplicationModule());
 
 	install(new ParamsModule());
-
-	bind(Bootstrapper.class).to(SecurityBootstrapper.class);
 
 	bind(RootPresenter.class).to(BodyPresenter.class).asEagerSingleton();
 
