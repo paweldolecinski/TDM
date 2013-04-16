@@ -33,6 +33,12 @@
 	<set-configuration-property name="gin.ginjector.extensions"
 		value="com.tdm.client.gin.GinjectorExtension" />
 
+	<set-configuration-property name="gwtp.bootstrapper"
+		value="com.tdm.client.app.SecurityBootstrapper" />
+
+	<set-configuration-property name="gwtp.prebootstrapper"
+		value="com.tdm.client.app.DefaultPreBootstrapper" />
+
 	<!-- To change the default logLevel -->
 	<set-property name="gwt.logging.logLevel" value="FINE" />
 	<!-- # To disable logging -->

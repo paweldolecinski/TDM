@@ -37,8 +37,4 @@ public class LoginView extends ViewImpl implements LoginPresenter.Display {
 		return widget;
 	}
 
-	@Override
-	public void setInSlot(Object slot, Widget content) {
-	}
-
 }

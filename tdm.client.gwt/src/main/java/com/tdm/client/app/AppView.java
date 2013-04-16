@@ -48,7 +48,7 @@ public class AppView extends ViewImpl implements
 	}
 
 	@Override
-	public void setInSlot(Object slot, Widget content) {
+	public void setInSlot(Object slot, IsWidget content) {
 		if (slot == AppPresenter.TYPE_MainContent) {
 			setMainContent(content);
 		} else {

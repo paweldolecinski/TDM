@@ -39,7 +39,7 @@
 
 	<properties>
 		<gwt.version>2.5.0</gwt.version>
-		<gwtp.version>1.0-RC-2</gwtp.version>
+		<gwtp.version>1.0-RC-3</gwtp.version>
 		<gae.version>1.7.6</gae.version>
 		<gwt-gin.version>2.0.0</gwt-gin.version>
 		<guice.version>3.0</guice.version>

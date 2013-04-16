@@ -7,9 +7,7 @@ import java.util.logging.Logger;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.UmbrellaException;
 import com.gwtplatform.mvp.client.PreBootstrapper;
-import com.gwtplatform.mvp.client.annotations.PreBootstrap;
 
-@PreBootstrap
 public class DefaultPreBootstrapper implements PreBootstrapper {
 
     protected static final Logger log = Logger
