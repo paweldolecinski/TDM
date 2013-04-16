@@ -111,7 +111,7 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 
 			if (!results.isEmpty()) {
 				GdmProblemEntityAssembler assembler = new GdmProblemEntityAssembler();
-				ArrayList<GdmProblem> res = new ArrayList<>();
+				ArrayList<GdmProblem> res = new ArrayList<GdmProblem>();
 				for (GdmProblemEntity p : results) {
 
 					res.add(assembler.fromEntity(p));

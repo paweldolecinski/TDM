@@ -27,7 +27,7 @@ public class SelectionModule {
 		OperatorOwa owa = new OperatorOwa(0.13, 0.17, 0.2, 0.5);
 		FuzzyPreferenceRelation ideaTuples = preferences.get(0);
 		for (SolutionIdeaTupleWithValue solutionIdeaTuple : ideaTuples) {
-			List<Double> values = new ArrayList<>();
+			List<Double> values = new ArrayList<Double>();
 			for (FuzzyPreferenceRelation fuzzyPreferenceRelation : preferences) {
 				SolutionIdeaTupleWithValue tuple = fuzzyPreferenceRelation
 						.get(solutionIdeaTuple);
@@ -57,11 +57,11 @@ public class SelectionModule {
 			FuzzyPreferenceRelation collectivePreference) {
 		Map<Double, SolutionIdeaId> qgdd = calculateQGDD(ideas,
 				collectivePreference);
-		ArrayList<Double> keys = new ArrayList<>(qgdd.keySet());
+		ArrayList<Double> keys = new ArrayList<Double>(qgdd.keySet());
 		Collections.sort(keys);
 		Collections.reverse(keys);
 
-		ArrayList<SolutionIdeaId> ranking = new ArrayList<>();
+		ArrayList<SolutionIdeaId> ranking = new ArrayList<SolutionIdeaId>();
 		for (Double key : keys) {
 			ranking.add(qgdd.get(key));
 		}
@@ -72,10 +72,10 @@ public class SelectionModule {
 	private Map<Double, SolutionIdeaId> calculateQGDD(
 			List<SolutionIdeaId> ideas,
 			FuzzyPreferenceRelation collectivePreference) {
-		Map<Double, SolutionIdeaId> qgdd = new HashMap<>();
+		Map<Double, SolutionIdeaId> qgdd = new HashMap<Double, SolutionIdeaId>();
 		OperatorOwa owa = new OperatorOwa(0.07, 0.67, 0.26);
 		for (SolutionIdeaId idea1 : ideas) {
-			List<Double> values = new ArrayList<>();
+			List<Double> values = new ArrayList<Double>();
 			for (SolutionIdeaId idea2 : ideas) {
 				if (idea1.equals(idea2)) {
 					continue;

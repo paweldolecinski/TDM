@@ -15,7 +15,7 @@ public class GdmProblemDto implements GdmProblem {
 	private String name;
 	private String description;
 	private Date creationDate;
-	private List<Expert> experts = new ArrayList<>();
+	private List<Expert> experts = new ArrayList<Expert>();
 	private GdmProblemCurrentConsensus currentConsensus;
 
 	public GdmProblemDto() {

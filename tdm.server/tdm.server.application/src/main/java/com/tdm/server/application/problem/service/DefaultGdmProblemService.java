@@ -71,7 +71,7 @@ public class DefaultGdmProblemService implements GdmProblemService {
 	public List<Expert> retrieveModeratorsOfProblem(GdmProblemKey problemId) {
 		GdmProblem read = problemDao.read(problemId);
 		List<Expert> experts = read.getExperts();
-		List<Expert> res = new ArrayList<>();
+		List<Expert> res = new ArrayList<Expert>();
 		for (Expert id : experts) {
 			if (ExpertRole.MODERATOR == id.getRole()
 					|| ExpertRole.OWNER == id.getRole())
