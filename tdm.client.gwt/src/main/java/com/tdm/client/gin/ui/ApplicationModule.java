@@ -22,6 +22,8 @@ import com.tdm.client.app.error.ErrorPagePresenter;
 import com.tdm.client.app.error.ErrorPageView;
 import com.tdm.client.app.inbox.InboxContentView;
 import com.tdm.client.app.inbox.InboxPagePresenter;
+import com.tdm.client.app.inbox.NewProblemPresenterWidget;
+import com.tdm.client.app.inbox.NewProblemView;
 import com.tdm.client.app.navibar.NaviBarPresenterWidget;
 import com.tdm.client.app.navibar.NaviBarView;
 import com.tdm.client.app.popup.LocalDialogPresenterWidget;
@@ -67,6 +69,9 @@ public class ApplicationModule extends AbstractPresenterModule {
 		bindPresenter(InboxPagePresenter.class,
 				InboxPagePresenter.Display.class, InboxContentView.class,
 				InboxPagePresenter.IProxy.class);
+		
+		bindSingletonPresenterWidget(NewProblemPresenterWidget.class,
+				NewProblemPresenterWidget.Display.class, NewProblemView.class);
 
 		/*
 		 * Problem section

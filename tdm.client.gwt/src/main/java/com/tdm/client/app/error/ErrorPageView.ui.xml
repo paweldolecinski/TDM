@@ -4,6 +4,7 @@
 	
 	<g:HTMLPanel>
 		<h1>Error occured!</h1>
+		<g:Label ui:field="errorMsg"/>
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

@@ -24,7 +24,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.ViewImpl;
-import com.tdm.client.app.AppView;
 import com.tdm.client.resources.AppResources;
 
 /**
@@ -83,16 +82,6 @@ public class ProblemDiscussionView extends ViewImpl implements
 		if (content != null) {
 			newSolutionPanel.add(content);
 		}
-	}
-
-	@Override
-	public void onReveal() {
-		AppView.getBody().setClassName(resources.mainCss().landing());
-	}
-
-	@Override
-	public void onHide() {
-		AppView.getBody().removeClassName(resources.mainCss().landing());
 	}
 
 }

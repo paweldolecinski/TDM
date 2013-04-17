@@ -28,12 +28,10 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.tdm.client.app.AppPresenter;
-import com.tdm.client.dispatch.command.CreateGdmProblemAction;
-import com.tdm.client.dispatch.command.CreateGdmProblemResult;
 import com.tdm.client.dispatch.command.GetProblemListAction;
 import com.tdm.client.dispatch.command.GetProblemListResult;
+import com.tdm.client.event.ErrorOccuredEvent;
 import com.tdm.client.event.NewGdmProblemEvent;
-import com.tdm.client.event.ShowProblemListEvent;
 import com.tdm.client.place.NameTokens;
 import com.tdm.domain.model.problem.vo.GdmProblem;
 import com.tdm.domain.model.problem.vo.jso.GdmProblemJso;
@@ -52,7 +50,6 @@ public class InboxPagePresenter extends
 
 		void clearProblemList();
 
-		void problemCounter(int amount);
 	}
 
 	@NameToken(NameTokens.inbox)
@@ -60,70 +57,43 @@ public class InboxPagePresenter extends
 	public interface IProxy extends ProxyPlace<InboxPagePresenter> {
 	}
 
-	private DispatchAsync dispatch;
+	private final DispatchAsync dispatch;
+	private final NewProblemPresenterWidget newProblemDialog;
 
 	@Inject
 	public InboxPagePresenter(EventBus eventBus, Display view, IProxy proxy,
-			final DispatchAsync dispatch) {
+			final DispatchAsync dispatch,
+			NewProblemPresenterWidget newProblemDialog) {
 		super(eventBus, view, proxy, AppPresenter.TYPE_MainContent);
 		this.dispatch = dispatch;
+		this.newProblemDialog = newProblemDialog;
 		getView().setUiHandlers(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.gwtplatform.mvp.client.PresenterWidget#onReset()
-	 */
 	@Override
 	protected void onReset() {
 		super.onReset();
-		ShowProblemListEvent.fire(this, (String) null);
+		getDecisionProblemList(null);
 	}
 
 	@Override
 	protected void onBind() {
 		super.onBind();
-		addRegisteredHandler(ShowProblemListEvent.getType(),
-				new ShowProblemListEvent.ShowProblemListHandler() {
-
-					@Override
-					public void onShowProblemList(ShowProblemListEvent event) {
-						getDecisionProblemList(event.getFilter());
-					}
-				});
 		addRegisteredHandler(NewGdmProblemEvent.getType(),
 				new NewGdmProblemEvent.NewGdmProblemHandler() {
 
 					@Override
 					public void onNewGdmProblem(NewGdmProblemEvent event) {
-						sendNewProblem();
+						addProblemToList(event.getCreatedProblem());
 					}
 				});
 	}
 
-	private void sendNewProblem() {
-		GdmProblemJso problem = GdmProblemJso.createObject().cast();
-		problem.setName("Problemo!");
-		problem.setDescription("Molto grande problemo :)");
-		dispatch.execute(new CreateGdmProblemAction(problem),
-				new AsyncCallback<CreateGdmProblemResult>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						GWT.log("error executing command ", caught);
-					}
-
-					@Override
-					public void onSuccess(CreateGdmProblemResult result) {
-						GdmProblem createdProblem = result.getCreatedProblem();
-						getView().addProblemListItem(createdProblem);
-					}
-				});
+	private void addProblemToList(GdmProblem newProblem) {
+		getView().addProblemListItem(newProblem);
 	}
 
 	private void getDecisionProblemList(String filter) {
-		getView().problemCounter(10);
 		getView().clearProblemList();
 
 		dispatch.execute(new GetProblemListAction(filter),
@@ -131,7 +101,8 @@ public class InboxPagePresenter extends
 
 					@Override
 					public void onFailure(Throwable caught) {
-						GWT.log("error executing command ", caught);
+						GWT.log("Error executing command ", caught);
+						ErrorOccuredEvent.fire(InboxPagePresenter.this, caught);
 					}
 
 					@Override
@@ -147,11 +118,11 @@ public class InboxPagePresenter extends
 
 	@Override
 	public void refreshProblemList(String filter) {
-		ShowProblemListEvent.fire(this, filter);
+		getDecisionProblemList(filter);
 	}
 
 	@Override
 	public void createNewProblem() {
-		NewGdmProblemEvent.fire(this);
+		addToPopupSlot(newProblemDialog);
 	}
 }

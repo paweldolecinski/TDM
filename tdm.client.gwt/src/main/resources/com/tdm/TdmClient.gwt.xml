@@ -12,17 +12,15 @@
 	<inherits name='com.google.gwt.storage.Storage' />
 	<inherits name="com.google.gwt.logging.Logging" />
 	<inherits name='com.google.gwt.junit.JUnit' />
+	<inherits name="org.hibernate.validator.HibernateValidator" />
 
 	<inherits name='com.gwtplatform.dispatch.Dispatch' />
+	<inherits name="com.gwtplatform.mvp.MvpWithEntryPoint" />
 
 	<inherits name="com.tdm.domain.Domain" />
 	<inherits name="com.tdm.security.Security" />
 
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
-
-	<inherits name="com.gwtplatform.mvp.MvpWithEntryPoint" />
-
-	<source path='client' />
 
 	<define-configuration-property name='gin.ginjector'
 		is-multi-valued='false' />
@@ -38,6 +36,10 @@
 
 	<set-configuration-property name="gwtp.prebootstrapper"
 		value="com.tdm.client.app.DefaultPreBootstrapper" />
+
+	<replace-with class="com.tdm.client.app.DefaultValidatorFactory">
+		<when-type-is class="javax.validation.ValidatorFactory" />
+	</replace-with>
 
 	<!-- To change the default logLevel -->
 	<set-property name="gwt.logging.logLevel" value="FINE" />
@@ -56,16 +58,14 @@
 	<set-configuration-property name="UiBinder.useSafeHtmlTemplates"
 		value="true" />
 
-	<!-- <extend-property name="locale" values="en" /> -->
-
 	<set-configuration-property name="CssResource.obfuscationPrefix"
 		value="empty" />
 	<set-configuration-property name="CssResource.style"
 		value="pretty" />
 	<set-property name="ClientBundle.enableInlining" value="false" />
 
+	<!-- safari ie6, ie7,ie8, opera, gecko1_8 -->
 	<set-property name="user.agent" value="safari" />
 
-	<!-- safari ie6, ie7,ie8, opera, gecko1_8 -->
-
+	<!-- <extend-property name="locale" values="en" /> -->
 </module>

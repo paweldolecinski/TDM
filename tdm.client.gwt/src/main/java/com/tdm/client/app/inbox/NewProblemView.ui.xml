@@ -1,0 +1,18 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<g:DialogBox modal="false">
+		<g:caption>
+			<b>New Problem</b>
+		</g:caption>
+		<g:HTMLPanel>
+			<g:HTML ui:field="errors" />
+			<g:Label>Title</g:Label>
+			<g:TextBox ui:field="titleBox" />
+			<g:Label>Description</g:Label>
+			<g:TextBox ui:field="descBox" />
+			<g:Button ui:field="okButton">Add</g:Button>
+		</g:HTMLPanel>
+	</g:DialogBox>
+</ui:UiBinder> 

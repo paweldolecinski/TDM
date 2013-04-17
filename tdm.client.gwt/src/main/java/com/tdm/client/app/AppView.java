@@ -16,7 +16,6 @@
 package com.tdm.client.app;
 
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -63,8 +62,4 @@ public class AppView extends ViewImpl implements
 			mainContentPanel.add(content);
 		}
 	}
-
-	public static native Element getBody() /*-{
-		return $doc.body;
-	}-*/;
 }

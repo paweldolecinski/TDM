@@ -58,7 +58,7 @@ public class InboxContentView extends ViewWithUiHandlers<ProblemListUiHandlers>
 	protected HeadingElement problemCounter;
 	@UiField
 	protected LIElement createItem;
-	
+
 	private HashMap<GdmProblem, ProblemListItemWidget> problemWidgetMap = new HashMap<GdmProblem, ProblemListItemWidget>();
 
 	private Provider<ProblemListItemWidget> problemWidgetProvider;
@@ -88,11 +88,8 @@ public class InboxContentView extends ViewWithUiHandlers<ProblemListUiHandlers>
 		problemWidgetMap.put(problem, item);
 		liElement.appendChild(item.getElement());
 		problemList.insertAfter(liElement, createItem);
-	}
-
-	@Override
-	public void problemCounter(int amount) {
-		problemCounter.setInnerText("You have " + amount + " problems");
+		problemCounter.setInnerText("You have " + problemList.getChildCount()
+				+ " problems");
 	}
 
 	@Override

@@ -54,8 +54,8 @@
 		<spring-social-facebook.version>1.1.0.BUILD-SNAPSHOT</spring-social-facebook.version>
 		<org.springframework.social.twitter-version>1.1.0.BUILD-SNAPSHOT</org.springframework.social.twitter-version>
 		<org.springframework.social.linkedin-version>1.0.0.BUILD-SNAPSHOT</org.springframework.social.linkedin-version>
-		
-		
+
+
 		<cglib.version>2.2</cglib.version>
 		<cxf.version>2.7.3</cxf.version>
 
@@ -172,12 +172,22 @@
 				<version>${project.version}</version>
 			</dependency>
 
-			<!-- Spring -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.6.1</version>
+			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
 				<version>1.6.1</version>
 			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.16</version>
+			</dependency>
+			<!-- Spring -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>

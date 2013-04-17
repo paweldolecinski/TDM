@@ -32,8 +32,6 @@ public interface MainCss extends CssResource {
 	@ClassName("content-main")
 	String content();
 
-	String landing();
-
 	String footer();
 
 	String navSub();

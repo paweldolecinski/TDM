@@ -39,8 +39,6 @@ public class ProblemDicussionPresenter extends
 		Presenter<ProblemDicussionPresenter.Display, ProblemDicussionPresenter.IProxy> {
 
 	public interface Display extends View {
-		void onReveal();
-		void onHide();
 	}
 
 	@NameToken(NameTokens.problem)
@@ -84,14 +82,12 @@ public class ProblemDicussionPresenter extends
 		super.onReveal();
 		setInSlot(TYPE_NewSolution, newSolution);
 		setInSlot(TYPE_Brainstorm, brainstorm);
-		getView().onReveal();
 	}
 
 	
 	@Override
 	protected void onHide() {
 		super.onHide();
-		getView().onHide();
 	}
 
 	@Override

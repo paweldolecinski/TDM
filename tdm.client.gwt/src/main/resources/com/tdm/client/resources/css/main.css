@@ -224,10 +224,6 @@ hr {
 	border-bottom: 1px solid #fff;
 }
 
-.landing .content-main {
-	margin: 0 0 30px;
-}
-
 .content-main {
 	margin: 50px 0;
 }
@@ -566,7 +562,7 @@ a.thumbnail:hover {
 	background-color: #6DACE7;
 }
 
-.landing .content-main .problemTitle {
+.content-main .problemTitle {
 	margin-bottom: 5px;
 }
 
@@ -598,33 +594,33 @@ a.thumbnail:hover {
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-.landing .content-main .toolbar {
+.content-main .toolbar {
 	padding: 0;
 	margin: 0;
 	background: transparent;
 }
 
-.landing .content-main .toolbar .btn.right {
+.content-main .toolbar .btn.right {
 	float: right;
 	margin-right: 0;
 	margin-left: 10px;
 }
 
-.landing .content-main .toolbar .blockShare {
+.content-main .toolbar .blockShare {
 	display: inline-block;
 	position: relative;
 }
 
-.landing .content-main .toolbar .blockShare a {
+.content-main .toolbar .blockShare a {
 	display: inline-block;
 	margin-right: 10px;
 }
 
-.landing .problemSolutions {
+.problemSolutions {
 	min-height: 149px;
 }
 
-.landing .problemSolutions .solutionsHeader {
+.problemSolutions .solutionsHeader {
 	font-size: 24px;
 	margin-bottom: 15px;
 }

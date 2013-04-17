@@ -23,8 +23,8 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.tdm.client.app.AppPresenter;
+import com.tdm.client.event.ErrorOccuredEvent;
 import com.tdm.client.place.NameTokens;
 
 /**
@@ -36,9 +36,6 @@ public class ErrorPagePresenter extends
 
 	public interface Display extends View {
 
-		/**
-		 * @param text
-		 */
 		void setErrorText(String text);
 	}
 
@@ -48,44 +45,23 @@ public class ErrorPagePresenter extends
 	public interface IProxy extends ProxyPlace<ErrorPagePresenter> {
 	}
 
-	/**
-	 * @param eventBus
-	 * @param view
-	 * @param proxy
-	 */
 	@Inject
 	public ErrorPagePresenter(EventBus eventBus, Display view, IProxy proxy) {
-		super(eventBus, view, proxy);
+		super(eventBus, view, proxy, AppPresenter.TYPE_MainContent);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.gwtplatform.mvp.client.PresenterWidget#onReveal()
-	 */
-	@Override
-	protected void onReveal() {
-		super.onReveal();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
-	 */
 	@Override
 	protected void onBind() {
 		super.onBind();
-	}
+		addRegisteredHandler(ErrorOccuredEvent.getType(),
+				new ErrorOccuredEvent.ErrorOccuredHandler() {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
-	 */
-	@Override
-	protected void revealInParent() {
-		RevealContentEvent.fire(this, AppPresenter.TYPE_MainContent, this);
+					@Override
+					public void onErrorOccured(ErrorOccuredEvent event) {
+						getView().setErrorText(
+								event.getCaught().getLocalizedMessage());
+					}
+				});
 	}
 
 }

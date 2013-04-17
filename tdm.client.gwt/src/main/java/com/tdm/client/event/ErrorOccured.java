@@ -4,8 +4,8 @@ import com.gwtplatform.dispatch.annotation.GenEvent;
 import com.gwtplatform.dispatch.annotation.Order;
 
 @GenEvent
-public class ShowProblemList {
+public class ErrorOccured {
 
 	@Order(1)
-	String filter;
+	Throwable caught;
 }
