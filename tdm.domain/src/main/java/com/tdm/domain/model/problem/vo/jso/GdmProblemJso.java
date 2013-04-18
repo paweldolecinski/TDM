@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import com.google.gwt.core.client.JsArray;
 import com.tdm.domain.model.expert.vo.Expert;
 import com.tdm.domain.model.expert.vo.jso.ExpertJso;
@@ -28,8 +25,6 @@ public class GdmProblemJso extends BaseJso implements GdmProblem {
 												return this.key;
 												}-*/;
 
-	@NotNull(message = "Title cannot be empty.")
-	@Size(min = 1, message = "Title must be at least 1 character long.")
 	@Override
 	public final native String getName() /*-{
 											return this.name;

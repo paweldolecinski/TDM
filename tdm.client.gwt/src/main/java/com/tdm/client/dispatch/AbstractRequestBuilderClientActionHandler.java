@@ -83,7 +83,8 @@ public abstract class AbstractRequestBuilderClientActionHandler<A extends Action
 						&& response.getStatusCode() < 300) {
 					resultCallback.onSuccess(extractResult(response));
 				} else {
-					resultCallback.onFailure(new IllegalArgumentException());
+					resultCallback.onFailure(new IllegalArgumentException(
+							response.getStatusText()));
 				}
 			}
 		});
@@ -111,6 +112,7 @@ public abstract class AbstractRequestBuilderClientActionHandler<A extends Action
 			UrlBuilder url, JSONObject jsonObject) {
 		RequestBuilder rb = new RequestBuilder(method, url.toUrl());
 		if (jsonObject != null) {
+			jsonObject.put("$H", null);
 			String string = jsonObject.toString();
 			rb.setRequestData(string);
 		}

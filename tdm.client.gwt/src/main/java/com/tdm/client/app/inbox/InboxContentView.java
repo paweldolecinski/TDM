@@ -88,8 +88,8 @@ public class InboxContentView extends ViewWithUiHandlers<ProblemListUiHandlers>
 		problemWidgetMap.put(problem, item);
 		liElement.appendChild(item.getElement());
 		problemList.insertAfter(liElement, createItem);
-		problemCounter.setInnerText("You have " + problemList.getChildCount()
-				+ " problems");
+		problemCounter.setInnerText("You have "
+				+ (problemList.getChildCount() - 2) + " problems");
 	}
 
 	@Override

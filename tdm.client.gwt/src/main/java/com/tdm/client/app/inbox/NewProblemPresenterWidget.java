@@ -83,9 +83,7 @@ public class NewProblemPresenterWidget extends
 
 	@Override
 	public void createProblem(String title, String description) {
-		GdmProblemJso toValidation = GdmProblemJso.createObject().cast();
-		toValidation.setName(title);
-		toValidation.setDescription(description);
+		GdmProblemJso toValidation = GdmProblemJso.create(title, description);
 
 		Set<ConstraintViolation<GdmProblemJso>> violations = validator
 				.validate(toValidation);
@@ -93,11 +91,7 @@ public class NewProblemPresenterWidget extends
 		if (!violations.isEmpty()) {
 			getView().showErrors(violations);
 		} else {
-			GdmProblemJso problem = GdmProblemJso.createObject().cast();
-			problem.setName(title);
-			problem.setDescription(description);
-
-			dispatch.execute(new CreateGdmProblemAction(problem),
+			dispatch.execute(new CreateGdmProblemAction(toValidation),
 					new AsyncCallback<CreateGdmProblemResult>() {
 
 						@Override
