@@ -13,7 +13,5 @@
 	<inherits name='com.google.gwt.user.User' />
 	<inherits name='com.tdm.gwt.TdmGwt' />
 
-	<source path='model' includes="**/vo/">
-		<exclude name="**/dto/**" />
-	</source>
+	<source path='model' includes="**/dto/" />
 </module>

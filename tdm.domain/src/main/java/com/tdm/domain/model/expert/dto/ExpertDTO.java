@@ -1,6 +1,5 @@
 package com.tdm.domain.model.expert.dto;
 
-import com.tdm.domain.model.expert.ExpertCurrentPreferences;
 
 public class ExpertDTO implements Expert {
 	

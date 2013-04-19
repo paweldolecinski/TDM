@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import com.tdm.domain.model.idea.SolutionIdea;
-import com.tdm.domain.model.idea.vo.SolutionIdeaDTO;
+import com.tdm.domain.model.idea.dto.SolutionIdeaDTO;
 import com.tdm.domain.model.problem.Problem;
 import com.tdm.domain.model.problem.ProblemId;
 import com.tdm.domain.model.problem.dto.ProblemDTO;

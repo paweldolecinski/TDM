@@ -1,4 +1,4 @@
-package com.tdm.domain.model.idea.vo;
+package com.tdm.domain.model.idea.dto;
 
 import java.util.Date;
 
