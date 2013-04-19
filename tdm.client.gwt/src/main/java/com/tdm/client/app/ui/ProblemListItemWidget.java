@@ -15,7 +15,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.tdm.client.place.NameTokens;
 import com.tdm.client.resources.AppResources;
-import com.tdm.domain.model.problem.vo.GdmProblem;
+import com.tdm.domain.model.problem.dto.Problem;
 
 public class ProblemListItemWidget extends Composite {
 
@@ -63,18 +63,19 @@ public class ProblemListItemWidget extends Composite {
 		this.placeManager = placeManager;
 	}
 
-	public void init(GdmProblem problem) {
+	public void init(Problem problem) {
 		title.setText(problem.getName());
 
 		String token = placeManager.buildHistoryToken(new PlaceRequest(
-				NameTokens.problem).with(NameTokens.Params.problemId, problem.getKey()
-				.getId()));
+				NameTokens.problem).with(NameTokens.Params.problemId,
+				problem.getKey()));
 
 		title.setTargetHistoryToken(token);
 		titleImage.setTargetHistoryToken(token);
 
-		String date = DateTimeFormat.getFormat(PredefinedFormat.DATE_TIME_MEDIUM)
-				.format(problem.getCreationDate());
+		String date = DateTimeFormat.getFormat(
+				PredefinedFormat.DATE_TIME_MEDIUM).format(
+				problem.getCreationDate());
 		creationDate.setText(date);
 		titleImage.getElement().setAttribute(
 				"style",

@@ -19,7 +19,7 @@ package com.tdm.client.dispatch.command;
 import com.gwtplatform.dispatch.annotation.GenDispatch;
 import com.gwtplatform.dispatch.annotation.In;
 import com.gwtplatform.dispatch.annotation.Out;
-import com.tdm.domain.model.problem.vo.GdmProblem;
+import com.tdm.domain.model.problem.dto.Problem;
 
 /**
  * @author Paweł Doleciński
@@ -29,8 +29,8 @@ import com.tdm.domain.model.problem.vo.GdmProblem;
 public class CreateGdmProblem {
 	
 	@In(1)
-	GdmProblem problem;
+	Problem problem;
 	
 	@Out(1)
-	GdmProblem createdProblem;
+	Problem createdProblem;
 }

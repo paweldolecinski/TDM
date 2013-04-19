@@ -20,8 +20,8 @@ import com.tdm.client.app.AppPresenter;
 import com.tdm.client.app.AppView;
 import com.tdm.client.app.error.ErrorPagePresenter;
 import com.tdm.client.app.error.ErrorPageView;
-import com.tdm.client.app.inbox.InboxContentView;
-import com.tdm.client.app.inbox.InboxPagePresenter;
+import com.tdm.client.app.inbox.HomeView;
+import com.tdm.client.app.inbox.HomePresenter;
 import com.tdm.client.app.inbox.NewProblemPresenterWidget;
 import com.tdm.client.app.inbox.NewProblemView;
 import com.tdm.client.app.navibar.NaviBarPresenterWidget;
@@ -66,9 +66,9 @@ public class ApplicationModule extends AbstractPresenterModule {
 		/*
 		 * Inbox section
 		 */
-		bindPresenter(InboxPagePresenter.class,
-				InboxPagePresenter.Display.class, InboxContentView.class,
-				InboxPagePresenter.IProxy.class);
+		bindPresenter(HomePresenter.class,
+				HomePresenter.Display.class, HomeView.class,
+				HomePresenter.IProxy.class);
 		
 		bindSingletonPresenterWidget(NewProblemPresenterWidget.class,
 				NewProblemPresenterWidget.Display.class, NewProblemView.class);

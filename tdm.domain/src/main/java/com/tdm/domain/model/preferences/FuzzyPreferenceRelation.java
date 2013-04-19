@@ -2,7 +2,7 @@ package com.tdm.domain.model.preferences;
 
 import java.util.Collection;
 
-import com.tdm.domain.model.preferences.vo.FuzzyPreferences;
+import com.tdm.domain.model.preferences.dto.FuzzyPreferences;
 
 public class FuzzyPreferenceRelation extends
 	PreferenceRelation<SolutionIdeaTupleWithValue> implements

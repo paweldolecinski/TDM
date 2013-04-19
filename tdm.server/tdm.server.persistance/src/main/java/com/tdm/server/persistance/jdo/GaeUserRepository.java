@@ -27,7 +27,6 @@ import org.springframework.stereotype.Repository;
 
 import com.tdm.domain.model.user.LocalUser;
 import com.tdm.domain.model.user.UserRepository;
-import com.tdm.server.persistance.jdo.assembler.UserEntityAssembler;
 import com.tdm.server.persistance.jdo.entities.UserEntity;
 
 /**

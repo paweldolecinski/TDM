@@ -4,16 +4,14 @@ import java.util.Collection;
 
 import com.tdm.domain.model.idea.SolutionIdea;
 import com.tdm.domain.model.idea.SolutionIdeaId;
-import com.tdm.domain.model.problem.vo.GdmProblemKey;
+import com.tdm.domain.model.problem.ProblemId;
 
 public interface SolutionIdeaService {
 
-	Collection<SolutionIdea> retrieveSolutionIdeasForProblem(
-			GdmProblemKey problemId);
+	Collection<SolutionIdea> retrieveSolutionIdeasForProblem(ProblemId problemId);
 
-	void createAndAddSolutionIdea(GdmProblemKey problemId,
-			String ideaName);
+	void addSolutionIdea(SolutionIdea idea);
 
-	SolutionIdea getSolutionIdea(GdmProblemKey problemId, SolutionIdeaId ideaId);
+	SolutionIdea getSolutionIdea(ProblemId problemId, SolutionIdeaId ideaId);
 
 }

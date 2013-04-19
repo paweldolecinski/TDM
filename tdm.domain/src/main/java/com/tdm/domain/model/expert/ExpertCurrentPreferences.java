@@ -1,7 +1,7 @@
 package com.tdm.domain.model.expert;
 
-import com.tdm.domain.model.expert.vo.Expert;
-import com.tdm.domain.model.preferences.vo.FuzzyPreferences;
+import com.tdm.domain.model.expert.dto.Expert;
+import com.tdm.domain.model.preferences.dto.FuzzyPreferences;
 
 public class ExpertCurrentPreferences {
 

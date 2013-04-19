@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PopupViewWithUiHandlers;
-import com.tdm.domain.model.problem.vo.jso.GdmProblemJso;
+import com.tdm.domain.model.problem.dto.ProblemJSO;
 
 /**
  * The view implementation for
@@ -68,7 +68,7 @@ public class NewProblemView extends
 		getUiHandlers().createProblem(titleBox.getText(), descBox.getText());
 	}
 
-	public void showErrors(Set<ConstraintViolation<GdmProblemJso>> violations) {
+	public void showErrors(Set<ConstraintViolation<ProblemJSO>> violations) {
 		StringBuilder builder = new StringBuilder();
 
 		for (ConstraintViolation<?> violation : violations) {

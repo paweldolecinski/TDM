@@ -2,18 +2,26 @@ package com.tdm.domain.model.idea;
 
 import java.util.Date;
 
-import com.tdm.domain.model.problem.vo.GdmProblemKey;
+public class SolutionIdea {
 
-public interface SolutionIdea {
+    String getName() {
+	return null;
+    }
 
-	String getName();
+    String getDetails() {
+	return null;
+    }
 
-	String getDetails();
+    Date getCreation() {
+	return null;
+    }
 
-	Date getCreation();
+    String getProblemId() {
+	return null;
+    }
 
-	GdmProblemKey getProblemId();
-
-	SolutionIdeaId getId();
+    String getId() {
+	return null;
+    }
 
 }

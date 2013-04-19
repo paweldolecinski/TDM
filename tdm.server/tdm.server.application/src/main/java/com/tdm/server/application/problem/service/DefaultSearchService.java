@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tdm.domain.model.expert.vo.ExpertId;
-import com.tdm.domain.model.expert.vo.ExpertRole;
+import com.tdm.domain.model.expert.ExpertId;
+import com.tdm.domain.model.expert.ExpertRole;
+import com.tdm.domain.model.problem.Problem;
 import com.tdm.domain.model.problem.ProblemRepository;
-import com.tdm.domain.model.problem.vo.GdmProblem;
 
 @Service
 public class DefaultSearchService implements SearchService {
@@ -24,26 +24,26 @@ public class DefaultSearchService implements SearchService {
 	}
 
 	@Override
-	public List<GdmProblem> retrieveProblemsForExpert(ExpertId id) {
+	public List<Problem> retrieveProblemsForExpert(ExpertId id) {
 
-		List<GdmProblem> problems = problemDao.findAllAssignedTo(id);
+		List<Problem> problems = problemDao.findAllAssignedTo(id);
 
 		return problems;
 	}
 
 	@Override
-	public List<GdmProblem> retrieveProblemsOwnedByExpert(ExpertId id) {
+	public List<Problem> retrieveProblemsOwnedByExpert(ExpertId id) {
 
-		List<GdmProblem> problems = problemDao.findAllAssignedTo(id,
+		List<Problem> problems = problemDao.findAllAssignedTo(id,
 				ExpertRole.OWNER);
 
 		return problems;
 	}
 
 	@Override
-	public List<GdmProblem> retrieveProblemsModeratedByExpert(ExpertId id) {
+	public List<Problem> retrieveProblemsModeratedByExpert(ExpertId id) {
 
-		List<GdmProblem> problems = problemDao.findAllAssignedTo(id,
+		List<Problem> problems = problemDao.findAllAssignedTo(id,
 				ExpertRole.MODERATOR);
 
 		return problems;

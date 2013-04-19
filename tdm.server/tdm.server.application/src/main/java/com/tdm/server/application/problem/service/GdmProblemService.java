@@ -2,28 +2,27 @@ package com.tdm.server.application.problem.service;
 
 import java.util.List;
 
-import com.tdm.domain.model.expert.vo.Expert;
-import com.tdm.domain.model.expert.vo.ExpertId;
-import com.tdm.domain.model.expert.vo.ExpertRole;
-import com.tdm.domain.model.problem.vo.GdmProblem;
-import com.tdm.domain.model.problem.vo.GdmProblemKey;
-import com.tdm.domain.model.problem.vo.dto.GdmProblemDto;
+import com.tdm.domain.model.expert.Expert;
+import com.tdm.domain.model.expert.ExpertId;
+import com.tdm.domain.model.expert.ExpertRole;
+import com.tdm.domain.model.problem.Problem;
+import com.tdm.domain.model.problem.ProblemId;
 
 public interface GdmProblemService {
 
-	GdmProblem retrieveProblem(GdmProblemKey id);
+	Problem retrieveProblem(ProblemId id);
 
-	ExpertId getOwnerOfProblem(GdmProblemKey problemId);
+	ExpertId getOwnerOfProblem(ProblemId problemId);
 
-	void setOwnerOfProblem(GdmProblemKey problemId, ExpertId id);
+	void setOwnerOfProblem(ProblemId problemId, ExpertId id);
 
-	List<Expert> retrieveExpertsAssignedToProblem(GdmProblemKey problemId);
+	List<Expert> retrieveExpertsAssignedToProblem(ProblemId problemId);
 
-	List<Expert> retrieveModeratorsOfProblem(GdmProblemKey problemId);
+	List<Expert> retrieveModeratorsOfProblem(ProblemId problemId);
 
-	void assignExpertToProblem(GdmProblemKey problemId, ExpertId expertId,
+	void assignExpertToProblem(ProblemId problemId, ExpertId expertId,
 			ExpertRole expertRole);
 
-	GdmProblemDto createProblem(GdmProblemDto problem);
+	Problem createProblem(Problem problem);
 
 }

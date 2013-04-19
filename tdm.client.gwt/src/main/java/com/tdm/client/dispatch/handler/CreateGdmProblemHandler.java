@@ -9,7 +9,7 @@ import com.tdm.client.dispatch.AbstractRequestBuilderClientActionHandler;
 import com.tdm.client.dispatch.command.CreateGdmProblemAction;
 import com.tdm.client.dispatch.command.CreateGdmProblemResult;
 import com.tdm.client.util.UrlBuilder;
-import com.tdm.domain.model.problem.vo.jso.GdmProblemJso;
+import com.tdm.domain.model.problem.dto.ProblemJSO;
 
 public class CreateGdmProblemHandler
 		extends
@@ -21,7 +21,7 @@ public class CreateGdmProblemHandler
 
 	@Override
 	protected CreateGdmProblemResult extractResult(Response response) {
-		GdmProblemJso createdProblem = JsonUtils.safeEval(response.getText());
+		ProblemJSO createdProblem = JsonUtils.safeEval(response.getText());
 		JSONObject jsonObject = new JSONObject(createdProblem);
 		System.out.println(jsonObject.toString());
 		return new CreateGdmProblemResult(createdProblem);

@@ -15,7 +15,6 @@
  */
 package com.tdm.server.persistance.jdo;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,15 +28,12 @@ import org.springframework.stereotype.Repository;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
-import com.tdm.domain.model.expert.vo.ExpertId;
-import com.tdm.domain.model.expert.vo.ExpertRole;
+import com.tdm.domain.model.expert.ExpertId;
+import com.tdm.domain.model.expert.ExpertRole;
 import com.tdm.domain.model.handling.ObjectNotFoundException;
+import com.tdm.domain.model.problem.Problem;
+import com.tdm.domain.model.problem.ProblemId;
 import com.tdm.domain.model.problem.ProblemRepository;
-import com.tdm.domain.model.problem.vo.GdmProblem;
-import com.tdm.domain.model.problem.vo.GdmProblemKey;
-import com.tdm.domain.model.problem.vo.dto.GdmProblemDto;
-import com.tdm.server.persistance.jdo.assembler.GdmProblemEntityAssembler;
-import com.tdm.server.persistance.jdo.entities.GdmProblemEntity;
 
 /**
  * @author Paweł Doleciński
@@ -55,23 +51,28 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 	 * @inheritDoc
 	 */
 	@Override
-	public GdmProblem read(GdmProblemKey id) throws ObjectNotFoundException {
-		GdmProblemEntity request = findRequest(id);
-		GdmProblemEntityAssembler assembler = new GdmProblemEntityAssembler();
-		return assembler.fromEntity(request);
+	public Problem read(ProblemId id) throws ObjectNotFoundException {
+		Key key = KeyFactory.createKey(Problem.class.getSimpleName(),
+				id.getIdString());
+		PersistenceManager pm = getPersistenceManager();
+		try {
+			Problem problem = pm.getObjectById(Problem.class, key);
+			return pm.detachCopy(problem);
+		} finally {
+			pm.close();
+		}
+
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	@Override
-	public GdmProblemDto create(GdmProblem problem) {
-		GdmProblemEntityAssembler assembler = new GdmProblemEntityAssembler();
-		GdmProblemEntity entity = assembler.toEntity(problem);
+	public Problem create(Problem problem) {
 		PersistenceManager pm = getPersistenceManager();
 		try {
-			GdmProblemEntity createdPersistent = pm.makePersistent(entity);
-			return assembler.fromEntity(createdPersistent);
+			Problem createdPersistent = pm.makePersistent(problem);
+			return pm.detachCopy(createdPersistent);
 		} finally {
 			pm.close();
 		}
@@ -79,7 +80,7 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 	}
 
 	@Override
-	public GdmProblemDto update(GdmProblem request) {
+	public Problem update(Problem request) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -88,7 +89,7 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 	 * @inheritDoc
 	 */
 	@Override
-	public void delete(GdmProblemKey id) throws ObjectNotFoundException {
+	public void delete(ProblemId id) throws ObjectNotFoundException {
 		PersistenceManager pm = getPersistenceManager();
 		try {
 			pm.deletePersistent(findRequest(id));
@@ -98,25 +99,17 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 	}
 
 	@Override
-	public List<GdmProblem> findAllAssignedTo(ExpertId expertId) {
+	public List<Problem> findAllAssignedTo(ExpertId expertId) {
 		PersistenceManager pm = getPersistenceManager();
 
-		Query q = pm.newQuery(GdmProblemEntity.class);
+		Query q = pm.newQuery(Problem.class);
 		q.setOrdering("creationDate asc");
 
 		try {
 			@SuppressWarnings("unchecked")
-			List<GdmProblemEntity> results = (List<GdmProblemEntity>) q
-					.execute();
-
+			List<Problem> results = (List<Problem>) q.execute();
 			if (!results.isEmpty()) {
-				GdmProblemEntityAssembler assembler = new GdmProblemEntityAssembler();
-				ArrayList<GdmProblem> res = new ArrayList<GdmProblem>();
-				for (GdmProblemEntity p : results) {
-
-					res.add(assembler.fromEntity(p));
-				}
-				return res;
+				return (List<Problem>) pm.detachCopyAll(results);
 			} else {
 				return Collections.emptyList();
 			}
@@ -127,19 +120,19 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 	}
 
 	@Override
-	public List<GdmProblem> findAllAssignedTo(ExpertId id, ExpertRole owner) {
+	public List<Problem> findAllAssignedTo(ExpertId id, ExpertRole owner) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private GdmProblemEntity findRequest(GdmProblemKey gdmProblemId)
+	private Problem findRequest(ProblemId gdmProblemId)
 			throws ObjectNotFoundException {
-		Key key = KeyFactory.createKey(GdmProblemEntity.class.getSimpleName(),
-				gdmProblemId.getId());
+		Key key = KeyFactory.createKey(Problem.class.getSimpleName(),
+				gdmProblemId.getIdString());
 		PersistenceManager pm = getPersistenceManager();
-		GdmProblemEntity problem = null;
+		Problem problem = null;
 		try {
-			problem = pm.getObjectById(GdmProblemEntity.class, key);
+			problem = pm.getObjectById(Problem.class, key);
 		} finally {
 			pm.close();
 		}

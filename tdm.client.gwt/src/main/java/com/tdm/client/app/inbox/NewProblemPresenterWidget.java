@@ -34,8 +34,8 @@ import com.tdm.client.dispatch.command.CreateGdmProblemAction;
 import com.tdm.client.dispatch.command.CreateGdmProblemResult;
 import com.tdm.client.event.ErrorOccuredEvent;
 import com.tdm.client.event.NewGdmProblemEvent;
-import com.tdm.domain.model.problem.vo.GdmProblem;
-import com.tdm.domain.model.problem.vo.jso.GdmProblemJso;
+import com.tdm.domain.model.problem.dto.ProblemJSO;
+import com.tdm.domain.model.problem.dto.Problem;
 
 /**
  * The {@link PresenterWidget} of a dialog box that is meant to be displayed
@@ -54,7 +54,7 @@ public class NewProblemPresenterWidget extends
 	 */
 	public interface Display extends PopupView,
 			HasUiHandlers<NewProblemUiHandlers> {
-		void showErrors(Set<ConstraintViolation<GdmProblemJso>> violations);
+		void showErrors(Set<ConstraintViolation<ProblemJSO>> violations);
 
 		void clear();
 	}
@@ -83,9 +83,9 @@ public class NewProblemPresenterWidget extends
 
 	@Override
 	public void createProblem(String title, String description) {
-		GdmProblemJso toValidation = GdmProblemJso.create(title, description);
+		ProblemJSO toValidation = ProblemJSO.create(title, description);
 
-		Set<ConstraintViolation<GdmProblemJso>> violations = validator
+		Set<ConstraintViolation<ProblemJSO>> violations = validator
 				.validate(toValidation);
 
 		if (!violations.isEmpty()) {
@@ -104,7 +104,7 @@ public class NewProblemPresenterWidget extends
 
 						@Override
 						public void onSuccess(CreateGdmProblemResult result) {
-							GdmProblem createdProblem = result
+							Problem createdProblem = result
 									.getCreatedProblem();
 							NewGdmProblemEvent.fire(
 									NewProblemPresenterWidget.this,

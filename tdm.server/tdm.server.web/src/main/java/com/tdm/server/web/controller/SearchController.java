@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tdm.domain.model.problem.vo.GdmProblem;
+import com.tdm.domain.model.problem.Problem;
+import com.tdm.domain.model.problem.dto.ProblemDTO;
 import com.tdm.server.application.problem.service.SearchService;
+import com.tdm.server.web.assembler.GdmProblemDtoAssembler;
 
 @Controller
 @RequestMapping("/search")
@@ -26,10 +28,12 @@ public final class SearchController {
 
 	@RequestMapping(value = "/problems", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<GdmProblem> getProblems(@RequestParam(value = "q", required=false) String filtr) {
-		List<GdmProblem> problems = service.retrieveProblemsForExpert(null);
+	public List<ProblemDTO> getProblems(
+			@RequestParam(value = "q", required = false) String filtr) {
+		List<Problem> problems = service.retrieveProblemsForExpert(null);
+		GdmProblemDtoAssembler ass = new GdmProblemDtoAssembler();
 
-		return problems;
+		return ass.fromEntityList(problems);
 	}
 
 }

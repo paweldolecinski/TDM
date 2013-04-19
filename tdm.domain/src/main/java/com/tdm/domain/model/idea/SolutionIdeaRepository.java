@@ -19,7 +19,7 @@ import java.util.Collection;
 
 import com.tdm.domain.model.handling.ConstraintsViolationException;
 import com.tdm.domain.model.handling.ObjectNotFoundException;
-import com.tdm.domain.model.problem.vo.GdmProblemKey;
+import com.tdm.domain.model.problem.ProblemId;
 
 /**
  * @author Paweł Doleciński
@@ -27,13 +27,13 @@ import com.tdm.domain.model.problem.vo.GdmProblemKey;
  */
 public interface SolutionIdeaRepository {
 
-	SolutionIdea read(GdmProblemKey problemId, SolutionIdeaId solutionIdeaId);
+	SolutionIdea read(ProblemId problemId, SolutionIdeaId solutionIdeaId);
 
 	void store(SolutionIdea soultionIdea) throws ObjectNotFoundException,
 			ConstraintsViolationException;
 
 	void delete(SolutionIdeaId id) throws ObjectNotFoundException;
 
-	Collection<SolutionIdea> findAllAssignedTo(GdmProblemKey problemId);
+	Collection<SolutionIdea> findAllAssignedTo(ProblemId problemId);
 
 }

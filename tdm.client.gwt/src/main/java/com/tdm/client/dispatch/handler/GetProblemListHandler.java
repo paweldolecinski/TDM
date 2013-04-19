@@ -23,7 +23,7 @@ import com.tdm.client.dispatch.AbstractRequestBuilderClientActionHandler;
 import com.tdm.client.dispatch.command.GetProblemListAction;
 import com.tdm.client.dispatch.command.GetProblemListResult;
 import com.tdm.client.util.UrlBuilder;
-import com.tdm.domain.model.problem.vo.jso.GdmProblemJso;
+import com.tdm.domain.model.problem.dto.ProblemJSO;
 
 /**
  * @author Paweł Doleciński
@@ -39,7 +39,7 @@ public class GetProblemListHandler
 
 	@Override
 	protected GetProblemListResult extractResult(final Response response) {
-		JsArray<GdmProblemJso> problems = JsonUtils
+		JsArray<ProblemJSO> problems = JsonUtils
 				.safeEval(response.getText());
 		return new GetProblemListResult(problems);
 	}
