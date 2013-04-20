@@ -36,6 +36,9 @@ public interface AppResources extends ClientBundle {
 
 	@Source("css/main.css")
 	MainCss mainCss();
+	
+	@Source("css/content.css")
+	ContentCss content();
 
 	@Source("css/naviBar.css")
 	NaviBarCss naviBar();

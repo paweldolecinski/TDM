@@ -1,4 +1,4 @@
-package com.tdm.client.app.inbox;
+package com.tdm.client.app.home;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 

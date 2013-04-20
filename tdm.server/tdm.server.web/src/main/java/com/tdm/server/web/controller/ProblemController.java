@@ -62,7 +62,7 @@ public final class ProblemController {
 
 			httpResponse_p.setStatus(HttpStatus.CREATED.value());
 			httpResponse_p.setHeader("Location", request_p.getContextPath()
-					+ "/problems/" + createdProblem.getKey());
+					+ "/problems/" + createdProblem.getEncodedKey());
 
 			return ass.fromEntity(createdProblem);
 		} catch (Exception e) {

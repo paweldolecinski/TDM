@@ -14,20 +14,20 @@
  * the License.
  */
 
-package com.tdm.client.app.inbox;
+package com.tdm.client.app.home;
 
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
-import com.google.gwt.event.dom.client.ClickEvent;
+import com.github.gwtbootstrap.client.ui.Form.SubmitEvent;
+import com.github.gwtbootstrap.client.ui.TextBox;
+import com.github.gwtbootstrap.client.ui.WellForm;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PopupPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PopupViewWithUiHandlers;
@@ -46,7 +46,7 @@ public class NewProblemView extends
 	}
 
 	@UiField
-	Button okButton;
+	WellForm form;
 	@UiField
 	TextBox titleBox;
 	@UiField
@@ -63,8 +63,9 @@ public class NewProblemView extends
 		asPopupPanel().setGlassEnabled(true);
 	}
 
-	@UiHandler("okButton")
-	void okButtonClicked(ClickEvent event) {
+	@UiHandler("form")
+	void onSubmit(SubmitEvent event) {
+		event.cancel();
 		getUiHandlers().createProblem(titleBox.getText(), descBox.getText());
 	}
 

@@ -99,6 +99,7 @@
 					</execution>
 				</executions>
 				<configuration>
+					<extraParam>true</extraParam>
 					<strict>true</strict>
 					<testTimeOut>180</testTimeOut>
 					<!-- With multiple tests use GwtTestSuite.java for speed -->

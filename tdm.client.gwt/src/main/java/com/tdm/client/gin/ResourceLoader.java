@@ -8,8 +8,10 @@ public class ResourceLoader {
 	public ResourceLoader(AppResources resources) {
 
 		resources.mainCss().ensureInjected();
+		resources.content().ensureInjected();
 		resources.naviBar().ensureInjected();
 		resources.welcome().ensureInjected();
+
 		// ... Inject more css into the document here on boot
 	}
 }

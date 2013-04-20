@@ -27,18 +27,7 @@ import com.google.gwt.resources.client.CssResource;
  */
 public interface MainCss extends CssResource {
 
-	String container();
-
-	@ClassName("content-main")
-	String content();
-
-	String footer();
-
-	String navSub();
-
 	String row();
-
-	String dropdownMenu();
 
 	String btn();
 
@@ -50,31 +39,11 @@ public interface MainCss extends CssResource {
 
 	String caret();
 
-	String span1();
-
-	String span2();
-
-	String span4();
-
-	String span5();
-
-	String span6();
-
-	String span7();
-
-	String span8();
-
 	String separator();
-
-	String copyright();
 
 	String problemList();
 
 	String problemListItem();
-
-	String thumbnails();
-
-	String thumbnail();
 
 	String caption();
 
@@ -86,17 +55,9 @@ public interface MainCss extends CssResource {
 
 	String create();
 
-	String problemTitle();
-
 	String clearfix();
 
 	String well();
-
-	String toolbar();
-
-	String right();
-
-	String blockShare();
 
 	String problemSolutions();
 
@@ -113,4 +74,5 @@ public interface MainCss extends CssResource {
 	String solutionAvatar();
 
 	String solutionComment();
+	
 }

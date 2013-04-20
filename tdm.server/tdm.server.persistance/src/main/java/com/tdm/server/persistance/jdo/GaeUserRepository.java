@@ -25,9 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import com.tdm.domain.model.user.LocalUser;
+import com.tdm.domain.model.user.User;
 import com.tdm.domain.model.user.UserRepository;
-import com.tdm.server.persistance.jdo.entities.UserEntity;
 
 /**
  * @author Paweł Doleciński
@@ -36,51 +35,46 @@ import com.tdm.server.persistance.jdo.entities.UserEntity;
 @Repository
 public class GaeUserRepository implements UserRepository {
 
-    @Autowired
-    @Qualifier("proxy")
-    private PersistenceManagerFactory persistenceManagerFactory;
+	@Autowired
+	@Qualifier("proxy")
+	private PersistenceManagerFactory persistenceManagerFactory;
 
-    public LocalUser findByUsername(String username) {
-	PersistenceManager pm = getPersistenceManager();
-	Query q = pm.newQuery(UserEntity.class);
-	q.setFilter("username == usernameParam");
-	q.declareParameters("String usernameParam");
-	try {
-	    @SuppressWarnings("unchecked")
-	    List<UserEntity> results = (List<UserEntity>) q.execute(username);
-	    if (!results.isEmpty() && results.size() == 1) {
-		UserEntityAssembler assembler = new UserEntityAssembler();
-		UserEntity detachCopy = pm.detachCopy(results.get(0));
-		return assembler.fromEntity(detachCopy);
-	    }
-	} finally {
-	    pm.close();
-	}
-	return null;
-    }
-
-    @Override
-    public LocalUser store(LocalUser user) {
-	PersistenceManager pm = getPersistenceManager();
-	UserEntityAssembler assembler = new UserEntityAssembler();
-	try {
-	    UserEntity entity = assembler.toEntity(user);
-	    UserEntity createdPersistent = pm.makePersistent(entity);
-	    createdPersistent = pm.detachCopy(createdPersistent);
-	    return assembler.fromEntity(createdPersistent);
-	} finally {
-	    pm.close();
+	public User findByUsername(String username) {
+		PersistenceManager pm = getPersistenceManager();
+		Query q = pm.newQuery(User.class);
+		q.setFilter("username == usernameParam");
+		q.declareParameters("String usernameParam");
+		try {
+			@SuppressWarnings("unchecked")
+			List<User> results = (List<User>) q.execute(username);
+			if (!results.isEmpty() && results.size() == 1) {
+				return pm.detachCopy(results.get(0));
+			}
+		} finally {
+			pm.close();
+		}
+		return null;
 	}
 
-    }
+	@Override
+	public User store(User user) {
+		PersistenceManager pm = getPersistenceManager();
+		try {
+			User createdPersistent = pm.makePersistent(user);
+			return pm.detachCopy(createdPersistent);
+		} finally {
+			pm.close();
+		}
 
-    public UserEntity update(UserEntity user) {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	}
 
-    private PersistenceManager getPersistenceManager() {
-	return persistenceManagerFactory.getPersistenceManager();
-    }
+	public User update(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private PersistenceManager getPersistenceManager() {
+		return persistenceManagerFactory.getPersistenceManager();
+	}
 
 }

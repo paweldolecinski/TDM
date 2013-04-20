@@ -1,0 +1,23 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+
+	<g:DialogBox modal="false">
+		<g:caption>
+			<b>New Problem</b>
+		</g:caption>
+		<g:HTMLPanel>
+			<g:HTML ui:field="errors" />
+
+			<b:WellForm ui:field="form">
+				<b:ControlLabel>Problem name</b:ControlLabel>
+				<b:TextBox placeholder="Problem name…" ui:field="titleBox" />
+				<b:ControlLabel>Description</b:ControlLabel>
+				<b:TextBox placeholder="Description…" ui:field="descBox" />
+				<b:HelpBlock>Description is optional.</b:HelpBlock>
+
+				<b:SubmitButton addStyleNames="btn">Submit</b:SubmitButton>
+			</b:WellForm>
+		</g:HTMLPanel>
+	</g:DialogBox>
+</ui:UiBinder> 

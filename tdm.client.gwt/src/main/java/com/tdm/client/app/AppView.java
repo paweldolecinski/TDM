@@ -15,7 +15,6 @@
  */
 package com.tdm.client.app;
 
-
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -25,8 +24,7 @@ import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.ViewImpl;
 
-public class AppView extends ViewImpl implements
-		AppPresenter.Display {
+public class AppView extends ViewImpl implements AppPresenter.Display {
 
 	public interface Binder extends UiBinder<Widget, AppView> {
 	}
@@ -35,6 +33,8 @@ public class AppView extends ViewImpl implements
 
 	@UiField
 	protected FlowPanel mainContentPanel;
+	@UiField
+	protected FlowPanel rightContentPanel;
 
 	@Inject
 	public AppView(Binder binder, EventBus eventBus) {
@@ -50,6 +50,8 @@ public class AppView extends ViewImpl implements
 	public void setInSlot(Object slot, IsWidget content) {
 		if (slot == AppPresenter.TYPE_MainContent) {
 			setMainContent(content);
+		} else if (slot == AppPresenter.TYPE_RightContent) {
+			setRightContent(content);
 		} else {
 			super.setInSlot(slot, content);
 		}
@@ -57,9 +59,15 @@ public class AppView extends ViewImpl implements
 
 	private void setMainContent(IsWidget content) {
 		mainContentPanel.clear();
-		mainContentPanel.setVisible(true);
 		if (content != null) {
 			mainContentPanel.add(content);
+		}
+	}
+
+	private void setRightContent(IsWidget content) {
+		rightContentPanel.clear();
+		if (content != null) {
+			rightContentPanel.add(content);
 		}
 	}
 }

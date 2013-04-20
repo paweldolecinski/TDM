@@ -1,17 +1,16 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
 
 	<ui:with field="res" type="com.tdm.client.resources.AppResources" />
 
 	<g:HTMLPanel styleName="{res.naviBar.navbarInner}">
 
 		<g:HTMLPanel styleName="{res.naviBar.navbarRight}">
-			<g:Anchor styleName="{res.mainCss.btn} {res.mainCss.btnDiscreet}"
-				href="#">
-				Paweł
-				<span class="{res.mainCss.caret}" />
-			</g:Anchor>
+			<b:DropdownButton text="Unknown" addStyleNames="{res.naviBar.userMenu}"
+				ui:field="userMenu">
+				<b:NavLink href="/signout">Sign out</b:NavLink>
+			</b:DropdownButton>
 
 		</g:HTMLPanel>
 

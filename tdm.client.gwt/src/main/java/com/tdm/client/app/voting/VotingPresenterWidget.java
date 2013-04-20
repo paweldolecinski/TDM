@@ -17,23 +17,48 @@ package com.tdm.client.app.voting;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.mvp.client.PresenterWidget;
+import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
+import com.tdm.client.app.AppPresenter;
+import com.tdm.client.event.navi.HideVotingPresenterEvent;
+import com.tdm.client.event.navi.HideVotingPresenterEvent.HideVotingPresenterHandler;
+import com.tdm.client.event.navi.RevealVotingPresenterEvent;
+import com.tdm.client.event.navi.RevealVotingPresenterEvent.RevealVotingPresenterHandler;
 
-public class VotingPresenterWidget
-		extends
-		PresenterWidget<VotingPresenterWidget.Display> {
+public class VotingPresenterWidget extends
+		Presenter<VotingPresenterWidget.Display, VotingPresenterWidget.IProxy>
+		implements RevealVotingPresenterHandler, HideVotingPresenterHandler {
+
+	@ProxyCodeSplit
+	public interface IProxy extends Proxy<VotingPresenterWidget> {
+	}
 
 	public interface Display extends View {
 	}
 
 	@Inject
-	public VotingPresenterWidget(EventBus eventBus, Display view) {
-		super(eventBus, view);
+	public VotingPresenterWidget(EventBus eventBus, Display view, IProxy proxy) {
+		super(eventBus, view, proxy, AppPresenter.TYPE_RightContent);
 	}
 
 	@Override
 	protected void onBind() {
 		super.onBind();
+	}
+
+	@ProxyEvent
+	@Override
+	public void onRevealVotingPresenter(RevealVotingPresenterEvent event) {
+		forceReveal();
+	}
+
+	@ProxyEvent
+	@Override
+	public void onHideVotingPresenter(HideVotingPresenterEvent event) {
+		RevealContentEvent.fire(this, AppPresenter.TYPE_RightContent, null);
 	}
 }

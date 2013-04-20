@@ -52,7 +52,6 @@ public class GdmProblemServiceTest {
 
 		Assert.assertEquals(name, result.getName());
 		Assert.assertEquals(description, result.getDescription());
-		Assert.assertEquals(id, result.getKey());
 	}
 
 	@Test

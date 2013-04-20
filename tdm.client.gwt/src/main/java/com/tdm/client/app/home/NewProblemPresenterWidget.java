@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.tdm.client.app.inbox;
+package com.tdm.client.app.home;
 
 import java.util.Set;
 
@@ -30,12 +30,15 @@ import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.tdm.client.dispatch.command.CreateGdmProblemAction;
 import com.tdm.client.dispatch.command.CreateGdmProblemResult;
 import com.tdm.client.event.ErrorOccuredEvent;
 import com.tdm.client.event.NewGdmProblemEvent;
-import com.tdm.domain.model.problem.dto.ProblemJSO;
+import com.tdm.client.place.NameTokens;
 import com.tdm.domain.model.problem.dto.Problem;
+import com.tdm.domain.model.problem.dto.ProblemJSO;
 
 /**
  * The {@link PresenterWidget} of a dialog box that is meant to be displayed
@@ -47,7 +50,8 @@ public class NewProblemPresenterWidget extends
 		NewProblemUiHandlers {
 
 	private final DispatchAsync dispatch;
-	Validator validator;
+	private Validator validator;
+	private final PlaceManager placeManager;
 
 	/**
 	 * {@link NewProblemPresenterWidget}'s PopupView.
@@ -61,9 +65,11 @@ public class NewProblemPresenterWidget extends
 
 	@Inject
 	public NewProblemPresenterWidget(final EventBus eventBus,
-			final Display view, final DispatchAsync dispatch) {
+			final Display view, final DispatchAsync dispatch,
+			final PlaceManager placeManager) {
 		super(eventBus, view);
 		this.dispatch = dispatch;
+		this.placeManager = placeManager;
 		getView().setUiHandlers(this);
 	}
 
@@ -104,11 +110,15 @@ public class NewProblemPresenterWidget extends
 
 						@Override
 						public void onSuccess(CreateGdmProblemResult result) {
-							Problem createdProblem = result
-									.getCreatedProblem();
+							Problem createdProblem = result.getCreatedProblem();
 							NewGdmProblemEvent.fire(
 									NewProblemPresenterWidget.this,
 									createdProblem);
+							PlaceRequest request = new PlaceRequest(
+									NameTokens.problem).with(
+									NameTokens.Params.problemId,
+									createdProblem.getKey());
+							placeManager.revealPlace(request);
 							getView().hide();
 						}
 					});

@@ -1,7 +1,7 @@
 package com.tdm.client.app.ui;
 
+import com.github.gwtbootstrap.client.ui.Paragraph;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.google.gwt.i18n.shared.DateTimeFormat.PredefinedFormat;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -48,7 +48,7 @@ public class ProblemListItemWidget extends Composite {
 	@UiField
 	protected InlineHyperlink title;
 	@UiField
-	protected ParagraphElement description;
+	protected Paragraph description;
 	@UiField
 	protected InlineLabel creationDate;
 
@@ -81,9 +81,9 @@ public class ProblemListItemWidget extends Composite {
 				"style",
 				"background-image:url("
 						+ resources.problemDefaultImage().getSafeUri()
-								.asString() + "); background-size: cover;");
+								.asString() + "); background-size: cover;min-height: 170px;display: block;");
 
-		description.setInnerText(problem.getDescription());
+		description.setText(problem.getDescription());
 
 	}
 }

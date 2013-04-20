@@ -1,5 +1,6 @@
 package com.tdm.client.app.navibar;
 
+import com.github.gwtbootstrap.client.ui.DropdownButton;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -21,6 +22,8 @@ public class NaviBarView extends ViewImpl implements
 	protected InlineHyperlink learnLink;
 	@UiField
 	protected InlineHyperlink exploreLink;
+	@UiField
+	protected DropdownButton userMenu;
 
 	@Inject
 	public NaviBarView(Binder binder) {
@@ -35,5 +38,10 @@ public class NaviBarView extends ViewImpl implements
 	@UiHandler({ "learnLink", "exploreLink" })
 	void handleMenuClick(ClickEvent e) {
 		Window.alert("Under construction. Sorry :(");
+	}
+
+	@Override
+	public void setUserName(String username) {
+		userMenu.setText(username);
 	}
 }

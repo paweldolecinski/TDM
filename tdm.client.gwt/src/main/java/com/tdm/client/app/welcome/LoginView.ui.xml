@@ -7,7 +7,7 @@
 	<g:HTMLPanel styleName="{res.welcome.head}">
 		<g:HTMLPanel styleName="{res.welcome.welcome} {res.mainCss.row}">
 
-			<g:HTMLPanel styleName="{res.welcome.logo} {res.mainCss.span4}">
+			<g:HTMLPanel styleName="{res.welcome.logo} {res.content.span4}">
 				<g:Label styleName="{res.welcome.logoName}">TDM</g:Label>
 				<small>make decision</small>
 			</g:HTMLPanel>

@@ -356,7 +356,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -456,6 +455,25 @@
 										</versionRange>
 										<goals>
 											<goal>add-source</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.datanucleus
+										</groupId>
+										<artifactId>
+											maven-datanucleus-plugin
+										</artifactId>
+										<versionRange>
+											[3.1.2,)
+										</versionRange>
+										<goals>
+											<goal>enhance</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>

@@ -4,6 +4,19 @@
 
 	<ui:with field="res" type="com.tdm.client.resources.AppResources" />
 
-	<g:FlowPanel styleName="{res.mainCss.content}" ui:field="mainContentPanel" />
+	<g:FlowPanel styleName="{res.content.rowFluid}">
+		<g:FlowPanel styleName="{res.content.span8} {res.content.indexMain}">
+
+			<g:FlowPanel styleName="{res.content.indexLeft}">
+			</g:FlowPanel>
+			<g:FlowPanel styleName="{res.content.indexCenter}"
+				ui:field="mainContentPanel" />
+
+		</g:FlowPanel>
+
+		<g:FlowPanel styleName="{res.content.span4} {res.content.indexRight}" ui:field="rightContentPanel">
+		</g:FlowPanel>
+
+	</g:FlowPanel>
 
 </ui:UiBinder>

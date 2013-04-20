@@ -13,7 +13,7 @@ public class GdmProblemDtoAssembler {
 	 */
 	public ProblemDTO fromEntity(Problem entity) {
 		ProblemDTO gdmProblemDto = new ProblemDTO();
-		gdmProblemDto.setKey(entity.getKey());
+		gdmProblemDto.setKey(entity.getEncodedKey());
 		gdmProblemDto.setName(entity.getName());
 		gdmProblemDto.setDescription(entity.getDescription());
 		gdmProblemDto.setCreationDate(entity.getCreationDate());

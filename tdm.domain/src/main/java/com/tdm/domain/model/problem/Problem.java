@@ -34,14 +34,9 @@ public class Problem {
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
 	private String encodedKey;
-	
-	
-	@Persistent
-    @Extension(vendorName="datanucleus", key="gae.pk-name", value="true")
-    private String key;
-	
+
 	@Persistent
 	private Date creationDate = new Date();
 	@Persistent
@@ -53,11 +48,8 @@ public class Problem {
 	@Persistent
 	private CurrentConsensus currentConsensus;
 
-	public Problem() {
-	}
-
-	public String getKey() {
-		return key;
+	public String getEncodedKey() {
+		return encodedKey;
 	}
 
 	public Date getCreationDate() {

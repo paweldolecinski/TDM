@@ -25,21 +25,51 @@ import com.google.gwt.resources.client.CssResource;
  * @author Paweł Doleciński
  * 
  */
-public interface NaviBarCss extends CssResource {
+public interface ContentCss extends CssResource {
 
-	String navbar();
+	@ClassName("row-fluid")
+	String rowFluid();
+
+	@ClassName("index-main")
+	String indexMain();
+
+	@ClassName("index-right")
+	String indexRight();
+
+	@ClassName("index-left")
+	String indexLeft();
+
+	@ClassName("index-center")
+	String indexCenter();
+
+	String span1();
+
+	String span2();
+
+	String span3();
+
+	String span4();
+
+	String span5();
+
+	String span6();
+
+	String span7();
+
+	String span8();
+
+	@ClassName("info-panel")
+	String infoPanel();
+
+	@ClassName("tab-well")
+	String tabWell();
 	
-	String navbarFixedTop();
+	@ClassName("tab-content")
+	String tabContent();
 	
-	String navbarInner();
+	@ClassName("empty-placeholder")
+	String emptyPlaceholder();
 	
-	String navbarRight();
-	
-	String navbarLeft();
-	
-	String brand();
-	
-	String navMain();
-	
-	String userMenu();
+	@ClassName("print_and_settings")
+	String printAndSettings();
 }

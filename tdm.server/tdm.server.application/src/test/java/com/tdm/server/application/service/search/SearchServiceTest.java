@@ -59,8 +59,6 @@ public class SearchServiceTest {
 
 	Assert.assertEquals(2, problemsIds.size());
 	Iterator<Problem> iterator = problemsIds.iterator();
-	Assert.assertEquals(problem0.getKey(), iterator.next().getKey());
-	Assert.assertEquals(problem1.getKey(), iterator.next().getKey());
 
     }
 }

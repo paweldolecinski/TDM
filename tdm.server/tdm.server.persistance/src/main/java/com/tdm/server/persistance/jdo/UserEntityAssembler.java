@@ -5,16 +5,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.tdm.domain.model.user.LocalUser;
-import com.tdm.domain.model.user.Role;
-import com.tdm.server.persistance.jdo.entities.UserEntity;
+import com.tdm.domain.model.user.User;
+import com.tdm.domain.model.user.dto.LocalUser;
+import com.tdm.domain.model.user.dto.Role;
 
 public class UserEntityAssembler {
 
     /**
      * Simply creates {@code RequestDTO} based on JPA Request entity.
      */
-    public LocalUser fromEntity(UserEntity entity) {
+    public LocalUser fromEntity(User entity) {
 	LocalUser localUser = new LocalUser();
 	localUser.setName(entity.getName());
 	localUser.setUsername(entity.getUsername());
@@ -29,8 +29,8 @@ public class UserEntityAssembler {
 	return localUser;
     }
 
-    public UserEntity toEntity(LocalUser user) {
-	UserEntity entity = new UserEntity();
+    public User toEntity(LocalUser user) {
+	User entity = new User();
 	entity.setUsername(user.getUsername());
 	entity.setEmail(user.getEmail());
 	entity.setName(user.getName());

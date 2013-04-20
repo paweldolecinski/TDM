@@ -9,8 +9,8 @@ import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 import com.tdm.client.app.navibar.NaviBarPresenterWidget;
-import com.tdm.client.event.RevealWelcomeContentEvent;
-import com.tdm.client.event.RevealWelcomeContentEvent.RevealWelcomeContentHandler;
+import com.tdm.client.event.navi.RevealWelcomeContentEvent;
+import com.tdm.client.event.navi.RevealWelcomeContentEvent.RevealWelcomeContentHandler;
 import com.tdm.client.resources.AppResources;
 
 public class BodyPresenter extends RootPresenter implements

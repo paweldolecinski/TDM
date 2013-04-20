@@ -13,14 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.tdm.client.app.inbox;
+package com.tdm.client.app.home;
 
 import java.util.HashMap;
 
-import com.google.gwt.dom.client.Document;
+import com.github.gwtbootstrap.client.ui.Thumbnails;
 import com.google.gwt.dom.client.HeadingElement;
-import com.google.gwt.dom.client.LIElement;
-import com.google.gwt.dom.client.UListElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -51,25 +49,20 @@ public class HomeView extends ViewWithUiHandlers<ProblemListUiHandlers>
 	@UiField
 	protected HTMLPanel headerPanel;
 	@UiField
-	protected UListElement problemList;
+	protected Thumbnails problemList;
 	@UiField
 	protected Button createButton;
 	@UiField
 	protected HeadingElement problemCounter;
-	@UiField
-	protected LIElement createItem;
 
 	private HashMap<Problem, ProblemListItemWidget> problemWidgetMap = new HashMap<Problem, ProblemListItemWidget>();
 
 	private Provider<ProblemListItemWidget> problemWidgetProvider;
 
-	private AppResources resources;
-
 	@Inject
 	public HomeView(Binder binder, EventBus eventBus,
 			Provider<ProblemListItemWidget> problemWidgetProvider,
 			AppResources resources) {
-		this.resources = resources;
 		widget = binder.createAndBindUi(this);
 		this.problemWidgetProvider = problemWidgetProvider;
 	}
@@ -81,25 +74,28 @@ public class HomeView extends ViewWithUiHandlers<ProblemListUiHandlers>
 
 	@Override
 	public void addProblemListItem(Problem problem) {
-		LIElement liElement = Document.get().createLIElement();
-		liElement.addClassName(resources.mainCss().span4());
 		ProblemListItemWidget item = problemWidgetProvider.get();
 		item.init(problem);
 		problemWidgetMap.put(problem, item);
-		liElement.appendChild(item.getElement());
-		problemList.insertAfter(liElement, createItem);
-		problemCounter.setInnerText("You have "
-				+ (problemList.getChildCount() - 2) + " problems");
+		problemList.add(item);
+
+		int i = problemWidgetMap.size();
+		problemCounter.setInnerText("You have " + i
+				+ (i > 1 ? " problems" : " problem"));
 	}
 
 	@Override
 	public void clearProblemList() {
-		while (problemList.getChildCount() > 2)
-			problemList.removeChild(problemList.getLastChild());
+		for (ProblemListItemWidget problemListItemWidget : problemWidgetMap
+				.values()) {
+			problemList.remove(problemListItemWidget);
+		}
+
+		problemWidgetMap.clear();
 	}
 
 	@UiHandler("createButton")
-	void handleClick(ClickEvent e) {
+	void onClick(ClickEvent event) {
 		getUiHandlers().createNewProblem();
 	}
 }

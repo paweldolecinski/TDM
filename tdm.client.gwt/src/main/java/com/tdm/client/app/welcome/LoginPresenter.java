@@ -23,7 +23,7 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.tdm.client.event.RevealWelcomeContentEvent;
+import com.tdm.client.event.navi.RevealWelcomeContentEvent;
 import com.tdm.client.place.NameTokens;
 
 public class LoginPresenter extends

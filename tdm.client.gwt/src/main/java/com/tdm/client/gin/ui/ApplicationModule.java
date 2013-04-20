@@ -20,14 +20,12 @@ import com.tdm.client.app.AppPresenter;
 import com.tdm.client.app.AppView;
 import com.tdm.client.app.error.ErrorPagePresenter;
 import com.tdm.client.app.error.ErrorPageView;
-import com.tdm.client.app.inbox.HomeView;
-import com.tdm.client.app.inbox.HomePresenter;
-import com.tdm.client.app.inbox.NewProblemPresenterWidget;
-import com.tdm.client.app.inbox.NewProblemView;
+import com.tdm.client.app.home.HomePresenter;
+import com.tdm.client.app.home.HomeView;
+import com.tdm.client.app.home.NewProblemPresenterWidget;
+import com.tdm.client.app.home.NewProblemView;
 import com.tdm.client.app.navibar.NaviBarPresenterWidget;
 import com.tdm.client.app.navibar.NaviBarView;
-import com.tdm.client.app.popup.LocalDialogPresenterWidget;
-import com.tdm.client.app.popup.LocalDialogView;
 import com.tdm.client.app.problem.BrainstormPresenterWidget;
 import com.tdm.client.app.problem.BrainstormView;
 import com.tdm.client.app.problem.NewSolutionPresenterWidget;
@@ -66,10 +64,9 @@ public class ApplicationModule extends AbstractPresenterModule {
 		/*
 		 * Inbox section
 		 */
-		bindPresenter(HomePresenter.class,
-				HomePresenter.Display.class, HomeView.class,
-				HomePresenter.IProxy.class);
-		
+		bindPresenter(HomePresenter.class, HomePresenter.Display.class,
+				HomeView.class, HomePresenter.IProxy.class);
+
 		bindSingletonPresenterWidget(NewProblemPresenterWidget.class,
 				NewProblemPresenterWidget.Display.class, NewProblemView.class);
 
@@ -87,18 +84,13 @@ public class ApplicationModule extends AbstractPresenterModule {
 		bindSingletonPresenterWidget(BrainstormPresenterWidget.class,
 				BrainstormPresenterWidget.Display.class, BrainstormView.class);
 
-		bindSingletonPresenterWidget(VotingPresenterWidget.class,
-				VotingPresenterWidget.Display.class, ProblemVotingView.class);
+		bindPresenter(VotingPresenterWidget.class,
+				VotingPresenterWidget.Display.class, ProblemVotingView.class,
+				VotingPresenterWidget.IProxy.class);
 
 		bindPresenterWidget(SingleSolutionPresenterWidget.class,
 				SingleSolutionPresenterWidget.Display.class,
 				SingleSolutionView.class);
-
-		/*
-		 * Pop-ups section
-		 */
-		bindPresenterWidget(LocalDialogPresenterWidget.class,
-				LocalDialogPresenterWidget.View.class, LocalDialogView.class);
 
 	}
 }

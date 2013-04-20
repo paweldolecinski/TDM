@@ -25,10 +25,10 @@ import com.gwtplatform.mvp.client.gin.PresenterSetupModule;
 import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics;
 import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl;
 import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsNavigationTracker;
-import com.gwtplatform.mvp.client.proxy.DefaultPlaceManager;
 import com.gwtplatform.mvp.client.proxy.RouteTokenFormatter;
 import com.tdm.client.app.BodyPresenter;
 import com.tdm.client.gin.ui.ApplicationModule;
+import com.tdm.client.place.TdmPlaceManager;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -37,7 +37,7 @@ public class ClientModule extends AbstractPresenterModule {
 
 	bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
 
-	install(new PresenterSetupModule(DefaultPlaceManager.class,
+	install(new PresenterSetupModule(TdmPlaceManager.class,
 			RouteTokenFormatter.class));
 
 	install(new ClientDispatchModule());

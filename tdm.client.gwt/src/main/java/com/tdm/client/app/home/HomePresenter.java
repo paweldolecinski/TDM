@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.tdm.client.app.inbox;
+package com.tdm.client.app.home;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
@@ -31,10 +31,9 @@ import com.tdm.client.app.AppPresenter;
 import com.tdm.client.dispatch.command.GetProblemListAction;
 import com.tdm.client.dispatch.command.GetProblemListResult;
 import com.tdm.client.event.ErrorOccuredEvent;
-import com.tdm.client.event.NewGdmProblemEvent;
 import com.tdm.client.place.NameTokens;
-import com.tdm.domain.model.problem.dto.ProblemJSO;
 import com.tdm.domain.model.problem.dto.Problem;
+import com.tdm.domain.model.problem.dto.ProblemJSO;
 
 /**
  * @author Paweł Doleciński
@@ -79,18 +78,6 @@ public class HomePresenter extends
 	@Override
 	protected void onBind() {
 		super.onBind();
-		addRegisteredHandler(NewGdmProblemEvent.getType(),
-				new NewGdmProblemEvent.NewGdmProblemHandler() {
-
-					@Override
-					public void onNewGdmProblem(NewGdmProblemEvent event) {
-						addProblemToList(event.getCreatedProblem());
-					}
-				});
-	}
-
-	private void addProblemToList(Problem newProblem) {
-		getView().addProblemListItem(newProblem);
 	}
 
 	private void getDecisionProblemList(String filter) {

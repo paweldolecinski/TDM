@@ -2,8 +2,25 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<g:HTMLPanel>
+	<ui:with field="res" type="com.tdm.client.resources.AppResources" />
 
-	</g:HTMLPanel>
+	<g:FlowPanel styleName="{res.content.infoPanel}">
+		<g:HTMLPanel styleName="{res.mainCss.well}">
+			<h4>Results</h4>
+			<p class="{res.content.emptyPlaceholder}">
+				No results
+			</p>
+		</g:HTMLPanel>
 
+		<g:FlowPanel styleName="{res.content.tabWell} {res.mainCss.well}">
+			<g:FlowPanel styleName="{res.content.tabContent}">
+				<g:HTMLPanel>
+					<h4>Latest Activity</h4>
+					<p class="{res.content.emptyPlaceholder}">
+						No recent activity
+					</p>
+				</g:HTMLPanel>
+			</g:FlowPanel>
+		</g:FlowPanel>
+	</g:FlowPanel>
 </ui:UiBinder> 

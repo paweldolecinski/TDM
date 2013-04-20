@@ -15,27 +15,24 @@
  */
 package com.tdm.client.app.problem;
 
-
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
-import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.tdm.client.app.AppPresenter;
-import com.tdm.client.app.voting.VotingPresenterWidget;
+import com.tdm.client.event.navi.HideVotingPresenterEvent;
+import com.tdm.client.event.navi.RevealVotingPresenterEvent;
 import com.tdm.client.place.NameTokens;
 
 /**
  * @author Paweł Doleciński
  * 
  */
-public class ProblemDicussionPresenter extends
+public class ProblemDicussionPresenter
+		extends
 		Presenter<ProblemDicussionPresenter.Display, ProblemDicussionPresenter.IProxy> {
 
 	public interface Display extends View {
@@ -46,59 +43,40 @@ public class ProblemDicussionPresenter extends
 	public interface IProxy extends ProxyPlace<ProblemDicussionPresenter> {
 	}
 
-	@ContentSlot
-	public static final Type<RevealContentHandler<?>> TYPE_NewSolution = new Type<RevealContentHandler<?>>();
+	public static final Object TYPE_NewSolution = new Object();
 
-	@ContentSlot
-	public static final Type<RevealContentHandler<?>> TYPE_Brainstorm = new Type<RevealContentHandler<?>>();
-
-	@ContentSlot
-	public static final Type<RevealContentHandler<?>> TYPE_Voting = new Type<RevealContentHandler<?>>();
+	public static final Object TYPE_Brainstorm = new Object();
 
 	private final NewSolutionPresenterWidget newSolution;
 
 	private final BrainstormPresenterWidget brainstorm;
 
-	private final VotingPresenterWidget voting;
-
 	@Inject
-	public ProblemDicussionPresenter(EventBus eventBus, Display view, IProxy proxy,
-			NewSolutionPresenterWidget newSolution,
-			BrainstormPresenterWidget brainstorm,
-			VotingPresenterWidget voting) {
-		super(eventBus, view, proxy);
+	public ProblemDicussionPresenter(EventBus eventBus, Display view,
+			IProxy proxy, NewSolutionPresenterWidget newSolution,
+			BrainstormPresenterWidget brainstorm) {
+		super(eventBus, view, proxy, AppPresenter.TYPE_MainContent);
 		this.newSolution = newSolution;
 		this.brainstorm = brainstorm;
-		this.voting = voting;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.gwtplatform.mvp.client.PresenterWidget#onReveal()
-	 */
 	@Override
 	protected void onReveal() {
 		super.onReveal();
+		RevealVotingPresenterEvent.fire(this);
 		setInSlot(TYPE_NewSolution, newSolution);
 		setInSlot(TYPE_Brainstorm, brainstorm);
 	}
 
-	
 	@Override
 	protected void onHide() {
 		super.onHide();
+		HideVotingPresenterEvent.fire(this);
 	}
 
 	@Override
 	protected void onBind() {
 		super.onBind();
-	}
-
-	@Override
-	protected void revealInParent() {
-		RevealContentEvent.fire(this, AppPresenter.TYPE_MainContent,
-				this);
 	}
 
 }
