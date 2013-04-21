@@ -48,8 +48,6 @@ public class ProblemListItemWidget extends Composite {
 	@UiField
 	protected InlineHyperlink title;
 	@UiField
-	protected Paragraph description;
-	@UiField
 	protected InlineLabel creationDate;
 
 	private PlaceManager placeManager;
@@ -64,7 +62,11 @@ public class ProblemListItemWidget extends Composite {
 	}
 
 	public void init(Problem problem) {
-		title.setText(problem.getName());
+		String name = problem.getName();
+		if (name.length() > 50) {
+			name = name.substring(0, 50) + "...";
+		}
+		title.setText(name);
 
 		String token = placeManager.buildHistoryToken(new PlaceRequest(
 				NameTokens.problem).with(NameTokens.Params.problemId,
@@ -77,13 +79,14 @@ public class ProblemListItemWidget extends Composite {
 				PredefinedFormat.DATE_TIME_MEDIUM).format(
 				problem.getCreationDate());
 		creationDate.setText(date);
-		titleImage.getElement().setAttribute(
-				"style",
-				"background-image:url("
-						+ resources.problemDefaultImage().getSafeUri()
-								.asString() + "); background-size: cover;min-height: 170px;display: block;");
-
-		description.setText(problem.getDescription());
+		titleImage
+				.getElement()
+				.setAttribute(
+						"style",
+						"background-image:url("
+								+ resources.problemDefaultImage().getSafeUri()
+										.asString()
+								+ "); background-size: cover;min-height: 170px;display: block;");
 
 	}
 }

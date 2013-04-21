@@ -1,22 +1,18 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:tdm="urn:import:com.tdm.client.app.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui"
+	xmlns:bs="urn:import:com.github.gwtbootstrap.client.ui.base">
 
-	<ui:with field="res" type="com.tdm.client.resources.AppResources" />
-
-	<g:FlowPanel styleName="{res.content.rowFluid}">
-		<g:FlowPanel styleName="{res.content.span8} {res.content.indexMain}">
-
-			<g:FlowPanel styleName="{res.content.indexLeft}">
-			</g:FlowPanel>
-			<g:FlowPanel styleName="{res.content.indexCenter}"
+	<b:FluidRow>
+		<b:Column size="8" addStyleNames="index-main">
+			<bs:HtmlWidget tag="div" addStyleNames="index-left"
+				ui:field="leftContentPanel" hideOn="PHONE" />
+			<bs:HtmlWidget tag="div" addStyleNames="index-center"
 				ui:field="mainContentPanel" />
+		</b:Column>
 
-		</g:FlowPanel>
+		<b:Column size="4" addStyleNames="index-right" ui:field="rightContentPanel" />
 
-		<g:FlowPanel styleName="{res.content.span4} {res.content.indexRight}" ui:field="rightContentPanel">
-		</g:FlowPanel>
-
-	</g:FlowPanel>
+	</b:FluidRow>
 
 </ui:UiBinder>

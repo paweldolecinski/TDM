@@ -60,7 +60,9 @@ public class NewProblemPresenterWidget extends
 			HasUiHandlers<NewProblemUiHandlers> {
 		void showErrors(Set<ConstraintViolation<ProblemJSO>> violations);
 
-		void clear();
+		void onHide();
+		
+		void onReveal();
 	}
 
 	@Inject
@@ -82,9 +84,14 @@ public class NewProblemPresenterWidget extends
 	}
 
 	@Override
+	protected void onReveal() {
+		super.onReveal();
+		getView().onReveal();
+	}
+	@Override
 	protected void onHide() {
 		super.onHide();
-		getView().clear();
+		getView().onHide();
 	}
 
 	@Override

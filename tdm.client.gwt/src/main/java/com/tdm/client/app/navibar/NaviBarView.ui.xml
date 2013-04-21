@@ -9,6 +9,8 @@
 		<g:HTMLPanel styleName="{res.naviBar.navbarRight}">
 			<b:DropdownButton text="Unknown" addStyleNames="{res.naviBar.userMenu}"
 				ui:field="userMenu">
+				<b:NavLink href="/#/about">About</b:NavLink>
+				<b:Divider />
 				<b:NavLink href="/signout">Sign out</b:NavLink>
 			</b:DropdownButton>
 

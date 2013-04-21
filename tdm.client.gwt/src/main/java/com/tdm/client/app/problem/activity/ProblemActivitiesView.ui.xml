@@ -1,0 +1,25 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+
+	<ui:with field="res" type="com.tdm.client.resources.AppResources" />
+
+	<g:FlowPanel styleName="{res.content.infoPanel}">
+		<b:Well addStyleNames="well-small">
+			<h4>Results</h4>
+			<p class="{res.content.emptyPlaceholder}">
+				No results
+			</p>
+		</b:Well>
+
+		<b:TabPanel addStyleNames="well well-small hide-tabs">
+			<b:TabPane active="true">
+				<b:Heading size="4">Latest Activity</b:Heading>
+				<b:Paragraph addStyleNames="{res.content.emptyPlaceholder}">
+					No recent activity
+				</b:Paragraph>
+			</b:TabPane>
+		</b:TabPanel>
+
+	</g:FlowPanel>
+</ui:UiBinder> 

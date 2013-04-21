@@ -5,57 +5,40 @@
 
 	<ui:with field="res" type="com.tdm.client.resources.AppResources" />
 
-	<g:HTMLPanel styleName="{res.mainCss.well}">
-		<g:HTMLPanel styleName="{res.mainCss.row}" ui:field="headerPanel">
-			<g:HTMLPanel styleName="{res.content.span7}">
+	<g:HTMLPanel styleName="well">
+		<g:HTMLPanel styleName="row" ui:field="headerPanel">
+			<g:HTMLPanel styleName="span7">
 				<h1 ui:field="problemCounter">
 					You have 0 problems
 				</h1>
 			</g:HTMLPanel>
-			<g:HTMLPanel styleName="{res.content.span5}">
-				<form class="form-inline pull-right form-aside">
-					<label>
-						<span>
-							Sort
-						</span>
-						<select id="sort" name="sort" class="span2">
-							<option value="modified_at">
-								by last opened
-							</option>
-							<option value="title">
-								by title
-							</option>
-						</select>
-					</label>
-					<label>
-						<span>
-							Show
-						</span>
-						<select id="filter" name="show" class="span2">
-							<option value="all">
-								all problems
-							</option>
-							<option value="own">
-								owned by me
-							</option>
-							<option value="shared">
-								shared with me
-							</option>
-						</select>
-					</label>
-				</form>
+			<g:HTMLPanel styleName="span5">
+				<b:WellForm type="INLINE">
+					<b:ControlLabel>Sort</b:ControlLabel>
+					<b:ListBox b:id="sort">
+						<g:item>by last opened</g:item>
+						<g:item>by title</g:item>
+					</b:ListBox>
+					<b:ControlLabel>Show</b:ControlLabel>
+					<b:ListBox b:id="filter">
+						<g:item>all problems</g:item>
+						<g:item>owned by me</g:item>
+						<g:item>shared with me</g:item>
+					</b:ListBox>
+				</b:WellForm>
+
 			</g:HTMLPanel>
 		</g:HTMLPanel>
 
 		<g:HTMLPanel>
 			<!-- <ul class="{res.mainCss.problemList} {res.mainCss.thumbnails}"> -->
 			<b:Thumbnails ui:field="problemList" addStyleNames="{res.mainCss.problemList}">
-				<b:Thumbnail size="3">
+				<b:Thumbnail size="4">
 					<g:HTMLPanel styleName="{res.mainCss.create}">
-						<g:Button ui:field="createButton"
-							styleName="{res.mainCss.btn} {res.mainCss.btnPrimary} {res.mainCss.btnLarge}">
+						<b:Button ui:field="createButton"
+							addStyleNames="btn btn-primary btn-large btn-create ">
 							New problem
-						</g:Button>
+						</b:Button>
 					</g:HTMLPanel>
 				</b:Thumbnail>
 			</b:Thumbnails>

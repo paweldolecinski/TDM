@@ -1,0 +1,28 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+
+	<ui:with field="res" type="com.tdm.client.resources.AppResources" />
+
+	<g:FlowPanel>
+		<g:HTMLPanel styleName="well well-small">
+			<b:Paragraph>
+				User name
+			</b:Paragraph>
+			<b:Heading size="4">Your decision</b:Heading>
+			<b:Paragraph>
+				1) Solution 1
+			</b:Paragraph>
+		</g:HTMLPanel>
+
+		<b:TabPanel addStyleNames="well well-small hide-tabs">
+			<b:TabPane active="true">
+				<b:Heading size="4">Experts</b:Heading>
+				<b:Paragraph addStyleNames="{res.content.emptyPlaceholder}">
+					No experts. Invite them!
+				</b:Paragraph>
+			</b:TabPane>
+		</b:TabPanel>
+
+	</g:FlowPanel>
+</ui:UiBinder> 

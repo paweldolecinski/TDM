@@ -13,14 +13,33 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.tdm.client.app.problem;
+package com.tdm.client.app.problem.activity;
 
-import com.gwtplatform.mvp.client.UiHandlers;
+
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.ViewImpl;
 
 /**
  * @author Paweł Doleciński
- *
+ * 
  */
+public class ProblemActivitiesView extends ViewImpl implements
+		ProblemActivitiesPresenter.Display {
 
-public interface BrainstormUiHandlers extends UiHandlers {
+	public interface Binder extends UiBinder<Widget, ProblemActivitiesView> {
+	}
+
+	private final Widget widget;
+
+	@Inject
+	public ProblemActivitiesView(Binder binder) {
+		widget = binder.createAndBindUi(this);
+	}
+
+	@Override
+	public Widget asWidget() {
+		return widget;
+	}
 }

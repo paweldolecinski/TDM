@@ -23,55 +23,48 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.tdm.client.app.AppPresenter;
-import com.tdm.client.event.navi.HideVotingPresenterEvent;
-import com.tdm.client.event.navi.RevealVotingPresenterEvent;
+import com.tdm.client.event.navi.HideActivitiesPresenterEvent;
+import com.tdm.client.event.navi.HideExpertsPresenterEvent;
+import com.tdm.client.event.navi.RevealActivitiesPresenterEvent;
+import com.tdm.client.event.navi.RevealExpertsPresenterEvent;
 import com.tdm.client.place.NameTokens;
 
 /**
  * @author Paweł Doleciński
  * 
  */
-public class ProblemDicussionPresenter
+public class ProblemProcessPresenter
 		extends
-		Presenter<ProblemDicussionPresenter.Display, ProblemDicussionPresenter.IProxy> {
+		Presenter<ProblemProcessPresenter.Display, ProblemProcessPresenter.IProxy> {
 
 	public interface Display extends View {
+		void focus();
 	}
 
 	@NameToken(NameTokens.problem)
 	@ProxyCodeSplit
-	public interface IProxy extends ProxyPlace<ProblemDicussionPresenter> {
+	public interface IProxy extends ProxyPlace<ProblemProcessPresenter> {
 	}
 
-	public static final Object TYPE_NewSolution = new Object();
-
-	public static final Object TYPE_Brainstorm = new Object();
-
-	private final NewSolutionPresenterWidget newSolution;
-
-	private final BrainstormPresenterWidget brainstorm;
-
 	@Inject
-	public ProblemDicussionPresenter(EventBus eventBus, Display view,
-			IProxy proxy, NewSolutionPresenterWidget newSolution,
-			BrainstormPresenterWidget brainstorm) {
+	public ProblemProcessPresenter(EventBus eventBus, Display view,
+			IProxy proxy) {
 		super(eventBus, view, proxy, AppPresenter.TYPE_MainContent);
-		this.newSolution = newSolution;
-		this.brainstorm = brainstorm;
 	}
 
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		RevealVotingPresenterEvent.fire(this);
-		setInSlot(TYPE_NewSolution, newSolution);
-		setInSlot(TYPE_Brainstorm, brainstorm);
+		RevealActivitiesPresenterEvent.fire(this);
+		RevealExpertsPresenterEvent.fire(this);
+		getView().focus();
 	}
 
 	@Override
 	protected void onHide() {
 		super.onHide();
-		HideVotingPresenterEvent.fire(this);
+		HideActivitiesPresenterEvent.fire(this);
+		HideExpertsPresenterEvent.fire(this);
 	}
 
 	@Override

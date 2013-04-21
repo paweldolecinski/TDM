@@ -27,41 +27,14 @@ import com.google.gwt.resources.client.CssResource;
  */
 public interface MainCss extends CssResource {
 
-	String row();
-
-	String btn();
-
-	String btnDiscreet();
-
-	String btnPrimary();
-
-	String btnLarge();
-
-	String caret();
 
 	String separator();
 
 	String problemList();
 
-	String problemListItem();
-
-	String caption();
-
-	String title();
-
-	String meta();
-
-	String description();
-
 	String create();
 
-	String clearfix();
-
-	String well();
-
 	String problemSolutions();
-
-	String solutionsHeader();
 
 	String solutionList();
 
@@ -72,7 +45,5 @@ public interface MainCss extends CssResource {
 	String solutionSubTitle();
 
 	String solutionAvatar();
-
-	String solutionComment();
 	
 }

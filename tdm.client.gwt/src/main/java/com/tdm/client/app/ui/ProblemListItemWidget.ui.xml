@@ -4,20 +4,19 @@
 
 	<ui:with type="com.tdm.client.resources.AppResources" field="res" />
 
-	<b:Thumbnail size="3">
+	<b:Thumbnail size="4">
 		<g:InlineHyperlink ui:field="titleImage" />
 		<b:Caption>
-			<h3 class="{res.mainCss.title}">
+			<h4>
 				<g:InlineHyperlink ui:field="title" />
-			</h3>
-			<b:Paragraph styleName="{res.mainCss.meta}">
+			</h4>
+			<b:Paragraph>
 				by
 				<g:InlineLabel>
 					Paweł Doleciński</g:InlineLabel>
 				on
 				<g:InlineLabel ui:field="creationDate" />
 			</b:Paragraph>
-			<b:Paragraph ui:field="description" styleName="{res.mainCss.description}" />
 		</b:Caption>
 	</b:Thumbnail>
 

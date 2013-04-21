@@ -96,7 +96,7 @@ public class HomePresenter extends
 					public void onSuccess(GetProblemListResult result) {
 						JsArray<ProblemJSO> problemList = result
 								.getProblemList();
-						for (int i = 0; i < problemList.length(); i++) {
+						for (int i = problemList.length()-1; i >= 0; i--) {
 							getView().addProblemListItem(problemList.get(i));
 						}
 					}

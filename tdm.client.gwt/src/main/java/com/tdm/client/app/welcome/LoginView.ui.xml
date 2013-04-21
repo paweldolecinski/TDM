@@ -5,16 +5,16 @@
 	<ui:with field="res" type="com.tdm.client.resources.AppResources" />
 
 	<g:HTMLPanel styleName="{res.welcome.head}">
-		<g:HTMLPanel styleName="{res.welcome.welcome} {res.mainCss.row}">
+		<g:HTMLPanel styleName="{res.welcome.welcome} row">
 
-			<g:HTMLPanel styleName="{res.welcome.logo} {res.content.span4}">
+			<g:HTMLPanel styleName="{res.welcome.logo} span4">
 				<g:Label styleName="{res.welcome.logoName}">TDM</g:Label>
 				<small>make decision</small>
 			</g:HTMLPanel>
-			<g:HTMLPanel styleName="{res.mainCss.clearfix}" />
+			<g:HTMLPanel styleName="clearfix" />
 		</g:HTMLPanel>
 
-		<g:HTMLPanel styleName="{res.mainCss.row}">
+		<g:HTMLPanel styleName="row">
 			<g:HTMLPanel styleName="{res.welcome.loginSection}">
 				<g:HTMLPanel styleName="{res.welcome.login}">
 					<h2>
@@ -38,7 +38,7 @@
 						won't post
 						without permission.
 					</g:HTMLPanel>
-					<g:HTMLPanel styleName="{res.mainCss.clearfix}" />
+					<g:HTMLPanel styleName="clearfix" />
 				</g:HTMLPanel>
 
 			</g:HTMLPanel>

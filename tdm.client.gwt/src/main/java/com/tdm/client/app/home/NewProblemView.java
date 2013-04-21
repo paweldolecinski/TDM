@@ -69,6 +69,7 @@ public class NewProblemView extends
 		getUiHandlers().createProblem(titleBox.getText(), descBox.getText());
 	}
 
+	@Override
 	public void showErrors(Set<ConstraintViolation<ProblemJSO>> violations) {
 		StringBuilder builder = new StringBuilder();
 
@@ -85,9 +86,15 @@ public class NewProblemView extends
 		this.errors.setHTML(builder.toString());
 	}
 
-	public void clear() {
+	@Override
+	public void onHide() {
 		titleBox.setText("");
 		descBox.setText("");
 		errors.setHTML("");
+	}
+
+	@Override
+	public void onReveal() {
+		titleBox.setFocus(true);
 	}
 }

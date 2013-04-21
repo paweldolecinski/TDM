@@ -26,16 +26,12 @@ import com.tdm.client.app.home.NewProblemPresenterWidget;
 import com.tdm.client.app.home.NewProblemView;
 import com.tdm.client.app.navibar.NaviBarPresenterWidget;
 import com.tdm.client.app.navibar.NaviBarView;
-import com.tdm.client.app.problem.BrainstormPresenterWidget;
-import com.tdm.client.app.problem.BrainstormView;
-import com.tdm.client.app.problem.NewSolutionPresenterWidget;
-import com.tdm.client.app.problem.NewSolutionView;
-import com.tdm.client.app.problem.ProblemDicussionPresenter;
-import com.tdm.client.app.problem.ProblemDiscussionView;
-import com.tdm.client.app.problem.SingleSolutionPresenterWidget;
-import com.tdm.client.app.problem.SingleSolutionView;
-import com.tdm.client.app.voting.ProblemVotingView;
-import com.tdm.client.app.voting.VotingPresenterWidget;
+import com.tdm.client.app.problem.ProblemProcessPresenter;
+import com.tdm.client.app.problem.ProblemProcessView;
+import com.tdm.client.app.problem.activity.ProblemActivitiesPresenter;
+import com.tdm.client.app.problem.activity.ProblemActivitiesView;
+import com.tdm.client.app.problem.expert.ProblemExpertsPresenter;
+import com.tdm.client.app.problem.expert.ProblemExpertsView;
 import com.tdm.client.app.welcome.LoginPresenter;
 import com.tdm.client.app.welcome.LoginView;
 
@@ -73,24 +69,18 @@ public class ApplicationModule extends AbstractPresenterModule {
 		/*
 		 * Problem section
 		 */
-		bindPresenter(ProblemDicussionPresenter.class,
-				ProblemDicussionPresenter.Display.class,
-				ProblemDiscussionView.class,
-				ProblemDicussionPresenter.IProxy.class);
+		bindPresenter(ProblemProcessPresenter.class,
+				ProblemProcessPresenter.Display.class,
+				ProblemProcessView.class, ProblemProcessPresenter.IProxy.class);
 
-		bindSingletonPresenterWidget(NewSolutionPresenterWidget.class,
-				NewSolutionPresenterWidget.Display.class, NewSolutionView.class);
+		bindPresenter(ProblemActivitiesPresenter.class,
+				ProblemActivitiesPresenter.Display.class,
+				ProblemActivitiesView.class,
+				ProblemActivitiesPresenter.IProxy.class);
 
-		bindSingletonPresenterWidget(BrainstormPresenterWidget.class,
-				BrainstormPresenterWidget.Display.class, BrainstormView.class);
-
-		bindPresenter(VotingPresenterWidget.class,
-				VotingPresenterWidget.Display.class, ProblemVotingView.class,
-				VotingPresenterWidget.IProxy.class);
-
-		bindPresenterWidget(SingleSolutionPresenterWidget.class,
-				SingleSolutionPresenterWidget.Display.class,
-				SingleSolutionView.class);
+		bindPresenter(ProblemExpertsPresenter.class,
+				ProblemExpertsPresenter.Display.class,
+				ProblemExpertsView.class, ProblemExpertsPresenter.IProxy.class);
 
 	}
 }

@@ -27,49 +27,12 @@ import com.google.gwt.resources.client.CssResource;
  */
 public interface ContentCss extends CssResource {
 
-	@ClassName("row-fluid")
-	String rowFluid();
-
-	@ClassName("index-main")
-	String indexMain();
-
-	@ClassName("index-right")
-	String indexRight();
-
-	@ClassName("index-left")
-	String indexLeft();
-
-	@ClassName("index-center")
-	String indexCenter();
-
-	String span1();
-
-	String span2();
-
-	String span3();
-
-	String span4();
-
-	String span5();
-
-	String span6();
-
-	String span7();
-
-	String span8();
-
 	@ClassName("info-panel")
 	String infoPanel();
 
-	@ClassName("tab-well")
-	String tabWell();
-	
-	@ClassName("tab-content")
-	String tabContent();
-	
 	@ClassName("empty-placeholder")
 	String emptyPlaceholder();
-	
+
 	@ClassName("print_and_settings")
 	String printAndSettings();
 }

@@ -13,14 +13,33 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.tdm.client.app.problem;
+package com.tdm.client.app.problem.expert;
 
-import com.gwtplatform.mvp.client.UiHandlers;
+
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.ViewImpl;
 
 /**
  * @author Paweł Doleciński
- *
+ * 
  */
-public interface SingleSolutiontUiHandlers extends UiHandlers {
-	void addNewComment(String commentText);
+public class ProblemExpertsView extends ViewImpl implements
+		ProblemExpertsPresenter.Display {
+
+	public interface Binder extends UiBinder<Widget, ProblemExpertsView> {
+	}
+
+	private final Widget widget;
+
+	@Inject
+	public ProblemExpertsView(Binder binder) {
+		widget = binder.createAndBindUi(this);
+	}
+
+	@Override
+	public Widget asWidget() {
+		return widget;
+	}
 }

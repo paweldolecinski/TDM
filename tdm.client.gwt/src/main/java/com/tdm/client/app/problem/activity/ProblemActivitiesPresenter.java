@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.tdm.client.app.voting;
+package com.tdm.client.app.problem.activity;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -24,24 +24,24 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.tdm.client.app.AppPresenter;
-import com.tdm.client.event.navi.HideVotingPresenterEvent;
-import com.tdm.client.event.navi.HideVotingPresenterEvent.HideVotingPresenterHandler;
-import com.tdm.client.event.navi.RevealVotingPresenterEvent;
-import com.tdm.client.event.navi.RevealVotingPresenterEvent.RevealVotingPresenterHandler;
+import com.tdm.client.event.navi.HideActivitiesPresenterEvent;
+import com.tdm.client.event.navi.HideActivitiesPresenterEvent.HideActivitiesPresenterHandler;
+import com.tdm.client.event.navi.RevealActivitiesPresenterEvent;
+import com.tdm.client.event.navi.RevealActivitiesPresenterEvent.RevealActivitiesPresenterHandler;
 
-public class VotingPresenterWidget extends
-		Presenter<VotingPresenterWidget.Display, VotingPresenterWidget.IProxy>
-		implements RevealVotingPresenterHandler, HideVotingPresenterHandler {
+public class ProblemActivitiesPresenter extends
+		Presenter<ProblemActivitiesPresenter.Display, ProblemActivitiesPresenter.IProxy>
+		implements RevealActivitiesPresenterHandler, HideActivitiesPresenterHandler {
 
 	@ProxyCodeSplit
-	public interface IProxy extends Proxy<VotingPresenterWidget> {
+	public interface IProxy extends Proxy<ProblemActivitiesPresenter> {
 	}
 
 	public interface Display extends View {
 	}
 
 	@Inject
-	public VotingPresenterWidget(EventBus eventBus, Display view, IProxy proxy) {
+	public ProblemActivitiesPresenter(EventBus eventBus, Display view, IProxy proxy) {
 		super(eventBus, view, proxy, AppPresenter.TYPE_RightContent);
 	}
 
@@ -52,13 +52,13 @@ public class VotingPresenterWidget extends
 
 	@ProxyEvent
 	@Override
-	public void onRevealVotingPresenter(RevealVotingPresenterEvent event) {
+	public void onRevealActivitiesPresenter(RevealActivitiesPresenterEvent event) {
 		forceReveal();
 	}
 
 	@ProxyEvent
 	@Override
-	public void onHideVotingPresenter(HideVotingPresenterEvent event) {
+	public void onHideActivitiesPresenter(HideActivitiesPresenterEvent event) {
 		RevealContentEvent.fire(this, AppPresenter.TYPE_RightContent, null);
 	}
 }

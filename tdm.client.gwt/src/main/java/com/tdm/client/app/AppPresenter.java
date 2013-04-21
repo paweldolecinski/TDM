@@ -45,6 +45,8 @@ public class AppPresenter extends
 		AsyncCallSucceedHandler {
 
 	@ContentSlot
+	public static final Type<RevealContentHandler<?>> TYPE_LeftContent = new Type<RevealContentHandler<?>>();
+	@ContentSlot
 	public static final Type<RevealContentHandler<?>> TYPE_MainContent = new Type<RevealContentHandler<?>>();
 	@ContentSlot
 	public static final Type<RevealContentHandler<?>> TYPE_RightContent = new Type<RevealContentHandler<?>>();

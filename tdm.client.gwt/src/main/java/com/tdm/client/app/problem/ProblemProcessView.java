@@ -15,11 +15,10 @@
  */
 package com.tdm.client.app.problem;
 
+import com.github.gwtbootstrap.client.ui.TextBox;
 import com.google.gwt.dom.client.UListElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -30,34 +29,25 @@ import com.tdm.client.resources.AppResources;
  * @author Paweł Doleciński
  * 
  */
-public class ProblemDiscussionView extends ViewImpl implements
-		ProblemDicussionPresenter.Display {
+public class ProblemProcessView extends ViewImpl implements
+		ProblemProcessPresenter.Display {
 
-	public interface Binder extends UiBinder<Widget, ProblemDiscussionView> {
+	public interface Binder extends UiBinder<Widget, ProblemProcessView> {
 	}
 
 	private final Widget widget;
 
 	@UiField
-	UListElement solutionList;
+	protected UListElement solutionList;
 
 	@UiField
-	FlowPanel newSolutionPanel;
-
-	private AppResources resources;
-
-	// @UiField
-	// HTMLPanel problemDescription;
-	// @UiField
-	// DeckPanel deckPanel;
+	protected TextBox solutionText;
 
 	@Inject
-	public ProblemDiscussionView(Binder binder, EventBus eventBus,
+	public ProblemProcessView(Binder binder, EventBus eventBus,
 			AppResources resources) {
-		this.resources = resources;
 		widget = binder.createAndBindUi(this);
-		// deckPanel.setAnimationEnabled(true);
-		// deckPanel.showWidget(0);
+
 	}
 
 	@Override
@@ -66,22 +56,8 @@ public class ProblemDiscussionView extends ViewImpl implements
 	}
 
 	@Override
-	public void setInSlot(Object slot, IsWidget content) {
-		if (slot == ProblemDicussionPresenter.TYPE_NewSolution) {
-			setInNewSolutionSlot(content);
-		} else {
-			super.setInSlot(slot, content);
-		}
-	}
-
-	/**
-	 * @param content
-	 */
-	private void setInNewSolutionSlot(IsWidget content) {
-		newSolutionPanel.clear();
-		if (content != null) {
-			newSolutionPanel.add(content);
-		}
+	public void focus() {
+		solutionText.setFocus(true);
 	}
 
 }

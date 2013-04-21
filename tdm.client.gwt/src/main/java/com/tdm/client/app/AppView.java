@@ -15,6 +15,8 @@
  */
 package com.tdm.client.app;
 
+import com.github.gwtbootstrap.client.ui.Column;
+import com.github.gwtbootstrap.client.ui.base.HtmlWidget;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -32,10 +34,12 @@ public class AppView extends ViewImpl implements AppPresenter.Display {
 	private final Widget widget;
 
 	@UiField
-	protected FlowPanel mainContentPanel;
+	protected HtmlWidget mainContentPanel;
 	@UiField
-	protected FlowPanel rightContentPanel;
-
+	protected Column rightContentPanel;
+	@UiField
+	protected HtmlWidget leftContentPanel;
+	
 	@Inject
 	public AppView(Binder binder, EventBus eventBus) {
 		widget = binder.createAndBindUi(this);
@@ -52,11 +56,19 @@ public class AppView extends ViewImpl implements AppPresenter.Display {
 			setMainContent(content);
 		} else if (slot == AppPresenter.TYPE_RightContent) {
 			setRightContent(content);
+		} else if (slot == AppPresenter.TYPE_LeftContent) {
+			setLeftContent(content);
 		} else {
 			super.setInSlot(slot, content);
 		}
 	}
-
+	private void setLeftContent(IsWidget content) {
+		leftContentPanel.clear();
+		if (content != null) {
+			leftContentPanel.add(content);
+		}
+	}
+	
 	private void setMainContent(IsWidget content) {
 		mainContentPanel.clear();
 		if (content != null) {
