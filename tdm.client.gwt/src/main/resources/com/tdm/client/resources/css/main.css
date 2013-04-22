@@ -6,6 +6,8 @@
 @external .row;
 @external .row-*;
 @external .thumbnails;
+@external .page-header;
+
 html {
 	font-size: 100%;
 	\-webkit-text-size-adjust: 100%;
@@ -32,6 +34,11 @@ label {
 
 select {
 	width: auto;
+}
+
+.page-header {
+	text-align: justify;
+	margin: 0;
 }
 
 .form-inline {

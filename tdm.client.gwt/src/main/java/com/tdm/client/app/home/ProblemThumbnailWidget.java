@@ -1,6 +1,5 @@
-package com.tdm.client.app.ui;
+package com.tdm.client.app.home;
 
-import com.github.gwtbootstrap.client.ui.Paragraph;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.google.gwt.i18n.shared.DateTimeFormat.PredefinedFormat;
@@ -17,10 +16,10 @@ import com.tdm.client.place.NameTokens;
 import com.tdm.client.resources.AppResources;
 import com.tdm.domain.model.problem.dto.Problem;
 
-public class ProblemListItemWidget extends Composite {
+public class ProblemThumbnailWidget extends Composite {
 
 	public static class Provider implements
-			com.google.inject.Provider<ProblemListItemWidget> {
+			com.google.inject.Provider<ProblemThumbnailWidget> {
 
 		private PlaceManager placeManager;
 		private AppResources resources;
@@ -33,12 +32,12 @@ public class ProblemListItemWidget extends Composite {
 		}
 
 		@Override
-		public ProblemListItemWidget get() {
-			return new ProblemListItemWidget(placeManager, resources);
+		public ProblemThumbnailWidget get() {
+			return new ProblemThumbnailWidget(placeManager, resources);
 		}
 	}
 
-	public interface Binder extends UiBinder<Widget, ProblemListItemWidget> {
+	public interface Binder extends UiBinder<Widget, ProblemThumbnailWidget> {
 	}
 
 	private static Binder binder = GWT.create(Binder.class);
@@ -54,7 +53,7 @@ public class ProblemListItemWidget extends Composite {
 
 	private AppResources resources;
 
-	private ProblemListItemWidget(PlaceManager placeManager,
+	private ProblemThumbnailWidget(PlaceManager placeManager,
 			AppResources resources) {
 		this.resources = resources;
 		initWidget(binder.createAndBindUi(this));

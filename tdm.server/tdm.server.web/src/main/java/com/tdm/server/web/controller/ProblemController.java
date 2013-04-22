@@ -1,6 +1,5 @@
 package com.tdm.server.web.controller;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +23,7 @@ import com.tdm.domain.model.problem.dto.ProblemDTO;
 import com.tdm.server.application.problem.service.GdmProblemService;
 import com.tdm.server.application.problem.service.SolutionIdeaService;
 import com.tdm.server.web.assembler.GdmProblemDtoAssembler;
+import com.tdm.server.web.assembler.SolutionIdeaDtoAssembler;
 
 @Controller
 @RequestMapping("/problems")
@@ -75,19 +74,33 @@ public final class ProblemController {
 	@ResponseBody
 	public List<SolutionIdeaDTO> getSolutionIdeasForProblem(
 			@PathVariable String problemId) {
-
-		Collection<SolutionIdea> ideas = ideaService
+		SolutionIdeaDtoAssembler ass = new SolutionIdeaDtoAssembler();
+		List<SolutionIdea> ideas = ideaService
 				.retrieveSolutionIdeasForProblem(new ProblemId(problemId));
-		return null;// new ArrayList<SolutionIdea>(ideas);
+		return ass.fromEntityList(ideas);
 	}
 
 	@RequestMapping(value = "/{problemId}/ideas", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public void createIdeaForProblem(@PathVariable String problemId,
-			@RequestBody MultiValueMap<String, String> body) {
-		SolutionIdea solutionIdea = new SolutionIdea();
-//		new ProblemId(problemId),body.getFirst("ideaName")
-		ideaService.addSolutionIdea(solutionIdea);
+	public SolutionIdeaDTO createIdeaForProblem(@PathVariable String problemId,
+			@RequestBody SolutionIdeaDTO solutionIdea,
+			HttpServletResponse httpResponse_p, WebRequest request_p) {
+		SolutionIdeaDtoAssembler ass = new SolutionIdeaDtoAssembler();
+		SolutionIdea entity = ass.toEntity(solutionIdea, problemService);
+		try {
+			SolutionIdea created = ideaService.addSolutionIdea(entity);
+
+			httpResponse_p.setStatus(HttpStatus.CREATED.value());
+			httpResponse_p.setHeader("Location",
+					request_p.getContextPath() + "/problems/" + problemId
+							+ "/ideas/" + created.getEncodedKey());
+
+			return ass.fromEntity(created);
+		} catch (Exception e) {
+			httpResponse_p.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
+			return null;
+		}
+
 	}
 
 }

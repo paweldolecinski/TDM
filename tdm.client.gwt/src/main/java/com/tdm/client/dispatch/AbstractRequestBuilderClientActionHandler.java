@@ -59,11 +59,7 @@ public abstract class AbstractRequestBuilderClientActionHandler<A extends Action
 			final AsyncCallback<R> resultCallback,
 			final ExecuteCommand<A, R> executeCommand) {
 
-		UrlBuilder urlBuilder = new UrlBuilder().setModule("api").setVersion(
-				"v1");
-
-		final RequestBuilder requestBuilder = getRequestBuilder(action,
-				urlBuilder);
+		final RequestBuilder requestBuilder = getRequestBuilder(action);
 		requestBuilder.setHeader("Content-Type",
 				"application/json; charset=utf-8");
 		requestBuilder.setHeader("Accept", "application/json");
@@ -98,8 +94,7 @@ public abstract class AbstractRequestBuilderClientActionHandler<A extends Action
 
 	protected abstract R extractResult(Response response);
 
-	protected abstract RequestBuilder getRequestBuilder(A action,
-			UrlBuilder urlBuilder);
+	protected abstract RequestBuilder getRequestBuilder(A action);
 
 	@Override
 	public DispatchRequest undo(final A action, final R result,
@@ -109,8 +104,14 @@ public abstract class AbstractRequestBuilderClientActionHandler<A extends Action
 	}
 
 	protected RequestBuilder prepareRequestBuilder(Method method,
-			UrlBuilder url, JSONObject jsonObject) {
-		RequestBuilder rb = new RequestBuilder(method, url.toUrl());
+			String[] restResourcePath, JSONObject jsonObject) {
+
+		UrlBuilder urlBuilder = new UrlBuilder().setModule("api").setVersion(
+				"v1");
+		for (String path : restResourcePath) {
+			urlBuilder.addResourcePath(path);
+		}
+		RequestBuilder rb = new RequestBuilder(method, urlBuilder.toUrl());
 		if (jsonObject != null) {
 			jsonObject.put("$H", null);
 			String string = jsonObject.toString();
@@ -119,7 +120,8 @@ public abstract class AbstractRequestBuilderClientActionHandler<A extends Action
 		return rb;
 	}
 
-	protected RequestBuilder prepareRequestBuilder(Method method, UrlBuilder url) {
-		return prepareRequestBuilder(method, url, null);
+	protected RequestBuilder prepareRequestBuilder(Method method,
+			String[] restResourcePath) {
+		return prepareRequestBuilder(method, restResourcePath, null);
 	}
 }

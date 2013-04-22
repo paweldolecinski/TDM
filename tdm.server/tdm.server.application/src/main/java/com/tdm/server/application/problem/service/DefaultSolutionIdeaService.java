@@ -1,8 +1,6 @@
 package com.tdm.server.application.problem.service;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,20 +30,16 @@ public class DefaultSolutionIdeaService implements SolutionIdeaService {
 	}
 
 	@Override
-	public Collection<SolutionIdea> retrieveSolutionIdeasForProblem(
+	public List<SolutionIdea> retrieveSolutionIdeasForProblem(
 			ProblemId problemId) {
-		Set<SolutionIdea> solutions = new HashSet<SolutionIdea>();
-		Collection<SolutionIdea> findAllAssignedTo = solutionIdeaDao
+		List<SolutionIdea> findAllAssignedTo = solutionIdeaDao
 				.findAllAssignedTo(problemId);
-		for (SolutionIdea solutionIdeaDTO : findAllAssignedTo) {
-			solutions.add(solutionIdeaDTO);
-		}
-		return solutions;
+		return findAllAssignedTo;
 	}
 
 	@Override
-	public void addSolutionIdea(SolutionIdea idea) {
-		solutionIdeaDao.store(idea);
+	public SolutionIdea addSolutionIdea(SolutionIdea idea) {
+		return solutionIdeaDao.create(idea);
 	}
 
 	@Override

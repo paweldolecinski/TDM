@@ -1,0 +1,24 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui"
+	xmlns:bs="urn:import:com.github.gwtbootstrap.client.ui.base">
+
+	<ui:with type="com.tdm.client.resources.AppResources" field="res" />
+
+	<bs:ListItem addStyleNames="row">
+		<b:Column size="1" addStyleNames="{res.mainCss.solutionAvatar}" />
+		<b:Column size="10" addStyleNames="{res.mainCss.solution}">
+			<bs:InlineLabel ui:field="titleText" addStyleNames="{res.mainCss.solutionTitle}">Use a tool that makes
+				it
+				really easy for
+				people
+				to send in ideas as they think of them</bs:InlineLabel>
+			<b:Paragraph ui:field="detailsText" addStyleNames="{res.mainCss.solutionSubTitle}">Just being able to bung
+				ideas
+				into the idea pit
+				would
+				be
+				helpful.</b:Paragraph>
+		</b:Column>
+	</bs:ListItem>
+</ui:UiBinder> 

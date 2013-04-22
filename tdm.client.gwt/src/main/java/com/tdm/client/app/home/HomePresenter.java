@@ -41,9 +41,9 @@ import com.tdm.domain.model.problem.dto.ProblemJSO;
  */
 public class HomePresenter extends
 		Presenter<HomePresenter.Display, HomePresenter.IProxy>
-		implements ProblemListUiHandlers {
+		implements HomeUiHandlers {
 
-	public interface Display extends View, HasUiHandlers<ProblemListUiHandlers> {
+	public interface Display extends View, HasUiHandlers<HomeUiHandlers> {
 
 		void addProblemListItem(Problem problem);
 

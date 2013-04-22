@@ -15,21 +15,30 @@
  */
 package com.tdm.client.app.problem;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.github.gwtbootstrap.client.ui.Form;
+import com.github.gwtbootstrap.client.ui.Form.SubmitEvent;
+import com.github.gwtbootstrap.client.ui.Heading;
 import com.github.gwtbootstrap.client.ui.TextBox;
-import com.google.gwt.dom.client.UListElement;
+import com.github.gwtbootstrap.client.ui.base.UnorderedList;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.mvp.client.ViewImpl;
-import com.tdm.client.resources.AppResources;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.tdm.domain.model.idea.dto.SolutionIdea;
 
 /**
  * @author Paweł Doleciński
  * 
  */
-public class ProblemProcessView extends ViewImpl implements
+public class ProblemProcessView extends
+		ViewWithUiHandlers<ProblemProcessUiHandlers> implements
 		ProblemProcessPresenter.Display {
 
 	public interface Binder extends UiBinder<Widget, ProblemProcessView> {
@@ -38,14 +47,22 @@ public class ProblemProcessView extends ViewImpl implements
 	private final Widget widget;
 
 	@UiField
-	protected UListElement solutionList;
+	protected UnorderedList solutionList;
 
 	@UiField
+	protected Form solutionForm;
+	@UiField
 	protected TextBox solutionText;
+	@UiField
+	protected Heading solutionCounter;
+
+	private List<SolutionIdeaWidget> ideas = new ArrayList<SolutionIdeaWidget>();
+	private Provider<SolutionIdeaWidget> solutionIdeaProvider;
 
 	@Inject
 	public ProblemProcessView(Binder binder, EventBus eventBus,
-			AppResources resources) {
+			Provider<SolutionIdeaWidget> solutionIdeaProvider) {
+		this.solutionIdeaProvider = solutionIdeaProvider;
 		widget = binder.createAndBindUi(this);
 
 	}
@@ -60,4 +77,35 @@ public class ProblemProcessView extends ViewImpl implements
 		solutionText.setFocus(true);
 	}
 
+	@UiHandler("solutionForm")
+	void onSubmit(SubmitEvent event) {
+		event.cancel();
+		if (solutionText.getText() != null && !solutionText.getText().isEmpty()) {
+			getUiHandlers().createSolutionIdea(solutionText.getText());
+			solutionText.setText(null);
+			focus();
+		}
+
+	}
+
+	@Override
+	public void addSolutionIdea(SolutionIdea created) {
+		SolutionIdeaWidget s = solutionIdeaProvider.get();
+		s.init(created);
+		if (ideas.isEmpty()) {
+			solutionList.add(s);
+		} else {
+			int widgetIndex = solutionList.getWidgetIndex(ideas.get(0));
+			solutionList.insert(s, widgetIndex);
+		}
+		ideas.add(0, s);
+		solutionCounter.setSubtext("(" + ideas.size() + ")");
+	}
+
+	@Override
+	public void clear() {
+		ideas.clear();
+		solutionList.clear();
+		solutionCounter.setSubtext("(" + ideas.size() + ")");
+	}
 }

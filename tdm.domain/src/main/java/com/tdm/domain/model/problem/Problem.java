@@ -17,14 +17,18 @@ package com.tdm.domain.model.problem;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Order;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.tdm.domain.model.expert.Expert;
+import com.tdm.domain.model.idea.SolutionIdea;
 
 /**
  * @author Paweł Doleciński
@@ -39,14 +43,23 @@ public class Problem {
 
 	@Persistent
 	private Date creationDate = new Date();
+
 	@Persistent
 	private String name;
+
 	@Persistent
 	private String description;
+
 	@Persistent
-	private List<Expert> experts;
+	private Set<Expert> experts;
+
 	@Persistent
 	private CurrentConsensus currentConsensus;
+
+	@Persistent(mappedBy = "problem")
+	@Element(dependent = "true")
+	@Order(extensions = @Extension(vendorName = "datanucleus", key = "list-ordering", value = "creationDate asc"))
+	private List<SolutionIdea> solutionIdeas;
 
 	public String getEncodedKey() {
 		return encodedKey;
@@ -72,11 +85,11 @@ public class Problem {
 		this.description = description;
 	}
 
-	public List<Expert> getExperts() {
+	public Set<Expert> getExperts() {
 		return experts;
 	}
 
-	public void setExperts(List<Expert> experts) {
+	public void setExperts(Set<Expert> experts) {
 		this.experts = experts;
 	}
 
@@ -88,4 +101,15 @@ public class Problem {
 		this.currentConsensus = currentConsensus;
 	}
 
+	public List<SolutionIdea> getSolutionIdeas() {
+		return solutionIdeas;
+	}
+
+	public void addSolutionIdeas(SolutionIdea solutionIdea) {
+		this.solutionIdeas.add(solutionIdea);
+	}
+
+	public void setSolutionIdeas(List<SolutionIdea> solutionIdeas) {
+		this.solutionIdeas = solutionIdeas;
+	}
 }

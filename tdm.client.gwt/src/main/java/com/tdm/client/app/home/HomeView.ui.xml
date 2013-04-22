@@ -8,9 +8,9 @@
 	<g:HTMLPanel styleName="well">
 		<g:HTMLPanel styleName="row" ui:field="headerPanel">
 			<g:HTMLPanel styleName="span7">
-				<h1 ui:field="problemCounter">
-					You have 0 problems
-				</h1>
+				<b:Heading size="1" ui:field="problemCounter" subtext="(0)">
+					Your problems
+				</b:Heading>
 			</g:HTMLPanel>
 			<g:HTMLPanel styleName="span5">
 				<b:WellForm type="INLINE">

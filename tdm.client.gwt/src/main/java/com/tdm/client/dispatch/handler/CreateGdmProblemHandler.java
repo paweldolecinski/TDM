@@ -8,12 +8,13 @@ import com.google.gwt.json.client.JSONObject;
 import com.tdm.client.dispatch.AbstractRequestBuilderClientActionHandler;
 import com.tdm.client.dispatch.command.CreateGdmProblemAction;
 import com.tdm.client.dispatch.command.CreateGdmProblemResult;
-import com.tdm.client.util.UrlBuilder;
 import com.tdm.domain.model.problem.dto.ProblemJSO;
 
 public class CreateGdmProblemHandler
 		extends
 		AbstractRequestBuilderClientActionHandler<CreateGdmProblemAction, CreateGdmProblemResult> {
+
+	private static final String[] restResourcePath = { "problems" };
 
 	protected CreateGdmProblemHandler() {
 		super(CreateGdmProblemAction.class);
@@ -28,14 +29,12 @@ public class CreateGdmProblemHandler
 	}
 
 	@Override
-	protected RequestBuilder getRequestBuilder(CreateGdmProblemAction action,
-			UrlBuilder urlBuilder) {
+	protected RequestBuilder getRequestBuilder(CreateGdmProblemAction action) {
 
-		urlBuilder.addResourcePath("problems");
 		JSONObject jsonObject = new JSONObject(
 				(JavaScriptObject) action.getProblem());
 
-		return prepareRequestBuilder(RequestBuilder.POST, urlBuilder,
+		return prepareRequestBuilder(RequestBuilder.POST, restResourcePath,
 				jsonObject);
 	}
 

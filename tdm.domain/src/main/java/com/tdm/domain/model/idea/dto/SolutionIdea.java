@@ -8,7 +8,7 @@ public interface SolutionIdea {
 
 	String getDetails();
 
-	Date getCreation();
+	Date getCreationDate();
 
 	String getProblemId();
 

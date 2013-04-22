@@ -1,7 +1,7 @@
 package com.tdm.server.application.problem.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class DefaultGdmProblemService implements GdmProblemService {
 	@Override
 	public ExpertId getOwnerOfProblem(ProblemId problemId) {
 		Problem read = problemDao.read(problemId);
-		List<Expert> experts = read.getExperts();
+		Set<Expert> experts = read.getExperts();
 		for (Expert id : experts) {
 			if (ExpertRole.OWNER == id.getRole())
 				return new ExpertId(id.getId());
@@ -57,17 +57,17 @@ public class DefaultGdmProblemService implements GdmProblemService {
 	}
 
 	@Override
-	public List<Expert> retrieveExpertsAssignedToProblem(ProblemId problemId) {
+	public Set<Expert> retrieveExpertsAssignedToProblem(ProblemId problemId) {
 		Problem read = problemDao.read(problemId);
-		List<Expert> experts = read.getExperts();
+		Set<Expert> experts = read.getExperts();
 		return experts;
 	}
 
 	@Override
-	public List<Expert> retrieveModeratorsOfProblem(ProblemId problemId) {
+	public Set<Expert> retrieveModeratorsOfProblem(ProblemId problemId) {
 		Problem read = problemDao.read(problemId);
-		List<Expert> experts = read.getExperts();
-		List<Expert> res = new ArrayList<Expert>();
+		Set<Expert> experts = read.getExperts();
+		Set<Expert> res = new HashSet<Expert>();
 		for (Expert id : experts) {
 			if (ExpertRole.MODERATOR == id.getRole()
 					|| ExpertRole.OWNER == id.getRole())

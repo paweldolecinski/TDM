@@ -20,32 +20,36 @@ import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.Response;
 import com.tdm.client.dispatch.AbstractRequestBuilderClientActionHandler;
-import com.tdm.client.dispatch.command.GetProblemListAction;
-import com.tdm.client.dispatch.command.GetProblemListResult;
-import com.tdm.domain.model.problem.dto.ProblemJSO;
+import com.tdm.client.dispatch.command.GetSolutionIdeaListAction;
+import com.tdm.client.dispatch.command.GetSolutionIdeaListResult;
+import com.tdm.domain.model.idea.dto.SolutionIdeaJSO;
 
 /**
  * @author Paweł Doleciński
  * 
  */
-public class GetProblemListHandler
+public class GetSolutionIdeaListHandler
 		extends
-		AbstractRequestBuilderClientActionHandler<GetProblemListAction, GetProblemListResult> {
+		AbstractRequestBuilderClientActionHandler<GetSolutionIdeaListAction, GetSolutionIdeaListResult> {
 
-	private static final String[] restResourcePath = { "search", "problems" };
+	private static final String[] restResourcePath = { "problems",
+			"{problemId}", "ideas" };
 
-	protected GetProblemListHandler() {
-		super(GetProblemListAction.class);
+	protected GetSolutionIdeaListHandler() {
+		super(GetSolutionIdeaListAction.class);
 	}
 
 	@Override
-	protected GetProblemListResult extractResult(final Response response) {
-		JsArray<ProblemJSO> problems = JsonUtils.safeEval(response.getText());
-		return new GetProblemListResult(problems);
+	protected GetSolutionIdeaListResult extractResult(final Response response) {
+		JsArray<SolutionIdeaJSO> res = JsonUtils.safeEval(response.getText());
+		return new GetSolutionIdeaListResult(res);
 	}
 
 	@Override
-	protected RequestBuilder getRequestBuilder(final GetProblemListAction action) {
+	protected RequestBuilder getRequestBuilder(
+			final GetSolutionIdeaListAction action) {
+
+		restResourcePath[1] = action.getProblemId();
 
 		return prepareRequestBuilder(RequestBuilder.GET, restResourcePath);
 

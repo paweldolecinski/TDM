@@ -52,8 +52,7 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 	 */
 	@Override
 	public Problem read(ProblemId id) throws ObjectNotFoundException {
-		Key key = KeyFactory.createKey(Problem.class.getSimpleName(),
-				id.getIdString());
+		Key key = KeyFactory.stringToKey(id.getIdString());
 		PersistenceManager pm = getPersistenceManager();
 		try {
 			Problem problem = pm.getObjectById(Problem.class, key);

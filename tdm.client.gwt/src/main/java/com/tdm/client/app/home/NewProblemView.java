@@ -35,7 +35,7 @@ import com.tdm.domain.model.problem.dto.ProblemJSO;
 
 /**
  * The view implementation for
- * {@link com.gwtplatform.NewProblemPresenterWidget.tab.client.application.localdialog.LocalDialogPresenterWidget}
+ * {@link com.gwtplatform.SolutionIdeaPresenterWidget.tab.client.application.localdialog.LocalDialogPresenterWidget}
  * .
  */
 public class NewProblemView extends

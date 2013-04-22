@@ -2,8 +2,9 @@ package com.tdm.client.gin.ui;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
+import com.tdm.client.app.home.ProblemThumbnailWidget;
+import com.tdm.client.app.problem.SolutionIdeaWidget;
 import com.tdm.client.app.ui.FooterWidget;
-import com.tdm.client.app.ui.ProblemListItemWidget;
 
 public class UiModule extends AbstractGinModule {
 
@@ -14,8 +15,12 @@ public class UiModule extends AbstractGinModule {
 		 */
 		bind(FooterWidget.Binder.class).in(Singleton.class);
 
-		bind(ProblemListItemWidget.class).toProvider(
-				ProblemListItemWidget.Provider.class);
+		bind(ProblemThumbnailWidget.class).toProvider(
+				ProblemThumbnailWidget.Provider.class);
+
+		bind(SolutionIdeaWidget.class).toProvider(
+				SolutionIdeaWidget.Provider.class);
+
 	}
 
 }

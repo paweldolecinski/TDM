@@ -4,7 +4,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -67,7 +67,7 @@ public class GdmProblemServiceTest {
 		manager.assignExpertToProblem(id, expertId, ExpertRole.MEMBER);
 
 		// Then
-		List<Expert> expertsIds = manager.retrieveExpertsAssignedToProblem(id);
+		Set<Expert> expertsIds = manager.retrieveExpertsAssignedToProblem(id);
 
 		Assert.assertEquals(1, expertsIds.size());
 		Assert.assertTrue(expertsIds.contains(expertId));
@@ -102,7 +102,7 @@ public class GdmProblemServiceTest {
 		manager.setOwnerOfProblem(id, expertId);
 
 		// Then
-		List<Expert> assignedExperts = manager
+		Set<Expert> assignedExperts = manager
 				.retrieveExpertsAssignedToProblem(id);
 
 		Assert.assertEquals(1, assignedExperts.size());
@@ -130,14 +130,14 @@ public class GdmProblemServiceTest {
 		manager.assignExpertToProblem(id, expertId, ExpertRole.MODERATOR);
 
 		// Then
-		List<Expert> assignedExperts = manager
+		Set<Expert> assignedExperts = manager
 				.retrieveExpertsAssignedToProblem(id);
 
 		Assert.assertEquals(1, assignedExperts.size());
 		Assert.assertTrue(assignedExperts.contains(expertId));
 		Assert.assertEquals(expertId, assignedExperts.iterator().next().getId());
 
-		List<Expert> moderatorsOfProblem = manager
+		Set<Expert> moderatorsOfProblem = manager
 				.retrieveModeratorsOfProblem(id);
 		Assert.assertEquals(1, moderatorsOfProblem.size());
 		Assert.assertTrue(moderatorsOfProblem.contains(expertId));

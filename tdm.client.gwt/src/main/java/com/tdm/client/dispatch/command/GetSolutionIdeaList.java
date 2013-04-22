@@ -13,27 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.tdm.domain.model.idea;
+package com.tdm.client.dispatch.command;
 
-import java.util.List;
-
-import com.tdm.domain.model.handling.ConstraintsViolationException;
-import com.tdm.domain.model.handling.ObjectNotFoundException;
-import com.tdm.domain.model.problem.ProblemId;
+import com.google.gwt.core.client.JsArray;
+import com.gwtplatform.dispatch.annotation.GenDispatch;
+import com.gwtplatform.dispatch.annotation.In;
+import com.gwtplatform.dispatch.annotation.Out;
+import com.tdm.domain.model.idea.dto.SolutionIdeaJSO;
 
 /**
  * @author Paweł Doleciński
  * 
  */
-public interface SolutionIdeaRepository {
+@GenDispatch(isSecure = true)
+public class GetSolutionIdeaList {
 
-	SolutionIdea read(ProblemId problemId, SolutionIdeaId solutionIdeaId);
+	@In(1)
+	String problemId;
 
-	SolutionIdea create(SolutionIdea soultionIdea) throws ObjectNotFoundException,
-			ConstraintsViolationException;
-
-	void delete(SolutionIdeaId id) throws ObjectNotFoundException;
-
-	List<SolutionIdea> findAllAssignedTo(ProblemId problemId);
-
+	@Out(1)
+	JsArray<SolutionIdeaJSO> solutionIdeaList;
 }
