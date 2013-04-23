@@ -13,10 +13,12 @@ import org.springframework.stereotype.Repository;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import javax.jdo.Transaction;
 import com.tdm.domain.model.handling.ObjectNotFoundException;
 import com.tdm.domain.model.idea.SolutionIdea;
 import com.tdm.domain.model.idea.SolutionIdeaId;
 import com.tdm.domain.model.idea.SolutionIdeaRepository;
+import com.tdm.domain.model.problem.Problem;
 import com.tdm.domain.model.problem.ProblemId;
 
 @Repository
@@ -34,12 +36,23 @@ public class JdoSolutionIdeaRepository implements SolutionIdeaRepository {
 	@Override
 	public SolutionIdea create(SolutionIdea soultionIdea) {
 		PersistenceManager pm = getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		SolutionIdea detachCopy;
 		try {
+			tx.begin();
 			SolutionIdea createdPersistent = pm.makePersistent(soultionIdea);
-			return pm.detachCopy(createdPersistent);
+			Problem problem = soultionIdea.getProblem();
+			// problem.addSolutionIdea(createdPersistent);
+			pm.makePersistent(problem);
+			tx.commit();
+			detachCopy = pm.detachCopy(createdPersistent);
 		} finally {
 			pm.close();
+			if (tx.isActive()) {
+				tx.rollback();
+			}
 		}
+		return detachCopy;
 	}
 
 	@Override

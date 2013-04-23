@@ -15,14 +15,13 @@
  */
 package com.tdm.domain.model.problem;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import javax.jdo.annotations.Element;
 import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.Order;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -33,7 +32,7 @@ import com.tdm.domain.model.idea.SolutionIdea;
 /**
  * @author Paweł Doleciński
  */
-@PersistenceCapable
+@PersistenceCapable(detachable = "true")
 public class Problem {
 
 	@PrimaryKey
@@ -50,16 +49,15 @@ public class Problem {
 	@Persistent
 	private String description;
 
-	@Persistent
+	@Persistent(defaultFetchGroup="true")
 	private Set<Expert> experts;
 
-	@Persistent
+	@Persistent(defaultFetchGroup="true")
 	private CurrentConsensus currentConsensus;
 
-	@Persistent(mappedBy = "problem")
-	@Element(dependent = "true")
-	@Order(extensions = @Extension(vendorName = "datanucleus", key = "list-ordering", value = "creationDate asc"))
-	private List<SolutionIdea> solutionIdeas;
+	@Persistent(defaultFetchGroup="true", mappedBy = "problem")
+//	@Order(extensions = @Extension(vendorName = "datanucleus", key = "list-ordering", value = "creationDate asc"))
+	private List<SolutionIdea> solutionIdeas = new ArrayList<SolutionIdea>();
 
 	public String getEncodedKey() {
 		return encodedKey;
@@ -105,7 +103,7 @@ public class Problem {
 		return solutionIdeas;
 	}
 
-	public void addSolutionIdeas(SolutionIdea solutionIdea) {
+	public void addSolutionIdea(SolutionIdea solutionIdea) {
 		this.solutionIdeas.add(solutionIdea);
 	}
 

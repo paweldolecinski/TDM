@@ -54,13 +54,14 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 	public Problem read(ProblemId id) throws ObjectNotFoundException {
 		Key key = KeyFactory.stringToKey(id.getIdString());
 		PersistenceManager pm = getPersistenceManager();
+		Problem detachCopy;
 		try {
 			Problem problem = pm.getObjectById(Problem.class, key);
-			return pm.detachCopy(problem);
+			detachCopy = pm.detachCopy(problem);
 		} finally {
 			pm.close();
 		}
-
+		return detachCopy;
 	}
 
 	/**

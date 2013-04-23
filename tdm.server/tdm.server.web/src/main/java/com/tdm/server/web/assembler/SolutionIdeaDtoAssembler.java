@@ -14,12 +14,13 @@ public class SolutionIdeaDtoAssembler {
 	/**
 	 * Simply creates {@code RequestDTO} based on JPA Request entity.
 	 */
-	public SolutionIdeaDTO fromEntity(SolutionIdea entity) {
+	public SolutionIdeaDTO fromEntity(SolutionIdea entity, String problemId) {
 		SolutionIdeaDTO dto = new SolutionIdeaDTO();
 		dto.setId(entity.getEncodedKey());
 		dto.setName(entity.getName());
 		dto.setDetails(entity.getDetails());
 		dto.setCreationDate(entity.getCreationDate());
+		dto.setProblemId(problemId);
 		return dto;
 	}
 
@@ -30,14 +31,17 @@ public class SolutionIdeaDtoAssembler {
 				.getProblemId()));
 		entity.setName(dto.getName());
 		entity.setDetails(dto.getDetails());
+		List<SolutionIdea> solutionIdeas = problem.getSolutionIdeas();
+		solutionIdeas.add(entity);
+		problem.setSolutionIdeas(solutionIdeas);
 		entity.setProblem(problem);
 		return entity;
 	}
 
-	public List<SolutionIdeaDTO> fromEntityList(List<SolutionIdea> entities) {
+	public List<SolutionIdeaDTO> fromEntityList(List<SolutionIdea> entities, String problemId) {
 		ArrayList<SolutionIdeaDTO> res = new ArrayList<SolutionIdeaDTO>();
-		for (SolutionIdea problem : entities) {
-			res.add(fromEntity(problem));
+		for (SolutionIdea solution : entities) {
+			res.add(fromEntity(solution,problemId));
 		}
 		return res;
 	}

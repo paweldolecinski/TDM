@@ -71,18 +71,18 @@ public final class ProblemController {
 	}
 
 	@RequestMapping(value = "/{problemId}/ideas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public List<SolutionIdeaDTO> getSolutionIdeasForProblem(
+	public @ResponseBody
+	List<SolutionIdeaDTO> getSolutionIdeasForProblem(
 			@PathVariable String problemId) {
 		SolutionIdeaDtoAssembler ass = new SolutionIdeaDtoAssembler();
 		List<SolutionIdea> ideas = ideaService
 				.retrieveSolutionIdeasForProblem(new ProblemId(problemId));
-		return ass.fromEntityList(ideas);
+		return ass.fromEntityList(ideas,problemId);
 	}
 
 	@RequestMapping(value = "/{problemId}/ideas", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public SolutionIdeaDTO createIdeaForProblem(@PathVariable String problemId,
+	public @ResponseBody
+	SolutionIdeaDTO createIdeaForProblem(@PathVariable String problemId,
 			@RequestBody SolutionIdeaDTO solutionIdea,
 			HttpServletResponse httpResponse_p, WebRequest request_p) {
 		SolutionIdeaDtoAssembler ass = new SolutionIdeaDtoAssembler();
@@ -95,7 +95,7 @@ public final class ProblemController {
 					request_p.getContextPath() + "/problems/" + problemId
 							+ "/ideas/" + created.getEncodedKey());
 
-			return ass.fromEntity(created);
+			return ass.fromEntity(created,problemId);
 		} catch (Exception e) {
 			httpResponse_p.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
 			return null;

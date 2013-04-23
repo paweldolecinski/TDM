@@ -107,8 +107,6 @@ public class ProblemProcessPresenter
 	}
 
 	private void getSolutionIdeaList() {
-		getView().clear();
-
 		dispatch.execute(new GetSolutionIdeaListAction(problemId),
 				new AsyncCallback<GetSolutionIdeaListResult>() {
 
@@ -121,10 +119,11 @@ public class ProblemProcessPresenter
 
 					@Override
 					public void onSuccess(GetSolutionIdeaListResult result) {
-						JsArray<SolutionIdeaJSO> problemList = result
+						getView().clear();
+						JsArray<SolutionIdeaJSO> res = result
 								.getSolutionIdeaList();
-						for (int i = problemList.length() - 1; i >= 0; i--) {
-							getView().addSolutionIdea(problemList.get(i));
+						for (int i = 0; i < res.length(); i++) {
+							getView().addSolutionIdea(res.get(i));
 						}
 					}
 				});

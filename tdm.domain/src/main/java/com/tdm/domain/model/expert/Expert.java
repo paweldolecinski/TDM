@@ -25,7 +25,7 @@ import com.google.appengine.api.datastore.Key;
 /**
  * @author Paweł Doleciński
  */
-@PersistenceCapable
+@PersistenceCapable(detachable="true")
 public class Expert {
 
 	@PrimaryKey

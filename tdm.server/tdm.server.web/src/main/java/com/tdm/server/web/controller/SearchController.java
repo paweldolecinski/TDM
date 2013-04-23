@@ -32,7 +32,6 @@ public final class SearchController {
 			@RequestParam(value = "q", required = false) String filtr) {
 		List<Problem> problems = service.retrieveProblemsForExpert(null);
 		GdmProblemDtoAssembler ass = new GdmProblemDtoAssembler();
-
 		return ass.fromEntityList(problems);
 	}
 

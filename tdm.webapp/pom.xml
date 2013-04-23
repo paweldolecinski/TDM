@@ -18,6 +18,96 @@
 		</gae.home>
 	</properties>
 
+	<profiles>
+		<profile>
+			<id>debug</id>
+			<activation>
+				<property>
+					<name>debug</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.appengine</groupId>
+						<artifactId>appengine-maven-plugin</artifactId>
+						<configuration>
+							<useJava7>true</useJava7>
+							<jvmFlags>
+								<jvmFlag>-Xdebug</jvmFlag>
+								<jvmFlag>-Xrunjdwp:transport=dt_socket,address=1044,server=y,suspend=y
+								</jvmFlag>
+							</jvmFlags>
+							<disableUpdateCheck>true</disableUpdateCheck>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>default</id>
+			<activation>
+				<property>
+					<name>debug</name>
+					<value>false</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<!-- GWT Maven Plugin -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>gwt-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>test</goal>
+									<goal>compile</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<extraParam>true</extraParam>
+							<strict>true</strict>
+							<testTimeOut>180</testTimeOut>
+							<!-- With multiple tests use GwtTestSuite.java for speed -->
+							<includes>**/*GwtTest.java</includes>
+							<!-- <includes>**/*GwtTestSuite.java</includes> -->
+							<mode>htmlunit</mode>
+							<extraJvmArgs>-Xss1024k -Xmx1024m -XX:MaxPermSize=256m</extraJvmArgs>
+							<logLevel>INFO</logLevel>
+							<style>${gwt.style}</style>
+
+							<!-- <copyWebapp>true</copyWebapp> -->
+							<hostedWebapp>${webappDirectory}</hostedWebapp>
+							<server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
+							<appEngineHome>${gae.home}</appEngineHome>
+							<appEngineVersion>${gae.version}</appEngineVersion>
+							<extraJvmArgs>-Dappengine.sdk.root=${gae.home}</extraJvmArgs>
+							<runTarget>index.html</runTarget>
+
+							<compileSourcesArtifacts>
+								<artifact>${project.groupId}:tdm.domain</artifact>
+								<artifact>${project.groupId}:tdm.client.gwt</artifact>
+							</compileSourcesArtifacts>
+							<module>${project.groupId}.TdmClient</module>
+						</configuration>
+					</plugin>
+
+					<!-- GAE Maven Plugin -->
+					<plugin>
+						<groupId>com.google.appengine</groupId>
+						<artifactId>appengine-maven-plugin</artifactId>
+						<configuration>
+							<useJava7>true</useJava7>
+							<disableUpdateCheck>true</disableUpdateCheck>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -83,57 +173,7 @@
 
 	<build>
 		<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
-		<finalName>tdm.webapp</finalName>
+		<!-- <finalName>tdm.webapp</finalName> -->
 
-		<plugins>
-			<!-- GWT Maven Plugin -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>test</goal>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<extraParam>true</extraParam>
-					<strict>true</strict>
-					<testTimeOut>180</testTimeOut>
-					<!-- With multiple tests use GwtTestSuite.java for speed -->
-					<includes>**/*GwtTest.java</includes>
-					<!-- <includes>**/*GwtTestSuite.java</includes> -->
-					<mode>htmlunit</mode>
-					<extraJvmArgs>-Xss1024k -Xmx1024m -XX:MaxPermSize=256m</extraJvmArgs>
-					<logLevel>INFO</logLevel>
-					<style>${gwt.style}</style>
-
-					<!-- <copyWebapp>true</copyWebapp> -->
-					<hostedWebapp>${webappDirectory}</hostedWebapp>
-					<server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
-					<appEngineHome>${gae.home}</appEngineHome>
-					<appEngineVersion>${gae.version}</appEngineVersion>
-					<extraJvmArgs>-Dappengine.sdk.root=${gae.home}</extraJvmArgs>
-					<runTarget>index.html</runTarget>
-
-					<compileSourcesArtifacts>
-						<artifact>${project.groupId}:tdm.domain</artifact>
-						<artifact>${project.groupId}:tdm.client.gwt</artifact>
-					</compileSourcesArtifacts>
-					<module>${project.groupId}.TdmClient</module>
-				</configuration>
-			</plugin>
-
-			<!-- GAE Maven Plugin -->
-			<plugin>
-				<groupId>com.google.appengine</groupId>
-				<artifactId>appengine-maven-plugin</artifactId>
-				<configuration>
-					<useJava7>true</useJava7>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
 </project>

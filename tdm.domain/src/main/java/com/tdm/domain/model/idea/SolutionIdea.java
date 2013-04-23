@@ -10,7 +10,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 import com.tdm.domain.model.problem.Problem;
 
-@PersistenceCapable
+@PersistenceCapable(detachable = "true")
 public class SolutionIdea {
 
 	@PrimaryKey
