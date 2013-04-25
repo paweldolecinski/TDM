@@ -10,8 +10,8 @@ public interface SolutionIdea {
 
 	Date getCreationDate();
 
-	String getProblemId();
-
 	String getId();
+	
+	String getProblemId();
 
 }

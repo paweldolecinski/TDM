@@ -2,10 +2,13 @@ package com.tdm.server.persistance.jdo;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
+import javax.jdo.Transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +16,6 @@ import org.springframework.stereotype.Repository;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
-import javax.jdo.Transaction;
 import com.tdm.domain.model.handling.ObjectNotFoundException;
 import com.tdm.domain.model.idea.SolutionIdea;
 import com.tdm.domain.model.idea.SolutionIdeaId;
@@ -23,6 +25,9 @@ import com.tdm.domain.model.problem.ProblemId;
 
 @Repository
 public class JdoSolutionIdeaRepository implements SolutionIdeaRepository {
+
+	protected final Logger logger = Logger
+			.getLogger(JdoSolutionIdeaRepository.class.getName());
 
 	@Autowired
 	@Qualifier("proxy")
@@ -34,25 +39,26 @@ public class JdoSolutionIdeaRepository implements SolutionIdeaRepository {
 	}
 
 	@Override
-	public SolutionIdea create(SolutionIdea soultionIdea) {
+	public SolutionIdea create(SolutionIdea soultionIdea, ProblemId problemId) {
 		PersistenceManager pm = getPersistenceManager();
+
 		Transaction tx = pm.currentTransaction();
-		SolutionIdea detachCopy;
 		try {
 			tx.begin();
-			SolutionIdea createdPersistent = pm.makePersistent(soultionIdea);
-			Problem problem = soultionIdea.getProblem();
-			// problem.addSolutionIdea(createdPersistent);
-			pm.makePersistent(problem);
+			pm.setDetachAllOnCommit(true);
+
+			Key key = KeyFactory.stringToKey(problemId.getIdString());
+			soultionIdea.setProblem(key);
+			pm.makePersistent(soultionIdea);
 			tx.commit();
-			detachCopy = pm.detachCopy(createdPersistent);
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Error during creating solution idea.", e);
 		} finally {
-			pm.close();
 			if (tx.isActive()) {
 				tx.rollback();
 			}
 		}
-		return detachCopy;
+		return soultionIdea;
 	}
 
 	@Override
@@ -68,7 +74,7 @@ public class JdoSolutionIdeaRepository implements SolutionIdeaRepository {
 
 		Query q = pm.newQuery(SolutionIdea.class);
 		q.setOrdering("creationDate asc");
-		q.setFilter("problem == problemParam");
+		q.setFilter("problemId == problemParam");
 		q.declareParameters(Key.class.getName() + " problemParam");
 
 		try {

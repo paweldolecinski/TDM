@@ -9,8 +9,8 @@ public class SolutionIdeaJSO extends BaseJso implements SolutionIdea {
 	protected SolutionIdeaJSO() {
 	}
 
-	public static native SolutionIdeaJSO create(String name, String problemId) /*-{
-																					return {name: name, problemId: problemId};
+	public static native SolutionIdeaJSO create(String name) /*-{
+																					return {name: name};
 																					}-*/;
 
 	@Override
@@ -32,13 +32,12 @@ public class SolutionIdeaJSO extends BaseJso implements SolutionIdea {
 															return this.creationDate;
 															}-*/;
 
-	@Override
-	public final native String getProblemId() /*-{
-												return this.problemId;
-												}-*/;
-
 	public final native String getId() /*-{
 										return this.id;
+										}-*/;
+
+	public final native String getProblemId() /*-{
+										return this.problemId;
 										}-*/;
 
 }

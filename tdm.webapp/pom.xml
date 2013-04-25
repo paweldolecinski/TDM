@@ -49,8 +49,7 @@
 			<id>default</id>
 			<activation>
 				<property>
-					<name>debug</name>
-					<value>false</value>
+					<name>!debug</name>
 				</property>
 			</activation>
 			<build>

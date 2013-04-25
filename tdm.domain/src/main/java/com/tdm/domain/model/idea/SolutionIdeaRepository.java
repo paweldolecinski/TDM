@@ -17,8 +17,6 @@ package com.tdm.domain.model.idea;
 
 import java.util.List;
 
-import com.tdm.domain.model.handling.ConstraintsViolationException;
-import com.tdm.domain.model.handling.ObjectNotFoundException;
 import com.tdm.domain.model.problem.ProblemId;
 
 /**
@@ -29,10 +27,9 @@ public interface SolutionIdeaRepository {
 
 	SolutionIdea read(ProblemId problemId, SolutionIdeaId solutionIdeaId);
 
-	SolutionIdea create(SolutionIdea soultionIdea) throws ObjectNotFoundException,
-			ConstraintsViolationException;
+	SolutionIdea create(SolutionIdea soultionIdea, ProblemId problemId);
 
-	void delete(SolutionIdeaId id) throws ObjectNotFoundException;
+	void delete(SolutionIdeaId id);
 
 	List<SolutionIdea> findAllAssignedTo(ProblemId problemId);
 

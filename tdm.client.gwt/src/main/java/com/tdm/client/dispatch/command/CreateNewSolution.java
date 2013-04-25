@@ -7,7 +7,10 @@ import com.tdm.domain.model.idea.dto.SolutionIdea;
 
 @GenDispatch(isSecure = true)
 public class CreateNewSolution {
+
 	@In(1)
+	String problemId;
+	@In(2)
 	SolutionIdea solutionIdea;
 	
 	@Out(1)

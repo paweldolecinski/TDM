@@ -3,6 +3,10 @@ package com.tdm.server.web.assembler;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.appengine.api.datastore.KeyFactory;
+import com.tdm.domain.model.expert.Expert;
+import com.tdm.domain.model.expert.dto.ExpertDTO;
+import com.tdm.domain.model.expert.dto.ExpertRole;
 import com.tdm.domain.model.problem.Problem;
 import com.tdm.domain.model.problem.dto.ProblemDTO;
 
@@ -13,10 +17,15 @@ public class GdmProblemDtoAssembler {
 	 */
 	public ProblemDTO fromEntity(Problem entity) {
 		ProblemDTO gdmProblemDto = new ProblemDTO();
-		gdmProblemDto.setKey(entity.getEncodedKey());
+		gdmProblemDto.setKey(KeyFactory.keyToString(entity.getKey()));
 		gdmProblemDto.setName(entity.getName());
 		gdmProblemDto.setDescription(entity.getDescription());
 		gdmProblemDto.setCreationDate(entity.getCreationDate());
+		List<Expert> experts = entity.getExperts();
+		for (Expert expert : experts) {
+			gdmProblemDto.addExpert(new ExpertDTO(expert.getId(), ExpertRole
+					.valueOf(expert.getRole().name())));
+		}
 		return gdmProblemDto;
 	}
 

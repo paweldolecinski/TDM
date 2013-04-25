@@ -10,7 +10,7 @@ public interface SolutionIdeaService {
 
 	List<SolutionIdea> retrieveSolutionIdeasForProblem(ProblemId problemId);
 
-	SolutionIdea addSolutionIdea(SolutionIdea idea);
+	SolutionIdea addSolutionIdea(SolutionIdea idea, ProblemId problemId);
 
 	SolutionIdea getSolutionIdea(ProblemId problemId, SolutionIdeaId ideaId);
 

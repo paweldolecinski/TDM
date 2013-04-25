@@ -38,8 +38,8 @@ public class DefaultSolutionIdeaService implements SolutionIdeaService {
 	}
 
 	@Override
-	public SolutionIdea addSolutionIdea(SolutionIdea idea) {
-		return solutionIdeaDao.create(idea);
+	public SolutionIdea addSolutionIdea(SolutionIdea idea, ProblemId problemId) {
+		return solutionIdeaDao.create(idea, problemId);
 	}
 
 	@Override

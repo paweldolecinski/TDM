@@ -15,52 +15,40 @@
  */
 package com.tdm.domain.model.problem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
-import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
 import com.tdm.domain.model.expert.Expert;
-import com.tdm.domain.model.idea.SolutionIdea;
 
 /**
  * @author Paweł Doleciński
  */
 @PersistenceCapable(detachable = "true")
-public class Problem {
+public class Problem implements Serializable {
+
+	private static final long serialVersionUID = 4432277540027624062L;
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
-	private String encodedKey;
+	private Key key;
 
-	@Persistent
 	private Date creationDate = new Date();
-
-	@Persistent
 	private String name;
-
-	@Persistent
 	private String description;
-
-	@Persistent(defaultFetchGroup="true")
-	private Set<Expert> experts;
-
-	@Persistent(defaultFetchGroup="true")
+	@Persistent(mappedBy="problem")
+	private List<Expert> experts = new ArrayList<Expert>();
 	private CurrentConsensus currentConsensus;
 
-	@Persistent(defaultFetchGroup="true", mappedBy = "problem")
-//	@Order(extensions = @Extension(vendorName = "datanucleus", key = "list-ordering", value = "creationDate asc"))
-	private List<SolutionIdea> solutionIdeas = new ArrayList<SolutionIdea>();
-
-	public String getEncodedKey() {
-		return encodedKey;
+	public Key getKey() {
+		return key;
 	}
 
 	public Date getCreationDate() {
@@ -83,11 +71,11 @@ public class Problem {
 		this.description = description;
 	}
 
-	public Set<Expert> getExperts() {
+	public List<Expert> getExperts() {
 		return experts;
 	}
 
-	public void setExperts(Set<Expert> experts) {
+	public void setExperts(List<Expert> experts) {
 		this.experts = experts;
 	}
 
@@ -98,16 +86,8 @@ public class Problem {
 	public void setCurrentConsensus(CurrentConsensus currentConsensus) {
 		this.currentConsensus = currentConsensus;
 	}
-
-	public List<SolutionIdea> getSolutionIdeas() {
-		return solutionIdeas;
-	}
-
-	public void addSolutionIdea(SolutionIdea solutionIdea) {
-		this.solutionIdeas.add(solutionIdea);
-	}
-
-	public void setSolutionIdeas(List<SolutionIdea> solutionIdeas) {
-		this.solutionIdeas = solutionIdeas;
+	
+	public void addExpert(Expert expert) {
+		experts.add(expert);
 	}
 }

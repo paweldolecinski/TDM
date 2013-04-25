@@ -1,37 +1,32 @@
 package com.tdm.domain.model.idea;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import com.tdm.domain.model.problem.Problem;
+import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable(detachable = "true")
-public class SolutionIdea {
+public class SolutionIdea implements Serializable {
+
+	private static final long serialVersionUID = 1193494744874575714L;
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
-	private String encodedKey;
+	private Key key;
 
-	@Persistent
 	private Date creationDate = new Date();
-
-	@Persistent
 	private String name;
-
-	@Persistent
 	private String details;
 
-	@Persistent
-	private Problem problem;
+	private Key problemId;
 
-	public String getEncodedKey() {
-		return encodedKey;
+	public Key getKey() {
+		return key;
 	}
 
 	public String getName() {
@@ -46,8 +41,8 @@ public class SolutionIdea {
 		return creationDate;
 	}
 
-	public Problem getProblem() {
-		return problem;
+	public Key getProblemId() {
+		return problemId;
 	}
 
 	public void setName(String name) {
@@ -58,7 +53,7 @@ public class SolutionIdea {
 		this.details = details;
 	}
 
-	public void setProblem(Problem problem) {
-		this.problem = problem;
+	public void setProblem(Key problemId) {
+		this.problemId = problemId;
 	}
 }

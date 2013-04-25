@@ -131,8 +131,8 @@ public class ProblemProcessPresenter
 
 	@Override
 	public void createSolutionIdea(String text) {
-		SolutionIdeaJSO solutionIdea = SolutionIdeaJSO.create(text, problemId);
-		dispatch.execute(new CreateNewSolutionAction(solutionIdea),
+		SolutionIdeaJSO solutionIdea = SolutionIdeaJSO.create(text);
+		dispatch.execute(new CreateNewSolutionAction(problemId, solutionIdea),
 				new AsyncCallback<CreateNewSolutionResult>() {
 
 					@Override

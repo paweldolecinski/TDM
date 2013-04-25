@@ -15,12 +15,15 @@
  */
 package com.tdm.server.persistance.jdo;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
+import javax.jdo.Transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,6 +31,7 @@ import org.springframework.stereotype.Repository;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.tdm.domain.model.expert.Expert;
 import com.tdm.domain.model.expert.ExpertId;
 import com.tdm.domain.model.expert.ExpertRole;
 import com.tdm.domain.model.handling.ObjectNotFoundException;
@@ -42,6 +46,9 @@ import com.tdm.domain.model.problem.ProblemRepository;
  */
 @Repository
 public class JdoGdmProblemRepository implements ProblemRepository {
+
+	protected final Logger logger = Logger
+			.getLogger(JdoGdmProblemRepository.class.getName());
 
 	@Autowired
 	@Qualifier("proxy")
@@ -70,13 +77,20 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 	@Override
 	public Problem create(Problem problem) {
 		PersistenceManager pm = getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
 		try {
-			Problem createdPersistent = pm.makePersistent(problem);
-			return pm.detachCopy(createdPersistent);
+			tx.begin();
+			pm.setDetachAllOnCommit(true);
+			pm.makePersistent(problem);
+			tx.commit();
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Error during creating problem.", e);
 		} finally {
-			pm.close();
+			if (tx.isActive()) {
+				tx.rollback();
+			}
 		}
-
+		return problem;
 	}
 
 	@Override
@@ -101,22 +115,45 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 	@Override
 	public List<Problem> findAllAssignedTo(ExpertId expertId) {
 		PersistenceManager pm = getPersistenceManager();
-
-		Query q = pm.newQuery(Problem.class);
-		q.setOrdering("creationDate asc");
-
+		List<Problem> problems = new ArrayList<Problem>();
+		Transaction tx = pm.currentTransaction();
 		try {
+			tx.begin();
+			Query q_expert = pm.newQuery(Expert.class, "userId == userIdParam");
+			q_expert.declareParameters("String userIdParam");
 			@SuppressWarnings("unchecked")
-			List<Problem> results = (List<Problem>) q.execute();
-			if (!results.isEmpty()) {
-				return (List<Problem>) pm.detachCopyAll(results);
-			} else {
-				return Collections.emptyList();
+			List<Expert> ids = (List<Expert>) q_expert.execute(expertId
+					.getIdString());
+			for (Expert expert : ids) {
+				Problem problem = expert.getProblem();
+				problem.getExperts().size();
+				problem.getCurrentConsensus();
+				problems.add(pm.detachCopy(problem));
 			}
-		} finally {
-			q.closeAll();
-		}
 
+			// Query q = pm.newQuery(Problem.class,
+			// "cities.contains(this.address.city)");
+			// q.declareParameters("Collection cities");
+			// q.setOrdering("creationDate asc");
+			// @SuppressWarnings("unchecked")
+			// List<Problem> results = (List<Problem>) q.execute(ids);
+			// results.size();
+			// for (Problem problem : results) {
+			// problem.getExperts().size();
+			// problem.getCurrentConsensus();
+			// problems.add(pm.detachCopy(problem));
+			// }
+
+			tx.commit();
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Error during fetching problems.", e);
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return problems;
 	}
 
 	@Override

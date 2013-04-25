@@ -67,6 +67,7 @@
 	<set-property name="ClientBundle.enableInlining" value="false" />
 
 	<!-- safari ie6, ie7,ie8, opera, gecko1_8 -->
+	
 	<set-property name="user.agent" value="safari" />
 
 	<!-- <extend-property name="locale" values="en" /> -->

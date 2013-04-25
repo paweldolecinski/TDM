@@ -1,7 +1,7 @@
 package com.tdm.domain.model.problem.dto;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,7 +20,7 @@ public interface Problem {
 
 	Date getCreationDate();
 
-	List<Expert> getExperts();
+	Set<Expert> getExperts();
 
 	GdmProblemCurrentConsensus getCurrentConsensus();
 

@@ -1,5 +1,6 @@
 package com.tdm.server.web.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
+import com.tdm.domain.model.expert.Expert;
+import com.tdm.domain.model.expert.ExpertRole;
 import com.tdm.domain.model.idea.SolutionIdea;
 import com.tdm.domain.model.idea.dto.SolutionIdeaDTO;
 import com.tdm.domain.model.problem.Problem;
@@ -53,17 +56,21 @@ public final class ProblemController {
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody
 	ProblemDTO createProblem(@RequestBody ProblemDTO problem,
-			HttpServletResponse httpResponse_p, WebRequest request_p) {
+			HttpServletResponse httpResponse_p, WebRequest request_p, Principal principal) {
 		GdmProblemDtoAssembler ass = new GdmProblemDtoAssembler();
 		Problem entity = ass.toEntity(problem);
+		Expert owner = new Expert(principal.getName(), ExpertRole.OWNER);
+		entity.addExpert(owner);
+		
 		try {
 			Problem createdProblem = problemService.createProblem(entity);
+			ProblemDTO dto = ass.fromEntity(createdProblem);
 
 			httpResponse_p.setStatus(HttpStatus.CREATED.value());
 			httpResponse_p.setHeader("Location", request_p.getContextPath()
-					+ "/problems/" + createdProblem.getEncodedKey());
+					+ "/problems/" + dto.getKey());
 
-			return ass.fromEntity(createdProblem);
+			return dto;
 		} catch (Exception e) {
 			httpResponse_p.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
 			return null;
@@ -77,7 +84,7 @@ public final class ProblemController {
 		SolutionIdeaDtoAssembler ass = new SolutionIdeaDtoAssembler();
 		List<SolutionIdea> ideas = ideaService
 				.retrieveSolutionIdeasForProblem(new ProblemId(problemId));
-		return ass.fromEntityList(ideas,problemId);
+		return ass.fromEntityList(ideas);
 	}
 
 	@RequestMapping(value = "/{problemId}/ideas", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -86,16 +93,17 @@ public final class ProblemController {
 			@RequestBody SolutionIdeaDTO solutionIdea,
 			HttpServletResponse httpResponse_p, WebRequest request_p) {
 		SolutionIdeaDtoAssembler ass = new SolutionIdeaDtoAssembler();
-		SolutionIdea entity = ass.toEntity(solutionIdea, problemService);
+		SolutionIdea entity = ass.toEntity(solutionIdea);
 		try {
-			SolutionIdea created = ideaService.addSolutionIdea(entity);
+			SolutionIdea created = ideaService.addSolutionIdea(entity,
+					new ProblemId(problemId));
+			SolutionIdeaDTO dto = ass.fromEntity(created);
 
 			httpResponse_p.setStatus(HttpStatus.CREATED.value());
-			httpResponse_p.setHeader("Location",
-					request_p.getContextPath() + "/problems/" + problemId
-							+ "/ideas/" + created.getEncodedKey());
+			httpResponse_p.setHeader("Location", request_p.getContextPath()
+					+ "/problems/" + problemId + "/ideas/" + dto.getId());
 
-			return ass.fromEntity(created,problemId);
+			return dto;
 		} catch (Exception e) {
 			httpResponse_p.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
 			return null;

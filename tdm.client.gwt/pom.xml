@@ -142,6 +142,11 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<strict>true</strict>
+					<extraJvmArgs>-Xss1024k -Xmx1024m -XX:MaxPermSize=256m</extraJvmArgs>
+					<logLevel>INFO</logLevel>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -157,46 +162,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- WAR Maven Plugin -->
-			<!-- <plugin> -->
-			<!-- <groupId>org.apache.maven.plugins</groupId> -->
-			<!-- <artifactId>maven-war-plugin</artifactId> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <phase>compile</phase> -->
-			<!-- <goals> -->
-			<!-- <goal>exploded</goal> -->
-			<!-- </goals> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- <configuration> -->
-			<!-- <webappDirectory>${webappDirectory}</webappDirectory> -->
-			<!-- <overlays> -->
-			<!-- <overlay> -->
-			<!-- <id>config</id> -->
-			<!-- <groupId>${project.groupId}</groupId> -->
-			<!-- <artifactId>tdm.server.web</artifactId> -->
-			<!-- <includes> -->
-			<!-- <include>WEB-INF/web.xml</include> -->
-			<!-- <include>WEB-INF/appengine-web.xml</include> -->
-			<!-- <include>WEB-INF/spring/**</include> -->
-			<!-- <include>WEB-INF/oxm/**</include> -->
-			<!-- <include>WEB-INF/lib/**</include> -->
-			<!-- </includes> -->
-			<!-- </overlay> -->
-			<!-- <overlay> -->
-
-			<!-- empty groupId/artifactId represents the current build -->
-			<!-- </overlay> -->
-			<!-- <overlay> -->
-			<!-- <id>web.xml</id> -->
-			<!-- <groupId>${project.groupId}</groupId> -->
-			<!-- <artifactId>tdm.server.web</artifactId> -->
-			<!-- </overlay> -->
-			<!-- </overlays> -->
-			<!-- </configuration> -->
-			<!-- </plugin> -->
-			<!-- Run annotation processors on src/main/java sources -->
 			<plugin>
 				<groupId>org.bsc.maven</groupId>
 				<artifactId>maven-processor-plugin</artifactId>

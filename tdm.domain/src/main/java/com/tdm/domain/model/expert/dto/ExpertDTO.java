@@ -3,17 +3,17 @@ package com.tdm.domain.model.expert.dto;
 
 public class ExpertDTO implements Expert {
 	
-	private final String id;
+	private final String userId;
 	private ExpertRole role;
 	private ExpertCurrentPreferences currentPreferences;
 
-	public ExpertDTO(String id, ExpertRole role) {
-		this.id = id;
+	public ExpertDTO(String userId, ExpertRole role) {
+		this.userId = userId;
 		this.role = role;
 	}
 
-	public String getId() {
-		return id;
+	public String getUserId() {
+		return userId;
 	}
 
 	public ExpertRole getRole() {

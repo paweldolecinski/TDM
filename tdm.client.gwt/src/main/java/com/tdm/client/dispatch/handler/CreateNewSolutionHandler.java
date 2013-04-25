@@ -32,7 +32,7 @@ public class CreateNewSolutionHandler
 	protected RequestBuilder getRequestBuilder(CreateNewSolutionAction action) {
 
 		SolutionIdea solutionIdea = action.getSolutionIdea();
-		restResourcePath[1] = solutionIdea.getProblemId();
+		restResourcePath[1] = action.getProblemId();
 
 		JSONObject jsonObject = new JSONObject((JavaScriptObject) solutionIdea);
 

@@ -1,5 +1,6 @@
 package com.tdm.server.web.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tdm.domain.model.expert.ExpertId;
 import com.tdm.domain.model.problem.Problem;
 import com.tdm.domain.model.problem.dto.ProblemDTO;
 import com.tdm.server.application.problem.service.SearchService;
@@ -29,8 +31,10 @@ public final class SearchController {
 	@RequestMapping(value = "/problems", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<ProblemDTO> getProblems(
-			@RequestParam(value = "q", required = false) String filtr) {
-		List<Problem> problems = service.retrieveProblemsForExpert(null);
+			@RequestParam(value = "q", required = false) String filtr,
+			Principal principal) {
+		List<Problem> problems = service
+				.retrieveProblemsForExpert(new ExpertId(principal.getName()));
 		GdmProblemDtoAssembler ass = new GdmProblemDtoAssembler();
 		return ass.fromEntityList(problems);
 	}

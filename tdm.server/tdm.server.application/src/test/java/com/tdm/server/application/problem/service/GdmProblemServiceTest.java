@@ -4,6 +4,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -67,7 +68,7 @@ public class GdmProblemServiceTest {
 		manager.assignExpertToProblem(id, expertId, ExpertRole.MEMBER);
 
 		// Then
-		Set<Expert> expertsIds = manager.retrieveExpertsAssignedToProblem(id);
+		List<Expert> expertsIds = manager.retrieveExpertsAssignedToProblem(id);
 
 		Assert.assertEquals(1, expertsIds.size());
 		Assert.assertTrue(expertsIds.contains(expertId));
@@ -102,7 +103,7 @@ public class GdmProblemServiceTest {
 		manager.setOwnerOfProblem(id, expertId);
 
 		// Then
-		Set<Expert> assignedExperts = manager
+		List<Expert> assignedExperts = manager
 				.retrieveExpertsAssignedToProblem(id);
 
 		Assert.assertEquals(1, assignedExperts.size());
@@ -130,7 +131,7 @@ public class GdmProblemServiceTest {
 		manager.assignExpertToProblem(id, expertId, ExpertRole.MODERATOR);
 
 		// Then
-		Set<Expert> assignedExperts = manager
+		List<Expert> assignedExperts = manager
 				.retrieveExpertsAssignedToProblem(id);
 
 		Assert.assertEquals(1, assignedExperts.size());

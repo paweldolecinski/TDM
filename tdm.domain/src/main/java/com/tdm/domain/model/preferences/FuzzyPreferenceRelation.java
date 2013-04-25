@@ -2,27 +2,24 @@ package com.tdm.domain.model.preferences;
 
 import java.util.Collection;
 
-import com.tdm.domain.model.preferences.dto.FuzzyPreferences;
-
 public class FuzzyPreferenceRelation extends
-	PreferenceRelation<SolutionIdeaTupleWithValue> implements
-	FuzzyPreferences {
+		PreferenceRelation<SolutionIdeaTupleWithValue> {
 
-    private static final long serialVersionUID = -8119377108595639064L;
+	private static final long serialVersionUID = -8119377108595639064L;
 
-    public FuzzyPreferenceRelation() {
-	super();
-    }
+	public FuzzyPreferenceRelation() {
+		super();
+	}
 
-    public FuzzyPreferenceRelation(Collection<SolutionIdeaTupleWithValue> m) {
-	super(m);
-    }
+	public FuzzyPreferenceRelation(Collection<SolutionIdeaTupleWithValue> m) {
+		super(m);
+	}
 
-    @Override
-    protected SolutionIdeaTupleWithValue reverseTuple(
-	    SolutionIdeaTupleWithValue tuple) {
-	return new SolutionIdeaTupleWithValue(tuple.getRight(),
-		tuple.getLeft(), tuple.getReverseValue());
-    }
+	@Override
+	protected SolutionIdeaTupleWithValue reverseTuple(
+			SolutionIdeaTupleWithValue tuple) {
+		return new SolutionIdeaTupleWithValue(tuple.getRight(),
+				tuple.getLeft(), tuple.getReverseValue());
+	}
 
 }

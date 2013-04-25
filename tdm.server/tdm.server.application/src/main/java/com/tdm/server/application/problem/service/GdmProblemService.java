@@ -1,5 +1,6 @@
 package com.tdm.server.application.problem.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.tdm.domain.model.expert.Expert;
@@ -16,7 +17,7 @@ public interface GdmProblemService {
 
 	void setOwnerOfProblem(ProblemId problemId, ExpertId id);
 
-	Set<Expert> retrieveExpertsAssignedToProblem(ProblemId problemId);
+	List<Expert> retrieveExpertsAssignedToProblem(ProblemId problemId);
 
 	Set<Expert> retrieveModeratorsOfProblem(ProblemId problemId);
 

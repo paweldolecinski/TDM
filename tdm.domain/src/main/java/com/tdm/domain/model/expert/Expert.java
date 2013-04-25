@@ -15,34 +15,41 @@
  */
 package com.tdm.domain.model.expert;
 
+import java.io.Serializable;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
+import com.tdm.domain.model.problem.Problem;
 
 /**
  * @author Paweł Doleciński
  */
-@PersistenceCapable(detachable="true")
-public class Expert {
+@PersistenceCapable(detachable = "true")
+public class Expert implements Serializable {
+
+	private static final long serialVersionUID = -7951708410379553053L;
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Key key;
 
-	private final String id;
-	private ExpertRole role;
-	private ExpertCurrentPreferences currentPreferences;
+	private String userId;
+	private ExpertRole role = ExpertRole.MEMBER;
+	private Problem problem;
+
+	// private transient ExpertCurrentPreferences currentPreferences;
 
 	public Expert(String id, ExpertRole role) {
-		this.id = id;
+		this.userId = id;
 		this.role = role;
 	}
 
 	public String getId() {
-		return id;
+		return userId;
 	}
 
 	public ExpertRole getRole() {
@@ -53,12 +60,20 @@ public class Expert {
 		this.role = role;
 	}
 
+	public Problem getProblem() {
+		return problem;
+	}
+
+	public void setProblem(Problem problem) {
+		this.problem = problem;
+	}
+
 	public ExpertCurrentPreferences getCurrentPreferences() {
-		return currentPreferences;
+		return null;
 	}
 
 	public void setCurrentPreferences(
 			ExpertCurrentPreferences currentPreferences) {
-		this.currentPreferences = currentPreferences;
+		// this.currentPreferences = currentPreferences;
 	}
 }

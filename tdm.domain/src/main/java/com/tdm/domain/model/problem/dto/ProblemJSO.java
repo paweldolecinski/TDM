@@ -1,8 +1,8 @@
 package com.tdm.domain.model.problem.dto;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.google.gwt.core.client.JsArray;
 import com.tdm.domain.model.expert.dto.Expert;
@@ -42,9 +42,9 @@ public class ProblemJSO extends BaseJso implements Problem {
 															}-*/;
 
 	@Override
-	public final List<Expert> getExperts() {
+	public final Set<Expert> getExperts() {
 		JsArray<ExpertJso> jsoExperts = getJsoExperts();
-		ArrayList<Expert> res = new ArrayList<Expert>();
+		Set<Expert> res = new HashSet<Expert>();
 		for (int i = 0; i < jsoExperts.length(); i++) {
 			res.add(jsoExperts.get(i));
 		}

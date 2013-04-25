@@ -39,10 +39,6 @@ public class SolutionIdeaDTO implements SolutionIdea {
 		this.id = id;
 	}
 
-	public void setProblemId(String problemId) {
-		this.problemId = problemId;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -53,5 +49,9 @@ public class SolutionIdeaDTO implements SolutionIdea {
 
 	public void setCreationDate(Date creation) {
 		this.creationDate = creation;
+	}
+
+	public void setProblemId(String problemId) {
+		this.problemId = problemId;
 	}
 }

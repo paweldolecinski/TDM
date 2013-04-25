@@ -1,8 +1,8 @@
 package com.tdm.domain.model.problem.dto;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.tdm.domain.model.expert.dto.Expert;
 
@@ -12,7 +12,7 @@ public class ProblemDTO implements Problem {
 	private String name;
 	private String description;
 	private Date creationDate;
-	private List<Expert> experts = new ArrayList<Expert>();
+	private Set<Expert> experts = new HashSet<Expert>();
 	private GdmProblemCurrentConsensus currentConsensus;
 
 	@Override
@@ -31,7 +31,7 @@ public class ProblemDTO implements Problem {
 	}
 
 	@Override
-	public List<Expert> getExperts() {
+	public Set<Expert> getExperts() {
 		return experts;
 	}
 

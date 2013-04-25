@@ -4,25 +4,26 @@ import com.tdm.gwt.client.BaseJso;
 
 public class ExpertJso extends BaseJso implements Expert {
 
-    protected ExpertJso() {
-    }
+	protected ExpertJso() {
+	}
 
-    @Override
-    public final String getId() {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	public native final String getUserId() /*-{
+											return this.userId;
+											}-*/;
 
-    @Override
-    public final ExpertRole getRole() {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	public final ExpertRole getRole() {
+		return ExpertRole.valueOf(getNativeExpertRole());
+	}
 
-    @Override
-    public final void setRole(ExpertRole role) {
-	// TODO Auto-generated method stub
+	public final void setRole(ExpertRole expertRole) {
+		setNativeExpertRole(expertRole.name());
+	}
 
-    }
+	private final native String getNativeExpertRole() /*-{
+												return this.expertRole;
+												}-*/;
 
+	private final native void setNativeExpertRole(final String expertRole) /*-{
+																		this.expertRole = expertRole;
+																		}-*/;
 }
