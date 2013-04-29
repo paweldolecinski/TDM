@@ -1,0 +1,4 @@
+# Module TDMClient
+# RPC service class, partial path of RPC policy file
+com.tdm.security.client.AuthService, CFD4ABCCF26E1C23EE3C44DD1ED49747.gwt.rpc
+com.gwtplatform.dispatch.shared.DispatchService, 5D98B52A489546FB00B513E528AFA79C.gwt.rpc

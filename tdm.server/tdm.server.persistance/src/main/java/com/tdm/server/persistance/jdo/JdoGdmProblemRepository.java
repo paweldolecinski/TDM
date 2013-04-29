@@ -64,6 +64,8 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 		Problem detachCopy;
 		try {
 			Problem problem = pm.getObjectById(Problem.class, key);
+			problem.getCurrentConsensus();
+			problem.getExperts();
 			detachCopy = pm.detachCopy(problem);
 		} finally {
 			pm.close();
@@ -119,30 +121,18 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q_expert = pm.newQuery(Expert.class, "userId == userIdParam");
-			q_expert.declareParameters("String userIdParam");
+			Query q = pm.newQuery("select from " + Problem.class.getName()
+					+ " where "
+					+ "experts.contains(e) && e.userId == userIdParam");
+			q.declareParameters("String userIdParam");
+			q.declareVariables(Expert.class.getName() + " e");
+
 			@SuppressWarnings("unchecked")
-			List<Expert> ids = (List<Expert>) q_expert.execute(expertId
+			List<Problem> ids = (List<Problem>) q.execute(expertId
 					.getIdString());
-			for (Expert expert : ids) {
-				Problem problem = expert.getProblem();
-				problem.getExperts().size();
-				problem.getCurrentConsensus();
+			for (Problem problem : ids) {
 				problems.add(pm.detachCopy(problem));
 			}
-
-			// Query q = pm.newQuery(Problem.class,
-			// "cities.contains(this.address.city)");
-			// q.declareParameters("Collection cities");
-			// q.setOrdering("creationDate asc");
-			// @SuppressWarnings("unchecked")
-			// List<Problem> results = (List<Problem>) q.execute(ids);
-			// results.size();
-			// for (Problem problem : results) {
-			// problem.getExperts().size();
-			// problem.getCurrentConsensus();
-			// problems.add(pm.detachCopy(problem));
-			// }
 
 			tx.commit();
 		} catch (Exception e) {

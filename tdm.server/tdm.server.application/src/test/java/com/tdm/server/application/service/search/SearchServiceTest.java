@@ -17,7 +17,6 @@ import com.tdm.domain.model.expert.ExpertId;
 import com.tdm.domain.model.problem.Problem;
 import com.tdm.domain.model.problem.ProblemId;
 import com.tdm.domain.model.problem.ProblemRepository;
-import com.tdm.domain.model.problem.dto.ProblemDTO;
 import com.tdm.server.application.problem.service.DefaultSearchService;
 import com.tdm.server.application.problem.service.SearchService;
 

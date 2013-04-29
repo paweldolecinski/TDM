@@ -20,7 +20,6 @@ import com.tdm.domain.model.handling.ObjectNotFoundException;
 import com.tdm.domain.model.idea.SolutionIdea;
 import com.tdm.domain.model.idea.SolutionIdeaId;
 import com.tdm.domain.model.idea.SolutionIdeaRepository;
-import com.tdm.domain.model.problem.Problem;
 import com.tdm.domain.model.problem.ProblemId;
 
 @Repository

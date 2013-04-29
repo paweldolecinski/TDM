@@ -29,7 +29,7 @@ public class GaeUserDetailsService implements UserDetailsService {
 		if (user == null) {
 
 			throw new UsernameNotFoundException("User for username " + username
-					+ "was not found.");
+					+ " was not found.");
 		}
 
 		Set<String> permissions = user.getAuthorities();
@@ -49,8 +49,8 @@ public class GaeUserDetailsService implements UserDetailsService {
 
 		}
 
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), "", true, true, true, true,
-				authorities);
+		return new org.springframework.security.core.userdetails.User(
+				user.getUsername(), "", true, true, true, true, authorities);
 	}
 
 }

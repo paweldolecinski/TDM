@@ -18,15 +18,19 @@ package com.tdm.client.app.problem;
 
 import java.util.Date;
 
+import com.github.gwtbootstrap.client.ui.Button;
 import com.github.gwtbootstrap.client.ui.Paragraph;
 import com.github.gwtbootstrap.client.ui.base.InlineLabel;
 import com.github.gwtbootstrap.client.ui.base.ListItem;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.google.web.bindery.event.shared.EventBus;
+import com.tdm.client.event.VoteOnSolutionEvent;
 import com.tdm.domain.model.idea.dto.SolutionIdea;
 
 /**
@@ -39,17 +43,17 @@ public class SolutionIdeaWidget extends Composite {
 	public static class Provider implements
 			com.google.inject.Provider<SolutionIdeaWidget> {
 
-		private PlaceManager placeManager;
+		private EventBus eventBus;
 
 		@Inject
-		public Provider(PlaceManager placeManager) {
-			this.placeManager = placeManager;
+		public Provider(EventBus eventBus) {
+			this.eventBus = eventBus;
 
 		}
 
 		@Override
 		public SolutionIdeaWidget get() {
-			return new SolutionIdeaWidget();
+			return new SolutionIdeaWidget(eventBus);
 		}
 	}
 
@@ -63,13 +67,28 @@ public class SolutionIdeaWidget extends Composite {
 	@UiField
 	protected Paragraph detailsText;
 
-	public SolutionIdeaWidget() {
+	private SolutionIdea solutionIdea;
+	private EventBus eventBus;
+
+	public SolutionIdeaWidget(EventBus eventBus) {
+		this.eventBus = eventBus;
 		initWidget(binder.createAndBindUi(this));
 		detailsText.setText(new Date().toString());
 	}
 
-	public void init(SolutionIdea created) {
-		titleText.setText(created.getName());
-		detailsText.setText(created.getDetails());
+	public void init(SolutionIdea solutionIdea) {
+		this.solutionIdea = solutionIdea;
+		titleText.setText(solutionIdea.getName());
+		detailsText.setText(solutionIdea.getDetails());
+	}
+
+	@UiHandler({ "vote1", "vote2", "vote3", "vote4", "vote5", "vote6", "vote7",
+			"vote8", "vote9" })
+	void onClickShowModal(ClickEvent event) {
+		Button b = (Button) event.getSource();
+		String text = b.getText();
+		int note = Integer.parseInt(text);
+		eventBus.fireEvent(new VoteOnSolutionEvent(solutionIdea, note));
+
 	}
 }

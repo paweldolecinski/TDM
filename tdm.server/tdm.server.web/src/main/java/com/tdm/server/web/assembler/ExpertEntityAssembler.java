@@ -1,17 +1,33 @@
 package com.tdm.server.web.assembler;
 
-import com.tdm.domain.model.expert.dto.Expert;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.tdm.domain.model.expert.Expert;
+import com.tdm.domain.model.expert.dto.ExpertDTO;
+import com.tdm.domain.model.expert.dto.ExpertRole;
 
 public class ExpertEntityAssembler {
 
-	public Expert fromEntity(Expert expert) {
-		// TODO Auto-generated method stub
-		return null;
+	public ExpertDTO fromEntity(Expert expert) {
+		ExpertDTO dto = new ExpertDTO(expert.getId(),
+				ExpertRole.valueOf(expert.getRole().name()));
+		return dto;
 	}
 
-	public Expert toEntity(Expert expert) {
-		// TODO Auto-generated method stub
-		return null;
+	public Expert toEntity(ExpertDTO expert) {
+		Expert dto = new Expert(expert.getUserId(),
+				com.tdm.domain.model.expert.ExpertRole.valueOf(expert.getRole()
+						.name()));
+
+		return dto;
 	}
 
+	public List<ExpertDTO> fromEntityList(List<Expert> entities) {
+		ArrayList<ExpertDTO> res = new ArrayList<ExpertDTO>();
+		for (Expert entity : entities) {
+			res.add(fromEntity(entity));
+		}
+		return res;
+	}
 }

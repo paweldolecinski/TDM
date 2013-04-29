@@ -1,12 +1,7 @@
 package com.tdm.domain.model.problem.dto;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import com.google.gwt.core.client.JsArray;
-import com.tdm.domain.model.expert.dto.Expert;
-import com.tdm.domain.model.expert.dto.ExpertJso;
 import com.tdm.gwt.client.BaseJso;
 
 public class ProblemJSO extends BaseJso implements Problem {
@@ -42,27 +37,8 @@ public class ProblemJSO extends BaseJso implements Problem {
 															}-*/;
 
 	@Override
-	public final Set<Expert> getExperts() {
-		JsArray<ExpertJso> jsoExperts = getJsoExperts();
-		Set<Expert> res = new HashSet<Expert>();
-		for (int i = 0; i < jsoExperts.length(); i++) {
-			res.add(jsoExperts.get(i));
-		}
-		return res;
-	}
-
-	private final native JsArray<ExpertJso> getJsoExperts() /*-{
-															return this.experts;
-															}-*/;
-
-	@Override
-	public final native GdmProblemCurrentConsensus getCurrentConsensus() /*-{
+	public final native CurrentConsensus getCurrentConsensus() /*-{
 																			return (this.currentConsensus == null) ? null : this.currentConsensus;
-																			}-*/;
-
-	@Override
-	public final native void addExpert(Expert expert) /*-{
-																			this.experts[this.experts.length] = value;
 																			}-*/;
 
 	@Override

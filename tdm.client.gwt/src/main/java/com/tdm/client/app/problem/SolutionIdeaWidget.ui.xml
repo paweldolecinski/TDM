@@ -7,18 +7,27 @@
 
 	<bs:ListItem addStyleNames="row">
 		<b:Column size="1" addStyleNames="{res.mainCss.solutionAvatar}" />
-		<b:Column size="10" addStyleNames="{res.mainCss.solution}">
-			<bs:InlineLabel ui:field="titleText" addStyleNames="{res.mainCss.solutionTitle}">Use a tool that makes
-				it
-				really easy for
-				people
-				to send in ideas as they think of them</bs:InlineLabel>
-			<b:Paragraph ui:field="detailsText" addStyleNames="{res.mainCss.solutionSubTitle}">Just being able to bung
-				ideas
-				into the idea pit
-				would
-				be
-				helpful.</b:Paragraph>
+		<b:Column size="9" addStyleNames="{res.mainCss.solution}">
+			<bs:InlineLabel ui:field="titleText" addStyleNames="{res.mainCss.solutionTitle}" />
+			<b:Paragraph ui:field="detailsText" addStyleNames="{res.mainCss.solutionSubTitle}" />
 		</b:Column>
+		<b:Column size="2">
+			<b:DropdownButton text="Vote" icon="THUMBS_UP">
+				<b:ButtonGroup>
+					<b:Button ui:field="vote9" styleName="badge badge-success vote-button">9</b:Button>
+					<b:Button ui:field="vote8" styleName="badge badge-success vote-button">8</b:Button>
+					<b:Button ui:field="vote7" styleName="badge badge-success vote-button">7</b:Button>
+					<b:Button ui:field="vote6" styleName="badge badge-warning vote-button">6</b:Button>
+					<b:Button ui:field="vote5" styleName="badge badge-warning vote-button">5</b:Button>
+					<b:Button ui:field="vote4" styleName="badge badge-warning vote-button">4</b:Button>
+					<b:Button ui:field="vote3" styleName="badge badge-info vote-button">3</b:Button>
+					<b:Button ui:field="vote2" styleName="badge badge-info vote-button">2</b:Button>
+					<b:Button ui:field="vote1" styleName="badge badge-info vote-button">1</b:Button>
+				</b:ButtonGroup>
+			</b:DropdownButton>
+		</b:Column>
+
+
+
 	</bs:ListItem>
 </ui:UiBinder> 

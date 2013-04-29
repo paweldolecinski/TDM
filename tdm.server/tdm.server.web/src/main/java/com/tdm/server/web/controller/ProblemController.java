@@ -18,6 +18,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.tdm.domain.model.expert.Expert;
 import com.tdm.domain.model.expert.ExpertRole;
+import com.tdm.domain.model.expert.dto.ExpertDTO;
 import com.tdm.domain.model.idea.SolutionIdea;
 import com.tdm.domain.model.idea.dto.SolutionIdeaDTO;
 import com.tdm.domain.model.problem.Problem;
@@ -25,6 +26,7 @@ import com.tdm.domain.model.problem.ProblemId;
 import com.tdm.domain.model.problem.dto.ProblemDTO;
 import com.tdm.server.application.problem.service.GdmProblemService;
 import com.tdm.server.application.problem.service.SolutionIdeaService;
+import com.tdm.server.web.assembler.ExpertEntityAssembler;
 import com.tdm.server.web.assembler.GdmProblemDtoAssembler;
 import com.tdm.server.web.assembler.SolutionIdeaDtoAssembler;
 
@@ -111,4 +113,13 @@ public final class ProblemController {
 
 	}
 
+	@RequestMapping(value = "/{problemId}/experts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody
+	List<ExpertDTO> getExpertsForProblem(
+			@PathVariable String problemId) {
+		ExpertEntityAssembler ass = new ExpertEntityAssembler();
+		List<Expert> experts = problemService
+				.retrieveExpertsAssignedToProblem(new ProblemId(problemId));
+		return ass.fromEntityList(experts);
+	}
 }

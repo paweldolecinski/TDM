@@ -1,12 +1,11 @@
 package com.tdm.domain.model.expert.dto;
 
-import com.tdm.domain.model.expert.dto.Expert;
-import com.tdm.domain.model.preferences.dto.FuzzyPreferences;
+import com.tdm.domain.model.preferences.dto.SolutionPreferences;
 
 public class ExpertCurrentPreferences {
 
     private Expert expertId;
-    private FuzzyPreferences preferences;
+    private SolutionPreferences preferences;
 
     public ExpertCurrentPreferences(Expert expertId) {
 	this.expertId = expertId;
@@ -16,11 +15,11 @@ public class ExpertCurrentPreferences {
 	return expertId;
     }
 
-    public FuzzyPreferences getPreferences() {
+    public SolutionPreferences getPreferences() {
 	return preferences;
     }
 
-    public void setPreferences(FuzzyPreferences preferences) {
+    public void setPreferences(SolutionPreferences preferences) {
 	this.preferences = preferences;
     }
 

@@ -20,13 +20,15 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
+import com.github.gwtbootstrap.client.ui.ControlGroup;
 import com.github.gwtbootstrap.client.ui.Form.SubmitEvent;
+import com.github.gwtbootstrap.client.ui.HelpInline;
 import com.github.gwtbootstrap.client.ui.TextBox;
 import com.github.gwtbootstrap.client.ui.WellForm;
+import com.github.gwtbootstrap.client.ui.constants.ControlGroupType;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -52,8 +54,9 @@ public class NewProblemView extends
 	@UiField
 	TextBox descBox;
 	@UiField
-	HTML errors;
-
+	ControlGroup titleControlGroup;
+	@UiField HelpInline titleError;
+	
 	@Inject
 	public NewProblemView(Binder uiBinder, EventBus eventBus) {
 		super(eventBus);
@@ -71,26 +74,23 @@ public class NewProblemView extends
 
 	@Override
 	public void showErrors(Set<ConstraintViolation<ProblemJSO>> violations) {
+
+		titleControlGroup.setType(ControlGroupType.ERROR);
 		StringBuilder builder = new StringBuilder();
 
 		for (ConstraintViolation<?> violation : violations) {
 			builder.append(violation.getMessage());
-			builder.append(" : <i>(");
-			builder.append(violation.getPropertyPath().toString());
-			builder.append(" = ");
-			builder.append("" + violation.getInvalidValue());
-			builder.append(")</i>");
-			builder.append("<br/>");
+			builder.append(" ");
 		}
-
-		this.errors.setHTML(builder.toString());
+		titleError.setText(builder.toString());
 	}
 
 	@Override
 	public void onHide() {
 		titleBox.setText("");
 		descBox.setText("");
-		errors.setHTML("");
+		titleControlGroup.setType(ControlGroupType.NONE);
+		titleError.setText(null);
 	}
 
 	@Override

@@ -46,6 +46,27 @@
 			</build>
 		</profile>
 		<profile>
+			<id>dev</id>
+			<activation>
+				<property>
+					<name>debug</name>
+					<value>false</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.appengine</groupId>
+						<artifactId>appengine-maven-plugin</artifactId>
+						<configuration>
+							<useJava7>true</useJava7>
+							<disableUpdateCheck>true</disableUpdateCheck>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>default</id>
 			<activation>
 				<property>

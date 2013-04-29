@@ -6,5 +6,4 @@ public interface ProblemProcessUiHandlers extends UiHandlers {
 
     void createSolutionIdea(String text);
     
-    void refreshSolutionIdeaList();
 }

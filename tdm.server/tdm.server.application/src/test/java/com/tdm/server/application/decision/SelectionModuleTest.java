@@ -7,9 +7,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.tdm.domain.model.idea.SolutionIdeaId;
-import com.tdm.domain.model.preferences.FuzzyPreferenceRelation;
-import com.tdm.domain.model.preferences.SolutionIdeaTupleWithValue;
-import com.tdm.server.application.decision.internal.SelectionModule;
+import com.tdm.server.application.decision.preference.FuzzyPreferenceRelation;
+import com.tdm.server.application.decision.preference.SolutionIdeaTupleWithValue;
+import com.tdm.server.application.decision.process.SelectionModule;
 
 public class SelectionModuleTest {
 

@@ -1,0 +1,2 @@
+serviceClass: com.tdm.security.client.AuthService
+path: CFD4ABCCF26E1C23EE3C44DD1ED49747.gwt.rpc

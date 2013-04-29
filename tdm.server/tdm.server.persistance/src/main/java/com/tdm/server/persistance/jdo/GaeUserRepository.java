@@ -59,13 +59,17 @@ public class GaeUserRepository implements UserRepository {
 	@Override
 	public User store(User user) {
 		PersistenceManager pm = getPersistenceManager();
+		User res = null;
 		try {
-			User createdPersistent = pm.makePersistent(user);
-			return pm.detachCopy(createdPersistent);
+			res = findByUsername(user.getUsername());
+			if (res == null) {
+				User createdPersistent = pm.makePersistent(user);
+				res = pm.detachCopy(createdPersistent);
+			}
 		} finally {
 			pm.close();
 		}
-
+		return res;
 	}
 
 	public User update(User user) {

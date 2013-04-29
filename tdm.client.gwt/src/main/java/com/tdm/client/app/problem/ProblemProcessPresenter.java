@@ -26,15 +26,21 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.proxy.ManualRevealCallback;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.tdm.client.app.AppPresenter;
 import com.tdm.client.dispatch.command.CreateNewSolutionAction;
 import com.tdm.client.dispatch.command.CreateNewSolutionResult;
+import com.tdm.client.dispatch.command.GetProblemByIdAction;
+import com.tdm.client.dispatch.command.GetProblemByIdResult;
 import com.tdm.client.dispatch.command.GetSolutionIdeaListAction;
 import com.tdm.client.dispatch.command.GetSolutionIdeaListResult;
+import com.tdm.client.dispatch.command.VoteOnSolutionAction;
+import com.tdm.client.dispatch.command.VoteOnSolutionResult;
 import com.tdm.client.event.ErrorOccuredEvent;
 import com.tdm.client.event.NewSolutionIdeaEvent;
+import com.tdm.client.event.VoteOnSolutionEvent;
 import com.tdm.client.event.navi.HideActivitiesPresenterEvent;
 import com.tdm.client.event.navi.HideExpertsPresenterEvent;
 import com.tdm.client.event.navi.RevealActivitiesPresenterEvent;
@@ -42,6 +48,9 @@ import com.tdm.client.event.navi.RevealExpertsPresenterEvent;
 import com.tdm.client.place.NameTokens;
 import com.tdm.domain.model.idea.dto.SolutionIdea;
 import com.tdm.domain.model.idea.dto.SolutionIdeaJSO;
+import com.tdm.domain.model.preferences.dto.SolutionPreferencesJSO;
+import com.tdm.domain.model.preferences.dto.SolutionPreferencesJSO.NoteJSO;
+import com.tdm.domain.model.problem.dto.ProblemJSO;
 
 /**
  * @author Paweł Doleciński
@@ -51,10 +60,14 @@ public class ProblemProcessPresenter
 		extends
 		Presenter<ProblemProcessPresenter.Display, ProblemProcessPresenter.IProxy>
 		implements ProblemProcessUiHandlers,
-		NewSolutionIdeaEvent.NewSolutionIdeaHandler {
+		NewSolutionIdeaEvent.NewSolutionIdeaHandler,
+		VoteOnSolutionEvent.VoteOnSolutionHandler {
 
 	public interface Display extends View,
 			HasUiHandlers<ProblemProcessUiHandlers> {
+
+		void setHeader(String title, String description);
+
 		void focus();
 
 		void addSolutionIdea(SolutionIdea solutionIdea);
@@ -69,6 +82,7 @@ public class ProblemProcessPresenter
 
 	public static final Object solutionIdeaSlot = new Object();
 	private String problemId;
+	private ProblemJSO problem;
 	private DispatchAsync dispatch;
 
 	@Inject
@@ -82,14 +96,18 @@ public class ProblemProcessPresenter
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		RevealActivitiesPresenterEvent.fire(this);
-		RevealExpertsPresenterEvent.fire(this);
+		RevealActivitiesPresenterEvent.fire(this, problemId);
+		RevealExpertsPresenterEvent.fire(this, problemId);
+		getView().setHeader(problem.getName(), problem.getDescription());
 		getView().focus();
 	}
 
 	@Override
 	protected void onHide() {
 		super.onHide();
+		problem = null;
+		problemId = null;
+		getView().clear();
 		HideActivitiesPresenterEvent.fire(this);
 		HideExpertsPresenterEvent.fire(this);
 	}
@@ -104,6 +122,7 @@ public class ProblemProcessPresenter
 	protected void onBind() {
 		super.onBind();
 		addRegisteredHandler(NewSolutionIdeaEvent.getType(), this);
+		addRegisteredHandler(VoteOnSolutionEvent.getType(), this);
 	}
 
 	private void getSolutionIdeaList() {
@@ -155,6 +174,29 @@ public class ProblemProcessPresenter
 	public void prepareFromRequest(PlaceRequest request) {
 		super.prepareFromRequest(request);
 		problemId = request.getParameter(NameTokens.Params.problemId, null);
+
+		ManualRevealCallback<GetProblemByIdResult> revealCallback = ManualRevealCallback
+				.create(this, new AsyncCallback<GetProblemByIdResult>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						GWT.log("error executing command ", caught);
+						ErrorOccuredEvent.fire(ProblemProcessPresenter.this,
+								caught);
+					}
+
+					@Override
+					public void onSuccess(GetProblemByIdResult result) {
+						problem = result.getProblem();
+					}
+				});
+
+		dispatch.execute(new GetProblemByIdAction(problemId), revealCallback);
+	}
+
+	@Override
+	public boolean useManualReveal() {
+		return true;
 	}
 
 	@Override
@@ -164,8 +206,28 @@ public class ProblemProcessPresenter
 	}
 
 	@Override
-	public void refreshSolutionIdeaList() {
-		// TODO Auto-generated method stub
+	public void onVoteOnSolution(VoteOnSolutionEvent event) {
+		NoteJSO note = NoteJSO.create(event.getSolution().getId(),
+				event.getNote());
+		JsArray<NoteJSO> notes = JsArray.createArray().cast();
+		notes.push(note);
+		SolutionPreferencesJSO preferences = SolutionPreferencesJSO.create(
+				problemId, notes);
+		
+		dispatch.execute(new VoteOnSolutionAction(preferences),
+				new AsyncCallback<VoteOnSolutionResult>() {
 
+					@Override
+					public void onFailure(Throwable caught) {
+						GWT.log("error executing command ", caught);
+						ErrorOccuredEvent.fire(ProblemProcessPresenter.this,
+								caught);
+					}
+
+					@Override
+					public void onSuccess(VoteOnSolutionResult result) {
+					}
+				});
 	}
+
 }

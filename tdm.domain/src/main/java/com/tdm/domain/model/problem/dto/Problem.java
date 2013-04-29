@@ -1,12 +1,9 @@
 package com.tdm.domain.model.problem.dto;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import com.tdm.domain.model.expert.dto.Expert;
 
 public interface Problem {
 
@@ -16,15 +13,12 @@ public interface Problem {
 	@Size(min = 1, message = "Title must be at least 1 character long.")
 	String getName();
 
+	@Size(max = 500, message = "Title must be at most 500 characters long.")
 	String getDescription();
 
 	Date getCreationDate();
 
-	Set<Expert> getExperts();
-
-	GdmProblemCurrentConsensus getCurrentConsensus();
-
-	void addExpert(Expert expert);
+	CurrentConsensus getCurrentConsensus();
 
 	void setName(String name);
 

@@ -22,6 +22,8 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.tdm.client.app.AppPresenter;
 import com.tdm.client.event.ErrorOccuredEvent;
@@ -32,7 +34,10 @@ import com.tdm.client.place.NameTokens;
  * 
  */
 public class ErrorPagePresenter extends
-		Presenter<ErrorPagePresenter.Display, ErrorPagePresenter.IProxy> {
+		Presenter<ErrorPagePresenter.Display, ErrorPagePresenter.IProxy>
+		implements ErrorOccuredEvent.ErrorOccuredHandler {
+
+	private PlaceManager placeManager;
 
 	public interface Display extends View {
 
@@ -46,22 +51,24 @@ public class ErrorPagePresenter extends
 	}
 
 	@Inject
-	public ErrorPagePresenter(EventBus eventBus, Display view, IProxy proxy) {
+	public ErrorPagePresenter(EventBus eventBus, Display view, IProxy proxy,
+			PlaceManager placeManager) {
 		super(eventBus, view, proxy, AppPresenter.TYPE_MainContent);
+		this.placeManager = placeManager;
 	}
 
+	@ProxyEvent
 	@Override
-	protected void onBind() {
-		super.onBind();
-		addRegisteredHandler(ErrorOccuredEvent.getType(),
-				new ErrorOccuredEvent.ErrorOccuredHandler() {
-
-					@Override
-					public void onErrorOccured(ErrorOccuredEvent event) {
-						getView().setErrorText(
-								event.getCaught().getLocalizedMessage());
-					}
-				});
+	public void onErrorOccured(ErrorOccuredEvent event) {
+		Throwable caught = event.getCaught();
+		StackTraceElement[] stackTrace = caught.getStackTrace();
+		String stack = "";
+		for (StackTraceElement stackTraceElement : stackTrace) {
+			stack += stackTraceElement.toString() + "\n";
+		}
+		getView().setErrorText(caught.getMessage() + " stack: " + stack);
+		placeManager.revealErrorPlace(placeManager.getCurrentPlaceRequest()
+				.getNameToken());
 	}
 
 }

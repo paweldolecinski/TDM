@@ -19,11 +19,11 @@ public class ExpertJso extends BaseJso implements Expert {
 		setNativeExpertRole(expertRole.name());
 	}
 
-	private final native String getNativeExpertRole() /*-{
-												return this.expertRole;
+	public final native String getNativeExpertRole() /*-{
+												return this.role;
 												}-*/;
 
-	private final native void setNativeExpertRole(final String expertRole) /*-{
-																		this.expertRole = expertRole;
+	public final native void setNativeExpertRole(final String expertRole) /*-{
+																		this.role = role;
 																		}-*/;
 }

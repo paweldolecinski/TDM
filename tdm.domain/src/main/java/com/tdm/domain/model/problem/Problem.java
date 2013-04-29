@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.jdo.annotations.Element;
+import javax.jdo.annotations.Embedded;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -43,9 +45,13 @@ public class Problem implements Serializable {
 	private Date creationDate = new Date();
 	private String name;
 	private String description;
-	@Persistent(mappedBy="problem")
+
+	@Element(dependent = "true")
+	@Persistent(mappedBy = "problem")
 	private List<Expert> experts = new ArrayList<Expert>();
-	private CurrentConsensus currentConsensus;
+
+	@Embedded
+	private CurrentConsensus currentConsensus = new CurrentConsensus();
 
 	public Key getKey() {
 		return key;
@@ -86,7 +92,7 @@ public class Problem implements Serializable {
 	public void setCurrentConsensus(CurrentConsensus currentConsensus) {
 		this.currentConsensus = currentConsensus;
 	}
-	
+
 	public void addExpert(Expert expert) {
 		experts.add(expert);
 	}

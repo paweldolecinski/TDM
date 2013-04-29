@@ -7,21 +7,7 @@
 
 	<b:Well>
 		<g:HTMLPanel styleName="span10">
-			<h3 class="page-header">
-				How can we maximize our market share in a
-				tough economy?
-				<br />
-				<small>
-					Lorem ipsum dolor sit amet, consectetur adipiscing
-					elit. Nam
-					eleifend lorem purus. Mauris sed libero sodales felis
-					faucibus
-					rutrum a in risus. Sed quis neque sit amet dolor
-					consectetur
-					pretium. In hac habitasse platea dictumst. Quisque a enim eu risus
-					ultricies ultrices.
-				</small>
-			</h3>
+			<b:Heading ui:field="problemHeader" size="2" addStyleNames="page-header" />
 		</g:HTMLPanel>
 		<b:Column size="2">
 			<b:DropdownButton addStyleNames="{res.content.printAndSettings}"
@@ -42,7 +28,8 @@
 
 				<g:HTMLPanel styleName="{res.mainCss.problemSolutions}">
 
-					<b:Heading ui:field="solutionCounter" size="4" addStyleNames="page-header" subtext="(0)">
+					<b:Heading ui:field="solutionCounter" size="4"
+						addStyleNames="page-header" subtext="(0)">
 						Solution Ideas
 					</b:Heading>
 

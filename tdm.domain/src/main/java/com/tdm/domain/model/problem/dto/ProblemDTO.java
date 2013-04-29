@@ -1,10 +1,6 @@
 package com.tdm.domain.model.problem.dto;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
-import com.tdm.domain.model.expert.dto.Expert;
 
 public class ProblemDTO implements Problem {
 
@@ -12,8 +8,7 @@ public class ProblemDTO implements Problem {
 	private String name;
 	private String description;
 	private Date creationDate;
-	private Set<Expert> experts = new HashSet<Expert>();
-	private GdmProblemCurrentConsensus currentConsensus;
+	private CurrentConsensus currentConsensus;
 
 	@Override
 	public String getKey() {
@@ -31,11 +26,6 @@ public class ProblemDTO implements Problem {
 	}
 
 	@Override
-	public Set<Expert> getExperts() {
-		return experts;
-	}
-
-	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -50,16 +40,11 @@ public class ProblemDTO implements Problem {
 	}
 
 	@Override
-	public void addExpert(Expert expert) {
-		experts.add(expert);
-	}
-
-	@Override
-	public GdmProblemCurrentConsensus getCurrentConsensus() {
+	public CurrentConsensus getCurrentConsensus() {
 		return currentConsensus;
 	}
 
-	public void setCurrentConsensus(GdmProblemCurrentConsensus currentConsensus) {
+	public void setCurrentConsensus(CurrentConsensus currentConsensus) {
 		this.currentConsensus = currentConsensus;
 	}
 

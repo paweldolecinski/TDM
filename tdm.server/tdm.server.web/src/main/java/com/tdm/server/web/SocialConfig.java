@@ -15,7 +15,7 @@ import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.appengine.AppEngineUsersConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.social.facebook.api.impl.FacebookTemplateExt;
 import org.springframework.social.security.SocialAuthenticationServiceLocator;
 import org.springframework.social.security.SocialAuthenticationServiceRegistry;
 import org.springframework.social.twitter.security.TwitterAuthenticationService;
@@ -81,6 +81,6 @@ public class SocialConfig {
     public Facebook facebook() {
 	Connection<Facebook> facebook = connectionRepository()
 		.findPrimaryConnection(Facebook.class);
-	return facebook != null ? facebook.getApi() : new FacebookTemplate();
+	return facebook != null ? facebook.getApi() : new FacebookTemplateExt();
     }
 }

@@ -33,6 +33,8 @@ public class ProblemActivitiesPresenter extends
 		Presenter<ProblemActivitiesPresenter.Display, ProblemActivitiesPresenter.IProxy>
 		implements RevealActivitiesPresenterHandler, HideActivitiesPresenterHandler {
 
+	private String problemId;
+
 	@ProxyCodeSplit
 	public interface IProxy extends Proxy<ProblemActivitiesPresenter> {
 	}
@@ -53,12 +55,14 @@ public class ProblemActivitiesPresenter extends
 	@ProxyEvent
 	@Override
 	public void onRevealActivitiesPresenter(RevealActivitiesPresenterEvent event) {
+		problemId = event.getProblemId();
 		forceReveal();
 	}
 
 	@ProxyEvent
 	@Override
 	public void onHideActivitiesPresenter(HideActivitiesPresenterEvent event) {
+		problemId = null;
 		RevealContentEvent.fire(this, AppPresenter.TYPE_RightContent, null);
 	}
 }

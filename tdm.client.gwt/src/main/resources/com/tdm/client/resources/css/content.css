@@ -4,11 +4,9 @@
 @external .row-fluid;
 @external .span*;
 @external .index-*;
-
 .container-fluid {
 	padding: 40px 0 0;
 }
-
 
 .span4.index-right {
 	margin: 0px;
@@ -55,9 +53,27 @@
 	font-weight: bold;
 	color: #999999;
 	text-align: center;
+	margin-top: 10px;
 }
 
 .print_and_settings {
 	float: right;
 	margin: 12px 10px 0px 0px;
+}
+
+@external .invite_experts;
+.invite_experts textarea {
+	height: 115px;
+	width: 320px;
+}
+
+@external .vote-button;
+.vote-button {
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+@external .expertList;
+.expertList {
+	margin-top: 10px;
 }

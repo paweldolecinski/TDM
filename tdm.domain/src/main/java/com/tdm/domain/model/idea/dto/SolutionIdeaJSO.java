@@ -37,7 +37,7 @@ public class SolutionIdeaJSO extends BaseJso implements SolutionIdea {
 										}-*/;
 
 	public final native String getProblemId() /*-{
-										return this.problemId;
-										}-*/;
+												return this.problemId;
+												}-*/;
 
 }

@@ -18,6 +18,7 @@ package com.tdm.client.app.problem;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.gwtbootstrap.client.ui.ButtonGroup;
 import com.github.gwtbootstrap.client.ui.Form;
 import com.github.gwtbootstrap.client.ui.Form.SubmitEvent;
 import com.github.gwtbootstrap.client.ui.Heading;
@@ -55,7 +56,9 @@ public class ProblemProcessView extends
 	protected TextBox solutionText;
 	@UiField
 	protected Heading solutionCounter;
-
+	@UiField
+	protected Heading problemHeader;
+	
 	private List<SolutionIdeaWidget> ideas = new ArrayList<SolutionIdeaWidget>();
 	private Provider<SolutionIdeaWidget> solutionIdeaProvider;
 
@@ -107,5 +110,11 @@ public class ProblemProcessView extends
 		ideas.clear();
 		solutionList.clear();
 		solutionCounter.setSubtext("(" + ideas.size() + ")");
+	}
+
+	@Override
+	public void setHeader(String title, String description) {
+		problemHeader.setText(title);
+		problemHeader.setSubtext(description);
 	}
 }

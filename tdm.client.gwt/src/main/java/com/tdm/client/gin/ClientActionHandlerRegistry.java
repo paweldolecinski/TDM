@@ -19,8 +19,11 @@ import com.google.inject.Inject;
 import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
 import com.tdm.client.dispatch.handler.CreateGdmProblemHandler;
 import com.tdm.client.dispatch.handler.CreateNewSolutionHandler;
+import com.tdm.client.dispatch.handler.GetExpertListHandler;
+import com.tdm.client.dispatch.handler.GetProblemByIdHandler;
 import com.tdm.client.dispatch.handler.GetProblemListHandler;
 import com.tdm.client.dispatch.handler.GetSolutionIdeaListHandler;
+import com.tdm.client.dispatch.handler.InviteExpertsHandler;
 
 public class ClientActionHandlerRegistry extends
 		DefaultClientActionHandlerRegistry {
@@ -30,11 +33,17 @@ public class ClientActionHandlerRegistry extends
 			final GetProblemListHandler getProblemListHandler,
 			final CreateGdmProblemHandler createGdmProblemHandler,
 			final CreateNewSolutionHandler createNewSolutionHandler,
-			final GetSolutionIdeaListHandler getSolutionIdeaListHandler) {
+			final GetSolutionIdeaListHandler getSolutionIdeaListHandler,
+			final GetProblemByIdHandler getProblemByIdHandler,
+			final GetExpertListHandler getExpertListHandler,
+			final InviteExpertsHandler inviteExpertsHandler) {
 
 		register(getProblemListHandler);
 		register(createGdmProblemHandler);
 		register(createNewSolutionHandler);
 		register(getSolutionIdeaListHandler);
+		register(getProblemByIdHandler);
+		register(getExpertListHandler);
+		register(inviteExpertsHandler);
 	}
 }

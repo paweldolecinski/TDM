@@ -40,122 +40,122 @@ import org.springframework.social.oauth2.OAuth2Version;
 
 public class GoogleTemplate extends AbstractOAuth2ApiBinding implements Google {
 
-    private String accessToken;
+	private String accessToken;
 
-    private LegacyProfileOperations userOperations;
-    private PersonOperations profileOperations;
-    private ActivityOperations activityOperations;
-    private CommentOperations commentOperations;
-    private TaskOperations taskOperations;
-    private DriveOperations driveOperations;
+	private LegacyProfileOperations userOperations;
+	private PersonOperations profileOperations;
+	private ActivityOperations activityOperations;
+	private CommentOperations commentOperations;
+	private TaskOperations taskOperations;
+	private DriveOperations driveOperations;
 
-    /**
-     * Creates a new instance of GoogleTemplate. This constructor creates a new
-     * GoogleTemplate able to perform unauthenticated operations against
-     * Google+.
-     */
-    public GoogleTemplate() {
-	initialize();
-    }
+	/**
+	 * Creates a new instance of GoogleTemplate. This constructor creates a new
+	 * GoogleTemplate able to perform unauthenticated operations against
+	 * Google+.
+	 */
+	public GoogleTemplate() {
+		initialize();
+	}
 
-    /**
-     * Creates a new instance of GoogleTemplate. This constructor creates the
-     * FacebookTemplate using a given access token.
-     * 
-     * @param accessToken
-     *            an access token granted by Google after OAuth2 authentication
-     */
-    public GoogleTemplate(String accessToken) {
-	super(accessToken);
-	setRequestFactory(new SimpleClientHttpRequestFactory());
-	this.accessToken = accessToken;
-	initialize();
-    }
+	/**
+	 * Creates a new instance of GoogleTemplate. This constructor creates the
+	 * FacebookTemplate using a given access token.
+	 * 
+	 * @param accessToken
+	 *            an access token granted by Google after OAuth2 authentication
+	 */
+	public GoogleTemplate(String accessToken) {
+		super(accessToken);
+		setRequestFactory(new SimpleClientHttpRequestFactory());
+		this.accessToken = accessToken;
+		initialize();
+	}
 
-    private void initialize() {
-	userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
-	profileOperations = new PersonTemplate(getRestTemplate(),
-		isAuthorized());
-	activityOperations = new ActivityTemplate(getRestTemplate(),
-		isAuthorized());
-	commentOperations = new CommentTemplate(getRestTemplate(),
-		isAuthorized());
-	taskOperations = new TaskTemplate(getRestTemplate(), isAuthorized());
-	driveOperations = new DriveTemplate(getRestTemplate(), isAuthorized());
-    }
+	private void initialize() {
+		userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
+		profileOperations = new PersonTemplate(getRestTemplate(),
+				isAuthorized());
+		activityOperations = new ActivityTemplate(getRestTemplate(),
+				isAuthorized());
+		commentOperations = new CommentTemplate(getRestTemplate(),
+				isAuthorized());
+		taskOperations = new TaskTemplate(getRestTemplate(), isAuthorized());
+		driveOperations = new DriveTemplate(getRestTemplate(), isAuthorized());
+	}
 
-    @Override
-    protected List<HttpMessageConverter<?>> getMessageConverters() {
+	@Override
+	protected List<HttpMessageConverter<?>> getMessageConverters() {
 
-	MappingJacksonHttpMessageConverter jsonConverter = new MappingJacksonHttpMessageConverter();
-	ObjectMapper objectMapper = new ObjectMapper();
-	objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
-	objectMapper.configure(WRITE_DATES_AS_TIMESTAMPS, false);
-	objectMapper.configure(FAIL_ON_EMPTY_BEANS, false);
-	objectMapper.setSerializationInclusion(NON_NULL);
-	jsonConverter.setObjectMapper(objectMapper);
+		MappingJacksonHttpMessageConverter jsonConverter = new MappingJacksonHttpMessageConverter();
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+		objectMapper.configure(WRITE_DATES_AS_TIMESTAMPS, false);
+		objectMapper.configure(FAIL_ON_EMPTY_BEANS, false);
+		objectMapper.setSerializationInclusion(NON_NULL);
+		jsonConverter.setObjectMapper(objectMapper);
 
-	SourceHttpMessageConverter<Source> sourceConverter = new SourceHttpMessageConverter<Source>();
-	sourceConverter
-		.setSupportedMediaTypes(singletonList(APPLICATION_ATOM_XML));
+		SourceHttpMessageConverter<Source> sourceConverter = new SourceHttpMessageConverter<Source>();
+		sourceConverter
+				.setSupportedMediaTypes(singletonList(APPLICATION_ATOM_XML));
 
-	FormHttpMessageConverter formHttpMessageConverter = new FormHttpMessageConverter();
-	formHttpMessageConverter.addPartConverter(jsonConverter);
+		FormHttpMessageConverter formHttpMessageConverter = new FormHttpMessageConverter();
+		formHttpMessageConverter.addPartConverter(jsonConverter);
 
-	List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-	messageConverters.add(jsonConverter);
-	messageConverters.add(sourceConverter);
-	messageConverters.add(new ByteArrayHttpMessageConverter());
-	messageConverters.add(formHttpMessageConverter);
-	return messageConverters;
-    }
+		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+		messageConverters.add(jsonConverter);
+		messageConverters.add(sourceConverter);
+		messageConverters.add(new ByteArrayHttpMessageConverter());
+		messageConverters.add(formHttpMessageConverter);
+		return messageConverters;
+	}
 
-    @Override
-    protected OAuth2Version getOAuth2Version() {
-	return OAuth2Version.BEARER;
-    }
+	@Override
+	protected OAuth2Version getOAuth2Version() {
+		return OAuth2Version.BEARER;
+	}
 
-    @Override
-    public LegacyProfileOperations userOperations() {
-	return userOperations;
-    }
+	@Override
+	public LegacyProfileOperations userOperations() {
+		return userOperations;
+	}
 
-    @Override
-    public PersonOperations personOperations() {
-	return profileOperations;
-    }
+	@Override
+	public PersonOperations personOperations() {
+		return profileOperations;
+	}
 
-    @Override
-    public ActivityOperations activityOperations() {
-	return activityOperations;
-    }
+	@Override
+	public ActivityOperations activityOperations() {
+		return activityOperations;
+	}
 
-    @Override
-    public CommentOperations commentOperations() {
-	return commentOperations;
-    }
+	@Override
+	public CommentOperations commentOperations() {
+		return commentOperations;
+	}
 
-    @Override
-    public TaskOperations taskOperations() {
-	return taskOperations;
-    }
+	@Override
+	public TaskOperations taskOperations() {
+		return taskOperations;
+	}
 
-    @Override
-    public DriveOperations driveOperations() {
-	return driveOperations;
-    }
+	@Override
+	public DriveOperations driveOperations() {
+		return driveOperations;
+	}
 
-    @Override
-    public void applyAuthentication(Object client) {
-	Method setHeaders = findMethod(client.getClass(), "setHeader",
-		String.class, String.class);
-	invokeMethod(setHeaders, client, "Authorization", getOAuth2Version()
-		.getAuthorizationHeaderValue(accessToken));
-    }
+	@Override
+	public void applyAuthentication(Object client) {
+		Method setHeaders = findMethod(client.getClass(), "setHeader",
+				String.class, String.class);
+		invokeMethod(setHeaders, client, "Authorization", getOAuth2Version()
+				.getAuthorizationHeaderValue(accessToken));
+	}
 
-    @Override
-    public String getAccessToken() {
-	return accessToken;
-    }
+	@Override
+	public String getAccessToken() {
+		return accessToken;
+	}
 
 }
