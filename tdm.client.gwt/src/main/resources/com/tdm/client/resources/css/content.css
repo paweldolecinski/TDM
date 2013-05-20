@@ -8,36 +8,25 @@
 	padding: 40px 0 0;
 }
 
-.span4.index-right {
-	margin: 0px;
+.index-right {
 	padding-top: 20px;
+	margin-left: 1.5% !important;
 	min-height: 100%;
-	position: relative;
 }
 
 .index-main {
-	position: relative;
-	height: auto !important;
 	height: 100%;
 	min-height: 100%;
 }
 
 .index-left {
-	padding: 20px 20px 0 10px;
-	float: left;
-	width: 195px;
+	padding: 20px 0 0 10px;
 	font-weight: lighter;
-	min-height: 0px;
 }
 
 .index-center {
-	position: absolute;
 	margin: 0;
-	bottom: 20px;
-	top: 20px;
-	right: 0;
-	padding: 0px 10px;
-	left: 205px;
+	padding: 20px 0px;
 }
 
 .info-panel {

@@ -1,6 +1,7 @@
-.navbar {
-	overflow: visible;
-}
+@external .navbar;
+@external .navbar-*;
+@external .nav;
+@external .brand;
 
 .navbarFixedTop {
 	top: 0;
@@ -11,90 +12,55 @@
 	margin-bottom: 0;
 }
 
-.navbar .navbarInner {
+.navbar .navbar-inner {
 	padding-left: 0;
 	padding-right: 0;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
 	border-radius: 0;
 	min-height: 40px;
-	background-color: #404040;
+	background-image: linear-gradient(to bottom, #404040, #404040);
 	border-bottom: 1px solid #2B2B2B;
-	font-family: 'TriplexSansLight';
 }
 
-.navbar .navbarRight {
-	float: right;
-	margin-right: 2.5%;
-	position: relative;
-	left: 0;
-	display: block;
-	margin: 0 10px 0 0;
-}
-
-.navbar .navbarLeft {
-	width: 220px;
-}
-
-@sprite .brand,.navbar .brand {
-	gwt-image: 'logo';
+.navbar img {
 	color: white;
 	padding: 0;
-	margin: 3px 0 0 18px;
+	margin: 0px 0 0 10px;
 	font-size: 22px;
 	font-weight: bold;
 	float: left;
 	display: block;
 }
 
-.navbar .navbarLeft ul {
-	float: right;
-	margin-right: 10px;
-	list-style: none;
-}
-
-.navbar .navMain {
-	position: absolute;
-	left: 190px;
-}
-
-.navbar .navMain li {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
-	display: table-cell;
-	line-height: 1;
+.navbar .nav>li {
 	text-align: center;
 	width: 150px;
 }
 
-.navbar .navMain li a {
-	border: 1px solid #383838;
+.navbar .nav>li a {
+/* 	border: 1px solid #383838; */
 	display: block;
 	padding: 15px 10px 8px 10px;
 	text-decoration: none;
 	margin: 0 6px;
-	-webkit-transition: color .2s linear;
-	-moz-transition: color .2s linear;
-	-ms-transition: color .2s linear;
-	-o-transition: color .2s linear;
-	transition: color .2s linear;
+/* 	-webkit-transition: color .2s linear; */
+/* 	-moz-transition: color .2s linear; */
+/* 	-ms-transition: color .2s linear; */
+/* 	-o-transition: color .2s linear; */
+/* 	transition: color .2s linear; */
 	color: white;
 }
 
-.navbar .navMain li a:hover {
-	color: #333;
-	background: #efefef;
-	border-bottom: none;
+.navbar .nav>li a:hover {
+	color: white;
 }
 
-.navbar .navMain li a:active {
-	color: #323232;
-	border-bottom: none;
-	background: #efefef !important;
+.navbar .nav>li a:active {
+	color: white;
 }
 
 .userMenu {
 	margin-top: 5px;
+	margin-right: 5px;
 }

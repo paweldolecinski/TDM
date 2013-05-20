@@ -16,10 +16,8 @@
 package com.tdm.client.app;
 
 import com.github.gwtbootstrap.client.ui.Column;
-import com.github.gwtbootstrap.client.ui.base.HtmlWidget;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -34,11 +32,11 @@ public class AppView extends ViewImpl implements AppPresenter.Display {
 	private final Widget widget;
 
 	@UiField
-	protected HtmlWidget mainContentPanel;
+	protected Column mainContentPanel;
 	@UiField
 	protected Column rightContentPanel;
 	@UiField
-	protected HtmlWidget leftContentPanel;
+	protected Column leftContentPanel;
 	
 	@Inject
 	public AppView(Binder binder, EventBus eventBus) {

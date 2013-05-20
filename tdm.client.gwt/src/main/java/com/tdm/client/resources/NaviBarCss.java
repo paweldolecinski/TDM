@@ -27,19 +27,7 @@ import com.google.gwt.resources.client.CssResource;
  */
 public interface NaviBarCss extends CssResource {
 
-	String navbar();
-	
 	String navbarFixedTop();
-	
-	String navbarInner();
-	
-	String navbarRight();
-	
-	String navbarLeft();
-	
-	String brand();
-	
-	String navMain();
 	
 	String userMenu();
 }

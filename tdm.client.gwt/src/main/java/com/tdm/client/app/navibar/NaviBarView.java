@@ -1,12 +1,12 @@
 package com.tdm.client.app.navibar;
 
 import com.github.gwtbootstrap.client.ui.DropdownButton;
+import com.github.gwtbootstrap.client.ui.NavLink;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.InlineHyperlink;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -19,9 +19,9 @@ public class NaviBarView extends ViewImpl implements
 
 	private final Widget widget;
 	@UiField
-	protected InlineHyperlink learnLink;
+	protected NavLink learnLink;
 	@UiField
-	protected InlineHyperlink exploreLink;
+	protected NavLink exploreLink;
 	@UiField
 	protected DropdownButton userMenu;
 

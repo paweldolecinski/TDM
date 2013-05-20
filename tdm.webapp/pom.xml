@@ -122,6 +122,9 @@
 						<configuration>
 							<useJava7>true</useJava7>
 							<disableUpdateCheck>true</disableUpdateCheck>
+							<jvmFlags>
+								<jvmFlag>-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=20</jvmFlag>
+							</jvmFlags>
 						</configuration>
 					</plugin>
 				</plugins>

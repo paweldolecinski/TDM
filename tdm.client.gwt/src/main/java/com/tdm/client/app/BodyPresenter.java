@@ -35,7 +35,6 @@ public class BodyPresenter extends RootPresenter implements
 				RootPanel naviBarPanel = RootPanel.get("navibar");
 				naviBarPanel.clear();
 				if (content != null) {
-					naviBarPanel.addStyleName(resources.naviBar().navbar());
 					naviBarPanel.addStyleName(resources.naviBar()
 							.navbarFixedTop());
 					naviBarPanel.add(content);

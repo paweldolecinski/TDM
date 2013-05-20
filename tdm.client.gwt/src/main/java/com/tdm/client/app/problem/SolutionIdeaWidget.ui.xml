@@ -5,13 +5,13 @@
 
 	<ui:with type="com.tdm.client.resources.AppResources" field="res" />
 
-	<bs:ListItem addStyleNames="row">
-		<b:Column size="1" addStyleNames="{res.mainCss.solutionAvatar}" />
-		<b:Column size="9" addStyleNames="{res.mainCss.solution}">
+	<bs:ListItem addStyleNames="row-fluid">
+		<b:Column size="1" addStyleNames="{res.mainCss.solutionAvatar}" hideOn="PHONE" />
+		<b:Column size="7" addStyleNames="{res.mainCss.solution}">
 			<bs:InlineLabel ui:field="titleText" addStyleNames="{res.mainCss.solutionTitle}" />
 			<b:Paragraph ui:field="detailsText" addStyleNames="{res.mainCss.solutionSubTitle}" />
 		</b:Column>
-		<b:Column size="2">
+		<b:Column size="3" addStyleNames="pull-right pagination-right">
 			<b:DropdownButton text="Vote" icon="THUMBS_UP">
 				<b:ButtonGroup>
 					<b:Button ui:field="vote9" styleName="badge badge-success vote-button">9</b:Button>

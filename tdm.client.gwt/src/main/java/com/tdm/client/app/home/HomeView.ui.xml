@@ -6,14 +6,14 @@
 	<ui:with field="res" type="com.tdm.client.resources.AppResources" />
 
 	<g:HTMLPanel styleName="well">
-		<g:HTMLPanel styleName="row" ui:field="headerPanel">
-			<g:HTMLPanel styleName="span7">
+		<g:HTMLPanel styleName="row-fluid" ui:field="headerPanel">
+			<b:Column size="6">
 				<b:Heading size="1" ui:field="problemCounter" subtext="(0)">
 					Your problems
 				</b:Heading>
-			</g:HTMLPanel>
-			<g:HTMLPanel styleName="span5">
-				<b:WellForm type="INLINE">
+			</b:Column>
+			<b:Column size="6" addStyleNames="pull-right pagination-right">
+				<b:Form type="INLINE">
 					<b:ControlLabel>Sort</b:ControlLabel>
 					<b:ListBox b:id="sort">
 						<g:item>by last opened</g:item>
@@ -25,9 +25,9 @@
 						<g:item>owned by me</g:item>
 						<g:item>shared with me</g:item>
 					</b:ListBox>
-				</b:WellForm>
+				</b:Form>
 
-			</g:HTMLPanel>
+			</b:Column>
 		</g:HTMLPanel>
 
 		<g:HTMLPanel>
