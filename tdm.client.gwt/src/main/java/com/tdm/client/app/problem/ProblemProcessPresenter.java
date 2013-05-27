@@ -27,6 +27,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.ManualRevealCallback;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.tdm.client.app.AppPresenter;
@@ -84,12 +85,15 @@ public class ProblemProcessPresenter
 	private String problemId;
 	private ProblemJSO problem;
 	private DispatchAsync dispatch;
+	private PlaceManager placeManager;
 
 	@Inject
 	public ProblemProcessPresenter(EventBus eventBus, Display view,
-			IProxy proxy, final DispatchAsync dispatch) {
+			IProxy proxy, final DispatchAsync dispatch,
+			PlaceManager placeManager) {
 		super(eventBus, view, proxy, AppPresenter.TYPE_MainContent);
 		this.dispatch = dispatch;
+		this.placeManager = placeManager;
 		getView().setUiHandlers(this);
 	}
 
@@ -133,7 +137,7 @@ public class ProblemProcessPresenter
 					public void onFailure(Throwable caught) {
 						GWT.log("Error executing command ", caught);
 						ErrorOccuredEvent.fire(ProblemProcessPresenter.this,
-								caught);
+								caught.getMessage());
 					}
 
 					@Override
@@ -158,7 +162,7 @@ public class ProblemProcessPresenter
 					public void onFailure(Throwable caught) {
 						GWT.log("error executing command ", caught);
 						ErrorOccuredEvent.fire(ProblemProcessPresenter.this,
-								caught);
+								caught.getMessage());
 					}
 
 					@Override
@@ -171,18 +175,18 @@ public class ProblemProcessPresenter
 	}
 
 	@Override
-	public void prepareFromRequest(PlaceRequest request) {
+	public void prepareFromRequest(final PlaceRequest request) {
 		super.prepareFromRequest(request);
 		problemId = request.getParameter(NameTokens.Params.problemId, null);
-
+		String join = request.getParameter(NameTokens.Params.join, null);
+		boolean shouldJoin = join != null;
 		ManualRevealCallback<GetProblemByIdResult> revealCallback = ManualRevealCallback
 				.create(this, new AsyncCallback<GetProblemByIdResult>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
 						GWT.log("error executing command ", caught);
-						ErrorOccuredEvent.fire(ProblemProcessPresenter.this,
-								caught);
+						placeManager.revealErrorPlace(request.getNameToken());
 					}
 
 					@Override
@@ -191,7 +195,8 @@ public class ProblemProcessPresenter
 					}
 				});
 
-		dispatch.execute(new GetProblemByIdAction(problemId), revealCallback);
+		dispatch.execute(new GetProblemByIdAction(problemId, shouldJoin),
+				revealCallback);
 	}
 
 	@Override
@@ -213,7 +218,7 @@ public class ProblemProcessPresenter
 		notes.push(note);
 		SolutionPreferencesJSO preferences = SolutionPreferencesJSO.create(
 				problemId, notes);
-		
+
 		dispatch.execute(new VoteOnSolutionAction(preferences),
 				new AsyncCallback<VoteOnSolutionResult>() {
 
@@ -221,7 +226,7 @@ public class ProblemProcessPresenter
 					public void onFailure(Throwable caught) {
 						GWT.log("error executing command ", caught);
 						ErrorOccuredEvent.fire(ProblemProcessPresenter.this,
-								caught);
+								caught.getMessage());
 					}
 
 					@Override

@@ -63,4 +63,7 @@ public interface AppResources extends ClientBundle {
 
 	@Source("resources/solution_avatar.jpg")
 	ImageResource solutionAvatar();
+	
+	@Source("resources/404.jpg")
+	ImageResource page404();
 }

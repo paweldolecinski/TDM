@@ -111,7 +111,8 @@ public class NewProblemPresenterWidget extends
 						public void onFailure(Throwable caught) {
 							GWT.log("error executing command ", caught);
 							ErrorOccuredEvent.fire(
-									NewProblemPresenterWidget.this, caught);
+									NewProblemPresenterWidget.this,
+									caught.getMessage());
 							getView().hide();
 						}
 

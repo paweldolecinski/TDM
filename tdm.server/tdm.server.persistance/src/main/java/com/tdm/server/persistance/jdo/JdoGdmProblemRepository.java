@@ -61,16 +61,60 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 	public Problem read(ProblemId id) throws ObjectNotFoundException {
 		Key key = KeyFactory.stringToKey(id.getIdString());
 		PersistenceManager pm = getPersistenceManager();
-		Problem detachCopy;
+
 		try {
 			Problem problem = pm.getObjectById(Problem.class, key);
 			problem.getCurrentConsensus();
 			problem.getExperts();
-			detachCopy = pm.detachCopy(problem);
+			Problem detachCopy = pm.detachCopy(problem);
+			return detachCopy;
+		} catch (Exception e) {
+			throw new ObjectNotFoundException(Problem.class, key);
 		} finally {
 			pm.close();
 		}
-		return detachCopy;
+
+	}
+
+	public Problem readFor(ProblemId problemId, ExpertId expertId) {
+		PersistenceManager pm = getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query q = pm.newQuery("select from " + Problem.class.getName()
+					+ " where" + " key == problemIdParam &&"
+					+ " experts.contains(e) && e.userId == userIdParam");
+
+			q.declareParameters(Key.class.getName()
+					+ " problemIdParam, String userIdParam");
+			q.declareVariables(Expert.class.getName() + " e");
+			Key key = KeyFactory.stringToKey(problemId.getIdString());
+
+			@SuppressWarnings("unchecked")
+			List<Problem> ids = (List<Problem>) q.execute(key,
+					expertId.getIdString());
+
+			if (ids.size() == 1) {
+				Problem p = ids.get(0);
+				p.getCurrentConsensus();
+				p.getExperts();
+				Problem detachCopy = pm.detachCopy(p);
+				tx.commit();
+				return detachCopy;
+			} else {
+				throw new ObjectNotFoundException(Problem.class,
+						problemId.getIdString());
+			}
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Error during fetching problems.", e);
+			throw new ObjectNotFoundException(Problem.class,
+					problemId.getIdString());
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
 	}
 
 	/**
@@ -97,8 +141,14 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 
 	@Override
 	public Problem update(Problem request) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManager pm = getPersistenceManager();
+		try {
+			Problem makePersistent = pm.makePersistent(request);
+			Problem detachCopy = pm.detachCopy(makePersistent);
+			return detachCopy;
+		} finally {
+			pm.close();
+		}
 	}
 
 	/**

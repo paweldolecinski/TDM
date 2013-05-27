@@ -21,7 +21,11 @@ public class NaviBarView extends ViewImpl implements
 	@UiField
 	protected NavLink learnLink;
 	@UiField
+	protected NavLink learnLinkPhone;
+	@UiField
 	protected NavLink exploreLink;
+	@UiField
+	protected NavLink exploreLinkPhone;
 	@UiField
 	protected DropdownButton userMenu;
 
@@ -35,7 +39,8 @@ public class NaviBarView extends ViewImpl implements
 		return widget;
 	}
 
-	@UiHandler({ "learnLink", "exploreLink" })
+	@UiHandler({ "learnLink", "learnLinkPhone", "exploreLink",
+			"exploreLinkPhone" })
 	void handleMenuClick(ClickEvent e) {
 		Window.alert("Under construction. Sorry :(");
 	}

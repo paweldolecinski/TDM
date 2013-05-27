@@ -30,6 +30,8 @@ public class GetProblemById {
 	
 	@In(1)
 	String problemId;
+	@In(2)
+	boolean join;
 	
 	@Out(1)
 	ProblemJSO problem;

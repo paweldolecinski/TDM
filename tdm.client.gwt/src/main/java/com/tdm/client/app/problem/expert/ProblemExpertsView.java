@@ -17,6 +17,7 @@ package com.tdm.client.app.problem.expert;
 
 import java.util.ArrayList;
 
+import com.github.gwtbootstrap.client.ui.Image;
 import com.github.gwtbootstrap.client.ui.Modal;
 import com.github.gwtbootstrap.client.ui.Paragraph;
 import com.github.gwtbootstrap.client.ui.TextArea;
@@ -62,6 +63,10 @@ public class ProblemExpertsView extends
 	protected TextBox mail4;
 	@UiField
 	protected TextArea msg;
+	@UiField
+	protected Paragraph userName;
+	@UiField
+	protected Image userImage;
 
 	@Inject
 	public ProblemExpertsView(Binder binder) {
@@ -126,7 +131,7 @@ public class ProblemExpertsView extends
 	}
 
 	@Override
-	public void mailsSent() {
+	public void mailSent() {
 		closeModal();
 	}
 
@@ -137,5 +142,11 @@ public class ProblemExpertsView extends
 		mail4.setText(null);
 		msg.setText(null);
 		inviteModal.hide();
+	}
+
+	@Override
+	public void setUserPhotoAndName(String imgUrl, String name) {
+		userName.setText(name);
+		userImage.setUrl(imgUrl);
 	}
 }

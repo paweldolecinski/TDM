@@ -2,7 +2,6 @@ package com.tdm.client.place;
 
 import javax.inject.Inject;
 
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
@@ -38,7 +37,7 @@ public class TdmPlaceManager extends PlaceManagerImpl {
 		this.retryTimer = new Timer() {
 			@Override
 			public void run() {
-				History.fireCurrentHistoryState();
+				revealCurrentPlace();
 			}
 		};
 
@@ -63,7 +62,8 @@ public class TdmPlaceManager extends PlaceManagerImpl {
 			nbRetry++;
 			retryTimer.schedule(retryDelay);
 		} else {
-			revealPlace(unauthorizedPlaceRequest, false);
+			revealPlace(unauthorizedPlaceRequest);
 		}
 	}
+
 }

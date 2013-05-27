@@ -2,7 +2,6 @@
 @external .navbar-*;
 @external .nav;
 @external .brand;
-
 .navbarFixedTop {
 	top: 0;
 	position: fixed;
@@ -44,7 +43,7 @@
 	width: 150px;
 }
 
-.navbar .nav>li a {
+.navbar .nav>li>a:focus,.navbar .nav>li>a:hover,.navbar .nav>li a {
 	/* 	border: 1px solid #383838; */
 	display: block;
 	padding: 15px 10px 8px 10px;
@@ -69,4 +68,9 @@
 .userMenu {
 	margin-top: 5px;
 	margin-right: 5px;
+}
+
+@external .dropdown-menu;
+.userMenuPhone .dropdown-menu {
+	left: -40px !important;
 }

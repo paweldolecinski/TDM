@@ -27,6 +27,6 @@ public class NaviBarPresenterWidget extends
 	@Override
 	protected void onReveal() {
 		super.onReveal();
-		getView().setUserName(currentUser.getUsername());
+		getView().setUserName(currentUser.getUser().getName());
 	}
 }

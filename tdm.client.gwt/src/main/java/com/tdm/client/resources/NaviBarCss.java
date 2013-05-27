@@ -30,4 +30,6 @@ public interface NaviBarCss extends CssResource {
 	String navbarFixedTop();
 	
 	String userMenu();
+	
+	String userMenuPhone();
 }

@@ -16,8 +16,6 @@
 package com.tdm.client.app.error;
 
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -31,9 +29,6 @@ public class ErrorPageView extends ViewImpl implements
 
 	public interface Binder extends UiBinder<Widget, ErrorPageView> {
 	}
-
-	@UiField
-	Label errorMsg;
 
 	private final Widget widget;
 
@@ -49,7 +44,6 @@ public class ErrorPageView extends ViewImpl implements
 
 	@Override
 	public void setErrorText(String text) {
-		errorMsg.setText(text);
 	}
 
 }

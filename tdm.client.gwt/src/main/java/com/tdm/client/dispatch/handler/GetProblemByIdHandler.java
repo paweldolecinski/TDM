@@ -15,6 +15,8 @@
  */
 package com.tdm.client.dispatch.handler;
 
+import java.util.HashMap;
+
 import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.Response;
@@ -48,7 +50,12 @@ public class GetProblemByIdHandler
 	protected RequestBuilder getRequestBuilder(final GetProblemByIdAction action) {
 
 		restResourcePath[1] = action.getProblemId();
-		return prepareRequestBuilder(RequestBuilder.GET, restResourcePath);
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		if (action.isJoin()) {
+			hashMap.put("join", "true");
+		}
+		return prepareRequestBuilder(RequestBuilder.GET, restResourcePath,
+				hashMap);
 
 	}
 

@@ -1,7 +1,6 @@
 package com.tdm.server.application.problem.service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.tdm.domain.model.expert.Expert;
 import com.tdm.domain.model.expert.ExpertId;
 import com.tdm.domain.model.expert.ExpertRole;
+import com.tdm.domain.model.handling.ObjectNotFoundException;
 import com.tdm.domain.model.problem.Problem;
 import com.tdm.domain.model.problem.ProblemId;
 import com.tdm.domain.model.problem.ProblemRepository;
@@ -33,15 +33,29 @@ public class DefaultGdmProblemService implements GdmProblemService {
 	}
 
 	@Override
-	public Problem retrieveProblem(ProblemId id) {
-		Problem read = problemDao.read(id);
-		return read;
+	public Problem retrieveProblem(ProblemId id)
+			throws ProblemNotFoundException {
+		try {
+			Problem read = problemDao.read(id);
+			return read;
+		} catch (ObjectNotFoundException ex) {
+			throw new ProblemNotFoundException("we could not find that task.");
+		}
+	}
+
+	public Problem retrieveProblem(ProblemId problemId, ExpertId expertId) {
+		try {
+			Problem read = problemDao.readFor(problemId, expertId);
+			return read;
+		} catch (ObjectNotFoundException ex) {
+			throw new ProblemNotFoundException("we could not find that task.");
+		}
 	}
 
 	@Override
 	public ExpertId getOwnerOfProblem(ProblemId problemId) {
 		Problem read = problemDao.read(problemId);
-		List<Expert> experts = read.getExperts();
+		Set<Expert> experts = read.getExperts();
 		for (Expert id : experts) {
 			if (ExpertRole.OWNER == id.getRole())
 				return new ExpertId(id.getId());
@@ -58,16 +72,16 @@ public class DefaultGdmProblemService implements GdmProblemService {
 	}
 
 	@Override
-	public List<Expert> retrieveExpertsAssignedToProblem(ProblemId problemId) {
+	public Set<Expert> retrieveExpertsAssignedToProblem(ProblemId problemId) {
 		Problem read = problemDao.read(problemId);
-		List<Expert> experts = read.getExperts();
+		Set<Expert> experts = read.getExperts();
 		return experts;
 	}
 
 	@Override
 	public Set<Expert> retrieveModeratorsOfProblem(ProblemId problemId) {
 		Problem read = problemDao.read(problemId);
-		List<Expert> experts = read.getExperts();
+		Set<Expert> experts = read.getExperts();
 		Set<Expert> res = new HashSet<Expert>();
 		for (Expert id : experts) {
 			if (ExpertRole.MODERATOR == id.getRole()
@@ -78,11 +92,10 @@ public class DefaultGdmProblemService implements GdmProblemService {
 	}
 
 	@Override
-	public void assignExpertToProblem(ProblemId problemId, ExpertId expertId,
-			ExpertRole expertRole) {
+	public void assignExpertToProblem(ProblemId problemId, Expert expert) {
 		Problem read = problemDao.read(problemId);
-//		read.addExpert(new Expert(expertId.getIdString(), expertRole));
-		problemDao.create(read);
+		read.addExpert(expert);
+		problemDao.update(read);
 	}
 
 }

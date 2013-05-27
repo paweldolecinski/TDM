@@ -7,5 +7,5 @@ import com.gwtplatform.dispatch.annotation.Order;
 public class ErrorOccured {
 
 	@Order(1)
-	Throwable caught;
+	String msg;
 }

@@ -25,6 +25,7 @@ public class AutoConnectionSignUp implements ConnectionSignUp {
 		UserProfile userProfile = connection.fetchUserProfile();
 		user.setName(userProfile.getName());
 		user.setEmail(userProfile.getEmail());
+		user.setImageUrl(connection.getImageUrl());
 		String username = getUsernameFromProfile(userProfile);
 		user.setUsername(username);
 		Set<String> auth = new HashSet<String>();

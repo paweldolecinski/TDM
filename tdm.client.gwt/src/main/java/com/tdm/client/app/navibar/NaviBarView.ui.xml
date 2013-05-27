@@ -9,39 +9,26 @@
 		<b:Image resource="{res.logo}" altText="TDM" hideOn="PHONE" />
 		<b:Nav>
 			<b:NavLink href="/#/home">Your problems</b:NavLink>
-			<b:NavLink ui:field="learnLink">Learn</b:NavLink>
-			<b:NavLink ui:field="exploreLink">Explore</b:NavLink>
+			<b:NavLink ui:field="learnLink" hideOn="PHONE">Learn</b:NavLink>
+			<b:NavLink ui:field="exploreLink" hideOn="PHONE">Explore</b:NavLink>
 		</b:Nav>
 		<b:Nav alignment="RIGHT">
 			<b:DropdownButton text="Unknown" addStyleNames="{res.naviBar.userMenu}"
-				ui:field="userMenu">
+				ui:field="userMenu" hideOn="PHONE">
+				<b:NavLink href="/#/about">About</b:NavLink>
+				<b:Divider />
+				<b:NavLink href="/signout">Sign out</b:NavLink>
+			</b:DropdownButton>
+			<b:DropdownButton text="|||"
+				addStyleNames="{res.naviBar.userMenu} {res.naviBar.userMenuPhone}"
+				showOn="PHONE">
+				<b:NavLink ui:field="exploreLinkPhone">Explore</b:NavLink>
+				<b:NavLink ui:field="learnLinkPhone">Learn</b:NavLink>
 				<b:NavLink href="/#/about">About</b:NavLink>
 				<b:Divider />
 				<b:NavLink href="/signout">Sign out</b:NavLink>
 			</b:DropdownButton>
 		</b:Nav>
 	</b:Navbar>
-	<!-- <g:HTMLPanel styleName="{res.naviBar.navbarRight}"> -->
-	<!-- </g:HTMLPanel> -->
-
-	<!-- <g:HTMLPanel styleName="{res.naviBar.navbarLeft}"> -->
-	<!-- <g:HTMLPanel styleName="{res.naviBar.brand}" /> -->
-
-	<!-- <ul id="navigation" class="{res.naviBar.navMain}"> -->
-	<!-- <li> -->
-	<!-- <g:InlineHyperlink>Your problems</g:InlineHyperlink> -->
-	<!-- </li> -->
-
-	<!-- <li> -->
-	<!-- <g:InlineHyperlink ui:field="learnLink">Learn</g:InlineHyperlink> -->
-	<!-- </li> -->
-
-	<!-- <li> -->
-	<!-- <g:InlineHyperlink ui:field="exploreLink">Explore</g:InlineHyperlink> -->
-	<!-- </li> -->
-	<!-- </ul> -->
-
-	<!-- </g:HTMLPanel> -->
-	<!-- </g:HTMLPanel> -->
 
 </ui:UiBinder> 

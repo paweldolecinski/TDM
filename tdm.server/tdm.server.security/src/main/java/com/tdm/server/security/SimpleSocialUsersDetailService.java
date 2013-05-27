@@ -20,6 +20,10 @@ public class SimpleSocialUsersDetailService implements SocialUserDetailsService 
 	public SocialUserDetails loadUserByUserId(String userId)
 			throws UsernameNotFoundException, DataAccessException {
 		UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
+		if(userDetails instanceof SocialUserDetails)
+		{
+			return (SocialUserDetails) userDetails;
+		}
 		return new SocialUser(userDetails.getUsername(),
 				userDetails.getPassword(), userDetails.getAuthorities());
 	}

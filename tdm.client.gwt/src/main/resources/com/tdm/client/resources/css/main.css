@@ -7,7 +7,6 @@
 @external .row-*;
 @external .thumbnails;
 @external .page-header;
-
 html {
 	font-size: 100%;
 	\-webkit-text-size-adjust: 100%;
@@ -190,4 +189,47 @@ a:focus {
 
 .solutionList .solutionSubTitle {
 	font-style: italic;
+}
+
+@external .dropdown-menu;
+.solutionList .dropdown-menu {
+	left: -200px !important;
+}
+
+@external .nav;
+@external .dropdown-toggle;
+@external .caret;
+.nav .dropdown-toggle .caret {
+	border-top-color: #000;
+	border-bottom-color: #000;
+}
+
+@external visible-phone;
+@external .caret;
+.visible-phone .caret {
+	display: none;
+}
+
+@external .profile;
+.profile {
+	height: 50px;
+}
+
+.profile img {
+	width: 60px;
+	float: left;
+	margin: 0px 17px 0px 0;
+}
+
+@external .title;
+.profile .title {
+	display: inline-block;
+	max-width: 110px;
+	font-size: 14px;
+	font-weight: normal;
+	white-space: nowrap;
+	overflow: hidden;
+	-ms-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
 }

@@ -15,6 +15,9 @@
  */
 package com.tdm.client.dispatch;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
@@ -104,12 +107,18 @@ public abstract class AbstractRequestBuilderClientActionHandler<A extends Action
 	}
 
 	protected RequestBuilder prepareRequestBuilder(Method method,
-			String[] restResourcePath, JSONObject jsonObject) {
+			String[] restResourcePath, Map<String, String> queryParams,
+			JSONObject jsonObject) {
 
 		UrlBuilder urlBuilder = new UrlBuilder().setModule("api").setVersion(
 				"v1");
 		for (String path : restResourcePath) {
 			urlBuilder.addResourcePath(path);
+		}
+		if (queryParams != null) {
+			for (Entry<String, String> entry : queryParams.entrySet()) {
+				urlBuilder.addQueryParameter(entry.getKey(), entry.getValue());
+			}
 		}
 		RequestBuilder rb = new RequestBuilder(method, urlBuilder.toUrl());
 		if (jsonObject != null) {
@@ -121,7 +130,18 @@ public abstract class AbstractRequestBuilderClientActionHandler<A extends Action
 	}
 
 	protected RequestBuilder prepareRequestBuilder(Method method,
+			String[] restResourcePath, JSONObject jsonObject) {
+		return prepareRequestBuilder(method, restResourcePath, null, jsonObject);
+	}
+
+	protected RequestBuilder prepareRequestBuilder(Method method,
+			String[] restResourcePath, Map<String, String> queryParams) {
+		return prepareRequestBuilder(method, restResourcePath, queryParams,
+				null);
+	}
+
+	protected RequestBuilder prepareRequestBuilder(Method method,
 			String[] restResourcePath) {
-		return prepareRequestBuilder(method, restResourcePath, null);
+		return prepareRequestBuilder(method, restResourcePath, null, null);
 	}
 }

@@ -23,6 +23,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.tdm.domain.model.problem.Problem;
 
 /**
@@ -46,6 +47,8 @@ public class Expert implements Serializable {
 	public Expert(String id, ExpertRole role) {
 		this.userId = id;
 		this.role = role;
+		this.key = KeyFactory.createKey(Expert.class.getSimpleName(), userId
+				+ role);
 	}
 
 	public String getId() {
@@ -76,4 +79,30 @@ public class Expert implements Serializable {
 			ExpertCurrentPreferences currentPreferences) {
 		// this.currentPreferences = currentPreferences;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Expert other = (Expert) obj;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}
+
 }

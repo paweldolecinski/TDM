@@ -13,6 +13,8 @@ public class LocalUser implements Serializable {
 
 	private String email;
 
+	private String imageUrl;
+
 	private boolean enabled;
 
 	private List<Role> authorities = new ArrayList<Role>();
@@ -27,6 +29,10 @@ public class LocalUser implements Serializable {
 
 	public String getEmail() {
 		return email;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
 	public boolean isEnabled() {
@@ -47,6 +53,10 @@ public class LocalUser implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public void setEnabled(boolean enabled) {

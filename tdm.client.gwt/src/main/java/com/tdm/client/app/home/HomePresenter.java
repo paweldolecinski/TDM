@@ -40,8 +40,8 @@ import com.tdm.domain.model.problem.dto.ProblemJSO;
  * 
  */
 public class HomePresenter extends
-		Presenter<HomePresenter.Display, HomePresenter.IProxy>
-		implements HomeUiHandlers {
+		Presenter<HomePresenter.Display, HomePresenter.IProxy> implements
+		HomeUiHandlers {
 
 	public interface Display extends View, HasUiHandlers<HomeUiHandlers> {
 
@@ -89,14 +89,15 @@ public class HomePresenter extends
 					@Override
 					public void onFailure(Throwable caught) {
 						GWT.log("Error executing command ", caught);
-						ErrorOccuredEvent.fire(HomePresenter.this, caught);
+						ErrorOccuredEvent.fire(HomePresenter.this,
+								caught.getMessage());
 					}
 
 					@Override
 					public void onSuccess(GetProblemListResult result) {
 						JsArray<ProblemJSO> problemList = result
 								.getProblemList();
-						for (int i = problemList.length()-1; i >= 0; i--) {
+						for (int i = problemList.length() - 1; i >= 0; i--) {
 							getView().addProblemListItem(problemList.get(i));
 						}
 					}

@@ -19,7 +19,7 @@
 					</b:ControlGroup>
 					<b:ControlGroup>
 						<b:ControlLabel for="descBox">Description</b:ControlLabel>
-						<b:TextBox placeholder="Description…" ui:field="descBox"
+						<b:TextArea placeholder="Description…" ui:field="descBox"
 							b:id="descBox" />
 						<b:HelpBlock>Description is optional.</b:HelpBlock>
 					</b:ControlGroup>

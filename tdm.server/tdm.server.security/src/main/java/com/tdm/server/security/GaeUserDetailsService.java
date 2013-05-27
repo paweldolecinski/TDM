@@ -49,8 +49,8 @@ public class GaeUserDetailsService implements UserDetailsService {
 
 		}
 
-		return new org.springframework.security.core.userdetails.User(
-				user.getUsername(), "", true, true, true, true, authorities);
+		return new GaeSocialUser(user.getUsername(), user.getName(),
+				user.getEmail(), user.getImageUrl(), authorities);
 	}
 
 }

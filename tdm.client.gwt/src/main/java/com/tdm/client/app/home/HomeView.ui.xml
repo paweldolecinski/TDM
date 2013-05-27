@@ -12,22 +12,22 @@
 					Your problems
 				</b:Heading>
 			</b:Column>
-			<b:Column size="6" addStyleNames="pull-right pagination-right">
-				<b:Form type="INLINE">
-					<b:ControlLabel>Sort</b:ControlLabel>
-					<b:ListBox b:id="sort">
-						<g:item>by last opened</g:item>
-						<g:item>by title</g:item>
-					</b:ListBox>
-					<b:ControlLabel>Show</b:ControlLabel>
-					<b:ListBox b:id="filter">
-						<g:item>all problems</g:item>
-						<g:item>owned by me</g:item>
-						<g:item>shared with me</g:item>
-					</b:ListBox>
-				</b:Form>
+<!-- 			<b:Column size="6" addStyleNames="pull-right pagination-right"> -->
+<!-- 				<b:Form type="INLINE"> -->
+<!-- 					<b:ControlLabel>Sort</b:ControlLabel> -->
+<!-- 					<b:ListBox b:id="sort"> -->
+<!-- 						<g:item>by last opened</g:item> -->
+<!-- 						<g:item>by title</g:item> -->
+<!-- 					</b:ListBox> -->
+<!-- 					<b:ControlLabel>Show</b:ControlLabel> -->
+<!-- 					<b:ListBox b:id="filter"> -->
+<!-- 						<g:item>all problems</g:item> -->
+<!-- 						<g:item>owned by me</g:item> -->
+<!-- 						<g:item>shared with me</g:item> -->
+<!-- 					</b:ListBox> -->
+<!-- 				</b:Form> -->
 
-			</b:Column>
+<!-- 			</b:Column> -->
 		</g:HTMLPanel>
 
 		<g:HTMLPanel>

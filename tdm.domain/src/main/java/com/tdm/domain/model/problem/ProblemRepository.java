@@ -20,7 +20,6 @@ import java.util.List;
 import com.tdm.domain.model.expert.ExpertId;
 import com.tdm.domain.model.expert.ExpertRole;
 
-
 /**
  * @author Paweł Doleciński
  */
@@ -28,8 +27,10 @@ public interface ProblemRepository {
 
 	Problem read(ProblemId id);
 
+	Problem readFor(ProblemId problemId, ExpertId expertId);
+
 	Problem create(Problem request);
-	
+
 	Problem update(Problem request);
 
 	void delete(ProblemId id);

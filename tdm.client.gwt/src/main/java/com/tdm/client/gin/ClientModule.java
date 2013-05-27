@@ -39,7 +39,9 @@ public class ClientModule extends AbstractPresenterModule {
 
 	install(new PresenterSetupModule(TdmPlaceManager.class,
 			RouteTokenFormatter.class));
-
+//	install(new PresenterSetupModule(TdmPlaceManager.class,
+//			ParameterTokenFormatter.class));
+	
 	install(new ClientDispatchModule());
 
 	install(new ApplicationModule());

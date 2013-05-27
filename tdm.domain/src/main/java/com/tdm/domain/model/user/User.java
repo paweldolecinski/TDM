@@ -25,11 +25,17 @@ public class User {
 	private String email;
 
 	@Persistent
+	private String imageUrl;
+
+	@Persistent
 	private boolean enabled;
 
 	@Persistent
 	private Set<String> authorities;
 
+	public User(){
+		
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -40,6 +46,10 @@ public class User {
 
 	public String getEmail() {
 		return email;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
 	public boolean isEnabled() {
@@ -60,6 +70,10 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public void setEnabled(boolean enabled) {

@@ -7,10 +7,12 @@
 
 	<g:FlowPanel>
 		<g:HTMLPanel styleName="well well-small">
-			<b:Paragraph>
-				User name
-			</b:Paragraph>
-			<b:Heading size="4">Your ranking</b:Heading>
+			<g:HTMLPanel styleName="profile">
+					<b:Image ui:field="userImage" />
+				<b:Paragraph ui:field="userName" styleName="title" />
+			</g:HTMLPanel>
+			<hr />
+			<b:Heading size="5">Your ranking</b:Heading>
 			<b:Paragraph>
 				1) Solution 1
 			</b:Paragraph>
@@ -35,25 +37,29 @@
 						<b:ControlGroup>
 							<b:ControlLabel for="input01">Email address 1</b:ControlLabel>
 							<b:Controls>
-								<b:TextBox ui:field="mail1" alternateSize="XLARGE" b:id="input01"></b:TextBox>
+								<b:TextBox ui:field="mail1" alternateSize="XLARGE"
+									b:id="input01"></b:TextBox>
 							</b:Controls>
 						</b:ControlGroup>
 						<b:ControlGroup>
 							<b:ControlLabel for="input02">Email address 2</b:ControlLabel>
 							<b:Controls>
-								<b:TextBox ui:field="mail2" alternateSize="XLARGE" b:id="input02"></b:TextBox>
+								<b:TextBox ui:field="mail2" alternateSize="XLARGE"
+									b:id="input02"></b:TextBox>
 							</b:Controls>
 						</b:ControlGroup>
 						<b:ControlGroup>
 							<b:ControlLabel for="input03">Email address 3</b:ControlLabel>
 							<b:Controls>
-								<b:TextBox ui:field="mail3" alternateSize="XLARGE" b:id="input03"></b:TextBox>
+								<b:TextBox ui:field="mail3" alternateSize="XLARGE"
+									b:id="input03"></b:TextBox>
 							</b:Controls>
 						</b:ControlGroup>
 						<b:ControlGroup>
 							<b:ControlLabel for="input04">Email address 4</b:ControlLabel>
 							<b:Controls>
-								<b:TextBox ui:field="mail4" alternateSize="XLARGE" b:id="input04"></b:TextBox>
+								<b:TextBox ui:field="mail4" alternateSize="XLARGE"
+									b:id="input04"></b:TextBox>
 							</b:Controls>
 						</b:ControlGroup>
 						<b:ControlGroup>
@@ -75,24 +81,25 @@
 					No experts
 				</b:Paragraph>
 				<bs:UnorderedList ui:field="experts" addStyleNames="expertList">
-					<bs:ListItem>
-						<g:HTMLPanel>
-							<a href="/users/profile" title="Edit your name &amp; picture">
-								<img data-bind="attr: { src: picture }"
-									src="//s3.amazonaws.com/astrid-production/medium/445393?1360066289" />
-							</a>
-							<div class="title" data-bind="text: display_name">Pawel Dolecinski</div>
-						</g:HTMLPanel>
-					</bs:ListItem>
-					<bs:ListItem>
-						<b:Image url="http://placehold.it/260x180" />
-					</bs:ListItem>
-					<bs:ListItem>
-						<b:Image url="http://placehold.it/260x180" />
-					</bs:ListItem>
-					<bs:ListItem>
-						<b:Image url="http://placehold.it/260x180" />
-					</bs:ListItem>
+					<!-- <bs:ListItem> -->
+					<!-- <g:HTMLPanel> -->
+					<!-- <a href="/users/profile" title="Edit your name &amp; picture"> -->
+					<!-- <img data-bind="attr: { src: picture }" -->
+					<!-- src="//s3.amazonaws.com/astrid-production/medium/445393?1360066289" 
+						/> -->
+					<!-- </a> -->
+					<!-- <div class="title" data-bind="text: display_name">Pawel Dolecinski</div> -->
+					<!-- </g:HTMLPanel> -->
+					<!-- </bs:ListItem> -->
+					<!-- <bs:ListItem> -->
+					<!-- <b:Image url="http://placehold.it/260x180" /> -->
+					<!-- </bs:ListItem> -->
+					<!-- <bs:ListItem> -->
+					<!-- <b:Image url="http://placehold.it/260x180" /> -->
+					<!-- </bs:ListItem> -->
+					<!-- <bs:ListItem> -->
+					<!-- <b:Image url="http://placehold.it/260x180" /> -->
+					<!-- </bs:ListItem> -->
 				</bs:UnorderedList>
 			</b:TabPane>
 		</b:TabPanel>

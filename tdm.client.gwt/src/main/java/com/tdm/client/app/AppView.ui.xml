@@ -5,11 +5,14 @@
 
 	<b:FluidRow>
 		<b:Column size="8" addStyleNames="index-main">
-			<b:Column size="3" ui:field="leftContentPanel" addStyleNames="index-left" hideOn="PHONE" />
-			<b:Column size="9" ui:field="mainContentPanel" addStyleNames="index-center" />
+			<b:Column size="3" ui:field="leftContentPanel"
+				addStyleNames="index-left" hideOn="PHONE" />
+			<b:Column size="9" ui:field="mainContentPanel"
+				addStyleNames="index-center" />
 		</b:Column>
 
-		<b:Column size="4" ui:field="rightContentPanel" addStyleNames="index-right"/>
+		<b:Column size="4" ui:field="rightContentPanel"
+			addStyleNames="index-right" />
 
 	</b:FluidRow>
 

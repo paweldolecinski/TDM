@@ -23,6 +23,7 @@ import javax.validation.ConstraintViolation;
 import com.github.gwtbootstrap.client.ui.ControlGroup;
 import com.github.gwtbootstrap.client.ui.Form.SubmitEvent;
 import com.github.gwtbootstrap.client.ui.HelpInline;
+import com.github.gwtbootstrap.client.ui.TextArea;
 import com.github.gwtbootstrap.client.ui.TextBox;
 import com.github.gwtbootstrap.client.ui.WellForm;
 import com.github.gwtbootstrap.client.ui.constants.ControlGroupType;
@@ -52,7 +53,7 @@ public class NewProblemView extends
 	@UiField
 	TextBox titleBox;
 	@UiField
-	TextBox descBox;
+	TextArea descBox;
 	@UiField
 	ControlGroup titleControlGroup;
 	@UiField HelpInline titleError;

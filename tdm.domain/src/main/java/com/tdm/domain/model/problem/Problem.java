@@ -16,9 +16,9 @@
 package com.tdm.domain.model.problem;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.jdo.annotations.Element;
 import javax.jdo.annotations.Embedded;
@@ -48,7 +48,7 @@ public class Problem implements Serializable {
 
 	@Element(dependent = "true")
 	@Persistent(mappedBy = "problem")
-	private List<Expert> experts = new ArrayList<Expert>();
+	private Set<Expert> experts = new HashSet<Expert>();
 
 	@Embedded
 	private CurrentConsensus currentConsensus = new CurrentConsensus();
@@ -77,11 +77,11 @@ public class Problem implements Serializable {
 		this.description = description;
 	}
 
-	public List<Expert> getExperts() {
+	public Set<Expert> getExperts() {
 		return experts;
 	}
 
-	public void setExperts(List<Expert> experts) {
+	public void setExperts(Set<Expert> experts) {
 		this.experts = experts;
 	}
 

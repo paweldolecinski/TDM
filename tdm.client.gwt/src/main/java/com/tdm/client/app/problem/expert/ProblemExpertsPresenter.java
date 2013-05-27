@@ -41,6 +41,7 @@ import com.tdm.client.event.navi.HideExpertsPresenterEvent;
 import com.tdm.client.event.navi.HideExpertsPresenterEvent.HideExpertsPresenterHandler;
 import com.tdm.client.event.navi.RevealExpertsPresenterEvent;
 import com.tdm.client.event.navi.RevealExpertsPresenterEvent.RevealExpertsPresenterHandler;
+import com.tdm.client.security.CurrentUser;
 import com.tdm.domain.model.expert.dto.ExpertInvitationJSO;
 import com.tdm.domain.model.expert.dto.ExpertJso;
 
@@ -52,6 +53,7 @@ public class ProblemExpertsPresenter
 
 	private String problemId;
 	private DispatchAsync dispatch;
+	private CurrentUser currentUser;
 
 	@ProxyCodeSplit
 	public interface IProxy extends Proxy<ProblemExpertsPresenter> {
@@ -63,20 +65,26 @@ public class ProblemExpertsPresenter
 
 		void addExpert(ExpertJso expert);
 
-		void mailsSent();
+		void mailSent();
+
+		void setUserPhotoAndName(String imgUrl, String name);
 	}
 
 	@Inject
 	public ProblemExpertsPresenter(EventBus eventBus, Display view,
-			IProxy proxy, final DispatchAsync dispatch) {
+			IProxy proxy, final DispatchAsync dispatch,
+			final CurrentUser currentUser) {
 		super(eventBus, view, proxy, AppPresenter.TYPE_LeftContent);
 		this.dispatch = dispatch;
+		this.currentUser = currentUser;
 		getView().setUiHandlers(this);
 	}
 
 	@Override
 	protected void onReset() {
 		super.onReset();
+		getView().setUserPhotoAndName(currentUser.getUser().getImageUrl(),
+				currentUser.getUser().getName());
 		getExpertList();
 	}
 
@@ -88,7 +96,7 @@ public class ProblemExpertsPresenter
 					public void onFailure(Throwable caught) {
 						GWT.log("Error executing command ", caught);
 						ErrorOccuredEvent.fire(ProblemExpertsPresenter.this,
-								caught);
+								caught.getMessage());
 					}
 
 					@Override
@@ -130,12 +138,12 @@ public class ProblemExpertsPresenter
 					public void onFailure(Throwable caught) {
 						GWT.log("Error executing command ", caught);
 						ErrorOccuredEvent.fire(ProblemExpertsPresenter.this,
-								caught);
+								caught.getMessage());
 					}
 
 					@Override
 					public void onSuccess(InviteExpertsResult result) {
-						getView().mailsSent();
+						getView().mailSent();
 					}
 				});
 	}

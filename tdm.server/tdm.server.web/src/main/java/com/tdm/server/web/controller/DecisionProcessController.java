@@ -1,5 +1,7 @@
 package com.tdm.server.web.controller;
 
+import java.security.Principal;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
+import com.tdm.domain.model.expert.Expert;
+import com.tdm.domain.model.expert.ExpertRole;
 import com.tdm.domain.model.expert.dto.ExpertsInvitationDTO;
 import com.tdm.domain.model.preferences.dto.SolutionPreferencesDTO;
 import com.tdm.domain.model.problem.ProblemId;
@@ -25,14 +29,14 @@ public final class DecisionProcessController {
 	InvitationService invitationService;
 	@Inject
 	DecisionProcessService decisionProcessService;
-	
+
 	public DecisionProcessController() {
 	}
 
 	@RequestMapping(value = "/vote", method = RequestMethod.POST)
 	public void vote(@PathVariable long problemId,
 			@RequestBody SolutionPreferencesDTO preferences) {
-		
+
 		decisionProcessService.vote();
 	}
 

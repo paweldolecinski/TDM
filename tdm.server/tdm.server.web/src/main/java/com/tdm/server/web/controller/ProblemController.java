@@ -2,6 +2,7 @@ package com.tdm.server.web.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import com.tdm.domain.model.expert.Expert;
+import com.tdm.domain.model.expert.ExpertId;
 import com.tdm.domain.model.expert.ExpertRole;
 import com.tdm.domain.model.expert.dto.ExpertDTO;
 import com.tdm.domain.model.idea.SolutionIdea;
@@ -46,10 +49,17 @@ public final class ProblemController {
 
 	@RequestMapping(value = "/{problemId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ProblemDTO getProblem(@PathVariable String problemId) {
-
-		Problem retrieveProblem = problemService.retrieveProblem(new ProblemId(
-				problemId));
+	public ProblemDTO getProblem(@PathVariable String problemId,
+			@RequestParam(value = "join", required = false) boolean join,
+			Principal principal) {
+		String username = principal.getName();
+		ProblemId problem = new ProblemId(problemId);
+		Expert expert = new Expert(username, ExpertRole.MEMBER);
+		if (join) {
+			problemService.assignExpertToProblem(problem, expert);
+		}
+		Problem retrieveProblem = problemService.retrieveProblem(problem,
+				new ExpertId(expert.getId()));
 		GdmProblemDtoAssembler ass = new GdmProblemDtoAssembler();
 
 		return ass.fromEntity(retrieveProblem);
@@ -58,25 +68,21 @@ public final class ProblemController {
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody
 	ProblemDTO createProblem(@RequestBody ProblemDTO problem,
-			HttpServletResponse httpResponse_p, WebRequest request_p, Principal principal) {
+			HttpServletResponse httpResponse_p, WebRequest request_p,
+			Principal principal) {
 		GdmProblemDtoAssembler ass = new GdmProblemDtoAssembler();
 		Problem entity = ass.toEntity(problem);
 		Expert owner = new Expert(principal.getName(), ExpertRole.OWNER);
 		entity.addExpert(owner);
-		
-		try {
-			Problem createdProblem = problemService.createProblem(entity);
-			ProblemDTO dto = ass.fromEntity(createdProblem);
 
-			httpResponse_p.setStatus(HttpStatus.CREATED.value());
-			httpResponse_p.setHeader("Location", request_p.getContextPath()
-					+ "/problems/" + dto.getKey());
+		Problem createdProblem = problemService.createProblem(entity);
+		ProblemDTO dto = ass.fromEntity(createdProblem);
 
-			return dto;
-		} catch (Exception e) {
-			httpResponse_p.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
-			return null;
-		}
+		httpResponse_p.setStatus(HttpStatus.CREATED.value());
+		httpResponse_p.setHeader("Location", request_p.getContextPath()
+				+ "/problems/" + dto.getKey());
+
+		return dto;
 	}
 
 	@RequestMapping(value = "/{problemId}/ideas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -96,29 +102,22 @@ public final class ProblemController {
 			HttpServletResponse httpResponse_p, WebRequest request_p) {
 		SolutionIdeaDtoAssembler ass = new SolutionIdeaDtoAssembler();
 		SolutionIdea entity = ass.toEntity(solutionIdea);
-		try {
-			SolutionIdea created = ideaService.addSolutionIdea(entity,
-					new ProblemId(problemId));
-			SolutionIdeaDTO dto = ass.fromEntity(created);
+		SolutionIdea created = ideaService.addSolutionIdea(entity,
+				new ProblemId(problemId));
+		SolutionIdeaDTO dto = ass.fromEntity(created);
 
-			httpResponse_p.setStatus(HttpStatus.CREATED.value());
-			httpResponse_p.setHeader("Location", request_p.getContextPath()
-					+ "/problems/" + problemId + "/ideas/" + dto.getId());
+		httpResponse_p.setStatus(HttpStatus.CREATED.value());
+		httpResponse_p.setHeader("Location", request_p.getContextPath()
+				+ "/problems/" + problemId + "/ideas/" + dto.getId());
 
-			return dto;
-		} catch (Exception e) {
-			httpResponse_p.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
-			return null;
-		}
-
+		return dto;
 	}
 
 	@RequestMapping(value = "/{problemId}/experts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
-	List<ExpertDTO> getExpertsForProblem(
-			@PathVariable String problemId) {
+	List<ExpertDTO> getExpertsForProblem(@PathVariable String problemId) {
 		ExpertEntityAssembler ass = new ExpertEntityAssembler();
-		List<Expert> experts = problemService
+		Set<Expert> experts = problemService
 				.retrieveExpertsAssignedToProblem(new ProblemId(problemId));
 		return ass.fromEntityList(experts);
 	}

@@ -18,7 +18,6 @@ package com.tdm.client.app.problem;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.gwtbootstrap.client.ui.ButtonGroup;
 import com.github.gwtbootstrap.client.ui.Form;
 import com.github.gwtbootstrap.client.ui.Form.SubmitEvent;
 import com.github.gwtbootstrap.client.ui.Heading;

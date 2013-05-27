@@ -95,7 +95,7 @@
 
 	<servlet>
 		<servlet-name>checkAuthServlet</servlet-name>
-		<servlet-class>com.tdm.security.server.AuthServiceImpl</servlet-class>
+		<servlet-class>com.tdm.server.security.AuthServiceImpl</servlet-class>
 	</servlet>
 
 	<servlet>

@@ -57,7 +57,6 @@ public class CurrentUser implements HasHandlers {
 				if (result != null) {
 					user = result;
 					CurrentUserChangedEvent.fire(CurrentUser.this);
-
 				} else {
 					failed();
 				}
@@ -91,6 +90,10 @@ public class CurrentUser implements HasHandlers {
 	 */
 	public boolean isConfirmed() {
 		return confirmed;
+	}
+
+	public LocalUser getUser() {
+		return user;
 	}
 
 	public String getUsername() {
