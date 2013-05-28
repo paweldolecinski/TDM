@@ -17,6 +17,10 @@
 
 	<precompilation-enabled>true</precompilation-enabled>
 
+	<inbound-services>
+		<service>channel_presence</service>
+	</inbound-services>
+
 	<!-- Configure java.util.logging -->
 	<system-properties>
 		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />

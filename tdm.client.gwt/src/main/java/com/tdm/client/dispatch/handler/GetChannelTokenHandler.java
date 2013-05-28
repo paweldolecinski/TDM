@@ -15,42 +15,38 @@
  */
 package com.tdm.client.dispatch.handler;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.Response;
-import com.google.gwt.json.client.JSONObject;
 import com.tdm.client.dispatch.AbstractRequestBuilderClientActionHandler;
-import com.tdm.client.dispatch.command.InviteExpertsAction;
-import com.tdm.client.dispatch.command.InviteExpertsResult;
+import com.tdm.client.dispatch.command.GetChannelTokenAction;
+import com.tdm.client.dispatch.command.GetChannelTokenResult;
 
 /**
  * @author Paweł Doleciński
  * 
  */
-public class InviteExpertsHandler
+public class GetChannelTokenHandler
 		extends
-		AbstractRequestBuilderClientActionHandler<InviteExpertsAction, InviteExpertsResult> {
+		AbstractRequestBuilderClientActionHandler<GetChannelTokenAction, GetChannelTokenResult> {
 
-	private static final String[] restResourcePath = { "decision",
-			"{problemId}", "invite" };
+	private static final String[] restResourcePath = { "channel", "{problemId}" };
 
-	protected InviteExpertsHandler() {
-		super(InviteExpertsAction.class);
+	protected GetChannelTokenHandler() {
+		super(GetChannelTokenAction.class);
 	}
 
 	@Override
-	protected InviteExpertsResult extractResult(final Response response) {
-		return new InviteExpertsResult();
+	protected GetChannelTokenResult extractResult(final Response response) {
+		String token = response.getText();
+		return new GetChannelTokenResult(token);
 	}
 
 	@Override
-	protected RequestBuilder getRequestBuilder(final InviteExpertsAction action) {
-
+	protected RequestBuilder getRequestBuilder(
+			final GetChannelTokenAction action) {
 		restResourcePath[1] = action.getProblemId();
-		JSONObject jsonObject = new JSONObject(
-				(JavaScriptObject) action.getInvitation());
-		return prepareRequestBuilder(RequestBuilder.POST, restResourcePath,
-				jsonObject);
+		return prepareRequestBuilder(RequestBuilder.GET, restResourcePath);
 
 	}
+
 }

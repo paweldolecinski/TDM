@@ -19,11 +19,13 @@ import com.google.inject.Inject;
 import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerRegistry;
 import com.tdm.client.dispatch.handler.CreateGdmProblemHandler;
 import com.tdm.client.dispatch.handler.CreateNewSolutionHandler;
+import com.tdm.client.dispatch.handler.GetChannelTokenHandler;
 import com.tdm.client.dispatch.handler.GetExpertListHandler;
 import com.tdm.client.dispatch.handler.GetProblemByIdHandler;
 import com.tdm.client.dispatch.handler.GetProblemListHandler;
 import com.tdm.client.dispatch.handler.GetSolutionIdeaListHandler;
 import com.tdm.client.dispatch.handler.InviteExpertsHandler;
+import com.tdm.client.dispatch.handler.VoteOnSolutionHandler;
 
 public class ClientActionHandlerRegistry extends
 		DefaultClientActionHandlerRegistry {
@@ -36,7 +38,9 @@ public class ClientActionHandlerRegistry extends
 			final GetSolutionIdeaListHandler getSolutionIdeaListHandler,
 			final GetProblemByIdHandler getProblemByIdHandler,
 			final GetExpertListHandler getExpertListHandler,
-			final InviteExpertsHandler inviteExpertsHandler) {
+			final InviteExpertsHandler inviteExpertsHandler,
+			final VoteOnSolutionHandler voteOnSolutionHandler,
+			final GetChannelTokenHandler getChannelTokenHandler) {
 
 		register(getProblemListHandler);
 		register(createGdmProblemHandler);
@@ -45,5 +49,7 @@ public class ClientActionHandlerRegistry extends
 		register(getProblemByIdHandler);
 		register(getExpertListHandler);
 		register(inviteExpertsHandler);
+		register(voteOnSolutionHandler);
+		register(getChannelTokenHandler);
 	}
 }

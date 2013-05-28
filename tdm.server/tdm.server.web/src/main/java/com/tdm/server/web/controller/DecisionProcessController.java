@@ -1,7 +1,5 @@
 package com.tdm.server.web.controller;
 
-import java.security.Principal;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
-import com.tdm.domain.model.expert.Expert;
-import com.tdm.domain.model.expert.ExpertRole;
 import com.tdm.domain.model.expert.dto.ExpertsInvitationDTO;
+import com.tdm.domain.model.preferences.SolutionPreferences;
 import com.tdm.domain.model.preferences.dto.SolutionPreferencesDTO;
 import com.tdm.domain.model.problem.ProblemId;
 import com.tdm.server.application.decision.service.DecisionProcessService;
 import com.tdm.server.application.problem.service.InvitationService;
+import com.tdm.server.web.assembler.PreferencesDtoAssembler;
 
 @Controller
 @RequestMapping("/decision/{problemId}")
@@ -34,13 +32,21 @@ public final class DecisionProcessController {
 	}
 
 	@RequestMapping(value = "/vote", method = RequestMethod.POST)
-	public void vote(@PathVariable long problemId,
-			@RequestBody SolutionPreferencesDTO preferences) {
-
-		decisionProcessService.vote();
+	public void vote(@PathVariable String problemId,
+			@RequestBody SolutionPreferencesDTO preferences,
+			HttpServletResponse httpResponse_p) {
+		if (problemId.equals(preferences.getProblemId())) {
+			SolutionPreferences prefs = new PreferencesDtoAssembler()
+					.toEntity(preferences);
+			decisionProcessService.vote(prefs);
+			httpResponse_p.setStatus(HttpStatus.OK.value());
+		} else {
+			throw new IllegalStateException(
+					"Problem ID different than one connected with preferences.");
+		}
 	}
 
-	@RequestMapping(value = "/invite", method = RequestMethod.GET)
+	@RequestMapping(value = "/invite", method = RequestMethod.POST)
 	public void inviteExpert(@PathVariable String problemId,
 			@RequestBody ExpertsInvitationDTO invitation,
 			HttpServletResponse httpResponse_p, WebRequest request_p) {

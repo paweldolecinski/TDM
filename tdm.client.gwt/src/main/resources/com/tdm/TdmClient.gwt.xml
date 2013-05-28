@@ -13,7 +13,8 @@
 	<inherits name="com.google.gwt.logging.Logging" />
 	<inherits name='com.google.gwt.junit.JUnit' />
 	<inherits name="org.hibernate.validator.HibernateValidator" />
-
+	<inherits name="com.google.gwt.appengine.channel.Channel" />
+	
 	<inherits name='com.github.gwtbootstrap.Bootstrap' />
 	<inherits name='com.allen_sauer.gwt.dnd.gwt-dnd' />
 

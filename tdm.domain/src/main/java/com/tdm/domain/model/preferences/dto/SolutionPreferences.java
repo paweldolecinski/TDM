@@ -6,7 +6,7 @@ public interface SolutionPreferences {
 
 	String getProblemId();
 	
-	List<Note> getNotes();
+	List<? extends Note> getNotes();
 	
 	interface Note {
 		String getSolutionId();

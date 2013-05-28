@@ -5,7 +5,7 @@ import java.util.List;
 public class SolutionPreferencesDTO implements SolutionPreferences {
 
 	private String problemId;
-	private List<Note> notes;
+	private List<NoteDTO> notes;
 
 	@Override
 	public String getProblemId() {
@@ -13,7 +13,7 @@ public class SolutionPreferencesDTO implements SolutionPreferences {
 	}
 
 	@Override
-	public List<Note> getNotes() {
+	public List<? extends Note> getNotes() {
 		return notes;
 	}
 

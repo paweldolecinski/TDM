@@ -13,12 +13,15 @@ import com.tdm.domain.model.handling.ObjectNotFoundException;
 import com.tdm.domain.model.problem.Problem;
 import com.tdm.domain.model.problem.ProblemId;
 import com.tdm.domain.model.problem.ProblemRepository;
+import com.tdm.server.application.Broadcaster;
 
 @Service
 public class DefaultGdmProblemService implements GdmProblemService {
 
 	@Autowired
 	ProblemRepository problemDao;
+	@Autowired
+	Broadcaster broadcaster;
 
 	protected DefaultGdmProblemService() {
 	}
@@ -96,6 +99,7 @@ public class DefaultGdmProblemService implements GdmProblemService {
 		Problem read = problemDao.read(problemId);
 		read.addExpert(expert);
 		problemDao.update(read);
+		broadcaster.publish(problemId, Broadcaster.Message.NEW_EXPERT);
 	}
 
 }

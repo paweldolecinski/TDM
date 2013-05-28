@@ -86,7 +86,7 @@ public class SolutionIdeaWidget extends Composite {
 			"vote8", "vote9" })
 	void onClickShowModal(ClickEvent event) {
 		Button b = (Button) event.getSource();
-		String text = b.getText();
+		String text = b.getTitle();
 		int note = Integer.parseInt(text);
 		eventBus.fireEvent(new VoteOnSolutionEvent(solutionIdea, note));
 

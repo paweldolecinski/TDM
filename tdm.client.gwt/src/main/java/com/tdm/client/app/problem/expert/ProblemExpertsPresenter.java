@@ -36,6 +36,7 @@ import com.tdm.client.dispatch.command.GetExpertListAction;
 import com.tdm.client.dispatch.command.GetExpertListResult;
 import com.tdm.client.dispatch.command.InviteExpertsAction;
 import com.tdm.client.dispatch.command.InviteExpertsResult;
+import com.tdm.client.event.ChannelMessageReceivedEvent;
 import com.tdm.client.event.ErrorOccuredEvent;
 import com.tdm.client.event.navi.HideExpertsPresenterEvent;
 import com.tdm.client.event.navi.HideExpertsPresenterEvent.HideExpertsPresenterHandler;
@@ -68,6 +69,23 @@ public class ProblemExpertsPresenter
 		void mailSent();
 
 		void setUserPhotoAndName(String imgUrl, String name);
+	}
+
+	@Override
+	protected void onBind() {
+		super.onBind();
+		addRegisteredHandler(
+				ChannelMessageReceivedEvent.getType(),
+				new ChannelMessageReceivedEvent.ChannelMessageReceivedHandler() {
+
+					@Override
+					public void onChannelMessageReceived(
+							ChannelMessageReceivedEvent event) {
+						if (event.getMsg().equals("NEW_EXPERT")) {
+							getExpertList();
+						}
+					}
+				});
 	}
 
 	@Inject

@@ -15,6 +15,11 @@
  */
 package com.tdm.client.app.problem;
 
+import com.google.gwt.appengine.channel.client.Channel;
+import com.google.gwt.appengine.channel.client.ChannelError;
+import com.google.gwt.appengine.channel.client.ChannelFactory;
+import com.google.gwt.appengine.channel.client.Socket;
+import com.google.gwt.appengine.channel.client.SocketListener;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -33,12 +38,15 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.tdm.client.app.AppPresenter;
 import com.tdm.client.dispatch.command.CreateNewSolutionAction;
 import com.tdm.client.dispatch.command.CreateNewSolutionResult;
+import com.tdm.client.dispatch.command.GetChannelTokenAction;
+import com.tdm.client.dispatch.command.GetChannelTokenResult;
 import com.tdm.client.dispatch.command.GetProblemByIdAction;
 import com.tdm.client.dispatch.command.GetProblemByIdResult;
 import com.tdm.client.dispatch.command.GetSolutionIdeaListAction;
 import com.tdm.client.dispatch.command.GetSolutionIdeaListResult;
 import com.tdm.client.dispatch.command.VoteOnSolutionAction;
 import com.tdm.client.dispatch.command.VoteOnSolutionResult;
+import com.tdm.client.event.ChannelMessageReceivedEvent;
 import com.tdm.client.event.ErrorOccuredEvent;
 import com.tdm.client.event.NewSolutionIdeaEvent;
 import com.tdm.client.event.VoteOnSolutionEvent;
@@ -86,14 +94,17 @@ public class ProblemProcessPresenter
 	private ProblemJSO problem;
 	private DispatchAsync dispatch;
 	private PlaceManager placeManager;
+	private Socket channelSocket;
+	private ChannelFactory channelFactory;
 
 	@Inject
 	public ProblemProcessPresenter(EventBus eventBus, Display view,
 			IProxy proxy, final DispatchAsync dispatch,
-			PlaceManager placeManager) {
+			PlaceManager placeManager, ChannelFactory channelFactory) {
 		super(eventBus, view, proxy, AppPresenter.TYPE_MainContent);
 		this.dispatch = dispatch;
 		this.placeManager = placeManager;
+		this.channelFactory = channelFactory;
 		getView().setUiHandlers(this);
 	}
 
@@ -102,6 +113,47 @@ public class ProblemProcessPresenter
 		super.onReveal();
 		RevealActivitiesPresenterEvent.fire(this, problemId);
 		RevealExpertsPresenterEvent.fire(this, problemId);
+		dispatch.execute(new GetChannelTokenAction(problemId),
+				new AsyncCallback<GetChannelTokenResult>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+
+					}
+
+					@Override
+					public void onSuccess(GetChannelTokenResult result) {
+						Channel channel = channelFactory.createChannel(result
+								.getToken());
+
+						channelSocket = channel.open(new SocketListener() {
+							@Override
+							public void onOpen() {
+								// Window.alert("Opened");
+							}
+
+							@Override
+							public void onMessage(String json) {
+								// Window.alert(json);
+								getEventBus().fireEvent(
+										new ChannelMessageReceivedEvent(json));
+							}
+
+							@Override
+							public void onError(ChannelError error) {
+								ErrorOccuredEvent.fire(
+										ProblemProcessPresenter.this,
+										error.getDescription());
+							}
+
+							@Override
+							public void onClose() {
+								// Window.alert("Closed");
+							}
+
+						});
+					}
+				});
 		getView().setHeader(problem.getName(), problem.getDescription());
 		getView().focus();
 	}
@@ -109,6 +161,7 @@ public class ProblemProcessPresenter
 	@Override
 	protected void onHide() {
 		super.onHide();
+		channelSocket.close();
 		problem = null;
 		problemId = null;
 		getView().clear();
