@@ -37,11 +37,6 @@ public class ProblemJSO extends BaseJso implements Problem {
 															}-*/;
 
 	@Override
-	public final native CurrentConsensus getCurrentConsensus() /*-{
-																			return (this.currentConsensus == null) ? null : this.currentConsensus;
-																			}-*/;
-
-	@Override
 	public final native void setName(String name) /*-{
 													this.name = name;
 													}-*/;

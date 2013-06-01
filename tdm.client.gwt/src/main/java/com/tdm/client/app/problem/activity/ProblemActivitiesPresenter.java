@@ -15,8 +15,13 @@
  */
 package com.tdm.client.app.problem.activity;
 
+import java.util.List;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -24,32 +29,89 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.tdm.client.app.AppPresenter;
+import com.tdm.client.dispatch.command.GetCurrentConsensusAction;
+import com.tdm.client.dispatch.command.GetCurrentConsensusResult;
+import com.tdm.client.event.ChannelMessageReceivedEvent;
+import com.tdm.client.event.ErrorOccuredEvent;
 import com.tdm.client.event.navi.HideActivitiesPresenterEvent;
 import com.tdm.client.event.navi.HideActivitiesPresenterEvent.HideActivitiesPresenterHandler;
 import com.tdm.client.event.navi.RevealActivitiesPresenterEvent;
 import com.tdm.client.event.navi.RevealActivitiesPresenterEvent.RevealActivitiesPresenterHandler;
+import com.tdm.domain.model.expert.dto.ExpertJso;
+import com.tdm.domain.model.idea.dto.SolutionIdea;
 
-public class ProblemActivitiesPresenter extends
+public class ProblemActivitiesPresenter
+		extends
 		Presenter<ProblemActivitiesPresenter.Display, ProblemActivitiesPresenter.IProxy>
-		implements RevealActivitiesPresenterHandler, HideActivitiesPresenterHandler {
+		implements RevealActivitiesPresenterHandler,
+		HideActivitiesPresenterHandler {
 
 	private String problemId;
+	private DispatchAsync dispatch;
 
 	@ProxyCodeSplit
 	public interface IProxy extends Proxy<ProblemActivitiesPresenter> {
 	}
 
 	public interface Display extends View {
+
+		void clearRanking();
+
+		void addToRanking(SolutionIdea solutionIdea);
 	}
 
 	@Inject
-	public ProblemActivitiesPresenter(EventBus eventBus, Display view, IProxy proxy) {
+	public ProblemActivitiesPresenter(EventBus eventBus, Display view,
+			IProxy proxy, final DispatchAsync dispatch) {
 		super(eventBus, view, proxy, AppPresenter.TYPE_RightContent);
+		this.dispatch = dispatch;
 	}
 
 	@Override
 	protected void onBind() {
 		super.onBind();
+		addRegisteredHandler(
+				ChannelMessageReceivedEvent.getType(),
+				new ChannelMessageReceivedEvent.ChannelMessageReceivedHandler() {
+
+					@Override
+					public void onChannelMessageReceived(
+							ChannelMessageReceivedEvent event) {
+						if (event.getMsg().equals("NEW_RESULT")) {
+							getResult();
+						}
+					}
+				});
+	}
+
+	
+	@Override
+	protected void onReset() {
+		super.onReset();
+		getResult();
+	}
+
+	private void getResult() {
+		dispatch.execute(new GetCurrentConsensusAction(problemId),
+				new AsyncCallback<GetCurrentConsensusResult>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						GWT.log("Error executing command ", caught);
+						ErrorOccuredEvent.fire(ProblemActivitiesPresenter.this,
+								caught.getMessage());
+					}
+
+					@Override
+					public void onSuccess(GetCurrentConsensusResult result) {
+						 getView().clearRanking();
+						List<SolutionIdea> res = result.getConsensus()
+								.getRanking();
+						for (SolutionIdea solutionIdea : res) {
+							getView().addToRanking(solutionIdea);
+						}
+					}
+				});
 	}
 
 	@ProxyEvent

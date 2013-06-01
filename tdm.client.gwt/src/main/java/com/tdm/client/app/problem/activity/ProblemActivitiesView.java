@@ -15,11 +15,15 @@
  */
 package com.tdm.client.app.problem.activity;
 
-
+import com.github.gwtbootstrap.client.ui.Paragraph;
+import com.github.gwtbootstrap.client.ui.base.ListItem;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
+import com.tdm.domain.model.idea.dto.SolutionIdea;
 
 /**
  * @author Paweł Doleciński
@@ -33,6 +37,11 @@ public class ProblemActivitiesView extends ViewImpl implements
 
 	private final Widget widget;
 
+	@UiField
+	protected ListItem ranking;
+	@UiField
+	protected Paragraph emptyPlaceholder;
+
 	@Inject
 	public ProblemActivitiesView(Binder binder) {
 		widget = binder.createAndBindUi(this);
@@ -41,5 +50,25 @@ public class ProblemActivitiesView extends ViewImpl implements
 	@Override
 	public Widget asWidget() {
 		return widget;
+	}
+
+	@Override
+	public void clearRanking() {
+		ranking.clear();
+		emptyPlaceholder.setVisible(true);
+	}
+
+	@Override
+	public void addToRanking(SolutionIdea solutionIdea) {
+		ListItem e = new ListItem();
+		HTML htmlPanel = new HTML();
+		htmlPanel.setText(solutionIdea.getName());
+		e.add(htmlPanel);
+		ranking.add(e);
+		if (ranking.getWidgetCount() > 0) {
+			emptyPlaceholder.setVisible(false);
+		} else {
+			emptyPlaceholder.setVisible(true);
+		}
 	}
 }

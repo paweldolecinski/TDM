@@ -18,8 +18,6 @@ public class SelectionModuleTest {
 	private SolutionIdeaId i3 = new SolutionIdeaId("3");
 	private SolutionIdeaId i4 = new SolutionIdeaId("4");
 
-	private SelectionModule selection = new SelectionModule();
-
 	@Test
 	public void shouldCalcualteCollectivePreference() {
 		FuzzyPreferenceRelation prefs1 = new FuzzyPreferenceRelation();
@@ -74,9 +72,9 @@ public class SelectionModuleTest {
 		prefs4.add(new SolutionIdeaTupleWithValue(i3, i4, 0.18));
 		prefs4.add(new SolutionIdeaTupleWithValue(i4, i4, 0.5));
 
-		FuzzyPreferenceRelation collectivePreference = selection
-				.getCollectivePreference(null,
-						Arrays.asList(prefs1, prefs2, prefs3, prefs4));
+		FuzzyPreferenceRelation collectivePreference = SelectionModule
+				.getCollectivePreference(Arrays.asList(prefs1, prefs2, prefs3,
+						prefs4));
 
 		// Then
 		SolutionIdeaTupleWithValue i1_i1 = collectivePreference.get(i1, i1);
@@ -148,8 +146,8 @@ public class SelectionModuleTest {
 		collective.add(new SolutionIdeaTupleWithValue(i4, i4, 0.5));
 
 		List<SolutionIdeaId> ideas = Arrays.asList(i1, i2, i3, i4);
-		List<SolutionIdeaId> globalRanking = selection.getGlobalRanking(ideas,
-				collective);
+		List<SolutionIdeaId> globalRanking = SelectionModule.getGlobalRanking(
+				ideas, collective);
 
 		Assert.assertEquals(i2, globalRanking.get(0));
 		Assert.assertEquals(i1, globalRanking.get(1));

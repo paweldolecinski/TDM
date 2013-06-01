@@ -16,7 +16,7 @@ import com.tdm.domain.model.problem.ProblemId;
 public class Broadcaster {
 
 	public enum Message {
-		NEW_EXPERT
+		NEW_EXPERT, NEW_RESULT,
 	}
 
 	private ChannelService channelService = ChannelServiceFactory

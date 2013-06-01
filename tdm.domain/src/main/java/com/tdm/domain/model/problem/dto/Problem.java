@@ -18,8 +18,6 @@ public interface Problem {
 
 	Date getCreationDate();
 
-	CurrentConsensus getCurrentConsensus();
-
 	void setName(String name);
 
 	void setDescription(String description);

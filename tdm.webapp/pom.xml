@@ -4,7 +4,7 @@
 
 	<artifactId>tdm.webapp</artifactId>
 	<packaging>war</packaging>
-
+	<name>TDM WebApp</name>
 	<parent>
 		<artifactId>tdm</artifactId>
 		<groupId>com.tdm</groupId>

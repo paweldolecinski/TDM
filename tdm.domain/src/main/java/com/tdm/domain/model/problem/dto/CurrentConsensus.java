@@ -1,22 +1,15 @@
 package com.tdm.domain.model.problem.dto;
 
-import com.tdm.domain.model.preferences.dto.SolutionPreferences;
+import java.util.List;
 
-public class CurrentConsensus {
+import com.tdm.domain.model.idea.dto.SolutionIdea;
 
-	private double consensusLevel;
-	private String problemId;
-	private SolutionPreferences globalPreferences;
+public interface CurrentConsensus {
 
-	public double getConsensusLevel() {
-		return consensusLevel;
-	}
+	double getConsensusLevel();
 
-	public String getProblemId() {
-		return problemId;
-	}
+	String getProblemId();
 
-	public SolutionPreferences getGlobalPreferences() {
-		return globalPreferences;
-	}
+	List<SolutionIdea> getRanking();
+
 }

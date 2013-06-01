@@ -1,15 +1,17 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui"
+	xmlns:bs="urn:import:com.github.gwtbootstrap.client.ui.base">
 
 	<ui:with field="res" type="com.tdm.client.resources.AppResources" />
 
 	<g:FlowPanel styleName="{res.content.infoPanel}">
 		<b:Well addStyleNames="well-small">
-			<h4>Results</h4>
-			<p class="{res.content.emptyPlaceholder}">
+			<b:Heading size="4">Results</b:Heading>
+			<b:Paragraph ui:field="emptyPlaceholder" addStyleNames="{res.content.emptyPlaceholder}">
 				No results
-			</p>
+			</b:Paragraph>
+			<bs:ListItem ui:field="ranking" addStyleNames="expertList" />
 		</b:Well>
 
 		<b:TabPanel addStyleNames="well well-small hide-tabs">

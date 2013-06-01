@@ -8,7 +8,6 @@ public class ProblemDTO implements Problem {
 	private String name;
 	private String description;
 	private Date creationDate;
-	private CurrentConsensus currentConsensus;
 
 	@Override
 	public String getKey() {
@@ -37,15 +36,6 @@ public class ProblemDTO implements Problem {
 
 	public void setKey(String key) {
 		this.key = key;
-	}
-
-	@Override
-	public CurrentConsensus getCurrentConsensus() {
-		return currentConsensus;
-	}
-
-	public void setCurrentConsensus(CurrentConsensus currentConsensus) {
-		this.currentConsensus = currentConsensus;
 	}
 
 	@Override

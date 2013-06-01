@@ -9,7 +9,7 @@
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 
-	<name>TDM Client GWT</name>
+	<name>TDM Browser Client </name>
 	<artifactId>tdm.client.gwt</artifactId>
 
 	<profiles>

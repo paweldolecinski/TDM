@@ -1,21 +1,15 @@
 package org.springframework.social.facebook.api.impl;
 
-import static org.springframework.social.facebook.api.impl.PagedListUtils.getPagedListParameters;
-
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.type.CollectionType;
-import org.codehaus.jackson.map.type.TypeFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.facebook.api.CommentOperations;
@@ -43,6 +37,11 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 
 public class FacebookTemplateExt extends AbstractOAuth2ApiBinding implements
 		Facebook {
@@ -231,6 +230,12 @@ public class FacebookTemplateExt extends AbstractOAuth2ApiBinding implements
 		return new PagedList<T>(data, null, null);
 	}
 
+	private PagingParameters getPagedListParameters(JsonNode pagingNode,
+			String pageKey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public byte[] fetchImage(String objectId, String connectionType,
 			ImageType type) {
 		URI uri = URIBuilder.fromUri(
@@ -293,8 +298,8 @@ public class FacebookTemplateExt extends AbstractOAuth2ApiBinding implements
 	}
 
 	@Override
-	protected MappingJacksonHttpMessageConverter getJsonMessageConverter() {
-		MappingJacksonHttpMessageConverter converter = super
+	protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
+		MappingJackson2HttpMessageConverter converter = super
 				.getJsonMessageConverter();
 		objectMapper = new ObjectMapper();
 		objectMapper.registerModule(new FacebookModule());
@@ -339,7 +344,10 @@ public class FacebookTemplateExt extends AbstractOAuth2ApiBinding implements
 		try {
 			CollectionType listType = TypeFactory.defaultInstance()
 					.constructCollectionType(List.class, elementType);
-			return (List<T>) objectMapper.readValue(jsonNode, listType);
+			return (List<T>) objectMapper.reader(listType).readValue(
+					jsonNode.toString()); // TODO: EXTREMELY HACKY--TEMPORARY
+											// UNTIL I FIGURE OUT HOW JACKSON 2
+											// DOES THIS
 		} catch (IOException e) {
 			throw new UncategorizedApiException(
 					"facebook",

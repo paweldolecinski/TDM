@@ -1,5 +1,8 @@
 package com.tdm.server.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,41 +12,68 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import com.tdm.domain.model.expert.dto.ExpertsInvitationDTO;
-import com.tdm.domain.model.preferences.SolutionPreferences;
+import com.tdm.domain.model.idea.SolutionIdeaId;
+import com.tdm.domain.model.idea.dto.SolutionIdea;
 import com.tdm.domain.model.preferences.dto.SolutionPreferencesDTO;
 import com.tdm.domain.model.problem.ProblemId;
+import com.tdm.domain.model.problem.dto.CurrentConsensusDTO;
+import com.tdm.server.application.decision.preference.SolutionIdeaUtilityList;
 import com.tdm.server.application.decision.service.DecisionProcessService;
 import com.tdm.server.application.problem.service.InvitationService;
+import com.tdm.server.application.problem.service.SolutionIdeaService;
 import com.tdm.server.web.assembler.PreferencesDtoAssembler;
+import com.tdm.server.web.assembler.SolutionIdeaDtoAssembler;
 
 @Controller
 @RequestMapping("/decision/{problemId}")
 public final class DecisionProcessController {
 
 	@Inject
-	InvitationService invitationService;
+	private InvitationService invitationService;
 	@Inject
-	DecisionProcessService decisionProcessService;
-
-	public DecisionProcessController() {
-	}
+	private DecisionProcessService decisionProcessService;
+	@Inject
+	private SolutionIdeaService ideaService;
 
 	@RequestMapping(value = "/vote", method = RequestMethod.POST)
 	public void vote(@PathVariable String problemId,
 			@RequestBody SolutionPreferencesDTO preferences,
 			HttpServletResponse httpResponse_p) {
 		if (problemId.equals(preferences.getProblemId())) {
-			SolutionPreferences prefs = new PreferencesDtoAssembler()
-					.toEntity(preferences);
-			decisionProcessService.vote(prefs);
+
+			SolutionIdeaUtilityList prefs = new PreferencesDtoAssembler()
+					.toModel(preferences);
+
+			decisionProcessService.vote(new ProblemId(problemId), prefs);
 			httpResponse_p.setStatus(HttpStatus.OK.value());
 		} else {
 			throw new IllegalStateException(
 					"Problem ID different than one connected with preferences.");
 		}
+	}
+
+	@RequestMapping(value = "/result", method = RequestMethod.POST)
+	@ResponseBody
+	public CurrentConsensusDTO getResult(@PathVariable String problemId) {
+
+		CurrentConsensusDTO result = new CurrentConsensusDTO();
+
+		ProblemId problem = new ProblemId(problemId);
+		List<SolutionIdeaId> currentRanking = decisionProcessService
+				.getCurrentResult(problem);
+		SolutionIdeaDtoAssembler ass = new SolutionIdeaDtoAssembler();
+		List<SolutionIdea> ideas = new ArrayList<SolutionIdea>();
+		for (SolutionIdeaId solutionIdeaId : currentRanking) {
+			ideas.add(ass.fromEntity(ideaService.getSolutionIdea(problem,
+					solutionIdeaId)));
+		}
+		result.setProblemId(problemId);
+		result.setRanking(ideas);
+		return result;
 	}
 
 	@RequestMapping(value = "/invite", method = RequestMethod.POST)
