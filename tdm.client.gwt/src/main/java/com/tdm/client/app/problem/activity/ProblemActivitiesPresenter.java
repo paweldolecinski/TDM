@@ -15,6 +15,7 @@
  */
 package com.tdm.client.app.problem.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
@@ -37,8 +38,8 @@ import com.tdm.client.event.navi.HideActivitiesPresenterEvent;
 import com.tdm.client.event.navi.HideActivitiesPresenterEvent.HideActivitiesPresenterHandler;
 import com.tdm.client.event.navi.RevealActivitiesPresenterEvent;
 import com.tdm.client.event.navi.RevealActivitiesPresenterEvent.RevealActivitiesPresenterHandler;
-import com.tdm.domain.model.expert.dto.ExpertJso;
 import com.tdm.domain.model.idea.dto.SolutionIdea;
+import com.tdm.domain.model.problem.dto.CurrentConsensusJSO;
 
 public class ProblemActivitiesPresenter
 		extends
@@ -84,10 +85,9 @@ public class ProblemActivitiesPresenter
 				});
 	}
 
-	
 	@Override
-	protected void onReset() {
-		super.onReset();
+	protected void onReveal() {
+		super.onReveal();
 		getResult();
 	}
 
@@ -104,10 +104,12 @@ public class ProblemActivitiesPresenter
 
 					@Override
 					public void onSuccess(GetCurrentConsensusResult result) {
-						 getView().clearRanking();
-						List<SolutionIdea> res = result.getConsensus()
-								.getRanking();
-						for (SolutionIdea solutionIdea : res) {
+						getView().clearRanking();
+						CurrentConsensusJSO consensus = result.getConsensus();
+						List<SolutionIdea> res = new ArrayList<SolutionIdea>(
+								consensus.getRanking());
+						for (int i = 0; i < res.size(); i++) {
+							SolutionIdea solutionIdea = res.get(i);
 							getView().addToRanking(solutionIdea);
 						}
 					}

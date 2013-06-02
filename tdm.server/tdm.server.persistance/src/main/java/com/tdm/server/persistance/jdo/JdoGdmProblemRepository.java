@@ -131,6 +131,7 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 			tx.commit();
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Error during creating problem.", e);
+			throw new IllegalStateException(e);
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
@@ -146,6 +147,9 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 			Problem makePersistent = pm.makePersistent(request);
 			Problem detachCopy = pm.detachCopy(makePersistent);
 			return detachCopy;
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Error during updating problem.", e);
+			throw new IllegalStateException(e);
 		} finally {
 			pm.close();
 		}
@@ -187,6 +191,7 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 			tx.commit();
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Error during fetching problems.", e);
+			throw new IllegalStateException(e);
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();

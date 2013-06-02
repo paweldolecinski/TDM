@@ -16,7 +16,10 @@
 package com.tdm.domain.model.expert;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -24,6 +27,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.tdm.domain.model.preferences.IdeaPairPreferences;
 import com.tdm.domain.model.problem.Problem;
 
 /**
@@ -42,7 +46,9 @@ public class Expert implements Serializable {
 	private ExpertRole role = ExpertRole.MEMBER;
 	private Problem problem;
 
-	// private transient ExpertCurrentPreferences currentPreferences;
+	@Element(dependent = "true")
+	@Persistent(embeddedElement = "true", defaultFetchGroup = "true")
+	private List<IdeaPairPreferences> currentPreferences = new ArrayList<IdeaPairPreferences>();
 
 	public Expert(String id, ExpertRole role) {
 		this.userId = id;
@@ -71,13 +77,13 @@ public class Expert implements Serializable {
 		this.problem = problem;
 	}
 
-	public ExpertCurrentPreferences getCurrentPreferences() {
-		return null;
+	public List<IdeaPairPreferences> getCurrentPreferences() {
+		return currentPreferences;
 	}
 
 	public void setCurrentPreferences(
-			ExpertCurrentPreferences currentPreferences) {
-		// this.currentPreferences = currentPreferences;
+			List<IdeaPairPreferences> currentPreferences) {
+		this.currentPreferences = currentPreferences;
 	}
 
 	@Override

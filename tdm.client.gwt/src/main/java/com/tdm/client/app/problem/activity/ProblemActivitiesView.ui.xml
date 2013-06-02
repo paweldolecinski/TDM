@@ -11,7 +11,7 @@
 			<b:Paragraph ui:field="emptyPlaceholder" addStyleNames="{res.content.emptyPlaceholder}">
 				No results
 			</b:Paragraph>
-			<bs:ListItem ui:field="ranking" addStyleNames="expertList" />
+			<bs:UnorderedList ui:field="ranking" addStyleNames="expertList" />
 		</b:Well>
 
 		<b:TabPanel addStyleNames="well well-small hide-tabs">

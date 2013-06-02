@@ -14,6 +14,7 @@
 		<b:Column size="3" addStyleNames="pull-right pagination-right">
 			<b:DropdownButton text="Vote" icon="THUMBS_UP">
 				<b:ButtonGroup>
+					<b:Button ui:field="vote10" styleName="badge badge-success vote-button" title="10" text="10" />
 					<b:Button ui:field="vote9" styleName="badge badge-success vote-button" title="9" text="9" />
 					<b:Button ui:field="vote8" styleName="badge badge-success vote-button" title="8" text="8" />
 					<b:Button ui:field="vote7" styleName="badge badge-success vote-button" title="7" text="7" />
@@ -23,6 +24,7 @@
 					<b:Button ui:field="vote3" styleName="badge badge-info vote-button" title="3" text="3" />
 					<b:Button ui:field="vote2" styleName="badge badge-info vote-button" title="2" text="2" />
 					<b:Button ui:field="vote1" styleName="badge badge-info vote-button" title="1" text="1" />
+					<b:Button ui:field="vote0" styleName="badge badge-info vote-button" title="0" text="0" />
 				</b:ButtonGroup>
 			</b:DropdownButton>
 		</b:Column>

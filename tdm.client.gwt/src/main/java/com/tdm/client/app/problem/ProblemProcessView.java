@@ -57,7 +57,7 @@ public class ProblemProcessView extends
 	protected Heading solutionCounter;
 	@UiField
 	protected Heading problemHeader;
-	
+
 	private List<SolutionIdeaWidget> ideas = new ArrayList<SolutionIdeaWidget>();
 	private Provider<SolutionIdeaWidget> solutionIdeaProvider;
 
@@ -115,5 +115,14 @@ public class ProblemProcessView extends
 	public void setHeader(String title, String description) {
 		problemHeader.setText(title);
 		problemHeader.setSubtext(description);
+	}
+
+	@Override
+	public List<SolutionIdea> getIdeas() {
+		ArrayList<SolutionIdea> res = new ArrayList<SolutionIdea>();
+		for (SolutionIdeaWidget idea : ideas) {
+			res.add(idea.getSolutionIdea());
+		}
+		return res;
 	}
 }

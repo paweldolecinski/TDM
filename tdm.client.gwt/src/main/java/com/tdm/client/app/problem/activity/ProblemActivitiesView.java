@@ -17,6 +17,7 @@ package com.tdm.client.app.problem.activity;
 
 import com.github.gwtbootstrap.client.ui.Paragraph;
 import com.github.gwtbootstrap.client.ui.base.ListItem;
+import com.github.gwtbootstrap.client.ui.base.UnorderedList;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HTML;
@@ -38,7 +39,7 @@ public class ProblemActivitiesView extends ViewImpl implements
 	private final Widget widget;
 
 	@UiField
-	protected ListItem ranking;
+	protected UnorderedList ranking;
 	@UiField
 	protected Paragraph emptyPlaceholder;
 

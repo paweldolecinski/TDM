@@ -29,8 +29,7 @@ object SelectionModule {
 
     var ideaTuples = preferences(0);
 
-    for (i <- 0 until ideaTuples.size()) {
-      val solutionIdeaTuple = ideaTuples.get(i);
+    for (solutionIdeaTuple <- ideaTuples.asScala) {
 
       var values: List[Double] = List();
 

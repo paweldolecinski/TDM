@@ -28,7 +28,7 @@ class OperatorOwa(weightsArg: Double*) {
     values.sorted
     //
     var s = 0.0;
-    for (i <- 0 to min)
+    for (i <- 0 until min)
       s += values(i) * weights(i);
 
     return s;

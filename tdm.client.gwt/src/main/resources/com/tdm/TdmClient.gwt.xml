@@ -65,7 +65,7 @@
 	<set-configuration-property name="CssResource.obfuscationPrefix"
 		value="empty" />
 	<set-configuration-property name="CssResource.style"
-		value="obf" />
+		value="pretty" />
 	<set-property name="ClientBundle.enableInlining" value="false" />
 
 	<!-- safari ie6, ie7,ie8, opera, gecko1_8 -->
@@ -75,5 +75,5 @@
 	<!-- <extend-property name="locale" values="en" /> -->
 	<add-linker name="xsiframe" />
 	<set-configuration-property name="devModeRedirectEnabled"
-		value="false" />
+		value="true" />
 </module>

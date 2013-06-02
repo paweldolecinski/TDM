@@ -20,6 +20,7 @@ import com.gwtplatform.dispatch.client.actionhandler.DefaultClientActionHandlerR
 import com.tdm.client.dispatch.handler.CreateGdmProblemHandler;
 import com.tdm.client.dispatch.handler.CreateNewSolutionHandler;
 import com.tdm.client.dispatch.handler.GetChannelTokenHandler;
+import com.tdm.client.dispatch.handler.GetCurrentConsensusHandler;
 import com.tdm.client.dispatch.handler.GetExpertListHandler;
 import com.tdm.client.dispatch.handler.GetProblemByIdHandler;
 import com.tdm.client.dispatch.handler.GetProblemListHandler;
@@ -40,7 +41,8 @@ public class ClientActionHandlerRegistry extends
 			final GetExpertListHandler getExpertListHandler,
 			final InviteExpertsHandler inviteExpertsHandler,
 			final VoteOnSolutionHandler voteOnSolutionHandler,
-			final GetChannelTokenHandler getChannelTokenHandler) {
+			final GetChannelTokenHandler getChannelTokenHandler,
+			final GetCurrentConsensusHandler getCurrentConsensusHandler) {
 
 		register(getProblemListHandler);
 		register(createGdmProblemHandler);
@@ -51,5 +53,6 @@ public class ClientActionHandlerRegistry extends
 		register(inviteExpertsHandler);
 		register(voteOnSolutionHandler);
 		register(getChannelTokenHandler);
+		register(getCurrentConsensusHandler);
 	}
 }

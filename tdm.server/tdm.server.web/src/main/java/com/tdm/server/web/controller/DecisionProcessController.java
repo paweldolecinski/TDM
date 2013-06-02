@@ -1,5 +1,6 @@
 package com.tdm.server.web.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
+import com.tdm.domain.model.expert.ExpertId;
 import com.tdm.domain.model.expert.dto.ExpertsInvitationDTO;
 import com.tdm.domain.model.idea.SolutionIdeaId;
 import com.tdm.domain.model.idea.dto.SolutionIdea;
@@ -42,13 +44,13 @@ public final class DecisionProcessController {
 	@RequestMapping(value = "/vote", method = RequestMethod.POST)
 	public void vote(@PathVariable String problemId,
 			@RequestBody SolutionPreferencesDTO preferences,
-			HttpServletResponse httpResponse_p) {
+			HttpServletResponse httpResponse_p, Principal principal) {
 		if (problemId.equals(preferences.getProblemId())) {
 
 			SolutionIdeaUtilityList prefs = new PreferencesDtoAssembler()
 					.toModel(preferences);
-
-			decisionProcessService.vote(new ProblemId(problemId), prefs);
+			decisionProcessService.vote(new ProblemId(problemId), new ExpertId(
+					principal.getName()), prefs);
 			httpResponse_p.setStatus(HttpStatus.OK.value());
 		} else {
 			throw new IllegalStateException(
@@ -56,7 +58,7 @@ public final class DecisionProcessController {
 		}
 	}
 
-	@RequestMapping(value = "/result", method = RequestMethod.POST)
+	@RequestMapping(value = "/result", method = RequestMethod.GET)
 	@ResponseBody
 	public CurrentConsensusDTO getResult(@PathVariable String problemId) {
 

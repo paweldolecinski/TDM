@@ -15,6 +15,8 @@
  */
 package com.tdm.client.app.problem;
 
+import java.util.List;
+
 import com.google.gwt.appengine.channel.client.Channel;
 import com.google.gwt.appengine.channel.client.ChannelError;
 import com.google.gwt.appengine.channel.client.ChannelFactory;
@@ -80,6 +82,8 @@ public class ProblemProcessPresenter
 		void focus();
 
 		void addSolutionIdea(SolutionIdea solutionIdea);
+
+		List<SolutionIdea> getIdeas();
 
 		void clear();
 	}
@@ -265,10 +269,20 @@ public class ProblemProcessPresenter
 
 	@Override
 	public void onVoteOnSolution(VoteOnSolutionEvent event) {
-		NoteJSO note = NoteJSO.create(event.getSolution().getId(),
-				event.getNote());
+		String voteId = event.getSolution().getId();
 		JsArray<NoteJSO> notes = JsArray.createArray().cast();
+
+		NoteJSO note = NoteJSO.create(voteId, event.getNote());
+		for (SolutionIdea idea : getView().getIdeas()) {
+			if (voteId.equals(idea.getId())) {
+				continue;
+			}
+			NoteJSO n = NoteJSO.create(idea.getId(), -1);
+			notes.push(n);
+		}
+
 		notes.push(note);
+
 		SolutionPreferencesJSO preferences = SolutionPreferencesJSO.create(
 				problemId, notes);
 

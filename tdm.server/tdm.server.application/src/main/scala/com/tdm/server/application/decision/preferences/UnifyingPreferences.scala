@@ -51,7 +51,10 @@ object UnifyingPreferences {
       val u_i = preferences.get(i);
       for (j <- i until preferences.size()) {
         val u_j = preferences.get(j);
-        var pref = (Math.pow(u_i.getNote(), 2)) / (Math.pow(u_i.getNote(), 2) + Math.pow(u_j.getNote(), 2));
+        var pref = -1.0;
+        if (u_i.getNote() != -1) {
+          pref = (Math.pow(u_i.getNote(), 2)) / (Math.pow(u_i.getNote(), 2) + Math.pow(u_j.getNote(), 2));
+        }
         fuzzyList += new SolutionIdeaTupleWithValue(u_i.getSolutionId(), u_j
           .getSolutionId(), pref);
       }

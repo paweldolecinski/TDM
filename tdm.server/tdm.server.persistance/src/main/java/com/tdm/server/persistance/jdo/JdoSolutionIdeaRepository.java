@@ -34,7 +34,32 @@ public class JdoSolutionIdeaRepository implements SolutionIdeaRepository {
 
 	@Override
 	public SolutionIdea read(ProblemId problemId, SolutionIdeaId solutionIdeaId) {
-		return null;
+		PersistenceManager pm = getPersistenceManager();
+
+		Key solutionIdeaKey = KeyFactory.stringToKey(solutionIdeaId
+				.getIdString());
+		Key problemKey = KeyFactory.stringToKey(problemId.getIdString());
+
+		Query q = pm.newQuery("select from " + SolutionIdea.class.getName()
+				+ " where" + " key == solutionIdeaIdParam &&"
+				+ " problemId == problemParam");
+		q.declareParameters(Key.class.getName() + " solutionIdeaIdParam, "
+				+ Key.class.getName() + " problemParam");
+
+		try {
+			@SuppressWarnings("unchecked")
+			List<SolutionIdea> results = (List<SolutionIdea>) q.execute(
+					solutionIdeaKey, problemKey);
+			if (results.size() == 1) {
+				SolutionIdea idea = results.get(0);
+				return pm.detachCopy(idea);
+			} else {
+				throw new IllegalStateException(
+						"Cannot find solution for problem");
+			}
+		} finally {
+			q.closeAll();
+		}
 	}
 
 	@Override
