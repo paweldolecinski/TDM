@@ -35,6 +35,7 @@ import com.tdm.domain.model.expert.Expert;
 import com.tdm.domain.model.expert.ExpertId;
 import com.tdm.domain.model.expert.ExpertRole;
 import com.tdm.domain.model.handling.ObjectNotFoundException;
+import com.tdm.domain.model.preferences.IdeaPreference;
 import com.tdm.domain.model.problem.Problem;
 import com.tdm.domain.model.problem.ProblemId;
 import com.tdm.domain.model.problem.ProblemRepository;
@@ -144,11 +145,34 @@ public class JdoGdmProblemRepository implements ProblemRepository {
 	public Problem update(Problem request) {
 		PersistenceManager pm = getPersistenceManager();
 		try {
+			pm.currentTransaction().begin();
 			Problem makePersistent = pm.makePersistent(request);
 			Problem detachCopy = pm.detachCopy(makePersistent);
+			pm.currentTransaction().commit();
 			return detachCopy;
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Error during updating problem.", e);
+			pm.currentTransaction().rollback();
+			throw new IllegalStateException(e);
+		} finally {
+			pm.close();
+		}
+	}
+
+	@Override
+	public Expert update(Expert request, List<IdeaPreference> currentPreferences) {
+		PersistenceManager pm = getPersistenceManager();
+		try {
+			pm.currentTransaction().begin();
+			Expert oldOne = pm.getObjectById(Expert.class, request.getKey());
+			oldOne.setCurrentPreferences(currentPreferences);
+			Expert makePersistent = pm.makePersistent(oldOne);
+			Expert detachCopy = pm.detachCopy(makePersistent);
+			pm.currentTransaction().commit();
+			return detachCopy;
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Error during updating problem.", e);
+			pm.currentTransaction().rollback();
 			throw new IllegalStateException(e);
 		} finally {
 			pm.close();

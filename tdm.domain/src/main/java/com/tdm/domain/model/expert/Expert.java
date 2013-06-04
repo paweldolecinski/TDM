@@ -16,9 +16,11 @@
 package com.tdm.domain.model.expert;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.jdo.JDOHelper;
 import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
@@ -27,7 +29,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
-import com.tdm.domain.model.preferences.IdeaPairPreferences;
+import com.tdm.domain.model.preferences.IdeaPreference;
 import com.tdm.domain.model.problem.Problem;
 
 /**
@@ -48,7 +50,7 @@ public class Expert implements Serializable {
 
 	@Element(dependent = "true")
 	@Persistent(embeddedElement = "true", defaultFetchGroup = "true")
-	private List<IdeaPairPreferences> currentPreferences = new ArrayList<IdeaPairPreferences>();
+	private Set<IdeaPreference> currentPreferences = new HashSet<IdeaPreference>();
 
 	public Expert(String id, ExpertRole role) {
 		this.userId = id;
@@ -57,6 +59,10 @@ public class Expert implements Serializable {
 				+ role);
 	}
 
+	public Key getKey() {
+		return key;
+	}
+	
 	public String getId() {
 		return userId;
 	}
@@ -77,13 +83,20 @@ public class Expert implements Serializable {
 		this.problem = problem;
 	}
 
-	public List<IdeaPairPreferences> getCurrentPreferences() {
+	public Set<IdeaPreference> getCurrentPreferences() {
+		if (this.currentPreferences == null) {
+			this.currentPreferences = new HashSet<IdeaPreference>();
+		}
 		return currentPreferences;
 	}
 
-	public void setCurrentPreferences(
-			List<IdeaPairPreferences> currentPreferences) {
-		this.currentPreferences = currentPreferences;
+	public void setCurrentPreferences(List<IdeaPreference> currentPreferences) {
+		if (this.currentPreferences == null) {
+			this.currentPreferences = new HashSet<IdeaPreference>();
+		}
+		this.currentPreferences.clear();
+		this.currentPreferences.addAll(currentPreferences);
+		JDOHelper.makeDirty(this, "currentPreferences");
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.tdm.server.application.decision.service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,13 @@ import com.tdm.domain.model.expert.Expert;
 import com.tdm.domain.model.expert.ExpertId;
 import com.tdm.domain.model.idea.SolutionIdeaId;
 import com.tdm.domain.model.idea.SolutionIdeaRepository;
-import com.tdm.domain.model.preferences.IdeaPairPreferences;
+import com.tdm.domain.model.preferences.IdeaPreference;
 import com.tdm.domain.model.problem.Problem;
 import com.tdm.domain.model.problem.ProblemId;
 import com.tdm.domain.model.problem.ProblemRepository;
 import com.tdm.server.application.Broadcaster;
 import com.tdm.server.application.decision.preference.FuzzyPreferenceRelation;
+import com.tdm.server.application.decision.preference.SolutionIdeaNote;
 import com.tdm.server.application.decision.preference.SolutionIdeaTupleWithValue;
 import com.tdm.server.application.decision.preference.SolutionIdeaUtilityList;
 import com.tdm.server.application.decision.preferences.UnifyingPreferences;
@@ -44,23 +46,17 @@ public class DecisionProcessService {
 		}
 		Expert expert = loopupExpert(expertId, problem);
 
-		FuzzyPreferenceRelation uniPrefs = UnifyingPreferences
-				.transform(preferences);
+		List<IdeaPreference> currentPreferences = new ArrayList<IdeaPreference>(
+				expert.getCurrentPreferences());
 
-		List<IdeaPairPreferences> currentPreferences = expert
-				.getCurrentPreferences();
-		if (currentPreferences == null) {
-			currentPreferences = new ArrayList<IdeaPairPreferences>();
-		}
+		for (SolutionIdeaNote newPref : preferences) {
+			int prefVal = newPref.getNote();
 
-		for (SolutionIdeaTupleWithValue newPref : uniPrefs) {
-			double prefVal = newPref.getValue();
 			if (prefVal != -1) {
-				IdeaPairPreferences p = new IdeaPairPreferences(newPref
-						.getLeft().getIdString(), newPref.getRight()
+				IdeaPreference p = new IdeaPreference(newPref.getSolutionId()
 						.getIdString(), prefVal);
 				if (currentPreferences.contains(p)) {
-					IdeaPairPreferences old = currentPreferences
+					IdeaPreference old = currentPreferences
 							.get(currentPreferences.indexOf(p));
 					old.setValue(prefVal);
 				} else {
@@ -68,8 +64,7 @@ public class DecisionProcessService {
 				}
 			}
 		}
-		expert.setCurrentPreferences(currentPreferences);
-		problemDao.update(problem);
+		problemDao.update(expert, currentPreferences);
 
 		broadcaster.publish(problemId, Broadcaster.Message.NEW_RESULT);
 	}
@@ -89,17 +84,18 @@ public class DecisionProcessService {
 		ArrayList<FuzzyPreferenceRelation> allPrefs = new ArrayList<FuzzyPreferenceRelation>();
 
 		for (Expert expert : problem.getExperts()) {
-			List<IdeaPairPreferences> currentPreferences = expert
+			Set<IdeaPreference> currentPreferences = expert
 					.getCurrentPreferences();
 			if (currentPreferences != null) {
-				FuzzyPreferenceRelation uniPrefs = new FuzzyPreferenceRelation();
-				for (IdeaPairPreferences p : currentPreferences) {
-					SolutionIdeaTupleWithValue tuple = new SolutionIdeaTupleWithValue(
-							new SolutionIdeaId(KeyFactory.keyToString(p.getLeftSolution())),
-							new SolutionIdeaId(KeyFactory.keyToString(p.getRightSolution())),
-							p.getValue());
-					uniPrefs.add(tuple);
+				SolutionIdeaUtilityList notes = new SolutionIdeaUtilityList();
+				for (IdeaPreference p : currentPreferences) {
+					SolutionIdeaNote tuple = new SolutionIdeaNote(
+							new SolutionIdeaId(KeyFactory.keyToString(p
+									.getSolution())), p.getValue());
+					notes.add(tuple);
 				}
+				FuzzyPreferenceRelation uniPrefs = UnifyingPreferences
+						.transform(notes);
 				allPrefs.add(uniPrefs);
 			}
 		}

@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.jdo.JDOHelper;
 import javax.jdo.annotations.Element;
 import javax.jdo.annotations.Embedded;
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -83,6 +84,7 @@ public class Problem implements Serializable {
 
 	public void setExperts(Set<Expert> experts) {
 		this.experts = experts;
+		JDOHelper.makeDirty(this, "experts");
 	}
 
 	public CurrentConsensus getCurrentConsensus() {

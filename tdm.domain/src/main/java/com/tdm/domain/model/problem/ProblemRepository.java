@@ -17,8 +17,10 @@ package com.tdm.domain.model.problem;
 
 import java.util.List;
 
+import com.tdm.domain.model.expert.Expert;
 import com.tdm.domain.model.expert.ExpertId;
 import com.tdm.domain.model.expert.ExpertRole;
+import com.tdm.domain.model.preferences.IdeaPreference;
 
 /**
  * @author Paweł Doleciński
@@ -38,5 +40,7 @@ public interface ProblemRepository {
 	List<Problem> findAllAssignedTo(ExpertId expert);
 
 	List<Problem> findAllAssignedTo(ExpertId expert, ExpertRole owner);
+
+	Expert update(Expert expert, List<IdeaPreference> currentPreferences);
 
 }

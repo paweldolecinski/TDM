@@ -48,7 +48,7 @@
 	<!-- To change the default logLevel -->
 	<set-property name="gwt.logging.logLevel" value="FINE" />
 	<!-- # To disable logging -->
-	<set-property name="gwt.logging.enabled" value="FALSE" />
+	<set-property name="gwt.logging.enabled" value="TRUE" />
 
 	<set-property name="gwt.logging.simpleRemoteHandler"
 		value="DISABLED" />
