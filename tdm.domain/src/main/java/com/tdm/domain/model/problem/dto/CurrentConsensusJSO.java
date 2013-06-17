@@ -14,7 +14,7 @@ public class CurrentConsensusJSO extends BaseJso implements CurrentConsensus {
 	}
 
 	@Override
-	public final native double getConsensusLevel()/*-{
+	public final native int getConsensusLevel()/*-{
 													return this.consensusLevel;
 													}-*/;
 

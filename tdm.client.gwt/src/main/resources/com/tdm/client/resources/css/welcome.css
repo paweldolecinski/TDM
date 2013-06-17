@@ -4,9 +4,8 @@
 	background: white;
 	text-align: center;
 	padding: 40px 0px 0px;
-	margin-right: auto;
-	margin-left: auto;
-	width: 1170px;
+	margin-right: 150px;
+	margin-left: 150px;
 	\-webkit-box-shadow: 0px 0px 10px 1px #555;
 	\-moz-box-shadow: 0px 0px 10px 1px #555;
 	box-shadow: 0px 0px 10px 1px #555;
@@ -30,16 +29,9 @@
 	font-size: 2.0em;
 }
 
-.head .logo small {
+.head .small {
 	text-align: right;
 	color: #aaa;
-}
-
-.loginSection {
-	float: right;
-	margin-right: 50px;
-	width: 520px;
-	margin-left: 30px;
 }
 
 .login {
@@ -82,7 +74,7 @@
 	width: 47%;
 	float: right;
 	margin-left: 10px;
-	color: white;
+	color: white !important;
 	border: 1px solid #ababab;
 	font-size: 1.4em;
 	padding: 9px 0px 7px;

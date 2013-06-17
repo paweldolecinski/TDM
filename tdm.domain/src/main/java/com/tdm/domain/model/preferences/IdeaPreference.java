@@ -25,6 +25,9 @@ public class IdeaPreference implements Serializable {
 	@Persistent
 	private int value;
 
+	@Persistent
+	private double proximity;
+
 	public IdeaPreference() {
 	}
 
@@ -47,6 +50,14 @@ public class IdeaPreference implements Serializable {
 
 	public void setValue(int value) {
 		this.value = value;
+	}
+
+	public double getProximity() {
+		return proximity;
+	}
+
+	public void setProximity(double proximity) {
+		this.proximity = proximity;
 	}
 
 	@Override

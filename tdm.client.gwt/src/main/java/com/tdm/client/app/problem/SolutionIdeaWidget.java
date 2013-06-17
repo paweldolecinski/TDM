@@ -76,14 +76,14 @@ public class SolutionIdeaWidget extends Composite {
 		detailsText.setText(new Date().toString());
 	}
 
-	public void init(SolutionIdea solutionIdea) {
+	public void init(final SolutionIdea solutionIdea) {
 		this.solutionIdea = solutionIdea;
 		titleText.setText(solutionIdea.getName());
 		detailsText.setText(solutionIdea.getDetails());
 	}
 
-	@UiHandler({ "vote0", "vote1", "vote2", "vote3", "vote4", "vote5", "vote6", "vote7",
-			"vote8", "vote9", "vote10" })
+	@UiHandler({ "vote0", "vote1", "vote2", "vote3", "vote4", "vote5", "vote6",
+			"vote7", "vote8", "vote9", "vote10" })
 	void onClickShowModal(ClickEvent event) {
 		Button b = (Button) event.getSource();
 		String text = b.getTitle();

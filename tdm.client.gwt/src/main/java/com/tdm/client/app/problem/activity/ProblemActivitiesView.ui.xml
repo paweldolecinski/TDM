@@ -7,11 +7,12 @@
 
 	<g:FlowPanel styleName="{res.content.infoPanel}">
 		<b:Well addStyleNames="well-small">
-			<b:Heading size="4">Results</b:Heading>
+			<b:Heading size="4">Best solutions</b:Heading>
 			<b:Paragraph ui:field="emptyPlaceholder" addStyleNames="{res.content.emptyPlaceholder}">
 				No results
 			</b:Paragraph>
 			<bs:UnorderedList ui:field="ranking" addStyleNames="expertList" />
+			<b:Heading size="4" ui:field="consLevel" />
 		</b:Well>
 
 		<b:TabPanel addStyleNames="well well-small hide-tabs">

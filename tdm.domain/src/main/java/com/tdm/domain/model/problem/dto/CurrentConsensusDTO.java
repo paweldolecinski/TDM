@@ -6,12 +6,12 @@ import com.tdm.domain.model.idea.dto.SolutionIdea;
 
 public class CurrentConsensusDTO implements CurrentConsensus {
 
-	private double consensusLevel;
+	private int consensusLevel;
 	private String problemId;
 	private List<SolutionIdea> ranking;
 
 	@Override
-	public double getConsensusLevel() {
+	public int getConsensusLevel() {
 		return consensusLevel;
 	}
 
@@ -31,5 +31,9 @@ public class CurrentConsensusDTO implements CurrentConsensus {
 
 	public void setRanking(List<SolutionIdea> ranking) {
 		this.ranking = ranking;
+	}
+
+	public void setConsensusLevel(int consensusLevel) {
+		this.consensusLevel = consensusLevel;
 	}
 }

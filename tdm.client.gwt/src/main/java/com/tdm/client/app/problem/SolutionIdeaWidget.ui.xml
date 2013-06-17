@@ -6,7 +6,8 @@
 	<ui:with type="com.tdm.client.resources.AppResources" field="res" />
 
 	<bs:ListItem addStyleNames="row-fluid">
-		<b:Column size="1" addStyleNames="{res.mainCss.solutionAvatar}" hideOn="PHONE" />
+		<b:Column size="1" addStyleNames="{res.mainCss.solutionAvatar}"
+			hideOn="PHONE" />
 		<b:Column size="7" addStyleNames="{res.mainCss.solution}">
 			<bs:InlineLabel ui:field="titleText" addStyleNames="{res.mainCss.solutionTitle}" />
 			<b:Paragraph ui:field="detailsText" addStyleNames="{res.mainCss.solutionSubTitle}" />
@@ -14,22 +15,30 @@
 		<b:Column size="3" addStyleNames="pull-right pagination-right">
 			<b:DropdownButton text="Vote" icon="THUMBS_UP">
 				<b:ButtonGroup>
-					<b:Button ui:field="vote10" styleName="badge badge-success vote-button" title="10" text="10" />
-					<b:Button ui:field="vote9" styleName="badge badge-success vote-button" title="9" text="9" />
-					<b:Button ui:field="vote8" styleName="badge badge-success vote-button" title="8" text="8" />
-					<b:Button ui:field="vote7" styleName="badge badge-success vote-button" title="7" text="7" />
-					<b:Button ui:field="vote6" styleName="badge badge-warning vote-button" title="6" text="6" />
-					<b:Button ui:field="vote5" styleName="badge badge-warning vote-button" title="5" text="5" />
-					<b:Button ui:field="vote4" styleName="badge badge-warning vote-button" title="4" text="4" />
-					<b:Button ui:field="vote3" styleName="badge badge-info vote-button" title="3" text="3" />
-					<b:Button ui:field="vote2" styleName="badge badge-info vote-button" title="2" text="2" />
-					<b:Button ui:field="vote1" styleName="badge badge-info vote-button" title="1" text="1" />
-					<b:Button ui:field="vote0" styleName="badge badge-info vote-button" title="0" text="0" />
+					<b:Button ui:field="vote10" styleName="badge badge-success vote-button"
+						title="10" text="10" />
+					<b:Button ui:field="vote9" styleName="badge badge-success vote-button"
+						title="9" text="9" />
+					<b:Button ui:field="vote8" styleName="badge badge-success vote-button"
+						title="8" text="8" />
+					<b:Button ui:field="vote7" styleName="badge badge-success vote-button"
+						title="7" text="7" />
+					<b:Button ui:field="vote6" styleName="badge badge-warning vote-button"
+						title="6" text="6" />
+					<b:Button ui:field="vote5" styleName="badge badge-warning vote-button"
+						title="5" text="5" />
+					<b:Button ui:field="vote4" styleName="badge badge-warning vote-button"
+						title="4" text="4" />
+					<b:Button ui:field="vote3" styleName="badge badge-info vote-button"
+						title="3" text="3" />
+					<b:Button ui:field="vote2" styleName="badge badge-info vote-button"
+						title="2" text="2" />
+					<b:Button ui:field="vote1" styleName="badge badge-info vote-button"
+						title="1" text="1" />
+					<b:Button ui:field="vote0" styleName="badge badge-info vote-button"
+						title="0" text="0" />
 				</b:ButtonGroup>
 			</b:DropdownButton>
 		</b:Column>
-
-
-
 	</bs:ListItem>
 </ui:UiBinder> 

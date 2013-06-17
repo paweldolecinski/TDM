@@ -6,7 +6,7 @@ import com.tdm.domain.model.idea.dto.SolutionIdea;
 
 public interface CurrentConsensus {
 
-	double getConsensusLevel();
+	int getConsensusLevel();
 
 	String getProblemId();
 

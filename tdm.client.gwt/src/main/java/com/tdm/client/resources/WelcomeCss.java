@@ -10,10 +10,10 @@ public interface WelcomeCss extends CssResource {
 
 	String logo();
 	
+	String small();
+	
 	String logoName();
 
-	String loginSection();
-	
 	String login();
 
 	String socialHint();

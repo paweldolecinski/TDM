@@ -15,6 +15,7 @@
  */
 package com.tdm.client.app.problem.activity;
 
+import com.github.gwtbootstrap.client.ui.Heading;
 import com.github.gwtbootstrap.client.ui.Paragraph;
 import com.github.gwtbootstrap.client.ui.base.ListItem;
 import com.github.gwtbootstrap.client.ui.base.UnorderedList;
@@ -43,6 +44,9 @@ public class ProblemActivitiesView extends ViewImpl implements
 	@UiField
 	protected Paragraph emptyPlaceholder;
 
+	@UiField
+	protected Heading consLevel;
+
 	@Inject
 	public ProblemActivitiesView(Binder binder) {
 		widget = binder.createAndBindUi(this);
@@ -56,6 +60,7 @@ public class ProblemActivitiesView extends ViewImpl implements
 	@Override
 	public void clearRanking() {
 		ranking.clear();
+		consLevel.setText("");
 		emptyPlaceholder.setVisible(true);
 	}
 
@@ -71,5 +76,10 @@ public class ProblemActivitiesView extends ViewImpl implements
 		} else {
 			emptyPlaceholder.setVisible(true);
 		}
+	}
+
+	@Override
+	public void setConsensusLevel(int consensusLevel) {
+		consLevel.setText("Consensus: " + consensusLevel + "%");
 	}
 }

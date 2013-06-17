@@ -45,7 +45,8 @@ public class ProblemActivitiesPresenter
 		extends
 		Presenter<ProblemActivitiesPresenter.Display, ProblemActivitiesPresenter.IProxy>
 		implements RevealActivitiesPresenterHandler,
-		HideActivitiesPresenterHandler {
+		HideActivitiesPresenterHandler,
+		ChannelMessageReceivedEvent.ChannelMessageReceivedHandler {
 
 	private String problemId;
 	private DispatchAsync dispatch;
@@ -59,6 +60,8 @@ public class ProblemActivitiesPresenter
 		void clearRanking();
 
 		void addToRanking(SolutionIdea solutionIdea);
+
+		void setConsensusLevel(int consensusLevel);
 	}
 
 	@Inject
@@ -71,18 +74,7 @@ public class ProblemActivitiesPresenter
 	@Override
 	protected void onBind() {
 		super.onBind();
-		addRegisteredHandler(
-				ChannelMessageReceivedEvent.getType(),
-				new ChannelMessageReceivedEvent.ChannelMessageReceivedHandler() {
-
-					@Override
-					public void onChannelMessageReceived(
-							ChannelMessageReceivedEvent event) {
-						if (event.getMsg().equals("NEW_RESULT")) {
-							getResult();
-						}
-					}
-				});
+		addRegisteredHandler(ChannelMessageReceivedEvent.getType(), this);
 	}
 
 	@Override
@@ -112,6 +104,8 @@ public class ProblemActivitiesPresenter
 							SolutionIdea solutionIdea = res.get(i);
 							getView().addToRanking(solutionIdea);
 						}
+						getView().setConsensusLevel(
+								consensus.getConsensusLevel());
 					}
 				});
 	}
@@ -128,5 +122,12 @@ public class ProblemActivitiesPresenter
 	public void onHideActivitiesPresenter(HideActivitiesPresenterEvent event) {
 		problemId = null;
 		RevealContentEvent.fire(this, AppPresenter.TYPE_RightContent, null);
+	}
+
+	@Override
+	public void onChannelMessageReceived(ChannelMessageReceivedEvent event) {
+		if (event.getMsg().equals("NEW_RESULT")) {
+			getResult();
+		}
 	}
 }
