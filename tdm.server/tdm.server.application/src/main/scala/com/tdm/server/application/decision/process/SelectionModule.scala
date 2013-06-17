@@ -25,23 +25,30 @@ object SelectionModule {
       return collectivePref;
     }
 
-    val owa = new OperatorOwa();
-
     var ideaTuples = preferences(0);
+    var maxSize = ideaTuples.size()
+    for (fuzzyPreferenceRelation <- preferences) {
+      if (fuzzyPreferenceRelation.size() > maxSize) {
+        ideaTuples = fuzzyPreferenceRelation
+        maxSize = fuzzyPreferenceRelation.size()
+      }
+    }
 
     for (solutionIdeaTuple <- ideaTuples.asScala) {
 
       var values: List[Double] = List();
 
-      for (j <- 0 until preferences.size) {
-        val fuzzyPreferenceRelation = preferences(j);
+      for (fuzzyPreferenceRelation <- preferences) {
 
-        val tuple = fuzzyPreferenceRelation
-          .get(solutionIdeaTuple);
-        if (tuple != null) {
-          values ::= tuple.getValue();
+        if (fuzzyPreferenceRelation.contains(solutionIdeaTuple)) {
+          val tuple = fuzzyPreferenceRelation
+            .get(solutionIdeaTuple);
+          if (tuple != null) {
+            values ::= tuple.getValue();
+          }
         }
       }
+      val owa = new OperatorOwa(values.length, true);
       collectivePref.add(new SolutionIdeaTupleWithValue(
         solutionIdeaTuple, owa.calculate(values)));
     }
@@ -55,12 +62,11 @@ object SelectionModule {
 
   def getGlobalRanking(ideas: List[SolutionIdeaId],
     collectivePreference: FuzzyPreferenceRelation): List[SolutionIdeaId] = {
-    val qgdd: Map[Double, SolutionIdeaId] = calculateQGDD(ideas,
+    var qgdd: Map[Double, SolutionIdeaId] = calculateQGDD(ideas,
       collectivePreference);
 
-    val keys: List[Double] = qgdd.keys.toList;
-    keys.sorted
-    keys.reverse
+    var keys: List[Double] = qgdd.keys.toList;
+    keys = keys.sorted
 
     var ranking: List[SolutionIdeaId] = List();
     for (key <- keys) {
@@ -74,7 +80,6 @@ object SelectionModule {
     ideas: List[SolutionIdeaId],
     collectivePreference: FuzzyPreferenceRelation): Map[Double, SolutionIdeaId] = {
     var qgdd: Map[Double, SolutionIdeaId] = Map();
-    val owa = new OperatorOwa(0.07, 0.67, 0.26);
     for (idea1 <- ideas) {
       var values: List[Double] = List();
       for (idea2 <- ideas) {
@@ -83,8 +88,13 @@ object SelectionModule {
         }
 
       }
-      val owaV = owa.calculate(values);
-      qgdd += owaV -> idea1;
+      if (values.isEmpty) {
+        qgdd += 0.5 -> idea1;
+      } else {
+        val owa = new OperatorOwa(values.length, false);
+        val owaV = owa.calculate(values);
+        qgdd += owaV -> idea1;
+      }
     }
     return qgdd;
   }

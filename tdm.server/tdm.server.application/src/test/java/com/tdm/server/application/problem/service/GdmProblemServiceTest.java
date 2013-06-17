@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.tdm.domain.model.expert.Expert;
@@ -17,6 +18,7 @@ import com.tdm.domain.model.problem.Problem;
 import com.tdm.domain.model.problem.ProblemId;
 import com.tdm.domain.model.problem.ProblemRepository;
 
+@Ignore
 public class GdmProblemServiceTest {
 
 	private GdmProblemService manager;

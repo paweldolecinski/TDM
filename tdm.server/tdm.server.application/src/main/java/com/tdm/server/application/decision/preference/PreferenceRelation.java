@@ -15,7 +15,10 @@ public abstract class PreferenceRelation<T extends SolutionIdeaTupleWithValue>
 	}
 
 	public PreferenceRelation(Collection<T> c) {
-		super(c);
+		super();
+		for (T t : c) {
+			add(t);
+		}
 	}
 
 	@Override
@@ -41,6 +44,10 @@ public abstract class PreferenceRelation<T extends SolutionIdeaTupleWithValue>
 			indexOf = indexOf(new SolutionIdeaTuple(i1, i2));
 		} else {
 			indexOf = indexOf(new SolutionIdeaTuple(i2, i1));
+		}
+		if(indexOf == -1)
+		{
+			return null;
 		}
 		return get(indexOf);
 	}

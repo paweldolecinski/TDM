@@ -60,13 +60,15 @@ public final class DecisionProcessController {
 
 	@RequestMapping(value = "/result", method = RequestMethod.GET)
 	@ResponseBody
-	public CurrentConsensusDTO getResult(@PathVariable String problemId) {
+	public CurrentConsensusDTO getResult(@PathVariable String problemId,
+			Principal principal) {
 
 		CurrentConsensusDTO result = new CurrentConsensusDTO();
 
 		ProblemId problem = new ProblemId(problemId);
 		List<SolutionIdeaId> currentRanking = decisionProcessService
-				.getCurrentResult(problem);
+				.getCurrentResult(problem, new ExpertId(principal.getName()));
+
 		SolutionIdeaDtoAssembler ass = new SolutionIdeaDtoAssembler();
 		List<SolutionIdea> ideas = new ArrayList<SolutionIdea>();
 		for (SolutionIdeaId solutionIdeaId : currentRanking) {
@@ -75,6 +77,9 @@ public final class DecisionProcessController {
 		}
 		result.setProblemId(problemId);
 		result.setRanking(ideas);
+		int currentConsensus = decisionProcessService
+				.getCurrentConsensus(problem);
+		result.setConsensusLevel(currentConsensus);
 		return result;
 	}
 
